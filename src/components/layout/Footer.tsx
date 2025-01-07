@@ -1,0 +1,54 @@
+import React from 'react';
+import { Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
+import { gradients } from '../../constants/colors';
+
+const socialLinks = [
+  {
+    name: 'Twitter',
+    href: '#',
+    icon: Twitter,
+  },
+  {
+    name: 'LinkedIn',
+    href: '#',
+    icon: Linkedin,
+  },
+  {
+    name: 'Instagram',
+    href: '#',
+    icon: Instagram,
+  },
+  {
+    name: 'Email',
+    href: 'mailto:contact@aprikos.no',
+    icon: Mail,
+  },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-white border-t border-slate-100">
+      <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+        <div className="flex justify-center space-x-8 md:order-2">
+          {socialLinks.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className="text-slate-400 hover:text-purple-600 transition-colors"
+              target={item.href.startsWith('mailto') ? undefined : '_blank'}
+              rel={item.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+            >
+              <span className="sr-only">{item.name}</span>
+              <item.icon className="h-6 w-6" />
+            </a>
+          ))}
+        </div>
+        <div className="mt-8 md:order-1 md:mt-0">
+          <p className="text-center text-sm leading-5 text-slate-500">
+            &copy; {new Date().getFullYear()} Aprikos Venture AS. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
