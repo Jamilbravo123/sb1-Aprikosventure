@@ -1,5 +1,6 @@
 import type { TeamMember } from './types';
 import jamilPortrait from '../../../assets/images/hero/jamil-portrett2.png';
+import saraPortrait from '../../../assets/images/hero/sara-portrett2.webp';
 
 export const teamMembers: TeamMember[] = [
   {
@@ -14,22 +15,22 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Sara Rana',
-    role: 'Chief Investment Officer',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1600',
-    bio: 'Former VC partner specializing in early-stage investments and portfolio management.',
+    role: 'Head of Growth / Marketing',
+    image: saraPortrait,
+    bio: 'Masters in Computer Science with a passion for innovation and entrepreneurship.',
     social: {
       linkedin: '#',
       email: 'sara@aprikosventure.com'
     }
   },
   {
-    name: 'Marcus Berg',
-    role: 'Head of Technology',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1600',
-    bio: 'Tech veteran with expertise in blockchain, AI, and enterprise software development.',
+    name: 'Under hiring',
+    role: 'Venture Builder',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1600',
+    bio: 'Venture builder with a passion for creating innovative and scalable businesses.',
     social: {
       linkedin: '#',
-      email: 'marcus@aprikosventure.com'
+      email: 'info@aprikosventure.com'
     }
   }
 ] as const;

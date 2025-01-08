@@ -4,9 +4,9 @@ import LogoLink from '../brand/LogoLink';
 import { MobileMenu, MobileMenuButton } from './mobile';
 import InvestorButton from '../common/InvestorButton';
 import OwnerRegistrationButton from '../common/OwnerRegistrationButton';
+import NewsTicker from '../common/NewsTicker';
 
 const navLinks = [
-  { href: '#process', label: 'Process' },
   { href: '#portfolio', label: 'Portfolio' },
   { href: '#about', label: 'About' },
   { href: '#team', label: 'Team' },
@@ -71,6 +71,7 @@ export default function Navbar() {
           onClose={() => setIsMobileMenuOpen(false)}
         />
       </nav>
+      <NewsTicker />
     </header>
   );
 }

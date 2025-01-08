@@ -11,7 +11,7 @@ export default function PortfolioHeader() {
         <div className={`h-1 w-full ${gradients.background.primary} rounded-full mt-2`} />
       </div>
       <p className="mt-6 text-lg leading-8 text-slate-600">
-        Our portfolio features ventures meant to drive innovation, resilience, and impact. Built in-house or with visionary founders, they aim to reshape industries and deliver lasting value.
+        Our portfolio features tech-based ventures meant to drive innovation, resilience, and impact. Built in-house or with visionary founders, they aim to reshape industries and deliver lasting value.
       </p>
     </div>
   );

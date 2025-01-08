@@ -17,7 +17,7 @@ export default function ProcessStep({
   number, 
   isLast = false 
 }: ProcessStepProps) {
-  const delay = parseInt(number) * 0.4;
+  const delay = parseInt(number) * 0.3;
   const [ref, isInView] = useInView();
   
   return (

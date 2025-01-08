@@ -1,4 +1,3 @@
-export { default as PortfolioHeader } from './PortfolioHeader';
 export { default as PortfolioGrid } from './PortfolioGrid';
 export { default as PortfolioSection } from './PortfolioSection';
 export { default as PortfolioCard } from './PortfolioCard';

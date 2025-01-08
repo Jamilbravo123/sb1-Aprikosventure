@@ -25,3 +25,16 @@
 .animate-fade-up {
   animation: fade-up 0.3s ease-out forwards;
 }
+
+@keyframes ticker {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-ticker {
+  animation: ticker 20s linear infinite;
+}
