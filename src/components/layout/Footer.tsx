@@ -1,6 +1,5 @@
 import React from 'react';
 import { Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
-import { gradients } from '../../constants/colors';
 
 const socialLinks = [
   {

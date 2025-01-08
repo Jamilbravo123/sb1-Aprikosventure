@@ -1,4 +1,4 @@
-export type CategoryKey = 'AI' | 'DLT';
+export type CategoryKey = 'Artificial Intelligence' | 'Distributed Ledger Technology';
 
 export type CompanyStatus = 'active' | 'development';
 
@@ -8,4 +8,6 @@ export interface PortfolioItem {
   image: string;
   status: CompanyStatus;
   tags: string[];
+  link?: string;
+  comingSoon?: boolean;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
-import { colors } from '../../../constants/colors';
 import { useInView } from '../../../hooks/useInView';
 
 interface ProcessStepProps {

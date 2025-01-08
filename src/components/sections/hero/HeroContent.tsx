@@ -1,6 +1,4 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import { gradients } from '../../../constants/colors';
 import HeroHeading from './HeroHeading';
 
 export default function HeroContent() {

@@ -1,15 +1,15 @@
 import type { TeamMember } from './types';
+import jamilPortrait from '../../../assets/images/hero/jamil-portrett2.png';
 
 export const teamMembers: TeamMember[] = [
   {
-    name: 'Erik Hansen',
+    name: 'Jamil Rehman',
     role: 'CEO & Founder',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1600',
+    image: jamilPortrait,
     bio: 'Serial entrepreneur with 15+ years of experience in technology and venture building.',
     social: {
-      linkedin: '#',
-      twitter: '#',
-      email: 'erik@aprikos.no'
+      linkedin: 'https://www.linkedin.com/in/jamil-rehman-725961222',
+      email: 'jamil@aprikosventure.com'
     }
   },
   {

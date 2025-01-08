@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 
 interface ValidationRules {
-  [key: string]: (value: any) => string | undefined;
+  [key: string]: (value: unknown) => string | undefined;
 }
 
-export function useForm<T extends Record<string, any>>(
+export function useForm<T extends Record<string, unknown>>(
   initialValues: T,
   validationRules: ValidationRules
 ) {
@@ -12,7 +12,7 @@ export function useForm<T extends Record<string, any>>(
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = useCallback((name: keyof T, value: any) => {
+  const handleChange = useCallback((name: keyof T, value: unknown) => {
     setValues(prev => ({ ...prev, [name]: value }));
     // Clear error when field is modified
     if (errors[name as string]) {

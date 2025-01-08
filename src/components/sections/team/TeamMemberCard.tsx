@@ -6,11 +6,13 @@ import { gradients } from '../../../constants/colors';
 export default function TeamMemberCard({ name, role, image, bio, social }: TeamMember) {
   return (
     <div className="group relative">
-      <div className="relative h-80 w-full overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-xl">
+      <div className="relative h-80 w-full overflow-hidden rounded-2xl bg-slate-900 shadow-lg transition-all duration-300 group-hover:shadow-xl">
         <img
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          className="absolute inset-0 h-full w-full scale-90 object-cover object-[center_20%] transition-transform duration-500 
+            group-hover:scale-95"
           src={image}
           alt={name}
+          loading="eager"
         />
         <div className={`absolute inset-0 ${gradients.background.primary} opacity-0 transition-opacity duration-300 group-hover:opacity-75`} />
         <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-6 transition-transform duration-300 group-hover:translate-y-0">
