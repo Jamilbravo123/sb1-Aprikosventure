@@ -39,7 +39,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:gap-x-8">
+          <div className="hidden lg:flex lg:gap-x-12">
             {navLinks.map((link) => (
               <NavLink key={link.href} href={link.href}>
                 {link.label}
@@ -48,8 +48,8 @@ export default function Navbar() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-4">
-            <div className="hidden lg:flex lg:items-center lg:gap-4">
+          <div className="flex items-center">
+            <div className="hidden lg:flex lg:items-center lg:gap-12 pl-16">
               <InvestorButton />
               <OwnerRegistrationButton />
             </div>

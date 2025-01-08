@@ -1,5 +1,6 @@
 import React from 'react';
 import { gradients } from '../../../constants/colors';
+import brochurePicture from '../../../assets/images/hero/brochure-picture.webp';
 
 export default function About() {
   return (
@@ -31,8 +32,8 @@ export default function About() {
             <div className="relative">
               <div className="aspect-[4/3] overflow-hidden rounded-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2070"
-                  alt="Team collaboration"
+                  src={brochurePicture}
+                  alt="Aprikos Venture Brochure"
                   className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
