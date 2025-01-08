@@ -7,22 +7,23 @@ interface NewsItem {
 
 const news: NewsItem[] = [
   {
-    text: "New venture opportunity in AI technology coming soon!",
+    text: "New venture opportunity in AI technology coming soon! Pre-register now!",
     url: "#portfolio"
   },
   {
-    text: "Join our next startup pitch event in Oslo",
+    text: "Venture Token in initial talk of co-operation with Aprikos Venture -",
     url: "#contact"
   },
   {
-    text: "Aprikos Venture expands portfolio in Nordic region",
-    url: "#portfolio"
+    text: "Aprikos Venture expands portfolio in South Asia region - launching Mashwara AI",
+    url: "https://mashwara.ai/"
   },
   {
-    text: "Latest investment round successfully closed"
+    text: "Latest investment round opening in February 2025 - Pre-register now for tokenized shares!",
+    url: "#investors"
   },
   {
-    text: "New partnerships forming in tech innovation space",
+    text: "New partnerships forged in tech innovation for on-chain maritime investments.",
     url: "#contact"
   }
 ];
@@ -101,7 +102,11 @@ export default function NewsTicker() {
           "
           onClick={(e) => {
             e.preventDefault();
-            document.querySelector(currentNews.url!)?.scrollIntoView({ behavior: 'smooth' });
+            if (currentNews.url?.startsWith('#')) {
+              document.querySelector(currentNews.url)?.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.open(currentNews.url, '_blank', 'noopener,noreferrer');
+            }
           }}
         >
           {currentNews.text}
