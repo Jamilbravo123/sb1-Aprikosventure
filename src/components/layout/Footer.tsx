@@ -4,12 +4,12 @@ import { Linkedin, Mail, Instagram } from 'lucide-react';
 const socialLinks = [
   {
     name: 'LinkedIn',
-    href: '#',
+    href: 'https://www.linkedin.com/company/aprikos-venture/',
     icon: Linkedin,
   },
   {
     name: 'Instagram',
-    href: '#',
+    href: 'https://www.instagram.com/aprikosventure?igsh=MTA4cnM1dGRvOWtoYQ==',
     icon: Instagram,
   },
   {

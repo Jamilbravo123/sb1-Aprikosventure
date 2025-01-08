@@ -17,10 +17,11 @@ export const teamMembers: TeamMember[] = [
     name: 'Sara Rana',
     role: 'Head of Growth / Marketing',
     image: saraPortrait,
-    bio: 'Masters in Computer Science with a passion for innovation and entrepreneurship.',
+    bio: 'Masters in Data Science with a passion for innovation and entrepreneurship.',
     social: {
-      linkedin: '#',
-      email: 'sara@aprikosventure.com'
+      linkedin: 'https://no.linkedin.com/in/sara-rana-35640a2a2',
+      twitter: '#',
+      email: 'sara@novemberproperty.com'
     }
   },
   {
