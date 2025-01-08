@@ -1,12 +1,7 @@
 import React from 'react';
-import { Twitter, Linkedin, Mail, Instagram } from 'lucide-react';
+import { Linkedin, Mail, Instagram } from 'lucide-react';
 
 const socialLinks = [
-  {
-    name: 'Twitter',
-    href: '#',
-    icon: Twitter,
-  },
   {
     name: 'LinkedIn',
     href: '#',

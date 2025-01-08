@@ -5,7 +5,7 @@ import Process from './components/sections/process/Process';
 import Portfolio from './components/sections/portfolio/Portfolio';
 import About from './components/sections/about/About';
 import Team from './components/sections/team/Team';
-import Contact from './components/sections/Contact';
+import ContactSection from './components/sections/contact/ContactSection';
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       <Portfolio />
       <About />
       <Team />
-      <Contact />
+      <ContactSection />
     </Layout>
   );
 }
