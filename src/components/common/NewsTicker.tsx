@@ -15,7 +15,7 @@ const news: NewsItem[] = [
     url: "#contact"
   },
   {
-    text: "Aprikos Venture expands portfolio in South Asia region - launching Mashwara AI",
+    text: "Aprikos Venture launches Mashwara AI in South Asia",
     url: "https://mashwara.ai/"
   },
   {
