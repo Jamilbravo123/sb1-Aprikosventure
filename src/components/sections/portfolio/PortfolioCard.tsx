@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ExternalLink, CircleDot, X } from 'lucide-react';
 import { PortfolioItem } from './types';
 import { colors } from '../../../constants/colors';
 
 interface PortfolioCardProps {
   item: PortfolioItem;
+  isActive?: boolean;
 }
 
-export default function PortfolioCard({ item }: PortfolioCardProps) {
+export default function PortfolioCard({ item, isActive = false }: PortfolioCardProps) {
   const [showPopup, setShowPopup] = useState(false);
+  const [removeFilter, setRemoveFilter] = useState(false);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isActive) {
+      timer = setTimeout(() => {
+        setRemoveFilter(true);
+      }, 1000);
+    } else {
+      setRemoveFilter(false);
+    }
+    return () => clearTimeout(timer);
+  }, [isActive]);
 
   const handleClick = () => {
     if (item.comingSoon) {
@@ -28,9 +42,13 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
           <img
             src={item.image}
             alt={item.title}
-            className="h-full w-full object-contain p-8 opacity-70 mix-blend-luminosity transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105"
+            className={`h-full w-full object-contain p-8 ${
+              removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
+            } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-40" />
+          <div className={`absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent ${
+            removeFilter ? 'opacity-0' : 'opacity-40 md:opacity-80'
+          } transition-opacity duration-300 group-hover:opacity-20`} />
         </div>
         <div className="p-6 flex-1 flex flex-col bg-white transition-colors duration-300 group-hover:bg-slate-50">
           <div className="flex items-center justify-between mb-3">

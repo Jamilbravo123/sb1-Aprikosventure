@@ -142,11 +142,6 @@ export default function NewsTicker() {
       duration-300
     `}>
       <div className="relative w-full">
-        <style jsx>{`
-          .shadow-glow {
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-          }
-        `}</style>
         <div 
           className="whitespace-nowrap animate-ticker inline-block"
           style={{

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChevronDown, Cpu, Link2 } from 'lucide-react';
 import { portfolioData } from './data';
 import PortfolioGrid from './PortfolioGrid';
@@ -11,13 +11,58 @@ const categoryIcons = {
 
 export default function PortfolioCategories() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey | null>(null);
+  const categoryRefs = useRef<Record<CategoryKey, HTMLDivElement | null>>({
+    'Artificial Intelligence': null,
+    'Distributed Ledger Technology': null
+  });
+
+  const handleCategoryClick = (category: CategoryKey) => {
+    // If clicking the same category, just close it
+    if (activeCategory === category) {
+      setActiveCategory(null);
+      return;
+    }
+
+    // If a different category is already open, close it first
+    if (activeCategory !== null) {
+      setActiveCategory(null);
+      // Wait for the closing animation
+      setTimeout(() => {
+        setActiveCategory(category);
+        // Then scroll to the new category
+        setTimeout(() => {
+          const element = categoryRefs.current[category];
+          if (element) {
+            const yOffset = -100;
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 50);
+      }, 300); // Wait for closing animation to complete
+    } else {
+      // If no category is open, just open the new one
+      setActiveCategory(category);
+      setTimeout(() => {
+        const element = categoryRefs.current[category];
+        if (element) {
+          const yOffset = -100;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 50);
+    }
+  };
 
   return (
     <div className="mt-16 space-y-4">
       {(Object.keys(portfolioData) as CategoryKey[]).map((category) => (
-        <div key={category} className="overflow-hidden rounded-2xl bg-white shadow-sm">
+        <div 
+          key={category} 
+          className="overflow-hidden rounded-2xl bg-white shadow-sm"
+          ref={el => categoryRefs.current[category] = el}
+        >
           <button
-            onClick={() => setActiveCategory(activeCategory === category ? null : category)}
+            onClick={() => handleCategoryClick(category)}
             className="group flex w-full items-center justify-between bg-slate-50 px-6 py-4 text-left 
               transition-all duration-300 hover:bg-slate-100 
               hover:shadow-md active:shadow-sm
@@ -45,7 +90,10 @@ export default function PortfolioCategories() {
           >
             <div className="overflow-hidden">
               <div className="p-6">
-                <PortfolioGrid items={portfolioData[category]} />
+                <PortfolioGrid 
+                  items={portfolioData[category]} 
+                  isActive={activeCategory === category}
+                />
               </div>
             </div>
           </div>

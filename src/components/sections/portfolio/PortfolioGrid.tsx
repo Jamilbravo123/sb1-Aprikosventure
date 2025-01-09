@@ -4,18 +4,15 @@ import { PortfolioItem } from './types';
 
 interface PortfolioGridProps {
   items: PortfolioItem[];
+  isActive?: boolean;
 }
 
-export default function PortfolioGrid({ items }: PortfolioGridProps) {
+export default function PortfolioGrid({ items, isActive = false }: PortfolioGridProps) {
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
       {items.map((item, index) => (
-        <div
-          key={item.title}
-          className="opacity-0 animate-fade-in"
-          style={{ animationDelay: `${index * 0.15}s` }}
-        >
-          <PortfolioCard item={item} />
+        <div key={index} className="flex">
+          <PortfolioCard item={item} isActive={isActive} />
         </div>
       ))}
     </div>
