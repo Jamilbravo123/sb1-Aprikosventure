@@ -20,7 +20,6 @@ export const teamMembers: TeamMember[] = [
     bio: 'Masters in Data Science with a passion for innovation and entrepreneurship.',
     social: {
       linkedin: 'https://no.linkedin.com/in/sara-rana-35640a2a2',
-      instagram: '#',
       email: 'sara@novemberproperty.com'
     }
   },
