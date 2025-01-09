@@ -11,7 +11,7 @@ const news: NewsItem[] = [
     url: "#portfolio"
   },
   {
-    text: "Venture Token in initial talk of co-operation with Aprikos Venture -",
+    text: "Venture Token in initial talk of co-operation with Aprikos Venture",
     url: "#contact"
   },
   {
@@ -82,8 +82,8 @@ export default function NewsTicker() {
       inline-block 
       text-white/95 
       font-mono 
-      ${isMobile ? 'text-xs' : 'text-sm'} 
-      px-4
+      ${isMobile ? 'text-[10px] leading-tight' : 'text-sm'} 
+      ${isMobile ? 'px-2' : 'px-4'}
     `}>
       {currentNews.url ? (
         <a 
@@ -150,7 +150,7 @@ export default function NewsTicker() {
         <div 
           className="whitespace-nowrap animate-ticker inline-block"
           style={{
-            animation: `ticker ${isMobile ? '15s' : '20s'} linear infinite`,
+            animation: `ticker ${isMobile ? '25s' : '20s'} linear infinite`,
             width: 'max-content'
           }}
         >
