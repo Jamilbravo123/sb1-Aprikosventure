@@ -150,8 +150,9 @@ export default function NewsTicker() {
         <div 
           className="whitespace-nowrap animate-ticker inline-block"
           style={{
-            animation: `ticker ${isMobile ? '25s' : '20s'} linear infinite`,
-            width: 'max-content'
+            animation: `ticker ${isMobile ? '30s' : '25s'} linear infinite`,
+            width: 'max-content',
+            paddingRight: '100%'
           }}
         >
           <NewsContent />
