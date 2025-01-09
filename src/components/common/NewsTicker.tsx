@@ -19,7 +19,7 @@ const news: NewsItem[] = [
     url: "https://mashwara.ai/"
   },
   {
-    text: "Latest investment round opening in February 2025 - Pre-register now for tokenized shares!",
+    text: "Feb 2025: Pre-register for tokenized shares investment round",
     url: "#investors"
   },
   {
