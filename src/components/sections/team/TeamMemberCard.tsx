@@ -1,5 +1,5 @@
 import React from 'react';
-import { Linkedin, Twitter, Mail } from 'lucide-react';
+import { Linkedin, Instagram, Mail } from 'lucide-react';
 import type { TeamMember } from './types';
 import { gradients } from '../../../constants/colors';
 
@@ -33,14 +33,14 @@ export default function TeamMemberCard({ name, role, image, bio, social }: TeamM
                   <Linkedin className="h-4 w-4" />
                 </a>
               )}
-              {social.twitter && (
+              {social.instagram && (
                 <a
-                  href={social.twitter}
+                  href={social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="rounded-full bg-white/20 p-2 text-white hover:bg-white/30 transition-colors"
                 >
-                  <Twitter className="h-4 w-4" />
+                  <Instagram className="h-4 w-4" />
                 </a>
               )}
               {social.email && (

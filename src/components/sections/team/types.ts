@@ -5,6 +5,7 @@ export interface TeamMember {
   bio: string;
   social: {
     linkedin?: string;
+    instagram?: string;
     twitter?: string;
     email?: string;
   };
