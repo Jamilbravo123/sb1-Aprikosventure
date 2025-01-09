@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import InvestorPortalPopup from '../portal/InvestorPortalPopup';
 
 interface NewsItem {
   text: string;
   url?: string;
+  isRegistration?: boolean;
 }
 
 const news: NewsItem[] = [
@@ -20,7 +22,8 @@ const news: NewsItem[] = [
   },
   {
     text: "Feb 2025: Pre-register for tokenized shares investment round",
-    url: "#investors"
+    url: "#investors",
+    isRegistration: true
   },
   {
     text: "New partnerships forged in tech innovation for on-chain maritime investments.",
@@ -33,6 +36,7 @@ export default function NewsTicker() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [showRegistrationPopup, setShowRegistrationPopup] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -77,6 +81,16 @@ export default function NewsTicker() {
 
   const currentNews = news[currentNewsIndex];
 
+  const handleNewsClick = (newsItem: NewsItem) => {
+    if (newsItem.isRegistration) {
+      setShowRegistrationPopup(true);
+    } else if (newsItem.url?.startsWith('#')) {
+      document.querySelector(newsItem.url)?.scrollIntoView({ behavior: 'smooth' });
+    } else if (newsItem.url) {
+      window.open(newsItem.url, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   const NewsContent = () => (
     <span className={`
       inline-block 
@@ -102,11 +116,7 @@ export default function NewsTicker() {
           "
           onClick={(e) => {
             e.preventDefault();
-            if (currentNews.url?.startsWith('#')) {
-              document.querySelector(currentNews.url)?.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              window.open(currentNews.url, '_blank', 'noopener,noreferrer');
-            }
+            handleNewsClick(currentNews);
           }}
         >
           {currentNews.text}
@@ -130,29 +140,39 @@ export default function NewsTicker() {
   );
 
   return (
-    <div className={`
-      w-full 
-      overflow-hidden 
-      bg-gradient-to-r 
-      from-[#0A3B63] 
-      to-[#0F4C81] 
-      backdrop-blur-sm 
-      ${isMobile ? 'py-0.5' : 'py-1'}
-      transition-all 
-      duration-300
-    `}>
-      <div className="relative w-full">
-        <div 
-          className="whitespace-nowrap animate-ticker inline-block"
-          style={{
-            animation: `ticker ${isMobile ? '30s' : '25s'} linear infinite`,
-            width: 'max-content',
-            paddingRight: '100%'
-          }}
-        >
-          <NewsContent />
+    <>
+      <div className={`
+        w-full 
+        overflow-hidden 
+        bg-gradient-to-r 
+        from-[#0A3B63] 
+        to-[#0F4C81] 
+        backdrop-blur-sm 
+        ${isMobile ? 'py-0.5' : 'py-1'}
+        transition-all 
+        duration-300
+      `}>
+        <div className="relative w-full">
+          <div 
+            className="whitespace-nowrap animate-ticker inline-block"
+            style={{
+              animation: `ticker ${isMobile ? '30s' : '25s'} linear infinite`,
+              width: 'max-content',
+              paddingRight: '100%'
+            }}
+          >
+            <NewsContent />
+          </div>
         </div>
       </div>
-    </div>
+
+      <InvestorPortalPopup
+        isOpen={showRegistrationPopup}
+        onClose={() => setShowRegistrationPopup(false)}
+        title="Investment Round Pre-registration"
+        heading="Register Your Interest"
+        message="Be among the first to participate in our upcoming tokenized shares investment round. Register now to receive exclusive updates and early access."
+      />
+    </>
   );
 }
