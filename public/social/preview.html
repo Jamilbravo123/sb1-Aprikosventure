@@ -11,12 +11,18 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: system-ui, -apple-system, sans-serif;
-            color: white;
             overflow: hidden;
         }
+        .container {
+            width: 500px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-50px); /* Move up slightly */
+        }
         .logo {
-            width: 800px;
+            width: 100%;
             height: auto;
             filter: brightness(0) invert(1);
             opacity: 0.95;
@@ -24,6 +30,8 @@
     </style>
 </head>
 <body>
-    <img src="../../src/assets/images/aprikos-venture-logo.svg" class="logo" alt="Aprikos Venture" />
+    <div class="container">
+        <img src="../../src/assets/images/aprikos-venture-logo.svg" class="logo" alt="Aprikos Venture" />
+    </div>
 </body>
 </html>
