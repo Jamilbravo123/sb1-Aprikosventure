@@ -9,7 +9,7 @@ export default function About() {
         <div className="lg:flex lg:items-center lg:gap-16">
           {/* Content */}
           <div className="lg:w-1/2">
-            <div className="mx-auto max-w-2xl lg:mx-0">
+            <div className="mx-auto text-center lg:text-left max-w-2xl lg:mx-0">
               <div className="inline-block">
                 <h2 className={`text-3xl font-bold tracking-tight sm:text-4xl ${gradients.brand.primary} bg-clip-text text-transparent`}>
                   About Us
