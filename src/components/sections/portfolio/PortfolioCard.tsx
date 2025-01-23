@@ -35,14 +35,14 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
   return (
     <>
       <div 
-        className="group relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer h-full flex flex-col hover:ring-2 hover:ring-blue-400"
+        className="group relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer w-full flex flex-col hover:ring-2 hover:ring-blue-400"
         onClick={handleClick}
       >
         <div className="aspect-[16/9] overflow-hidden bg-slate-900 relative">
           <img
             src={item.image}
             alt={item.title}
-            className={`h-full w-full object-contain p-8 ${
+            className={`h-full w-full object-contain object-center p-4 ${
               removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
             } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
           />
@@ -58,16 +58,20 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
             />
           </div>
           <span className={`inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full mb-3 transition-all duration-300 ${
-            item.status === 'active' 
-              ? 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100 group-hover:shadow-sm' 
-              : 'bg-amber-50 text-amber-700 group-hover:bg-amber-100 group-hover:shadow-sm'
+            item.title.includes('Venturetoken')
+              ? 'bg-blue-50 text-blue-700 group-hover:bg-blue-100 group-hover:shadow-sm'
+              : item.status === 'active' 
+                ? 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100 group-hover:shadow-sm' 
+                : 'bg-amber-50 text-amber-700 group-hover:bg-amber-100 group-hover:shadow-sm'
           }`}>
             <CircleDot className="h-3 w-3" />
-            {item.status === 'active' 
-              ? 'Launched' 
-              : item.title.includes('Bldrx') 
-                ? 'Launching Soon' 
-                : 'Development'
+            {item.title.includes('Venturetoken') 
+              ? 'Partnership'
+              : item.status === 'active' 
+                ? 'Launched' 
+                : item.title.includes('Bldrx') 
+                  ? 'Launching Soon' 
+                  : 'Development'
             }
           </span>
           <p className="text-base leading-6 text-slate-600">{item.description}</p>

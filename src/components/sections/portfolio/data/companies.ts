@@ -48,5 +48,14 @@ export const companies: PortfolioCompany[] = [
     image: 'https://images.unsplash.com/photo-1590986514371-d1a1429199d0?auto=format&fit=crop&q=80&w=1600',
     status: 'active',
     tags: ['PropTech', 'Construction']
+  },
+  {
+    id: 'venturetoken',
+    name: 'Venturetoken.io (Vt)',
+    description: 'Innovative blockchain venture platform.',
+    image: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80&w=1600',
+    status: 'active',
+    url: 'www.venturetoken.io',
+    tags: ['Blockchain', 'DeFi']
   }
 ];

@@ -9,7 +9,7 @@ interface PortfolioGridProps {
 
 export default function PortfolioGrid({ items, isActive = false }: PortfolioGridProps) {
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {items.map((item, index) => (
         <div key={index} className="flex">
           <PortfolioCard item={item} isActive={isActive} />

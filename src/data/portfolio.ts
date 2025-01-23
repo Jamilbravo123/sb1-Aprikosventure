@@ -27,6 +27,13 @@ export const portfolioData: Record<string, PortfolioItem[]> = {
       description: 'Decentralized identity solution for secure and private digital credentials.',
       image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1600',
       status: 'active',
+    },
+    {
+      title: 'Venturetoken.io (Vt)',
+      description: 'Innovative blockchain venture platform.',
+      image: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80&w=1600',
+      status: 'active',
+      url: 'www.venturetoken.io'
     }
   ],
   'Industry': [

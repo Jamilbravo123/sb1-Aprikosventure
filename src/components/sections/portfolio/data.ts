@@ -2,6 +2,7 @@ import { CategoryKey, PortfolioItem } from './types';
 import mashwaraLogo from '../../../assets/images/mashwara-ai-logo.webp';
 import codeEntropyLogo from '../../../assets/images/code-entropy-logo.webp';
 import balderxLogo from '../../../assets/images/balderx-logo.webp';
+import venturetokenLogo from '../../../assets/images/hero/browser-icon.svg';
 
 export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
   'Artificial Intelligence': [
@@ -38,6 +39,14 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       status: 'development',
       tags: ['Maritime', 'Tokenization', 'Sustainability'],
       comingSoon: true
+    },
+    {
+      title: 'Venturetoken (Vt)',
+      description: 'Driving innovation in venture ecosystems',
+      image: venturetokenLogo,
+      status: 'active',
+      tags: ['Blockchain', 'DeFi', 'Utility'],
+      link: 'https://venturetoken.io/'
     }
   ]
 };
