@@ -42,7 +42,7 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
     {
       title: 'Venturetoken (Vt)',
       description: 'Driving innovation in venture ecosystems',
-      image: 'https://venturetoken.io/images/logo.png',
+      image: 'https://raw.githubusercontent.com/Jamilbravo123/sb1-Aprikosventure/main/src/assets/images/hero/browser-icon.svg',
       status: 'active',
       tags: ['Blockchain', 'DeFi', 'Utility'],
       link: 'https://venturetoken.io/'
