@@ -2,7 +2,7 @@ import { CategoryKey, PortfolioItem } from './types';
 import mashwaraLogo from '../../../assets/images/mashwara-ai-logo.webp';
 import codeEntropyLogo from '../../../assets/images/code-entropy-logo.webp';
 import balderxLogo from '../../../assets/images/balderx-logo.webp';
-import venturetokenLogo from '../../../assets/images/hero/browser-icon.svg';
+import venturetokenLogo from '../../../assets/images/venturetoken-logo.svg';
 
 export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
   'Artificial Intelligence': [
