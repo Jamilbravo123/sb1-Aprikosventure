@@ -14,14 +14,6 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       link: 'https://mashwara.ai/'
     },
     {
-      title: 'Code Entropy',
-      description: 'Full-stack software house specializing in AI and Web3 solutions.',
-      image: codeEntropyLogo,
-      status: 'active',
-      tags: ['AI', 'Web3', 'Software Development'],
-      link: 'https://codentropy.io/'
-    },
-    {
       title: 'Juni AI',
       description: 'Rethinking clinic intelligence with next-gen AI tools to streamline operations, enhance workflows, and unlock new possibilities for healthcare providers.',
       image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1600',
@@ -30,7 +22,15 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       comingSoon: true
     }
   ],
-  'Distributed Ledger Technology': [
+  'Web3 & Software Innovation': [
+    {
+      title: 'Code Entropy',
+      description: 'Full-stack software house specializing in AI and Web3 solutions.',
+      image: codeEntropyLogo,
+      status: 'active',
+      tags: ['AI', 'Web3', 'Software Development'],
+      link: 'https://codentropy.io/'
+    },
     {
       title: 'Bldrx<sup>2</sup>',
       description: 'Blockchain-powered platform for tokenizing shares and raising capital with secure, transparent, and efficient ownership digitization.',

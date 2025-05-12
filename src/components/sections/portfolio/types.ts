@@ -1,4 +1,4 @@
-export type CategoryKey = 'Health Intelligence' | 'Distributed Ledger Technology';
+export type CategoryKey = 'Health Intelligence' | 'Web3 & Software Innovation';
 
 export type CompanyStatus = 'active' | 'development';
 

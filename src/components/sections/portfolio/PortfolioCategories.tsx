@@ -1,24 +1,24 @@
 import React, { useState, useRef } from 'react';
-import { ChevronDown, Heart, Link2 } from 'lucide-react';
+import { ChevronDown, Heart, Code2 } from 'lucide-react';
 import { portfolioData } from './data';
 import PortfolioGrid from './PortfolioGrid';
 import { CategoryKey } from './types';
 
 const categoryIcons = {
   'Health Intelligence': <Heart className="w-6 h-6 text-rose-500" />,
-  'Distributed Ledger Technology': <Link2 className="w-6 h-6 text-purple-500" />
+  'Web3 & Software Innovation': <Code2 className="w-6 h-6 text-purple-500" />
 };
 
 const categorySubtext = {
   'Health Intelligence': 'AI-powered health solutions designed to empower patients, clinicians, and systems',
-  'Distributed Ledger Technology': 'Innovative blockchain solutions for secure, transparent, and efficient digital transactions'
+  'Web3 & Software Innovation': 'From tokens to code – building the backbone of future tech and finance'
 };
 
 export default function PortfolioCategories() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey | null>(null);
   const categoryRefs = useRef<Record<CategoryKey, HTMLDivElement | null>>({
     'Health Intelligence': null,
-    'Distributed Ledger Technology': null
+    'Web3 & Software Innovation': null
   });
 
   const handleCategoryClick = (category: CategoryKey) => {
