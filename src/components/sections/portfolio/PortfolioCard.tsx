@@ -32,6 +32,8 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
     }
   };
 
+  const isWeb3Section = item.tags.some(tag => ['Web3', 'Blockchain', 'DeFi'].includes(tag));
+
   return (
     <>
       <div 
@@ -42,7 +44,7 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
           <img
             src={item.image}
             alt={item.title}
-            className={`h-full w-full object-cover ${
+            className={`h-full w-full ${isWeb3Section ? 'object-contain p-4' : 'object-cover'} ${
               removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
             } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
           />
