@@ -20,6 +20,22 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       status: 'development',
       tags: ['Healthcare', 'AI', 'Operations'],
       comingSoon: true
+    },
+    {
+      title: 'Aprikos Medical AS',
+      description: 'Aprikos Medical is a Norwegian company that specializes in providing premium medical devices to hospitals and clinics worldwide.',
+      image: 'https://images.unsplash.com/photo-1583912267550-d6cc3c410d1c?auto=format&fit=crop&q=80&w=1600',
+      status: 'active',
+      tags: ['Medical Devices', 'Healthcare', 'Global'],
+      link: 'https://aprikosmedical.com'
+    },
+    {
+      title: 'Pharmeca AS',
+      description: 'Innovative pharmaceutical solutions leveraging advanced technology for improved patient care and treatment outcomes.',
+      image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=1600',
+      status: 'development',
+      tags: ['Pharmaceuticals', 'Healthcare', 'Innovation'],
+      comingSoon: true
     }
   ],
   'Web3 & Software Innovation': [
