@@ -4,7 +4,7 @@ import codeEntropyLogo from '../../../assets/images/code-entropy-logo.webp';
 import balderxLogo from '../../../assets/images/balderx-logo.webp';
 
 export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
-  'Artificial Intelligence': [
+  'Health Intelligence': [
     {
       title: 'Mashwara AI',
       description: 'Supporting patients and doctors with AI-driven solutions that enhance communication, improve healthcare access, and enable informed, efficient decision-making.',

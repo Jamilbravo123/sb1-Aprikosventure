@@ -1,35 +1,36 @@
 import React, { useState, useRef } from 'react';
-import { ChevronDown, Cpu, Link2 } from 'lucide-react';
+import { ChevronDown, Heart, Link2 } from 'lucide-react';
 import { portfolioData } from './data';
 import PortfolioGrid from './PortfolioGrid';
 import { CategoryKey } from './types';
 
 const categoryIcons = {
-  'Artificial Intelligence': <Cpu className="w-6 h-6 text-blue-500" />,
+  'Health Intelligence': <Heart className="w-6 h-6 text-rose-500" />,
   'Distributed Ledger Technology': <Link2 className="w-6 h-6 text-purple-500" />
+};
+
+const categorySubtext = {
+  'Health Intelligence': 'AI-powered health solutions designed to empower patients, clinicians, and systems',
+  'Distributed Ledger Technology': 'Innovative blockchain solutions for secure, transparent, and efficient digital transactions'
 };
 
 export default function PortfolioCategories() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey | null>(null);
   const categoryRefs = useRef<Record<CategoryKey, HTMLDivElement | null>>({
-    'Artificial Intelligence': null,
+    'Health Intelligence': null,
     'Distributed Ledger Technology': null
   });
 
   const handleCategoryClick = (category: CategoryKey) => {
-    // If clicking the same category, just close it
     if (activeCategory === category) {
       setActiveCategory(null);
       return;
     }
 
-    // If a different category is already open, close it first
     if (activeCategory !== null) {
       setActiveCategory(null);
-      // Wait for the closing animation
       setTimeout(() => {
         setActiveCategory(category);
-        // Then scroll to the new category
         setTimeout(() => {
           const element = categoryRefs.current[category];
           if (element) {
@@ -38,9 +39,8 @@ export default function PortfolioCategories() {
             window.scrollTo({ top: y, behavior: 'smooth' });
           }
         }, 50);
-      }, 300); // Wait for closing animation to complete
+      }, 300);
     } else {
-      // If no category is open, just open the new one
       setActiveCategory(category);
       setTimeout(() => {
         const element = categoryRefs.current[category];
@@ -68,11 +68,14 @@ export default function PortfolioCategories() {
               hover:shadow-md active:shadow-sm
               transform hover:-translate-y-[1px] active:translate-y-0"
           >
-            <div className="flex items-center gap-3">
-              {categoryIcons[category]}
-              <h3 className="text-xl font-semibold text-slate-900 transition-colors group-hover:text-blue-600">
-                {category}
-              </h3>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center gap-3">
+                {categoryIcons[category]}
+                <h3 className="text-xl font-semibold text-slate-900 transition-colors group-hover:text-blue-600">
+                  {category}
+                </h3>
+              </div>
+              <p className="text-sm text-slate-600 pl-9">{categorySubtext[category]}</p>
             </div>
             <ChevronDown
               className={`h-5 w-5 text-slate-500 transition-all duration-300 

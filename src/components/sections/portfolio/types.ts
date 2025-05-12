@@ -1,4 +1,4 @@
-export type CategoryKey = 'Artificial Intelligence' | 'Distributed Ledger Technology';
+export type CategoryKey = 'Health Intelligence' | 'Distributed Ledger Technology';
 
 export type CompanyStatus = 'active' | 'development';
 
