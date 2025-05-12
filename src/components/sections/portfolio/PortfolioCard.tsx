@@ -38,11 +38,11 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
         className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer w-full flex flex-col hover:ring-1 hover:ring-blue-400"
         onClick={handleClick}
       >
-        <div className="aspect-[16/9] overflow-hidden bg-slate-50 relative">
+        <div className="aspect-[16/9] overflow-hidden bg-slate-900 relative">
           <img
             src={item.image}
             alt={item.title}
-            className={`absolute inset-0 h-full w-full object-contain ${
+            className={`h-full w-full object-contain p-4 ${
               removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
             } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
           />
