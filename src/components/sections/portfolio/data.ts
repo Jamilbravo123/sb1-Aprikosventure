@@ -20,6 +20,14 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       status: 'active',
       tags: ['AI', 'Web3', 'Software Development'],
       link: 'https://codentropy.io/'
+    },
+    {
+      title: 'Juni AI',
+      description: 'Rethinking clinic intelligence with next-gen AI tools to streamline operations, enhance workflows, and unlock new possibilities for healthcare providers.',
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1600',
+      status: 'development',
+      tags: ['Healthcare', 'AI', 'Operations'],
+      comingSoon: true
     }
   ],
   'Distributed Ledger Technology': [
