@@ -2,6 +2,7 @@ import { CategoryKey, PortfolioItem } from './types';
 import mashwaraLogo from '../../../assets/images/mashwara-ai-logo.webp';
 import codeEntropyLogo from '../../../assets/images/code-entropy-logo.webp';
 import balderxLogo from '../../../assets/images/balderx-logo.webp';
+import aprikosMedicalLogo from '../../../assets/images/aprikosmedical-logo.png';
 
 export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
   'Health Intelligence': [
@@ -24,7 +25,7 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
     {
       title: 'Aprikos Medical AS',
       description: 'Aprikos Medical is a Norwegian company that specializes in providing premium medical devices to hospitals and clinics worldwide.',
-      image: 'https://images.unsplash.com/photo-1583912267550-d6c2ac4b0154?auto=format&fit=crop&q=80&w=1600',
+      image: aprikosMedicalLogo,
       status: 'active',
       tags: ['Medical Devices', 'Healthcare', 'Global'],
       link: 'https://aprikosmedical.com'
