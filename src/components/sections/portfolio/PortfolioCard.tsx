@@ -35,14 +35,14 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
   return (
     <>
       <div 
-        className="group relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 cursor-pointer w-full flex flex-col hover:ring-2 hover:ring-blue-400"
+        className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer w-full flex flex-col hover:ring-1 hover:ring-blue-400"
         onClick={handleClick}
       >
-        <div className="aspect-[16/9] overflow-hidden bg-slate-900 relative">
+        <div className="aspect-[16/9] overflow-hidden bg-slate-50 relative">
           <img
             src={item.image}
             alt={item.title}
-            className={`absolute inset-0 h-full w-full object-cover ${
+            className={`absolute inset-0 h-full w-full object-contain ${
               removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
             } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
           />
@@ -50,43 +50,43 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
             removeFilter ? 'opacity-0' : 'opacity-40 md:opacity-80'
           } transition-opacity duration-300 group-hover:opacity-20`} />
         </div>
-        <div className="p-6 flex-1 flex flex-col bg-white transition-colors duration-300 group-hover:bg-slate-50">
-          <div className="flex items-center justify-between mb-3">
+        <div className="p-4 flex-1 flex flex-col bg-white transition-colors duration-300 group-hover:bg-slate-50">
+          <div className="flex items-center justify-between mb-2">
             <h3 
-              className={`text-xl font-semibold leading-6 text-slate-900 group-hover:text-[${colors.primary.blue}] transition-colors`}
+              className={`text-base font-semibold leading-6 text-slate-900 group-hover:text-[${colors.primary.blue}] transition-colors`}
               dangerouslySetInnerHTML={{ __html: item.title }}
             />
           </div>
-          <span className={`inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full mb-3 transition-all duration-300 ${
-            item.title.includes('Venturetoken')
-              ? 'bg-blue-50 text-blue-700 group-hover:bg-blue-100 group-hover:shadow-sm'
-              : item.status === 'active' 
-                ? 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100 group-hover:shadow-sm' 
-                : 'bg-amber-50 text-amber-700 group-hover:bg-amber-100 group-hover:shadow-sm'
+          <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full mb-2 transition-all duration-300 ${
+            item.status === 'active' 
+              ? 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100' 
+              : 'bg-amber-50 text-amber-700 group-hover:bg-amber-100'
           }`}>
             <CircleDot className="h-3 w-3" />
-            {item.title.includes('Venturetoken') 
-              ? 'Partnership'
-              : item.status === 'active' 
-                ? 'Launched' 
-                : item.title.includes('Bldrx') 
-                  ? 'Launching Soon' 
-                  : 'Development'
-            }
+            {item.status === 'active' ? 'Active' : 'Development'}
           </span>
-          <p className="text-base leading-6 text-slate-600">{item.description}</p>
+          <p className="text-sm leading-5 text-slate-600 line-clamp-2">{item.description}</p>
+          <div className="flex flex-wrap gap-1 mt-2">
+            {item.tags.map((tag, index) => (
+              <span 
+                key={index}
+                className="text-xs px-2 py-0.5 bg-slate-100 text-slate-700 rounded-full"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
           {(item.link || item.comingSoon) && (
-            <div className={`mt-4 flex items-center gap-2 text-[${colors.primary.blue}] group-hover:text-[${colors.primary.navy}] transition-colors`}>
-              <span className="text-sm font-medium">
+            <div className={`mt-3 flex items-center gap-1 text-[${colors.primary.blue}] group-hover:text-[${colors.primary.navy}] transition-colors`}>
+              <span className="text-xs font-medium">
                 {item.comingSoon ? 'Coming Soon' : 'Learn more'}
               </span>
-              <ExternalLink className="w-4 h-4 transform transition-transform group-hover:translate-x-1" />
+              <ExternalLink className="w-3 h-3 transform transition-transform group-hover:translate-x-1" />
             </div>
           )}
         </div>
       </div>
 
-      {/* Coming Soon Popup */}
       {showPopup && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowPopup(false)}>
           <div 
