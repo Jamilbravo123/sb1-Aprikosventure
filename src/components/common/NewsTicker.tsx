@@ -9,25 +9,25 @@ interface NewsItem {
 
 const news: NewsItem[] = [
   {
-    text: "New venture opportunity in AI technology coming soon! Pre-register now!",
+    text: "New venture opportunity in AI technology coming soon! Pre-register for details!",
     url: "#portfolio"
   },
   {
     text: "Venture Token in initial talk of co-operation with Aprikos Venture",
-    url: "#contact"
+    url: "https://venturetoken.io/"
   },
   {
     text: "Aprikos Venture launches Mashwara AI in South Asia",
     url: "https://mashwara.ai/"
   },
   {
-    text: "Feb 2025: Pre-register for tokenized shares investment round",
+    text: "Feb 2026: Pre-register for tokenized shares investment round",
     url: "#investors",
     isRegistration: true
   },
   {
     text: "New partnerships forged in tech innovation for on-chain maritime investments.",
-    url: "#contact"
+    url: "https://shippingx.io/"
   }
 ];
 

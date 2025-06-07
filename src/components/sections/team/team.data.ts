@@ -27,20 +27,20 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'Under hiring',
-    role: 'Investment Associate | Deal Support & Portfolio Monitoring',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1600',
-    bio: 'Supports deal flow, market research, and investment memos. Assists in portfolio tracking and communication.',
+    name: 'Dr. Farooq Maqsood',
+    role: 'Partner & Venture Builder',
+    image: farooqPortrait,
+    bio: 'As Partner at Aprikos Venture, Farooq brings clinical insight to lead our health innovation.',
     social: {
       linkedin: '#',
       email: 'info@aprikosventure.com'
     }
   },
   {
-    name: 'Dr. Farooq Maqsood',
-    role: 'Partner & Venture Builder',
-    image: farooqPortrait,
-    bio: 'As Partner at Aprikos Venture, Farooq brings clinical insight to lead our health innovation.',
+    name: 'Under hiring',
+    role: 'Investment Associate | Deal Support & Portfolio Monitoring',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1600',
+    bio: 'Supports deal flow, market research, and investment memos. Assists in portfolio tracking and communication.',
     social: {
       linkedin: '#',
       email: 'info@aprikosventure.com'

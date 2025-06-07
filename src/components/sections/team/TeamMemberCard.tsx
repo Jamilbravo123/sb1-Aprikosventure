@@ -8,7 +8,7 @@ export default function TeamMemberCard({ name, role, image, bio, social }: TeamM
     <div className="group relative">
       <div className="relative h-80 w-64 mx-auto overflow-hidden rounded-2xl bg-slate-900 shadow-lg transition-all duration-300 group-hover:shadow-xl">
         <img
-          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-95"
+          className={`absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-95 ${name === 'Sara Rana' ? 'object-top' : ''}`}
           src={image}
           alt={name}
           loading="eager"
