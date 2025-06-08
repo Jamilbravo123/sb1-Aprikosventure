@@ -3,11 +3,12 @@ import React from 'react';
 interface ContactFormProps {
   formRef: React.RefObject<HTMLFormElement>;
   isSubmitting: boolean;
+  handleSubmit: (e: React.FormEvent) => void;
 }
 
-export default function ContactForm({ formRef, isSubmitting }: ContactFormProps) {
+export default function ContactForm({ formRef, isSubmitting, handleSubmit }: ContactFormProps) {
   return (
-    <form ref={formRef} className="space-y-6">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label htmlFor="name" className="block text-sm font-medium leading-6 text-slate-900">
           Name
