@@ -99,6 +99,7 @@ export default function NewsTicker() {
       ${isMobile ? 'text-[10px] leading-tight' : 'text-sm'} 
       ${isMobile ? 'px-2' : 'px-4'}
     `}>
+      <span className="font-bold mr-2">News!</span>
       {currentNews.url ? (
         <a 
           href={currentNews.url}

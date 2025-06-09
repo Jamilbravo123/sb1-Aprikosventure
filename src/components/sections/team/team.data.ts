@@ -28,12 +28,12 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Dr. Farooq Maqsood',
-    role: 'Partner & Venture Builder',
+    role: 'Co-founder and Venture Builder',
     image: farooqPortrait,
-    bio: 'As Partner at Aprikos Venture, Farooq brings clinical insight to lead our health innovation.',
+    bio: 'Farooq brings extensive clinical experience and domain expertise to spearhead our health innovation ventures.',
     social: {
-      linkedin: '#',
-      email: 'info@aprikosventure.com'
+      linkedin: 'https://www.linkedin.com/in/farooq-maqsood-437b3361/',
+      email: 'contact@aprikosventure.com'
     }
   },
   {
