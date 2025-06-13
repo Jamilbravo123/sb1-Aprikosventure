@@ -13,7 +13,7 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
   const [removeFilter, setRemoveFilter] = useState(false);
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: ReturnType<typeof setTimeout>;
     if (isActive) {
       timer = setTimeout(() => {
         setRemoveFilter(true);
@@ -33,6 +33,9 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
   };
 
   const isWeb3Section = item.tags.some(tag => ['Web3', 'Blockchain', 'DeFi'].includes(tag));
+  const isLogo = item.isLogo || isWeb3Section;
+  const isMashwaraLogo = item.title === 'Mashwara AI';
+  const isJuniAiLogo = item.title === 'Juni AI';
 
   return (
     <>
@@ -40,17 +43,17 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
         className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer w-full flex flex-col hover:ring-1 hover:ring-blue-400"
         onClick={handleClick}
       >
-        <div className="aspect-[16/9] overflow-hidden bg-slate-900 relative">
+        <div className={`aspect-[16/9] overflow-hidden relative ${isMashwaraLogo ? 'bg-slate-900' : (isJuniAiLogo ? 'flex items-center justify-center p-4' : (isLogo ? 'bg-slate-900 flex items-center justify-center p-4' : 'bg-slate-900'))}`} style={isJuniAiLogo ? { backgroundColor: '#194b6a' } : {}}>
           <img
             src={item.image}
             alt={item.title}
-            className={`h-full w-full ${isWeb3Section ? 'object-contain p-4' : 'object-cover'} ${
+            className={`h-full w-full ${isMashwaraLogo ? 'object-cover' : (isLogo ? 'object-contain max-h-full' : 'object-cover')} ${
               removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
             } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
           />
           <div className={`absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent ${
             removeFilter ? 'opacity-0' : 'opacity-40 md:opacity-60'
-          } transition-opacity duration-300 group-hover:opacity-20`} />
+          } ${isLogo ? 'group-hover:opacity-10' : 'transition-opacity duration-300 group-hover:opacity-20'}`} />
         </div>
         <div className="p-4 flex-1 flex flex-col bg-white transition-colors duration-300 group-hover:bg-slate-50">
           <div className="flex items-center justify-between mb-2">

@@ -3,6 +3,7 @@ import mashwaraLogo from '../../../assets/images/mashwara-ai-logo.webp';
 import codeEntropyLogo from '../../../assets/images/code-entropy-logo.webp';
 import balderxLogo from '../../../assets/images/balderx-logo.webp';
 import aprikosMedicalLogo from '../../../assets/images/aprikosmedical-logo.png';
+import juniAiLogo from '../../../assets/images/hero/Juniai - Color logo - no background.png';
 
 export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
   'Health Intelligence': [
@@ -12,15 +13,17 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       image: mashwaraLogo,
       status: 'active',
       tags: ['Healthtech', 'AI', 'Healthcare'],
-      link: 'https://mashwara.ai/'
+      link: 'https://mashwara.ai/',
+      isLogo: true
     },
     {
       title: 'Juni AI',
       description: 'Rethinking clinic intelligence with next-gen AI tools to streamline operations, enhance workflows, and unlock new possibilities for healthcare providers.',
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1600',
+      image: juniAiLogo,
       status: 'development',
       tags: ['Healthcare', 'AI', 'Operations'],
-      comingSoon: true
+      comingSoon: true,
+      isLogo: true
     },
     {
       title: 'Aprikos Medical AS',
@@ -28,7 +31,8 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       image: aprikosMedicalLogo,
       status: 'active',
       tags: ['Medical Devices', 'Healthcare', 'Global'],
-      link: 'https://aprikosmedical.com'
+      link: 'https://aprikosmedical.com',
+      isLogo: true
     },
     {
       title: 'Pharmeca AS',
@@ -46,15 +50,17 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       image: codeEntropyLogo,
       status: 'active',
       tags: ['AI', 'Web3', 'Software Development'],
-      link: 'https://codentropy.io/'
+      link: 'https://codentropy.io/',
+      isLogo: true
     },
     {
-      title: 'Bldrx<sup>2</sup>',
-      description: 'Blockchain-powered platform for tokenizing shares and raising capital with secure, transparent, and efficient ownership digitization.',
+      title: 'DuneBlocks',
+      description: 'Blockchain-powered platform for tokenizing real estate',
       image: balderxLogo,
       status: 'development',
-      tags: ['Tokenization', 'Capital Markets', 'Blockchain'],
-      comingSoon: true
+      tags: ['Tokenization', 'Real Estate', 'Blockchain'],
+      comingSoon: true,
+      isLogo: true
     },
     {
       title: 'ShippingX',

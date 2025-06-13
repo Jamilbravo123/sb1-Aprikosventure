@@ -10,4 +10,5 @@ export interface PortfolioItem {
   tags: string[];
   link?: string;
   comingSoon?: boolean;
+  isLogo?: boolean;
 }
