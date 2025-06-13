@@ -54,7 +54,7 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       isLogo: true
     },
     {
-      title: 'DuneBlocks',
+      title: 'BalderX',
       description: 'Blockchain-powered platform for tokenizing real estate',
       image: balderxLogo,
       status: 'development',
