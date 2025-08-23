@@ -18,7 +18,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Sara Rana',
-    role: 'Head of Growth / Marketing',
+    role: 'Co-founder / Venture Builder',
     image: saraPortrait,
     bio: 'Masters in Data Science with a passion for innovation and entrepreneurship.',
     social: {
