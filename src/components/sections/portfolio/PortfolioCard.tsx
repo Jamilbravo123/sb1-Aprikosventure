@@ -36,6 +36,7 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
   const isLogo = item.isLogo || isWeb3Section;
   const isMashwaraLogo = item.title === 'Mashwara AI';
   const isJuniAiLogo = item.title === 'Juni AI';
+  const isShippingXLogo = item.title === 'ShippingX';
 
   return (
     <>
