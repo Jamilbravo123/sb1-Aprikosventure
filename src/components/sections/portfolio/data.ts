@@ -34,14 +34,6 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
       tags: ['Healthcare', 'AI', 'Operations'],
       comingSoon: true,
       isLogo: true
-    },
-    {
-      title: 'Pharmeca AS',
-      description: 'Innovative pharmaceutical solutions leveraging advanced technology for improved patient care and treatment outcomes.',
-      image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&q=80&w=1600',
-      status: 'development',
-      tags: ['Pharmaceuticals', 'Healthcare', 'Innovation'],
-      comingSoon: true
     }
   ],
   'Web3 & Software Innovation': [
