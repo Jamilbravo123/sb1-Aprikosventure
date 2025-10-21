@@ -33,6 +33,9 @@ export default function PortfolioHeader() {
           <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-slate-900/10" />
           <div className={`absolute -bottom-4 -right-4 h-72 w-72 ${gradients.background.primary} opacity-20 blur-3xl`} />
         </div>
+        <p className="mt-4 text-sm text-slate-600 text-center lg:text-left italic">
+          Pictured: Jamil Rehman and Bent Andreassen – Group Director at Pharma Nordic in connection with Pharmesa AS.
+        </p>
       </div>
     </div>
   );
