@@ -5,19 +5,19 @@ import PortfolioGrid from './PortfolioGrid';
 import { CategoryKey } from './types';
 
 const categoryIcons = {
-  'Health Intelligence': <Heart className="w-6 h-6 text-rose-500 transition-all duration-300 group-hover:scale-110 group-hover:text-rose-400 group-hover:drop-shadow-lg" />,
+  'AI & Deep Tech': <Heart className="w-6 h-6 text-rose-500 transition-all duration-300 group-hover:scale-110 group-hover:text-rose-400 group-hover:drop-shadow-lg" />,
   'Web3 & Software Innovation': <Code2 className="w-6 h-6 text-purple-500 transition-all duration-300 group-hover:scale-110 group-hover:text-purple-400 group-hover:drop-shadow-lg" />
 };
 
 const categorySubtext = {
-  'Health Intelligence': 'Tech-driven healthcare built with deep domain insight and global ambition',
+  'AI & Deep Tech': 'Advanced AI solutions built with deep domain expertise and global ambition',
   'Web3 & Software Innovation': 'From tokens to code – building the backbone of future tech and finance'
 };
 
 export default function PortfolioCategories() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey | null>(null);
   const categoryRefs = useRef<Record<CategoryKey, HTMLDivElement | null>>({
-    'Health Intelligence': null,
+    'AI & Deep Tech': null,
     'Web3 & Software Innovation': null
   });
 

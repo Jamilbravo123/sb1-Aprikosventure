@@ -71,17 +71,7 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
             <CircleDot className="h-3 w-3" />
             {item.status === 'active' ? 'Active' : 'Development'}
           </span>
-          <p className="text-sm leading-5 text-slate-600 line-clamp-2">{item.description}</p>
-          <div className="flex flex-wrap gap-1 mt-2">
-            {item.tags.map((tag, index) => (
-              <span 
-                key={index}
-                className="text-xs px-2 py-0.5 bg-slate-100 text-slate-700 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <p className="text-sm leading-5 text-slate-600">{item.description}</p>
           {(item.link || item.comingSoon) && (
             <div className={`mt-3 flex items-center gap-1 text-[${colors.primary.blue}] group-hover:text-[${colors.primary.navy}] transition-colors`}>
               <span className="text-xs font-medium">

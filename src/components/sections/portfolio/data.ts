@@ -7,7 +7,7 @@ import juniAiLogo from '../../../assets/images/hero/Juniai - Color logo - no bac
 import shippingxLogo from '../../../assets/images/hero/Shipping-X1.png';
 
 export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
-  'Health Intelligence': [
+  'AI & Deep Tech': [
     {
       title: 'Mashwara AI',
       description: 'Supporting patients and doctors with AI-driven solutions that enhance communication, improve healthcare access, and enable informed, efficient decision-making.',
@@ -19,7 +19,7 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
     },
     {
       title: 'Aprikos Medical AS',
-      description: 'Aprikos Medical is a Norwegian company that specializes in providing premium medical devices to hospitals and clinics worldwide.',
+      description: 'Aprikos Medical is a Norwegian medical device manufacturer that specializes in providing premium medical devices to the global market.',
       image: aprikosMedicalLogo,
       status: 'active',
       tags: ['Medical Devices', 'Healthcare', 'Global'],
@@ -28,7 +28,7 @@ export const portfolioData: Record<CategoryKey, PortfolioItem[]> = {
     },
     {
       title: 'Juni AI',
-      description: 'Rethinking clinic intelligence with next-gen AI tools to streamline operations, enhance workflows, and unlock new possibilities for healthcare providers.',
+      description: 'Rethinking inhouse intelligence with next-gen AI tools to streamline operations and enhance workflows.',
       image: juniAiLogo,
       status: 'development',
       tags: ['Healthcare', 'AI', 'Operations'],
