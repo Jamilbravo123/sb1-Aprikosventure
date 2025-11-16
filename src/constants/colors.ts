@@ -52,3 +52,22 @@ export const gradientCSS = {
     hero: 'linear-gradient(to right, rgb(241, 245, 249), rgb(248, 250, 252))',
   },
 } as const;
+
+// Dark Theme - Private Lounge
+export const darkTheme = {
+  background: {
+    primary: '#0A0E1A',      // Deep navy-black
+    secondary: '#111827',     // Slate-900
+    elevated: '#1E293B',      // Slate-800
+  },
+  text: {
+    primary: '#F1F5F9',       // Near white
+    secondary: '#CBD5E1',     // Slate-300
+    muted: '#94A3B8',         // Slate-400
+  },
+  glass: {
+    card: 'rgba(30, 41, 59, 0.5)',  // Semi-transparent slate
+    border: 'rgba(148, 163, 184, 0.2)',
+  },
+  gold: '#B8860B',  // Existing brand gold
+} as const;

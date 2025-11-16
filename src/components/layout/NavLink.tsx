@@ -1,4 +1,4 @@
-import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface NavLinkProps {
   href: string;
@@ -6,19 +6,44 @@ interface NavLinkProps {
 }
 
 export default function NavLink({ href, children }: NavLinkProps) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+    
+    // Check if we're on dashboard or another page
+    if (location.pathname !== '/') {
+      // Navigate to homepage first, then scroll
+      navigate('/');
+      setTimeout(() => {
+        const targetId = href.replace('#', '');
+        const element = document.getElementById(targetId);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    } else {
+      // Already on homepage, just scroll
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
     }
   };
 

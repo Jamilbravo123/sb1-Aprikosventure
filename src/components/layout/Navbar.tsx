@@ -4,7 +4,9 @@ import LogoLink from '../brand/LogoLink';
 import { MobileMenu, MobileMenuButton } from './mobile';
 import InvestorButton from '../common/InvestorButton';
 import OwnerRegistrationButton from '../common/OwnerRegistrationButton';
+import UserMenu from '../common/UserMenu';
 import NewsTicker from '../common/NewsTicker';
+import { useAuth } from '../../contexts/AuthContext';
 
 const navLinks = [
   { href: '#portfolio', label: 'Portfolio' },
@@ -16,6 +18,7 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,8 +53,14 @@ export default function Navbar() {
           {/* Action Buttons */}
           <div className="flex items-center">
             <div className="hidden lg:flex lg:items-center lg:gap-12 pl-16">
-              <InvestorButton />
-              <OwnerRegistrationButton />
+              {user ? (
+                <UserMenu />
+              ) : (
+                <>
+                  <InvestorButton />
+                  <OwnerRegistrationButton />
+                </>
+              )}
             </div>
             
             {/* Mobile Menu Button */}

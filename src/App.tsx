@@ -1,21 +1,25 @@
 import React from 'react';
-import Layout from './components/layout/Layout';
-import Hero from './components/sections/hero';
-import Process from './components/sections/process/Process';
-import Portfolio from './components/sections/portfolio/Portfolio';
-import About from './components/sections/about/About';
-import Team from './components/sections/team/Team';
-import ContactSection from './components/sections/contact/ContactSection';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import MagicLinkLogin from './components/auth/MagicLinkLogin';
+import AuthCallback from './components/auth/AuthCallback';
+import InvestorDashboard from './pages/InvestorDashboard';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 export default function App() {
   return (
-    <Layout>
-      <Hero />
-      <Process />
-      <Portfolio />
-      <About />
-      <Team />
-      <ContactSection />
-    </Layout>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/investor-login" element={<MagicLinkLogin />} />
+      <Route path="/auth/callback" element={<AuthCallback />} />
+      <Route
+        path="/investor-dashboard"
+        element={
+          <ProtectedRoute>
+            <InvestorDashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
