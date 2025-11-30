@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ExternalLink, CircleDot, X } from 'lucide-react';
 import { PortfolioItem } from './types';
 import { colors } from '../../../constants/colors';
@@ -8,21 +8,8 @@ interface PortfolioCardProps {
   isActive?: boolean;
 }
 
-export default function PortfolioCard({ item, isActive = false }: PortfolioCardProps) {
+export default function PortfolioCard({ item }: PortfolioCardProps) {
   const [showPopup, setShowPopup] = useState(false);
-  const [removeFilter, setRemoveFilter] = useState(false);
-
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    if (isActive) {
-      timer = setTimeout(() => {
-        setRemoveFilter(true);
-      }, 1000);
-    } else {
-      setRemoveFilter(false);
-    }
-    return () => clearTimeout(timer);
-  }, [isActive]);
 
   const handleClick = () => {
     if (item.comingSoon) {
@@ -41,20 +28,16 @@ export default function PortfolioCard({ item, isActive = false }: PortfolioCardP
   return (
     <>
       <div 
-        className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer w-full flex flex-col hover:ring-1 hover:ring-blue-400"
+        className="group relative overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer w-full h-full flex flex-col hover:ring-1 hover:ring-blue-400"
         onClick={handleClick}
       >
         <div className={`aspect-[16/9] overflow-hidden relative ${isMashwaraLogo ? 'bg-slate-900' : (isJuniAiLogo ? 'flex items-center justify-center p-4' : (isLogo ? 'bg-slate-900 flex items-center justify-center p-4' : 'bg-slate-900'))}`} style={isJuniAiLogo ? { backgroundColor: '#194b6a' } : {}}>
           <img
             src={item.image}
             alt={item.title}
-            className={`h-full w-full ${isMashwaraLogo ? 'object-cover' : (isLogo ? 'object-contain max-h-full' : 'object-cover')} ${
-              removeFilter ? 'opacity-100 mix-blend-normal' : 'opacity-90 md:opacity-70 mix-blend-luminosity'
-            } transition-all duration-500 group-hover:opacity-100 group-hover:mix-blend-normal group-hover:scale-105`}
+            className={`h-full w-full ${isMashwaraLogo ? 'object-cover' : (isLogo ? 'object-contain max-h-full' : 'object-cover')} 
+              opacity-100 mix-blend-normal transition-all duration-300 group-hover:scale-105`}
           />
-          <div className={`absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent ${
-            removeFilter ? 'opacity-0' : 'opacity-40 md:opacity-60'
-          } ${isLogo ? 'group-hover:opacity-10' : 'transition-opacity duration-300 group-hover:opacity-20'}`} />
         </div>
         <div className="p-4 flex-1 flex flex-col bg-white transition-colors duration-300 group-hover:bg-slate-50">
           <div className="flex items-center justify-between mb-2">
