@@ -46,7 +46,7 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
               dangerouslySetInnerHTML={{ __html: item.title }}
             />
           </div>
-          <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full mb-2 transition-all duration-300 ${
+          <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-full mb-2 transition-all duration-300 self-start ${
             item.status === 'active' 
               ? 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100' 
               : 'bg-amber-50 text-amber-700 group-hover:bg-amber-100'
@@ -54,9 +54,13 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
             <CircleDot className="h-3 w-3" />
             {item.status === 'active' ? 'Active' : 'Development'}
           </span>
-          <p className="text-sm leading-5 text-slate-600">{item.description}</p>
+          <p className="text-sm leading-5 text-slate-600 mb-3">{item.description}</p>
+          
+          {/* Spacer to push button to bottom */}
+          <div className="flex-1" />
+          
           {(item.link || item.comingSoon) && (
-            <div className={`mt-3 flex items-center gap-1 text-[${colors.primary.blue}] group-hover:text-[${colors.primary.navy}] transition-colors`}>
+            <div className={`mt-2 flex items-center gap-1 text-[${colors.primary.blue}] group-hover:text-[${colors.primary.navy}] transition-colors`}>
               <span className="text-xs font-medium">
                 {item.comingSoon ? 'Coming Soon' : 'Learn more'}
               </span>
