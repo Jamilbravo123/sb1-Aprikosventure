@@ -16,7 +16,7 @@ export const portfolioData: PortfolioItem[] = [
   },
   {
     title: 'Venturetoken (Vt)',
-    description: 'Driving innovation in venture ecosystems',
+    description: 'Driving innovation in venture ecosystems with Norways first MiCA registered utility token.',
     image: 'https://raw.githubusercontent.com/Jamilbravo123/sb1-Aprikosventure/main/src/assets/images/hero/browser-icon.svg',
     status: 'active',
     tags: ['Blockchain', 'DeFi', 'Utility'],
@@ -28,12 +28,12 @@ export const portfolioData: PortfolioItem[] = [
     image: shippingxLogo,
     status: 'active',
     tags: ['Maritime', 'Tokenization', 'Sustainability'],
-    link: 'https://shippingx.no/',
+    link: 'https://shippingx.io/',
     isLogo: true
   },
   {
-    title: 'Aprikos Medical AS',
-    description: 'Aprikos Medical is a Norwegian medical device manufacturer that specializes in providing premium medical devices to the global market.',
+    title: 'Aprikos Medical',
+    description: 'Aprikos Medical is a MDR - certified Norwegian medical device manufacturer that specializes in providing premium medical devices to the global market.',
     image: aprikosMedicalLogo,
     status: 'active',
     tags: ['Medical Devices', 'Healthcare', 'Global'],
