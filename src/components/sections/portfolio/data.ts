@@ -26,9 +26,9 @@ export const portfolioData: PortfolioItem[] = [
     title: 'ShippingX',
     description: 'Advancing maritime innovation with tokenized assets and sustainable compliance trading.',
     image: shippingxLogo,
-    status: 'active',
+    status: 'development',
     tags: ['Maritime', 'Tokenization', 'Sustainability'],
-    link: 'https://shippingx.io/',
+    comingSoon: true,
     isLogo: true
   },
   {
