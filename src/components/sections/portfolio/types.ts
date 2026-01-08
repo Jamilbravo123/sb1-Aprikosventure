@@ -7,6 +7,7 @@ export interface PortfolioItem {
   description: string;
   image: string;
   status: CompanyStatus;
+  statusText?: string;
   tags: string[];
   link?: string;
   comingSoon?: boolean;

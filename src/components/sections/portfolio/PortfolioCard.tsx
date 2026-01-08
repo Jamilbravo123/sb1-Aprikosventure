@@ -52,7 +52,7 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
               : 'bg-amber-50 text-amber-700 group-hover:bg-amber-100'
           }`}>
             <CircleDot className="h-3 w-3" />
-            {item.status === 'active' ? 'Active' : 'Development'}
+            {item.statusText || (item.status === 'active' ? 'Active' : 'Development')}
           </span>
           <p className="text-sm leading-5 text-slate-600 mb-3">{item.description}</p>
           

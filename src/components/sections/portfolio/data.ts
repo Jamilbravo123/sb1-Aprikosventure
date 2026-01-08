@@ -10,6 +10,7 @@ export const portfolioData: PortfolioItem[] = [
     description: 'Supporting patients and doctors with AI-driven solutions that enhance communication, improve healthcare access, and enable informed, efficient decision-making.',
     image: mashwaraLogo,
     status: 'active',
+    statusText: 'Live Beta',
     tags: ['Healthtech', 'AI', 'Healthcare'],
     link: 'https://mashwara.ai/',
     isLogo: true
@@ -27,6 +28,7 @@ export const portfolioData: PortfolioItem[] = [
     description: 'Advancing maritime innovation with tokenized assets and sustainable compliance trading.',
     image: shippingxLogo,
     status: 'development',
+    statusText: 'Launching Q1 2026',
     tags: ['Maritime', 'Tokenization', 'Sustainability'],
     comingSoon: true,
     isLogo: true
