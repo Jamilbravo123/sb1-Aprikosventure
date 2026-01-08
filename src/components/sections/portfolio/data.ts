@@ -2,6 +2,7 @@ import { PortfolioItem } from './types';
 import mashwaraLogo from '../../../assets/images/mashwara-ai-logo.webp';
 import aprikosMedicalLogo from '../../../assets/images/aprikosmedical-logo.png';
 import shippingxLogo from '../../../assets/images/hero/Shipping-X1.png';
+import codeEntropyLogo from '../../../assets/images/code-entropy-logo.webp';
 
 // Unified portfolio - selected companies
 export const portfolioData: PortfolioItem[] = [
