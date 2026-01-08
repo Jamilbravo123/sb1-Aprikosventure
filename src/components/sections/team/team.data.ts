@@ -28,16 +28,6 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'Dr. Farooq Maqsood',
-    role: 'Co-founder and Venture Builder',
-    image: farooqPortrait,
-    bio: 'Farooq brings extensive clinical experience and domain expertise to spearhead our health innovation ventures.',
-    social: {
-      linkedin: 'https://www.linkedin.com/in/farooq-maqsood-437b3361/',
-      email: 'contact@aprikosventure.com'
-    }
-  },
-  {
     name: 'Robert Lyngmoe',
     role: 'Venture Builder',
     image: robertPortrait,
@@ -45,6 +35,16 @@ export const teamMembers: TeamMember[] = [
     social: {
       linkedin: '#',
       email: 'info@aprikosventure.com'
+    }
+  },
+  {
+    name: 'Dr. Farooq Maqsood',
+    role: 'Co-founder and Venture Builder',
+    image: farooqPortrait,
+    bio: 'Farooq brings extensive clinical experience and domain expertise to spearhead our health innovation ventures.',
+    social: {
+      linkedin: 'https://www.linkedin.com/in/farooq-maqsood-437b3361/',
+      email: 'contact@aprikosventure.com'
     }
   },
   {
