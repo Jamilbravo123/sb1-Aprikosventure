@@ -4,6 +4,7 @@ import saraPortrait from '../../../assets/images/hero/sara-portrett2.webp';
 import farooqPortrait from '../../../assets/images/hero/Farooq1.jpg';
 import vishalPortrait from '../../../assets/images/hero/Vishal1.jpg';
 import joniPortrait from '../../../assets/images/hero/Joni1.jpg';
+import robertPortrait from '../../../assets/images/hero/robert.jpeg';
 
 export const teamMembers: TeamMember[] = [
   {
@@ -37,10 +38,10 @@ export const teamMembers: TeamMember[] = [
     }
   },
   {
-    name: 'Under hiring',
-    role: 'Investment Associate | Deal Support & Portfolio Monitoring',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1600',
-    bio: 'Supports deal flow, market research, and investment memos. Assists in portfolio tracking and communication.',
+    name: 'Robert Lyngmoe',
+    role: 'Venture Builder',
+    image: robertPortrait,
+    bio: 'Experienced venture builder driving innovation and growth across the Aprikos ecosystem.',
     social: {
       linkedin: '#',
       email: 'info@aprikosventure.com'
