@@ -45,7 +45,7 @@ export const portfolioData: PortfolioItem[] = [
   },
   {
     title: 'Code Entropy',
-    description: 'Full-stack software house specializing in AI and Web3 solutions.',
+    description: 'In-house software house building AI and Web3 solutions across the Aprikos ecosystem.',
     image: codeEntropyLogo,
     status: 'active',
     tags: ['AI', 'Web3', 'Software Development'],
