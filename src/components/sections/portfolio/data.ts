@@ -42,5 +42,14 @@ export const portfolioData: PortfolioItem[] = [
     tags: ['Medical Devices', 'Healthcare', 'Global'],
     link: 'https://aprikosmedical.com',
     isLogo: true
+  },
+  {
+    title: 'Code Entropy',
+    description: 'Full-stack software house specializing in AI and Web3 solutions.',
+    image: codeEntropyLogo,
+    status: 'active',
+    tags: ['AI', 'Web3', 'Software Development'],
+    link: 'https://codentropy.io/',
+    isLogo: true
   }
 ];
