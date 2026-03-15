@@ -38,7 +38,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#0c0c0c]">
+    <section id="contact" className="py-16 sm:py-24 bg-[#0c0c0c]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <ContactHeader />
 

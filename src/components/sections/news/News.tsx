@@ -160,7 +160,7 @@ export default function News() {
   const compact = news.slice(3);
 
   return (
-    <section id="news" className="py-24 bg-[#0c0c0c]">
+    <section id="news" className="py-16 sm:py-24 bg-[#0c0c0c]">
       <div className="mx-auto max-w-[1100px] px-6">
         <NewsHeader />
         {loading ? (

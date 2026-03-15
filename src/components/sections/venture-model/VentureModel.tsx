@@ -102,7 +102,7 @@ export default function VentureModel() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="py-24 bg-[#0c0c0c] relative overflow-hidden">
+    <section ref={sectionRef} className="py-16 sm:py-24 bg-[#0c0c0c] relative overflow-hidden">
       {/* Floating images — desktop only */}
       <div className="hidden xl:block">
         {floatingImages.map((img, i) => (

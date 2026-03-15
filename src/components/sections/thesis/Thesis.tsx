@@ -52,7 +52,7 @@ export default function Thesis() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 bg-[#0c0c0c] relative overflow-hidden">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-24 bg-[#0c0c0c] relative overflow-hidden">
       {/* Subtle background image */}
       <div
         className="absolute inset-0 opacity-[0.15]"
@@ -79,7 +79,7 @@ export default function Thesis() {
 
         {/* TODO: Add founder image once photo is confirmed */}
 
-        <div className="thesis-animate flex gap-12 justify-center flex-wrap">
+        <div className="thesis-animate grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-12 max-w-[500px] sm:max-w-none mx-auto">
           {stats.map((s) => (
             <div key={s.label} className="text-center">
               <div

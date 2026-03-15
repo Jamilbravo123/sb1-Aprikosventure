@@ -3,7 +3,7 @@ import TeamGrid from './TeamGrid';
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 bg-[#0c0c0c]">
+    <section id="team" className="py-16 sm:py-24 bg-[#0c0c0c]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <TeamHeader />
         <TeamGrid />
