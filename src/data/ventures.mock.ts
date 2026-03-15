@@ -1,102 +1,292 @@
-import { VentureOpportunity } from '../types/dashboard';
-import mashwaraLogo from '../assets/images/mashwara-ai-logo.webp';
+import type { Venture, TeamMember } from '../types/dashboard';
+import mashwaraLogo from '../assets/images/mashwara-ai-logo.png';
 import shippingxLogo from '../assets/images/hero/Shipping-X1.png';
 import aprikosVentureLogo from '../assets/images/aprikos-venture-logo.svg';
 import aprikosMedicalLogo from '../assets/images/aprikosmedical-logo.png';
+import codeEntropyLogo from '../assets/images/code-entropy-logo.webp';
+import venturetokenLogo from '../assets/images/venturetoken-logo.svg';
+import balderxLogo from '../assets/images/balderx-logo.png';
 
-export const ventures: VentureOpportunity[] = [
+// =============================================================================
+// VENTURES - Our Venture Structure
+// =============================================================================
+
+export const ventures: Venture[] = [
+  // PLATFORM: Nordic Legacy
   {
-    id: 'mashwara-ai',
-    name: 'Mashwara AI',
-    logo: mashwaraLogo,
-    category: ['Healthtech', 'AI', 'Pakistan'],
-    description: 'Supporting patients and doctors with AI-driven solutions that enhance communication, improve healthcare access, and enable informed decision-making.',
-    highlights: {
-      stage: 'Seed Stage',
-      geography: 'Pakistan, Norway',
-      thesis: 'Making quality healthcare accessible through AI-powered patient-doctor communication'
-    },
-    latestUpdate: {
-      date: 'November 10, 2025',
-      text: 'Successfully closed seed funding round and launched beta platform with 500+ active users'
-    },
-    fundingInfo: {
-      currentRound: 'Seed Round',
-      target: '$500,000',
-      status: 'open',
-      minInvestment: '100 Vt'
-    },
-    balderxUrl: 'https://balderx.com/projects/mashwara-ai'
+    id: 'nordic-legacy',
+    name: 'Nordic Legacy',
+    tagline: 'Strategic holding platform for non-tech ventures',
+    kind: 'platform',
+    industry: 'industry',
+    hqCountry: 'NO',
+    markets: ['NORDICS'],
+    status: 'live',
+    ownershipType: 'core',
+    aprikosRole: 'Platform Owner',
+    logo: aprikosVentureLogo,
+    childIds: ['soe-construction', 'november-property', 'aprikos-medical'],
+    links: [
+      { label: 'Website', url: 'https://nordiclegacy.no', type: 'website' }
+    ],
+    details: {
+      highlights: ['Real estate portfolio', 'Healthcare services', 'Nordic focus']
+    }
   },
+  
+  // Sub-venture: SOE Construction Group (under Nordic Legacy)
   {
-    id: 'shippingx',
-    name: 'ShippingX',
-    logo: shippingxLogo,
-    category: ['Maritime', 'Tokenization', 'Sustainability'],
-    description: 'Advancing maritime innovation with tokenized assets and sustainable compliance trading for the global shipping industry.',
-    highlights: {
-      stage: 'Pre-Seed',
-      geography: 'Norway, Global',
-      thesis: 'Tokenizing maritime assets to unlock liquidity in the $2T shipping industry'
-    },
-    latestUpdate: {
-      date: 'November 5, 2025',
-      text: 'Partnered with major Norwegian shipping companies for pilot program'
-    },
-    fundingInfo: {
-      currentRound: 'Pre-Seed Round',
-      target: '$250,000',
-      status: 'open',
-      minInvestment: '100 Vt'
-    },
-    balderxUrl: 'https://balderx.com/projects/shippingx'
+    id: 'soe-construction',
+    name: 'SOE Construction Group',
+    tagline: 'Engineering and construction excellence',
+    kind: 'venture',
+    industry: 'proptech',
+    hqCountry: 'NO',
+    markets: ['NO', 'NORDICS'],
+    status: 'live',
+    ownershipType: 'majority',
+    aprikosRole: 'Venture Builder · Operating Partner',
+    logo: aprikosVentureLogo,
+    parentId: 'nordic-legacy',
+    details: {
+      highlights: ['Construction', 'Engineering', 'Nordic projects']
+    }
   },
+  
+  // Sub-venture: November Property (under Nordic Legacy)
+  {
+    id: 'november-property',
+    name: 'November Property',
+    tagline: 'Property development and real estate',
+    kind: 'venture',
+    industry: 'proptech',
+    hqCountry: 'NO',
+    markets: ['NO', 'NORDICS'],
+    status: 'live',
+    ownershipType: 'majority',
+    aprikosRole: 'Venture Builder · Operating Partner',
+    logo: aprikosVentureLogo,
+    parentId: 'nordic-legacy',
+    details: {
+      highlights: ['Property development', 'Real estate', 'Nordic focus']
+    }
+  },
+  
+  // Sub-venture: Aprikos Medical (under Nordic Legacy)
   {
     id: 'aprikos-medical',
     name: 'Aprikos Medical',
+    tagline: 'MDR-certified Norwegian medical device manufacturer',
+    kind: 'venture',
+    industry: 'medtech',
+    hqCountry: 'NO',
+    markets: ['NO', 'EU', 'GLOBAL'],
+    status: 'live',
+    ownershipType: 'strategic',
+    aprikosRole: 'Venture Builder · Strategic Stake',
     logo: aprikosMedicalLogo,
-    category: ['Medical Devices', 'Healthcare', 'Global'],
-    description: 'Norwegian medical device manufacturer specializing in premium medical devices for the global market.',
-    highlights: {
-      stage: 'Active',
-      geography: 'Norway, Global',
-      thesis: 'Delivering premium medical technology to healthcare providers worldwide'
-    },
-    latestUpdate: {
-      date: 'November 1, 2025',
-      text: 'Expanded distribution network to 15 new countries across Europe and Asia'
-    },
-    fundingInfo: {
-      currentRound: 'Growth Round',
-      target: '$750,000',
-      status: 'open',
-      minInvestment: '100 Vt'
-    },
-    balderxUrl: 'https://balderx.com/projects/aprikos-medical'
+    parentId: 'nordic-legacy',
+    links: [
+      { label: 'Website', url: 'https://aprikosmedical.com', type: 'website' }
+    ],
+    details: {
+      highlights: ['Medical devices', 'MDR certified', 'Global distribution']
+    }
   },
+  
+  // VENTURE: Mashwara AI
   {
-    id: 'aprikos-venture-basket',
-    name: 'Aprikos Venture Basket',
-    logo: aprikosVentureLogo,
-    category: ['DeFi', 'Portfolio', 'Tokenization'],
-    description: 'Diversified tokenized basket providing exposure to multiple high-growth ventures across the Aprikos Venture portfolio.',
-    highlights: {
-      stage: 'Active',
-      geography: 'Global',
-      thesis: 'Democratizing venture capital access through tokenized portfolio exposure'
-    },
-    latestUpdate: {
-      date: 'November 12, 2025',
-      text: 'Q4 portfolio update: 35% average growth across portfolio companies'
-    },
-    fundingInfo: {
-      currentRound: 'Continuous',
-      target: 'Ongoing',
-      status: 'open',
-      minInvestment: '100 Vt'
-    },
-    balderxUrl: 'https://balderx.com/projects/aprikos-basket',
-    infoUrl: '#portfolio'
-  }
+    id: 'mashwara-ai',
+    name: 'Mashwara AI',
+    tagline: 'AI-driven healthcare solutions for emerging markets',
+    kind: 'venture',
+    industry: 'healthtech',
+    hqCountry: 'PK',
+    markets: ['PK', 'MENA'],
+    status: 'building',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder',
+    logo: mashwaraLogo,
+    links: [
+      { label: 'Website', url: 'https://mashwara.ai', type: 'website' }
+    ],
+    balderxUrl: 'https://balderx.com/projects/mashwara-ai',
+    statusText: 'Live Beta',
+    details: {
+      highlights: ['AI/ML platform', 'Healthcare communication', 'Emerging markets']
+    }
+  },
+  
+  // VENTURE: ShippingX
+  {
+    id: 'shippingx',
+    name: 'ShippingX',
+    tagline: 'Tokenized maritime assets and compliance trading',
+    kind: 'venture',
+    industry: 'fintech',
+    hqCountry: 'NO',
+    markets: ['GLOBAL'],
+    status: 'building',
+    ownershipType: 'strategic',
+    aprikosRole: 'Venture Builder',
+    logo: shippingxLogo,
+    balderxUrl: 'https://balderx.com/projects/shippingx',
+    statusText: 'Launching Q1 2026',
+    details: {
+      highlights: ['Maritime innovation', 'Tokenized assets', 'Sustainable compliance']
+    }
+  },
+  
+  // VENTURE: Venturetoken
+  {
+    id: 'venturetoken',
+    name: 'Venturetoken',
+    tagline: "Norway's first MiCA registered utility token",
+    kind: 'venture',
+    industry: 'web3',
+    hqCountry: 'NO',
+    markets: ['EU', 'GLOBAL'],
+    status: 'live',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder · Operating Partner',
+    logo: venturetokenLogo,
+    links: [
+      { label: 'Website', url: 'https://venturetoken.io', type: 'website' }
+    ],
+    balderxUrl: 'https://balderx.com/projects/venturetoken',
+    details: {
+      highlights: ['MiCA registered', 'Utility token', 'Venture ecosystem']
+    }
+  },
+  
+  // VENTURE: BalderX
+  {
+    id: 'balderx',
+    name: 'BalderX',
+    tagline: 'Tokenized investment platform for alternative assets',
+    kind: 'venture',
+    industry: 'fintech',
+    hqCountry: 'NO',
+    markets: ['EU', 'GLOBAL'],
+    status: 'live',
+    ownershipType: 'majority',
+    aprikosRole: 'Venture Builder · Operating Partner',
+    logo: balderxLogo,
+    links: [
+      { label: 'Platform', url: 'https://balderx.com', type: 'website' }
+    ],
+    details: {
+      highlights: ['Tokenized investments', 'Alternative assets', 'Regulated platform']
+    }
+  },
+  
+  // VENTURE: Nayapaisa
+  {
+    id: 'nayapaisa',
+    name: 'Nayapaisa',
+    tagline: 'Cross-border digital payment infrastructure',
+    kind: 'venture',
+    industry: 'fintech',
+    hqCountry: 'PK',
+    markets: ['PK', 'NO'],
+    status: 'building',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder',
+    logo: '',
+    links: [],
+    details: { highlights: ['Cross-border payments', 'Nordic-South Asian corridor'] },
+  },
+
+  // VENTURE: MKV32 Cultural Care
+  {
+    id: 'mkv32-cultural-care',
+    name: 'MKV32 Cultural Care',
+    tagline: 'Culturally adapted healthcare solutions',
+    kind: 'venture',
+    industry: 'healthtech',
+    hqCountry: 'NO',
+    markets: ['NO', 'NORDICS'],
+    status: 'building',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder',
+    logo: '',
+    links: [],
+    details: { highlights: ['Cultural care', 'Nordic healthcare'] },
+  },
+
+  // VENTURE: Pharmesa
+  {
+    id: 'pharmesa',
+    name: 'Pharmesa',
+    tagline: 'Pharmaceutical innovation platform',
+    kind: 'venture',
+    industry: 'medtech',
+    hqCountry: 'NO',
+    markets: ['NO', 'EU'],
+    status: 'building',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder',
+    logo: '',
+    links: [],
+    details: { highlights: ['Pharma innovation', 'European markets'] },
+  },
+
+  // HUB: Code Entropy
+  {
+    id: 'code-entropy',
+    name: 'Code Entropy',
+    tagline: 'Our production hub for AI and Web3 development',
+    kind: 'hub',
+    industry: 'software',
+    hqCountry: 'PK',
+    markets: ['GLOBAL'],
+    status: 'live',
+    ownershipType: 'in-house',
+    aprikosRole: 'Venture Builder · Operating Partner',
+    logo: codeEntropyLogo,
+    links: [
+      { label: 'Website', url: 'https://codentropy.io', type: 'website' }
+    ],
+    details: {
+      highlights: ['Full-stack development', 'AI/ML capabilities', 'Web3 solutions']
+    }
+  },
 ];
 
+// =============================================================================
+// CORE TEAM (for "Core Functions" section)
+// =============================================================================
+
+export const coreTeam: TeamMember[] = [
+  {
+    id: 'robert',
+    name: 'Robert Lyngmoe',
+    role: 'Finance & Operations',
+    department: 'core',
+    country: 'NO',
+  },
+  {
+    id: 'sara',
+    name: 'Sara Rana',
+    role: 'Marketing & Growth',
+    department: 'core',
+    country: 'NO',
+  },
+];
+
+// =============================================================================
+// HELPERS
+// =============================================================================
+
+export const getVenturesByCountry = (country: 'NO' | 'PK' | 'ALL') => {
+  if (country === 'ALL') return ventures.filter(v => !v.parentId); // Top-level only
+  return ventures.filter(v => v.hqCountry === country && !v.parentId);
+};
+
+export const getChildVentures = (parentId: string) => {
+  return ventures.filter(v => v.parentId === parentId);
+};
+
+export const getTopLevelVentures = () => {
+  return ventures.filter(v => !v.parentId);
+};
