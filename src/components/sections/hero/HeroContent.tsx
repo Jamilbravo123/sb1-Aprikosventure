@@ -51,7 +51,7 @@ export default function HeroContent() {
         </a>
       </div>
 
-      <div className="hero-fade hidden sm:flex absolute bottom-10 flex-col items-center gap-2">
+      <div className="hero-fade hidden sm:flex mt-16 flex-col items-center gap-2">
         <span className="text-[#333] text-[10px] tracking-[3px] uppercase">Scroll</span>
         <div className="w-px h-8 bg-gradient-to-b from-gold/40 to-transparent" />
       </div>
