@@ -4,7 +4,7 @@ import { teamMembers } from './team.data';
 
 export default function TeamGrid() {
   return (
-    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:max-w-none lg:grid-cols-3">
+    <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:max-w-none lg:grid-cols-5">
       {teamMembers.map((member, index) => (
         <div
           key={member.name}
