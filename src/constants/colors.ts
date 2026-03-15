@@ -2,17 +2,17 @@
 export const colors = {
   primary: {
     blue: '#0F4C81', // Corporate blue
-    navy: '#1E2A4A', // Deep navy
-    gold: '#B8860B', // Professional gold
+    navy: '#141420', // Deep dark
+    gold: '#C9935E', // Warm copper
   },
   secondary: {
     slate: '#64748B', // Refined slate
     steel: '#475569', // Steel blue-gray
   },
   text: {
-    primary: '#1E293B', // slate-900
-    secondary: '#475569', // slate-600
-    light: '#94A3B8', // slate-400
+    primary: '#ffffff',
+    secondary: '#bbbbbb',
+    light: '#777777',
   },
   background: {
     light: '#F8FAFC', // slate-50
@@ -24,50 +24,63 @@ export const colors = {
 export const gradients = {
   // Text gradients
   brand: {
-    primary: 'bg-gradient-to-r from-[#0F4C81] to-[#1E2A4A]',
-    secondary: 'bg-gradient-to-r from-[#1E2A4A] to-[#B8860B]',
+    primary: 'bg-gradient-to-r from-[#0c0c0c] to-[#141420]',
+    secondary: 'bg-gradient-to-r from-[#141420] to-[#C9935E]',
   },
-  
+
   // Background gradients
   background: {
-    primary: 'bg-gradient-to-tr from-[#0F4C81] to-[#1E2A4A]',
+    primary: 'bg-gradient-to-tr from-[#0c0c0c] to-[#141420]',
     hero: 'bg-gradient-to-r from-slate-100 to-slate-50',
     card: 'bg-gradient-to-b from-white to-slate-50',
   },
-  
+
   // Border gradients
   border: {
-    primary: 'border-gradient-to-r from-[#0F4C81] to-[#1E2A4A]',
+    primary: 'border-gradient-to-r from-[#0c0c0c] to-[#141420]',
   },
 } as const;
 
 // Gradient CSS Variables (for custom applications)
 export const gradientCSS = {
   brand: {
-    primary: 'linear-gradient(to right, #0F4C81, #1E2A4A)',
-    secondary: 'linear-gradient(to right, #1E2A4A, #B8860B)',
+    primary: 'linear-gradient(to right, #0c0c0c, #141420)',
+    secondary: 'linear-gradient(to right, #141420, #C9935E)',
   },
   background: {
-    primary: 'linear-gradient(to top right, #0F4C81, #1E2A4A)',
+    primary: 'linear-gradient(to top right, #0c0c0c, #141420)',
     hero: 'linear-gradient(to right, rgb(241, 245, 249), rgb(248, 250, 252))',
   },
 } as const;
 
-// Dark Theme - Private Lounge
+// Dark Theme - Used across site
 export const darkTheme = {
-  background: {
-    primary: '#0A0E1A',      // Deep navy-black
-    secondary: '#111827',     // Slate-900
-    elevated: '#1E293B',      // Slate-800
-  },
+  primary: '#0c0c0c',
+  secondary: '#141420',
+  elevated: '#141420',
   text: {
-    primary: '#F1F5F9',       // Near white
-    secondary: '#CBD5E1',     // Slate-300
-    muted: '#94A3B8',         // Slate-400
+    primary: '#ffffff',
+    secondary: '#bbbbbb',
+    muted: '#777777',
+    dim: '#555555',
+    ghost: '#333333',
   },
   glass: {
-    card: 'rgba(30, 41, 59, 0.5)',  // Semi-transparent slate
-    border: 'rgba(148, 163, 184, 0.2)',
+    background: 'rgba(20, 20, 32, 0.4)',
+    border: 'rgba(100, 100, 120, 0.08)',
+    borderHover: 'rgba(201, 147, 94, 0.2)',
   },
-  gold: '#B8860B',  // Existing brand gold
+  gold: {
+    primary: '#C9935E',
+    light: '#E8C896',
+    dark: '#A67A45',
+  },
+} as const;
+
+// Dark gradient definitions for public site
+export const darkGradients = {
+  hero: 'bg-gradient-to-br from-[#0c0c0c] via-[#141420] to-[#0c0c0c]',
+  goldText: 'bg-gradient-to-r from-[#C9935E] via-[#E8C896] to-[#C9935E]',
+  goldLine: 'bg-gradient-to-r from-transparent via-[rgba(201,147,94,0.4)] to-transparent',
+  section: 'bg-gradient-to-b from-[#0c0c0c] to-[#141420]',
 } as const;
