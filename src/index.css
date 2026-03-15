@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
   body {
     @apply antialiased;
   }
@@ -24,99 +20,28 @@
   }
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0px);
+/* Hero mesh gradient */
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(15, 27, 45, 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(201, 147, 94, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(15, 27, 45, 0.6) 0%, transparent 50%);
+  animation: hero-mesh-move 20s ease-in-out infinite;
+}
+
+@keyframes hero-mesh-move {
+  0%, 100% {
+    background-position: 0% 0%, 100% 50%, 0% 100%;
   }
-  50% {
-    transform: translateY(-10px);
+  33% {
+    background-position: 50% 0%, 80% 30%, 20% 80%;
   }
-  100% {
-    transform: translateY(0px);
+  66% {
+    background-position: 0% 20%, 100% 60%, 10% 90%;
   }
 }
 
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float-delayed {
-  0% {
-    transform: translateY(-10px);
-  }
-  50% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float-delayed {
-  animation: float-delayed 4s ease-in-out infinite;
-}
-
-@keyframes slide-in-left {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-}
-
-@keyframes scale-up {
-  0% {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.animate-scale-up {
-  animation: scale-up 0.8s ease-out forwards;
-}
-
-@keyframes slide-up {
-  0% {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-slide-up {
-  animation: slide-up 0.8s ease-out forwards;
-}
-
-@keyframes pulse-soft {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 2s ease-in-out infinite;
-}
-
+/* Animations */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -149,12 +74,8 @@
 
 /* Modal animations */
 @keyframes modal-overlay-show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes modal-content-show {
@@ -195,12 +116,8 @@
 }
 
 @keyframes float-gentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
 }
 
 .animate-float-gentle {
@@ -208,16 +125,12 @@
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(184, 134, 11, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(201, 147, 94, 0.4), transparent);
   background-size: 200% 100%;
   animation: shimmer 3s ease-in-out infinite;
 }
@@ -243,4 +156,16 @@
 
 .card-spotlight:hover::before {
   opacity: 1;
+}
+
+/* News skeleton shimmer */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(20, 20, 32, 0.3) 25%, rgba(20, 20, 32, 0.5) 50%, rgba(20, 20, 32, 0.3) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
