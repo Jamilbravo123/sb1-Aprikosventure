@@ -27,7 +27,7 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
   if (!isOpen) return null;
 
   return (
-    <div className="lg:hidden fixed inset-0 z-[100] bg-[#0c0c0c] flex flex-col">
+    <div className="lg:hidden fixed inset-0 z-[100] flex flex-col" style={{ backgroundColor: '#0c0c0c' }}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
         <h2 className="text-lg font-semibold text-white">Menu</h2>
