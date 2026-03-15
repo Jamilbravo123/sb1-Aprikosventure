@@ -55,14 +55,14 @@ export default function Navbar() {
             />
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        <MobileMenu
-          isOpen={isMobileMenuOpen}
-          links={navLinks}
-          onClose={() => setIsMobileMenuOpen(false)}
-        />
       </nav>
+
+      {/* Mobile Menu — outside nav to avoid overflow issues */}
+      <MobileMenu
+        isOpen={isMobileMenuOpen}
+        links={navLinks}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
     </header>
   );
 }

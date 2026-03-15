@@ -24,61 +24,52 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
     };
   }, [isOpen]);
 
+  if (!isOpen) return null;
+
   return (
-    <>
-      {/* Backdrop */}
-      <div
-        className={`lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={onClose}
-      />
-
-      {/* Panel */}
-      <div
-        className={`lg:hidden fixed right-0 top-0 h-full w-full max-w-sm z-50 bg-[#0c0c0c] border-l border-slate-800/50 shadow-2xl transition-transform duration-300 ease-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between p-4 border-b border-slate-800/50">
-            <h2 className="text-lg font-semibold text-white">Menu</h2>
-            <button
-              onClick={onClose}
-              aria-label="Close menu"
-              className="rounded-lg p-2 text-slate-400 hover:text-gold hover:bg-slate-800/50 transition-colors"
-            >
-              <X className="h-6 w-6" />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto p-4">
-            <nav className="space-y-2">
-              {links.map(({ href, label }) => (
-                <button
-                  key={href}
-                  className="w-full text-left px-4 py-3 rounded-lg text-base font-medium text-slate-300 hover:text-gold hover:bg-slate-800/50 transition-all duration-200"
-                  onClick={() => {
-                    onClose();
-                    const element = document.querySelector(href);
-                    if (element) {
-                      setTimeout(() => {
-                        const offset = 80;
-                        const elementPosition = element.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - offset;
-                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                      }, 150);
-                    }
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
-            </nav>
-
-          </div>
-        </div>
+    <div className="lg:hidden fixed inset-0 z-[100] bg-[#0c0c0c] flex flex-col">
+      {/* Header */}
+      <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
+        <h2 className="text-lg font-semibold text-white">Menu</h2>
+        <button
+          onClick={onClose}
+          aria-label="Close menu"
+          className="rounded-lg p-2 text-slate-400 hover:text-gold transition-colors"
+        >
+          <X className="h-6 w-6" />
+        </button>
       </div>
-    </>
+
+      {/* Navigation links */}
+      <nav className="flex-1 flex flex-col justify-center px-8 gap-2">
+        {links.map(({ href, label }) => (
+          <button
+            key={href}
+            className="text-left py-4 text-2xl font-display font-bold text-white hover:text-gold transition-colors border-b border-white/[0.04] last:border-b-0"
+            onClick={() => {
+              onClose();
+              const element = document.querySelector(href);
+              if (element) {
+                setTimeout(() => {
+                  const offset = 80;
+                  const elementPosition = element.getBoundingClientRect().top;
+                  const offsetPosition = elementPosition + window.pageYOffset - offset;
+                  window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                }, 150);
+              }
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </nav>
+
+      {/* Footer */}
+      <div className="p-6 text-center">
+        <p className="text-[#444] text-xs tracking-wider uppercase">
+          Venture Studio · Oslo | Berlin | Lahore | Dubai
+        </p>
+      </div>
+    </div>
   );
 }
