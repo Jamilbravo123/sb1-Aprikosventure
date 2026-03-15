@@ -1,11 +1,12 @@
-import React from 'react';
-import { gradients } from '../../../constants/colors';
-
 export default function HeroBackground() {
   return (
-    <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-      <div 
-        className={`relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] ${gradients.background.primary} opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]`} 
+    <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0c0c0c] via-[#141420] to-[#0c0c0c]" />
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'radial-gradient(ellipse at 50% 30%, rgba(201,147,94,0.04) 0%, transparent 60%)',
+        }}
       />
     </div>
   );
