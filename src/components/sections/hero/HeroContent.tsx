@@ -21,9 +21,14 @@ export default function HeroContent() {
 
   return (
     <div ref={containerRef} className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 text-center">
-      <p className="hero-fade text-gold text-[10px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase mb-6">
-        Venture Studio · Oslo | Berlin | Lahore | Dubai
-      </p>
+      <div className="hero-fade flex flex-col items-center gap-1.5 mb-6">
+        <span className="text-gold text-[10px] sm:text-[11px] tracking-[4px] sm:tracking-[5px] uppercase">
+          Venture Studio
+        </span>
+        <span className="text-[#555] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase">
+          Oslo | Berlin | Lahore | Dubai
+        </span>
+      </div>
 
       <HeroHeading />
 

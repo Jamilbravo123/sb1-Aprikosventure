@@ -75,19 +75,19 @@ function FeaturedCard({ item }: { item: NewsItem }) {
 function SecondaryCard({ item }: { item: NewsItem }) {
   const venture = getVentureName(item.title);
   return (
-    <article className="news-card group rounded-xl bg-[#141420]/30 border border-white/[0.04] p-7 transition-all duration-400 hover:border-gold/15 hover:bg-[#141420]/50 hover:-translate-y-1">
-      <div className="flex items-center gap-2 mb-4">
+    <article className="news-card group rounded-xl bg-[#141420]/30 border border-white/[0.04] p-5 sm:p-7 transition-all duration-400 hover:border-gold/15 hover:bg-[#141420]/50 hover:-translate-y-1">
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
         {venture && <span className="text-gold text-[10px] font-semibold tracking-wider uppercase">{venture}</span>}
         {venture && <span className="text-[#333]">·</span>}
         <time className="text-[11px] text-[#555]">{formatDate(item.published_at)}</time>
       </div>
-      <h3 className="text-[18px] font-semibold text-white mb-3 group-hover:text-gold-light transition-colors leading-snug">
+      <h3 className="text-[16px] sm:text-[18px] font-semibold text-white mb-2 sm:mb-3 group-hover:text-gold-light transition-colors leading-snug">
         {item.title}
       </h3>
-      <p className="text-[14px] text-[#777] leading-[1.7]">
+      <p className="hidden sm:block text-[14px] text-[#777] leading-[1.7]">
         {item.summary}
       </p>
-      <div className="mt-4">
+      <div className="mt-3 sm:mt-4">
         <SourceLink url={item.url} />
       </div>
     </article>
@@ -97,10 +97,10 @@ function SecondaryCard({ item }: { item: NewsItem }) {
 function CompactItem({ item }: { item: NewsItem }) {
   const venture = getVentureName(item.title);
   return (
-    <article className="news-card group flex items-start gap-5 py-5 border-b border-white/[0.04] last:border-b-0 transition-all duration-300 hover:bg-white/[0.01] hover:px-3 hover:-mx-3 rounded-lg">
+    <article className="news-card group flex items-start gap-3 sm:gap-5 py-4 sm:py-5 border-b border-white/[0.04] last:border-b-0 transition-all duration-300 hover:bg-white/[0.01] hover:px-3 hover:-mx-3 rounded-lg">
       {/* Timeline dot + date */}
-      <div className="flex flex-col items-center flex-shrink-0 w-[85px] pt-1">
-        <time className="text-[11px] text-[#555] whitespace-nowrap">
+      <div className="flex flex-col items-center flex-shrink-0 w-[70px] sm:w-[85px] pt-1">
+        <time className="text-[10px] sm:text-[11px] text-[#555] whitespace-nowrap">
           {formatDate(item.published_at)}
         </time>
       </div>
@@ -112,13 +112,13 @@ function CompactItem({ item }: { item: NewsItem }) {
 
       {/* Content */}
       <div className="flex-1 pb-1">
-        <div className="flex items-center gap-2 mb-1.5">
+        <div className="flex items-center gap-2 mb-1">
           {venture && <span className="text-gold text-[10px] font-semibold tracking-wider uppercase">{venture}</span>}
         </div>
-        <h4 className="text-[15px] font-semibold text-white group-hover:text-gold-light transition-colors leading-snug">
+        <h4 className="text-[14px] sm:text-[15px] font-semibold text-white group-hover:text-gold-light transition-colors leading-snug">
           {item.title}
         </h4>
-        <p className="text-[12px] text-[#666] leading-relaxed mt-1.5">
+        <p className="hidden sm:block text-[12px] text-[#666] leading-relaxed mt-1.5">
           {item.summary}
         </p>
       </div>

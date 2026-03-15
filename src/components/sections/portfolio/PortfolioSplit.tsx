@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap, ScrollTrigger } from '../../../lib/gsap';
 import { portfolioCategories, getVenturesForCategory } from '../../../data/portfolio-categories';
@@ -81,62 +81,95 @@ function VentureCard({ venture }: { venture: Venture }) {
 
 function CategoryRow({ config, ventures, index }: { config: typeof portfolioCategories[0]; ventures: Venture[]; index: number }) {
   const rowRef = useRef<HTMLDivElement>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileContentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     if (!rowRef.current) return;
 
-    const label = rowRef.current.querySelector('.cat-label');
-    const divider = rowRef.current.querySelector('.cat-divider');
-    const cards = rowRef.current.querySelectorAll('.venture-card');
+    // Only animate on desktop
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 1024px)', () => {
+      const label = rowRef.current!.querySelector('.cat-label');
+      const cards = rowRef.current!.querySelectorAll('.venture-card');
 
-    // Animate label and cards on scroll — divider is always visible (no animation)
-    gsap.set(label, { x: -15, opacity: 0 });
-    gsap.set(cards, { x: 20, opacity: 0 });
+      gsap.set(label, { x: -15, opacity: 0 });
+      gsap.set(cards, { x: 20, opacity: 0 });
 
-    ScrollTrigger.create({
-      trigger: rowRef.current,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        const tl = gsap.timeline();
-
-        if (label) {
-          tl.to(label, { x: 0, opacity: 1, duration: 1, ease: 'power2.out', clearProps: 'transform,opacity' });
-        }
-
-        if (cards.length) {
-          tl.to(cards, {
-            x: 0,
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.18,
-            ease: 'power2.out',
-            clearProps: 'transform,opacity',
-          }, '-=0.6');
-        }
-      },
+      ScrollTrigger.create({
+        trigger: rowRef.current!,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          const tl = gsap.timeline();
+          if (label) {
+            tl.to(label, { x: 0, opacity: 1, duration: 1, ease: 'power2.out', clearProps: 'transform,opacity' });
+          }
+          if (cards.length) {
+            tl.to(cards, {
+              x: 0, opacity: 1, duration: 0.9, stagger: 0.18,
+              ease: 'power2.out', clearProps: 'transform,opacity',
+            }, '-=0.6');
+          }
+        },
+      });
     });
   }, { scope: rowRef });
 
+  const toggleMobile = () => {
+    if (!mobileContentRef.current) return;
+    const el = mobileContentRef.current;
+
+    if (!mobileOpen) {
+      setMobileOpen(true);
+      el.style.height = 'auto';
+      const h = el.offsetHeight;
+      el.style.height = '0px';
+      gsap.to(el, { height: h, opacity: 1, duration: 0.4, ease: 'power2.out', onComplete: () => { el.style.height = 'auto'; } });
+    } else {
+      gsap.to(el, { height: 0, opacity: 0, duration: 0.3, ease: 'power2.in', onComplete: () => setMobileOpen(false) });
+    }
+  };
+
   return (
-    <div
-      ref={rowRef}
-      className="flex flex-col lg:flex-row gap-6 lg:gap-0 py-10 relative"
-    >
-      {/* Category label — left side */}
-      <div className="cat-label lg:w-[220px] flex-shrink-0 lg:pr-8 lg:self-center">
-        <div className="flex items-center gap-3 mb-2">
-          <span className="text-lg text-gold">{config.icon}</span>
-          <h3 className="font-display text-xl font-bold text-white">{config.title}</h3>
+    <div ref={rowRef} className="py-6 lg:py-10 relative">
+      {/* Desktop layout */}
+      <div className="hidden lg:flex lg:flex-row lg:gap-0">
+        <div className="cat-label lg:w-[220px] flex-shrink-0 lg:pr-8 lg:self-center">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-lg text-gold">{config.icon}</span>
+            <h3 className="font-display text-xl font-bold text-white">{config.title}</h3>
+          </div>
+          <p className="text-[12px] text-[#666] leading-relaxed">{config.description}</p>
         </div>
-        <p className="text-[12px] text-[#666] leading-relaxed">{config.description}</p>
+        <div className="flex-1 flex flex-nowrap items-start gap-4 lg:ml-6 lg:pl-6 lg:border-l-2 lg:border-gold/30 lg:shadow-[inset_2px_0_12px_rgba(201,147,94,0.08)]">
+          {ventures.map((v) => (
+            <VentureCard key={v.id} venture={v} />
+          ))}
+        </div>
       </div>
 
-      {/* Ventures — flowing right */}
-      <div className="flex-1 flex flex-wrap lg:flex-nowrap items-start gap-4 lg:ml-6 lg:pl-6 lg:border-l-2 lg:border-gold/30 lg:shadow-[inset_2px_0_12px_rgba(201,147,94,0.08)]">
-        {ventures.map((v) => (
-          <VentureCard key={v.id} venture={v} />
-        ))}
+      {/* Mobile accordion */}
+      <div className="lg:hidden">
+        <button
+          onClick={toggleMobile}
+          className="w-full flex items-center justify-between py-3"
+        >
+          <div className="flex items-center gap-3">
+            <span className="text-lg text-gold">{config.icon}</span>
+            <h3 className="font-display text-xl font-bold text-white">{config.title}</h3>
+          </div>
+          <span className={`text-gold text-sm transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`}>▾</span>
+        </button>
+        <p className="text-[12px] text-[#666] leading-relaxed mb-2">{config.description}</p>
+
+        <div ref={mobileContentRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
+          <div className="space-y-1 pt-3">
+            {ventures.map((v) => (
+              <VentureCard key={v.id} venture={v} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
