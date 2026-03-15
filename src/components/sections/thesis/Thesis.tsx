@@ -53,9 +53,9 @@ export default function Thesis() {
 
   return (
     <section ref={sectionRef} id="about" className="py-16 sm:py-24 bg-[#0c0c0c] relative overflow-hidden">
-      {/* Subtle background image */}
+      {/* Subtle background image — hidden on mobile */}
       <div
-        className="absolute inset-0 opacity-[0.15]"
+        className="absolute inset-0 opacity-[0.15] hidden sm:block"
         style={{
           backgroundImage: `url(${brochureImg})`,
           backgroundSize: 'cover',
@@ -67,8 +67,9 @@ export default function Thesis() {
         <p className="thesis-animate text-gold text-[11px] tracking-[4px] uppercase mb-3.5">
           Why Aprikos Venture
         </p>
-        <h2 className="thesis-animate font-display text-4xl font-bold mb-5 text-white">
-          Where Innovation Meets<br />Emerging Opportunity
+        <h2 className="thesis-animate font-display text-3xl sm:text-4xl font-bold mb-5 text-white">
+          <span className="hidden sm:inline">Where Innovation Meets<br />Emerging Opportunity</span>
+          <span className="sm:hidden">Innovation Meets Opportunity</span>
         </h2>
         <p className="thesis-animate text-[#777] text-base leading-[1.8] max-w-[600px] mx-auto mb-10">
           We focus on building companies where technology, capital, and emerging markets
