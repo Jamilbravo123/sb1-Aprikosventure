@@ -36,7 +36,7 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
 
       {/* Panel */}
       <div
-        className={`lg:hidden fixed right-0 top-0 h-full w-full max-w-sm z-50 bg-[#0A0E1A] border-l border-slate-800/50 shadow-2xl transition-transform duration-300 ease-out ${
+        className={`lg:hidden fixed right-0 top-0 h-full w-full max-w-sm z-50 bg-[#0c0c0c] border-l border-slate-800/50 shadow-2xl transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

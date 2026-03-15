@@ -20,8 +20,8 @@ export default function HeroContent() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
-      <p className="hero-fade text-gold text-[11px] tracking-[5px] uppercase mb-6">
+    <div ref={containerRef} className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 text-center">
+      <p className="hero-fade text-gold text-[10px] sm:text-[11px] tracking-[3px] sm:tracking-[5px] uppercase mb-6">
         Venture Studio · Oslo | Berlin | Lahore | Dubai
       </p>
 
@@ -31,7 +31,7 @@ export default function HeroContent() {
         We build and scale ventures across AI, digital assets, and emerging markets.
       </p>
 
-      <div className="hero-fade flex gap-3.5 mt-10">
+      <div className="hero-fade flex flex-col sm:flex-row gap-3.5 mt-10 w-full sm:w-auto">
         <a
           href="#ventures"
           className="px-7 py-3 rounded-full bg-gradient-to-br from-gold to-gold-dark text-white text-sm font-medium hover:shadow-[0_8px_24px_rgba(201,147,94,0.25)] hover:-translate-y-0.5 transition-all"
@@ -46,7 +46,7 @@ export default function HeroContent() {
         </a>
       </div>
 
-      <div className="hero-fade absolute bottom-10 flex flex-col items-center gap-2">
+      <div className="hero-fade hidden sm:flex absolute bottom-10 flex-col items-center gap-2">
         <span className="text-[#333] text-[10px] tracking-[3px] uppercase">Scroll</span>
         <div className="w-px h-8 bg-gradient-to-b from-gold/40 to-transparent" />
       </div>

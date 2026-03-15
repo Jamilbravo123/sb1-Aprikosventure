@@ -44,7 +44,7 @@ function VentureCard({ venture }: { venture: Venture }) {
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); }}
-      className="venture-card group w-[280px] flex-shrink-0 cursor-pointer py-5 px-6 rounded-xl hover:bg-white/[0.03] transition-all"
+      className="venture-card group w-full sm:w-[280px] flex-shrink-0 cursor-pointer py-5 px-6 rounded-xl hover:bg-white/[0.03] transition-all"
     >
       {/* Logo */}
       <div className="h-20 mb-4 flex items-center gap-2">

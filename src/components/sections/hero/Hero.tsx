@@ -28,7 +28,7 @@ export default function Hero() {
     <div ref={containerRef} className="relative min-h-screen overflow-hidden">
       <HeroBackground />
       <div className="hero-inner relative z-10 flex min-h-screen items-center justify-center">
-        <div className="mx-auto max-w-7xl px-6 py-32 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 py-20 sm:py-32 lg:px-8">
           <HeroContent />
         </div>
       </div>
