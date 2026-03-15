@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import NavLink from './NavLink';
 import LogoLink from '../brand/LogoLink';
 import { MobileMenu, MobileMenuButton } from './mobile';
-import UserMenu from '../common/UserMenu';
-import { useAuth } from '../../contexts/AuthContext';
 
 const navLinks = [
   { href: '#ventures', label: 'Ventures' },
@@ -16,7 +14,6 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,28 +47,12 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center">
-            <div className="hidden lg:flex lg:items-center lg:gap-4 pl-10">
-              {user ? (
-                <UserMenu />
-              ) : (
-                <a
-                  href="/investor-login"
-                  className="text-sm font-medium text-[#0c0c0c] bg-[#C9935E] hover:bg-[#E8C896] transition-colors px-5 py-2.5 rounded-lg"
-                >
-                  Investor Login
-                </a>
-              )}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="lg:hidden">
-              <MobileMenuButton
-                isOpen={isMobileMenuOpen}
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              />
-            </div>
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <MobileMenuButton
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
           </div>
         </div>
 

@@ -28,37 +28,44 @@ export default function VentureRow({ venture, mirrored = false }: VentureRowProp
       onClick={handleClick}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); }}
       className={`
-        group flex items-center gap-3 p-3.5 rounded-xl cursor-pointer
-        bg-dark-secondary/40 border border-white/[0.08]
-        hover:border-gold/20 hover:-translate-y-0.5
-        hover:shadow-[0_6px_24px_rgba(0,0,0,0.2)]
+        group py-5 cursor-pointer
+        border-b border-white/[0.04] last:border-b-0
         transition-all duration-300
-        ${mirrored ? 'flex-row-reverse text-right' : ''}
+        ${mirrored ? 'text-right' : ''}
       `}
     >
-      <div className="w-[34px] h-[40px] rounded-lg bg-gold/10 border border-gold/[0.12] flex items-center justify-center flex-shrink-0 overflow-hidden">
+      {/* Logo — fixed height zone */}
+      <div className={`h-8 mb-3 flex items-center ${mirrored ? 'justify-end' : ''}`}>
         {venture.logo ? (
-          <img src={venture.logo} alt={venture.name} className="w-full h-full object-contain p-1.5" />
+          <img
+            src={venture.logo}
+            alt={venture.name}
+            className="h-8 w-auto max-w-[160px] object-contain"
+          />
         ) : (
-          <span className="text-gold text-[11px] font-bold">{getInitials(venture.name)}</span>
+          <span className="text-gold text-xl font-bold tracking-wide">{getInitials(venture.name)}</span>
         )}
       </div>
 
-      <div className="flex-1 min-w-0">
-        <div className="text-[13px] font-semibold text-white truncate">
-          {mirrored && <span className="text-xs mr-1">{flag}</span>}
+      {/* Name + flag + link */}
+      <div className={`flex items-center gap-2 mb-1 ${mirrored ? 'justify-end' : ''}`}>
+        <span className="text-[17px] font-semibold text-white group-hover:text-gold-light transition-colors">
           {venture.name}
-          {!mirrored && <span className="text-xs ml-1">{flag}</span>}
-        </div>
-        <div className="text-[11px] text-[#555] truncate">{venture.tagline}</div>
+        </span>
+        <span className="text-sm">{flag}</span>
+        <ExternalLink className="w-3.5 h-3.5 text-[#333] group-hover:text-gold transition-colors" />
       </div>
 
-      <div className={`flex gap-1.5 flex-shrink-0 ${mirrored ? 'mr-auto ml-0' : 'ml-auto mr-0'}`}>
-        <span className="text-[8px] px-2 py-0.5 rounded-full bg-gold/10 text-gold font-medium">{industryText}</span>
-        <span className="text-[8px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 font-medium">{statusText}</span>
-      </div>
+      {/* Tagline */}
+      <p className={`text-[14px] text-[#888] leading-relaxed mb-3 ${mirrored ? 'ml-auto' : ''}`}>
+        {venture.tagline}
+      </p>
 
-      <ExternalLink className={`w-3.5 h-3.5 text-[#333] group-hover:text-gold transition-colors flex-shrink-0 ${mirrored ? 'order-first' : ''}`} />
+      {/* Badges */}
+      <div className={`flex gap-2 ${mirrored ? 'justify-end' : ''}`}>
+        <span className="text-[11px] px-3 py-1 rounded-full bg-gold/10 text-gold font-medium">{industryText}</span>
+        <span className="text-[11px] px-3 py-1 rounded-full bg-green-500/10 text-green-400 font-medium">{statusText}</span>
+      </div>
     </div>
   );
 }

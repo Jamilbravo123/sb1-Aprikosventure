@@ -1,11 +1,12 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap, ScrollTrigger } from '../../../lib/gsap';
+import brochureImg from '../../../assets/images/hero/brochure-picture.webp';
 
 const stats = [
-  { value: 7, label: 'Ventures' },
+  { value: 8, label: 'Ventures' },
   { value: 6, label: 'Markets' },
-  { value: 2, label: 'Verticals' },
+  { value: 3, label: 'Verticals' },
   { value: 4, label: 'Years Building', suffix: '+' },
 ];
 
@@ -20,16 +21,18 @@ export default function Thesis() {
     counters.forEach((el) => {
       const target = parseInt(el.getAttribute('data-value') || '0', 10);
       const suffix = el.getAttribute('data-suffix') || '';
-      gsap.from({ val: 0 }, {
+      const obj = { val: 0 };
+      gsap.to(obj, {
         val: target,
         duration: 2,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: el,
-          start: 'top 80%',
+          start: 'top 85%',
+          once: true,
         },
-        onUpdate: function () {
-          (el as HTMLElement).textContent = Math.round(this.targets()[0].val) + suffix;
+        onUpdate: () => {
+          (el as HTMLElement).textContent = Math.round(obj.val) + suffix;
         },
       });
     });
@@ -49,17 +52,27 @@ export default function Thesis() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 bg-[#0c0c0c]">
-      <div className="max-w-[1100px] mx-auto px-6 text-center">
+    <section ref={sectionRef} id="about" className="py-24 bg-[#0c0c0c] relative overflow-hidden">
+      {/* Subtle background image */}
+      <div
+        className="absolute inset-0 opacity-[0.15]"
+        style={{
+          backgroundImage: `url(${brochureImg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 75%',
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c] via-transparent to-[#0c0c0c]" />
+      <div className="max-w-[1100px] mx-auto px-6 text-center relative z-10">
         <p className="thesis-animate text-gold text-[11px] tracking-[4px] uppercase mb-3.5">
           Why Aprikos Venture
         </p>
-        <h2 className="thesis-animate font-display text-4xl font-bold mb-5">
+        <h2 className="thesis-animate font-display text-4xl font-bold mb-5 text-white">
           Where Innovation Meets<br />Emerging Opportunity
         </h2>
         <p className="thesis-animate text-[#777] text-base leading-[1.8] max-w-[600px] mx-auto mb-10">
           We focus on building companies where technology, capital, and emerging markets
-          intersect — from AI and digital health to blockchain infrastructure and new
+          intersect. From AI and digital health to blockchain infrastructure and new
           digital economies. Our cross-border model connects Nordic precision with
           South Asian scale.
         </p>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface MobileMenuButtonProps {
@@ -10,7 +9,7 @@ export default function MobileMenuButton({ isOpen, onClick }: MobileMenuButtonPr
   return (
     <button
       type="button"
-      className="inline-flex items-center justify-center rounded-md p-2.5 text-slate-700"
+      className="inline-flex items-center justify-center rounded-md p-2.5 text-slate-300 hover:text-gold transition-colors"
       onClick={onClick}
       aria-expanded={isOpen}
     >

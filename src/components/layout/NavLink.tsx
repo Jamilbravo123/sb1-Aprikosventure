@@ -11,39 +11,27 @@ export default function NavLink({ href, children }: NavLinkProps) {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    
-    // Check if we're on dashboard or another page
-    if (location.pathname !== '/') {
-      // Navigate to homepage first, then scroll
-      navigate('/');
-      setTimeout(() => {
-        const targetId = href.replace('#', '');
-        const element = document.getElementById(targetId);
-        if (element) {
-          const offset = 80;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 100);
-    } else {
-      // Already on homepage, just scroll
+
+    const doScroll = () => {
       const targetId = href.replace('#', '');
       const element = document.getElementById(targetId);
       if (element) {
         const offset = 80;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
+
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       }
+    };
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(doScroll, 100);
+    } else {
+      doScroll();
     }
   };
 
@@ -51,7 +39,7 @@ export default function NavLink({ href, children }: NavLinkProps) {
     <a
       href={href}
       onClick={scrollToSection}
-      className="text-sm font-semibold leading-6 text-slate-900 hover:text-purple-600 transition-colors px-3 py-2"
+      className="text-sm font-medium leading-6 text-slate-300 hover:text-gold transition-colors px-3 py-2"
     >
       {children}
     </a>

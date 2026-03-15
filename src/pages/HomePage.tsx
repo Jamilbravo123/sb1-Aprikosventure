@@ -1,6 +1,5 @@
 import Layout from '../components/layout/Layout';
 import Hero from '../components/sections/hero';
-import LogoMarquee from '../components/sections/marquee/LogoMarquee';
 import Portfolio from '../components/sections/portfolio/Portfolio';
 import VentureModel from '../components/sections/venture-model/VentureModel';
 import Thesis from '../components/sections/thesis/Thesis';
@@ -12,7 +11,6 @@ export default function HomePage() {
   return (
     <Layout>
       <Hero />
-      <LogoMarquee />
       <Portfolio />
       <VentureModel />
       <Thesis />

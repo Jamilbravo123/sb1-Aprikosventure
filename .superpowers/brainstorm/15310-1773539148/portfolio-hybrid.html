@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Hybrid — Split + Expand</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0c0c0c; color: #fff; font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-header .overline { color: #C9935E; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 14px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 14px; }
+  .section-header p { color: #777; font-size: 15px; max-width: 480px; margin: 0 auto; line-height: 1.7; }
+
+  /* === Split Container === */
+  .split-container {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    position: relative;
+  }
+
+  /* === Divider === */
+  .divider {
+    position: relative;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(201,147,94,0.15) 10%,
+      rgba(201,147,94,0.5) 50%,
+      rgba(201,147,94,0.15) 90%,
+      transparent 100%
+    );
+  }
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: #C9935E;
+    box-shadow: 0 0 16px rgba(201,147,94,0.6), 0 0 40px rgba(201,147,94,0.2);
+  }
+  .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,147,94,0.2);
+    animation: pulse-ring 3s ease-out infinite;
+  }
+  @keyframes pulse-ring {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+  }
+
+  /* === Category Column === */
+  .category {
+    padding: 20px 32px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .category-header {
+    margin-bottom: 0;
+    transition: margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .cat-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(201,147,94,0.08);
+    border: 1px solid rgba(201,147,94,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+    transition: all 0.4s;
+  }
+  .category:hover .cat-icon,
+  .category.active .cat-icon {
+    background: rgba(201,147,94,0.15);
+    border-color: rgba(201,147,94,0.3);
+    box-shadow: 0 0 24px rgba(201,147,94,0.15);
+  }
+
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    transition: color 0.3s;
+  }
+  .category:hover .cat-title,
+  .category.active .cat-title { color: #E8C896; }
+
+  .cat-desc {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 300px;
+    transition: color 0.3s;
+  }
+  .category:hover .cat-desc { color: #777; }
+
+  .cat-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #C9935E;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-top: 16px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s;
+  }
+  .category:hover .cat-cta { opacity: 1; transform: translateY(0); }
+  .category.active .cat-cta { opacity: 1; transform: translateY(0); }
+  .cat-cta .arrow { transition: transform 0.3s; }
+  .category:hover .cat-cta .arrow { transform: translateX(4px); }
+
+  /* === Right Column Mirror === */
+  .category-right { text-align: right; }
+  .category-right .cat-icon { margin-left: auto; }
+  .category-right .cat-desc { margin-left: auto; }
+  .category-right .cat-cta { float: right; }
+
+  /* === Expanded Ventures === */
+  .ventures-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease,
+                margin-top 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    margin-top: 0;
+  }
+  .category.active .ventures-panel {
+    max-height: 600px;
+    opacity: 1;
+    margin-top: 28px;
+  }
+  .category.active .category-header {
+    margin-bottom: 0;
+  }
+
+  .venture-card {
+    background: rgba(20, 20, 32, 0.4);
+    border: 1px solid rgba(100, 100, 120, 0.08);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 10px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    /* Staggered animation */
+    transform: translateY(12px);
+    opacity: 0;
+    animation: card-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  .venture-card:nth-child(1) { animation-delay: 0.1s; }
+  .venture-card:nth-child(2) { animation-delay: 0.2s; }
+  .venture-card:nth-child(3) { animation-delay: 0.3s; }
+  .venture-card:nth-child(4) { animation-delay: 0.4s; }
+
+  @keyframes card-in {
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .venture-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,147,94,0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .venture-card:hover {
+    border-color: rgba(201,147,94,0.2);
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 1px rgba(201,147,94,0.08);
+  }
+  .venture-card:hover::before { opacity: 1; }
+
+  .vc-top {
+    display: flex; align-items: flex-start; gap: 14px;
+    position: relative; z-index: 1;
+  }
+  .vc-logo {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(201,147,94,0.1);
+    border: 1px solid rgba(201,147,94,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: #C9935E;
+    flex-shrink: 0;
+  }
+  .vc-name {
+    font-size: 15px; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .vc-flag { font-size: 12px; opacity: 0.7; }
+  .vc-tagline { color: #666; font-size: 12px; margin-top: 3px; line-height: 1.5; }
+  .vc-badges {
+    display: flex; gap: 6px; margin-top: 10px;
+    position: relative; z-index: 1;
+  }
+  .badge {
+    font-size: 9px; padding: 4px 10px; border-radius: 99px;
+    letter-spacing: 0.5px; font-weight: 500;
+  }
+  .b-sector { background: rgba(201,147,94,0.1); color: #C9935E; }
+  .b-live { background: rgba(100,200,100,0.08); color: #6b9; }
+  .b-building { background: rgba(100,150,255,0.08); color: #79f; }
+  .b-beta { background: rgba(232,200,150,0.08); color: #E8C896; }
+
+  .vc-arrow {
+    position: absolute;
+    right: 20px; top: 50%;
+    transform: translateY(-50%);
+    color: #333; font-size: 18px;
+    transition: all 0.3s;
+    z-index: 1;
+  }
+  .venture-card:hover .vc-arrow { color: #C9935E; transform: translateY(-50%) translateX(4px); }
+
+  /* === Hint text === */
+  .hint {
+    text-align: center;
+    margin-top: 48px;
+    color: #444;
+    font-size: 13px;
+  }
+  .hint strong { color: #C9935E; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="section-header">
+    <div class="overline">Our Ecosystem</div>
+    <h2>Ventures We Build</h2>
+    <p>Building and investing in cross-border ventures at the intersection of technology, capital, and emerging markets.</p>
+  </div>
+
+  <div class="split-container">
+
+    <!-- LEFT: Digital Assets -->
+    <div class="category" id="cat-digital" onclick="toggleCat('digital')">
+      <div class="category-header">
+        <div class="cat-icon">◈</div>
+        <div class="cat-title">Digital Assets</div>
+        <div class="cat-desc">Tokenization, digital payments, and blockchain infrastructure connecting Nordic and emerging markets.</div>
+        <div class="cat-cta">Explore ventures <span class="arrow">→</span></div>
+      </div>
+
+      <div class="ventures-panel">
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Vt</div>
+            <div>
+              <div class="vc-name">Venturetoken <span class="vc-flag">🇳🇴</span></div>
+              <div class="vc-tagline">MiCA-registered utility token powering the Aprikos ecosystem</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">Web3</span><span class="badge b-live">Live</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Np</div>
+            <div>
+              <div class="vc-name">Nayapaisa <span class="vc-flag">🇵🇰</span></div>
+              <div class="vc-tagline">Cross-border digital payment infrastructure</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">FinTech</span><span class="badge b-building">Building</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Sx</div>
+            <div>
+              <div class="vc-name">ShippingX <span class="vc-flag">🇳🇴</span></div>
+              <div class="vc-tagline">Tokenized maritime asset investment platform</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">FinTech</span><span class="badge b-building">Launching Q1 2026</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="divider"></div>
+
+    <!-- RIGHT: Health Tech -->
+    <div class="category category-right" id="cat-health" onclick="toggleCat('health')">
+      <div class="category-header">
+        <div class="cat-icon">✦</div>
+        <div class="cat-title">Health Tech</div>
+        <div class="cat-desc">AI diagnostics, medical devices, and culturally adapted care — from South Asia to the Nordics.</div>
+        <div class="cat-cta">Explore ventures <span class="arrow">→</span></div>
+      </div>
+
+      <div class="ventures-panel">
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Ma</div>
+            <div>
+              <div class="vc-name">Mashwara AI <span class="vc-flag">🇵🇰</span></div>
+              <div class="vc-tagline">AI healthcare platform transforming access to care in emerging markets</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">HealthTech</span><span class="badge b-beta">Live Beta</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Am</div>
+            <div>
+              <div class="vc-name">Aprikos Medical <span class="vc-flag">🇳🇴</span></div>
+              <div class="vc-tagline">MDR-certified medical device development and manufacturing</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">MedTech</span><span class="badge b-live">Live</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Mk</div>
+            <div>
+              <div class="vc-name">MKV32 Cultural Care <span class="vc-flag">🇳🇴</span></div>
+              <div class="vc-tagline">Culturally adapted healthcare solutions</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">HealthTech</span><span class="badge b-building">Building</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+        <div class="venture-card">
+          <div class="vc-top">
+            <div class="vc-logo">Ph</div>
+            <div>
+              <div class="vc-name">Pharmesa <span class="vc-flag">🇳🇴</span></div>
+              <div class="vc-tagline">Pharmaceutical innovation platform</div>
+            </div>
+          </div>
+          <div class="vc-badges"><span class="badge b-sector">MedTech</span><span class="badge b-building">Building</span></div>
+          <div class="vc-arrow">→</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hint">
+    <strong>Click a category</strong> to see its ventures expand with staggered animation
+  </div>
+</div>
+
+<script>
+  function toggleCat(cat) {
+    const el = document.getElementById('cat-' + cat);
+    const other = cat === 'digital'
+      ? document.getElementById('cat-health')
+      : document.getElementById('cat-digital');
+
+    if (el.classList.contains('active')) {
+      el.classList.remove('active');
+      // Reset card animations
+      el.querySelectorAll('.venture-card').forEach(c => {
+        c.style.animation = 'none';
+        c.offsetHeight; // trigger reflow
+        c.style.animation = '';
+      });
+    } else {
+      el.classList.add('active');
+      // Reset card animations for fresh stagger
+      el.querySelectorAll('.venture-card').forEach(c => {
+        c.style.animation = 'none';
+        c.offsetHeight;
+        c.style.animation = '';
+      });
+    }
+  }
+</script>
+
+</body>
+</html>

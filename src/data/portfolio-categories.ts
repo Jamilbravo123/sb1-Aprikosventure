@@ -21,15 +21,37 @@ export const portfolioCategories: CategoryConfig[] = [
     id: 'health-tech',
     title: 'Health Tech',
     icon: '✦',
-    description: 'AI diagnostics, medical devices, and culturally adapted care.',
-    ventureIds: ['mashwara-ai', 'aprikos-medical', 'mkv32-cultural-care', 'pharmesa'],
+    description: 'AI diagnostics, medical devices, and pharmaceutical innovation.',
+    ventureIds: ['mashwara-ai', 'aprikos-medical', 'pharmesa'],
+  },
+  {
+    id: 'nordic-legacy',
+    title: 'Industry',
+    icon: '▲',
+    description: 'Consumer brands & Property.',
+    ventureIds: ['november-property', 'kinetic-energy'],
   },
 ];
+
+const statusOrder: Record<string, number> = {
+  live: 0,
+  scaling: 1,
+  building: 2,
+  stealth: 3,
+};
+
+function getStatusPriority(venture: typeof ventures[0]): number {
+  const text = venture.statusText?.toLowerCase() || '';
+  if (text.includes('launching')) return 1;
+  if (text.includes('beta')) return 1;
+  return statusOrder[venture.status] ?? 3;
+}
 
 export function getVenturesForCategory(categoryId: PortfolioCategory) {
   const category = portfolioCategories.find((c) => c.id === categoryId);
   if (!category) return [];
   return category.ventureIds
     .map((id) => ventures.find((v) => v.id === id))
-    .filter(Boolean);
+    .filter(Boolean)
+    .sort((a, b) => getStatusPriority(a!) - getStatusPriority(b!));
 }

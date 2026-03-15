@@ -15,7 +15,7 @@ export type OwnershipType = 'core' | 'majority' | 'strategic' | 'in-house';
 // Status (konsistent, 4 valg)
 export type VentureStatus = 'live' | 'building' | 'scaling' | 'stealth';
 
-export type PortfolioCategory = 'digital-assets' | 'health-tech';
+export type PortfolioCategory = 'digital-assets' | 'health-tech' | 'nordic-legacy';
 
 // Aprikos rolle - 4 intuitive kategorier (kan kombineres med ·)
 export type AprikosRole = 

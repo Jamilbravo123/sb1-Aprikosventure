@@ -1,10 +1,12 @@
 import type { Venture, TeamMember } from '../types/dashboard';
 import mashwaraLogo from '../assets/images/mashwara-ai-logo.png';
-import shippingxLogo from '../assets/images/hero/Shipping-X1.png';
+const mashwara3dLogo = '/social/mashwara-ai-logo-Cp2Bf_rL.webp';
+const shippingxLogo = '/social/shippingx-logo3.png';
 import aprikosVentureLogo from '../assets/images/aprikos-venture-logo.svg';
 import aprikosMedicalLogo from '../assets/images/aprikosmedical-logo.png';
 import codeEntropyLogo from '../assets/images/code-entropy-logo.webp';
 import venturetokenLogo from '../assets/images/venturetoken-logo.svg';
+const venturetoken3dIcon = '/social/venturetoken-3dicon.png';
 import balderxLogo from '../assets/images/balderx-logo.png';
 
 // =============================================================================
@@ -65,8 +67,11 @@ export const ventures: Venture[] = [
     status: 'live',
     ownershipType: 'majority',
     aprikosRole: 'Venture Builder · Operating Partner',
-    logo: aprikosVentureLogo,
+    logo: '/social/November-Property-Logo-white.png',
     parentId: 'nordic-legacy',
+    links: [
+      { label: 'Website', url: 'https://novemberproperty.com/', type: 'website' as const }
+    ],
     details: {
       highlights: ['Property development', 'Real estate', 'Nordic focus']
     }
@@ -106,7 +111,7 @@ export const ventures: Venture[] = [
     status: 'building',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder',
-    logo: mashwaraLogo,
+    logo: '/social/mashwara_bot.png',
     links: [
       { label: 'Website', url: 'https://mashwara.ai', type: 'website' }
     ],
@@ -149,7 +154,7 @@ export const ventures: Venture[] = [
     status: 'live',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder · Operating Partner',
-    logo: venturetokenLogo,
+    logo: venturetoken3dIcon,
     links: [
       { label: 'Website', url: 'https://venturetoken.io', type: 'website' }
     ],
@@ -184,7 +189,7 @@ export const ventures: Venture[] = [
   {
     id: 'nayapaisa',
     name: 'Nayapaisa',
-    tagline: 'Cross-border digital payment infrastructure',
+    tagline: 'Regulated digital asset exchange',
     kind: 'venture',
     industry: 'fintech',
     hqCountry: 'PK',
@@ -192,33 +197,16 @@ export const ventures: Venture[] = [
     status: 'building',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder',
-    logo: '',
+    logo: '/social/Nayapaisa.png',
     links: [],
     details: { highlights: ['Cross-border payments', 'Nordic-South Asian corridor'] },
-  },
-
-  // VENTURE: MKV32 Cultural Care
-  {
-    id: 'mkv32-cultural-care',
-    name: 'MKV32 Cultural Care',
-    tagline: 'Culturally adapted healthcare solutions',
-    kind: 'venture',
-    industry: 'healthtech',
-    hqCountry: 'NO',
-    markets: ['NO', 'NORDICS'],
-    status: 'building',
-    ownershipType: 'core',
-    aprikosRole: 'Venture Builder',
-    logo: '',
-    links: [],
-    details: { highlights: ['Cultural care', 'Nordic healthcare'] },
   },
 
   // VENTURE: Pharmesa
   {
     id: 'pharmesa',
     name: 'Pharmesa',
-    tagline: 'Pharmaceutical innovation platform',
+    tagline: 'Pharmaceutical launch platform MENA-SA',
     kind: 'venture',
     industry: 'medtech',
     hqCountry: 'NO',
@@ -229,6 +217,26 @@ export const ventures: Venture[] = [
     logo: '',
     links: [],
     details: { highlights: ['Pharma innovation', 'European markets'] },
+  },
+
+  // VENTURE: Kinetic Energy
+  {
+    id: 'kinetic-energy',
+    name: 'Kinetic Energy',
+    tagline: 'Performance energy drink — powered by Venturetoken',
+    kind: 'venture' as VentureKind,
+    industry: 'industry' as Industry,
+    hqCountry: 'NO' as Country,
+    markets: ['NO', 'GLOBAL'] as Market[],
+    status: 'building' as VentureStatus,
+    statusText: 'Pre-launch',
+    ownershipType: 'core' as OwnershipType,
+    aprikosRole: 'Venture Builder',
+    logo: '/social/ke-logo.png',
+    links: [
+      { label: 'Website', url: 'https://venturetoken.io/kinetic', type: 'website' as const }
+    ],
+    details: { highlights: ['Energy drink', 'Consumer brand', 'Venturetoken rewards'] },
   },
 
   // HUB: Code Entropy

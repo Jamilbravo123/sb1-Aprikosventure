@@ -1,44 +1,69 @@
-import React from 'react';
+import { useState } from 'react';
 import VentureCard from './VentureCard';
-import { ventures } from '../../data/ventures.mock';
-import { INVESTOR_CLUB_COPY } from '../../constants/copy';
+import { getTopLevelVentures } from '../../data/ventures.mock';
+import type { Industry } from '../../types/dashboard';
+
+type FilterType = 'ALL' | Industry;
 
 export default function VentureList() {
-  return (
-    <section className="py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl mb-4">
-            {INVESTOR_CLUB_COPY.opportunitiesTitle}
-          </h2>
-          {/* Gold accent line with shimmer */}
-          <div className="relative w-16 h-0.5 mx-auto mt-3 mb-6 overflow-hidden">
-            <div className="absolute inset-0 bg-[#B8860B] opacity-90" />
-            <div className="absolute inset-0 animate-shimmer" />
-          </div>
-          <p className="text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-            {INVESTOR_CLUB_COPY.opportunitiesIntro}
-          </p>
-        </div>
+  const [filter, setFilter] = useState<FilterType>('ALL');
+  
+  const allVentures = getTopLevelVentures();
+  
+  // Filter by industry (include all ventures in main grid)
+  const filteredVentures = filter === 'ALL' 
+    ? allVentures 
+    : allVentures.filter(v => v.industry === filter);
 
-        {/* Venture Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {ventures.map((venture, index) => (
-            <div key={venture.id} style={{ animationDelay: `${index * 0.5}s` }}>
-              <VentureCard venture={venture} />
-            </div>
+  // Get unique industries from ventures
+  const industries: FilterType[] = ['ALL', 'fintech', 'healthtech', 'web3', 'industry', 'software'];
+
+  const industryLabels: Record<FilterType, string> = {
+    'ALL': 'All',
+    'fintech': 'Fintech',
+    'healthtech': 'Healthtech',
+    'web3': 'Web3',
+    'industry': 'Industry',
+    'maritime': 'Maritime',
+    'proptech': 'Proptech',
+    'medtech': 'Medtech',
+    'software': 'Software',
+  };
+
+  return (
+    <section className="py-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Industry Filter */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {industries.map((ind) => (
+            <button
+              key={ind}
+              onClick={() => setFilter(ind)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                filter === ind 
+                  ? 'bg-[#B8860B] text-white' 
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              {industryLabels[ind]}
+            </button>
           ))}
         </div>
 
-        {/* Legal Disclaimer - Below Cards */}
-        <div className="mt-12 max-w-4xl mx-auto">
-          <p className="text-xs text-slate-400 text-center leading-relaxed bg-slate-900/30 p-6 rounded-xl border border-slate-700/30">
-            {INVESTOR_CLUB_COPY.opportunitiesDisclaimer}
-          </p>
+        {/* Venture Cards Grid - 3 columns for balanced layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredVentures.map((venture) => (
+            <VentureCard key={venture.id} venture={venture} />
+          ))}
         </div>
+
+        {/* Empty State */}
+        {filteredVentures.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-slate-400">No ventures found for this filter.</p>
+          </div>
+        )}
       </div>
     </section>
   );
 }
-

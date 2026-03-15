@@ -30,19 +30,19 @@ export default function NewsCard({ item }: NewsCardProps) {
         </h3>
 
         {/* Summary */}
-        <p className="text-sm text-slate-400 leading-relaxed flex-1 line-clamp-3">
+        <p className="text-sm text-slate-400 leading-relaxed flex-1">
           {item.summary}
         </p>
 
-        {/* Link */}
-        {item.url && (
+        {/* Source link — only for external press/official sources */}
+        {item.url && item.url.includes('newsweb') && (
           <a
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-1.5 text-[#C9935E]/60 hover:text-[#C9935E] text-xs font-medium transition-colors"
           >
-            Read more
+            Source
             <ExternalLink className="w-3 h-3" />
           </a>
         )}

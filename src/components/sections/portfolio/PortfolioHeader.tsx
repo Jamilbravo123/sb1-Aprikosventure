@@ -11,7 +11,7 @@ export default function PortfolioHeader() {
         <div className="h-1 w-full bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mt-3" />
       </div>
       <p className="mt-6 text-lg leading-8 text-slate-400 max-w-2xl mx-auto text-pretty">
-        Building and investing across two core verticals where technology meets opportunity.
+        Building and investing across three core verticals where technology meets opportunity.
       </p>
     </div>
   );

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Split Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0c0c0c; color: #fff; font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+
+  .section-header { text-align: center; margin-bottom: 48px; }
+  .section-header .overline { color: #C9935E; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .section-header p { color: #888; font-size: 14px; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+  /* === CONCEPT A: Split Screen === */
+  .concept-label {
+    color: #C9935E; font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 32px; padding-bottom: 8px; border-bottom: 1px solid rgba(201,147,94,0.2);
+  }
+
+  .split-portfolio {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    min-height: 500px;
+  }
+
+  .category {
+    padding: 32px;
+    position: relative;
+  }
+
+  .divider-line {
+    background: linear-gradient(180deg, transparent 0%, rgba(201,147,94,0.4) 20%, rgba(201,147,94,0.6) 50%, rgba(201,147,94,0.4) 80%, transparent 100%);
+    position: relative;
+  }
+  .divider-line::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #C9935E;
+    box-shadow: 0 0 20px rgba(201,147,94,0.5), 0 0 40px rgba(201,147,94,0.2);
+  }
+
+  .category-header {
+    margin-bottom: 28px;
+  }
+  .category-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .category-count {
+    color: #555;
+    font-size: 12px;
+  }
+
+  .venture-item {
+    background: rgba(20, 20, 32, 0.5);
+    border: 1px solid rgba(100, 100, 120, 0.1);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .venture-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(201,147,94,0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .venture-item:hover {
+    border-color: rgba(201,147,94,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,147,94,0.1);
+  }
+  .venture-item:hover::before { opacity: 1; }
+
+  .venture-top {
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 1;
+  }
+  .venture-info { display: flex; align-items: center; gap: 12px; }
+  .venture-logo {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(201,147,94,0.12);
+    border: 1px solid rgba(201,147,94,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #C9935E;
+  }
+  .venture-name { font-size: 14px; font-weight: 600; }
+  .venture-flag { font-size: 12px; margin-left: 4px; opacity: 0.7; }
+  .venture-tagline { color: #666; font-size: 11px; margin-top: 2px; }
+  .venture-arrow {
+    color: #333;
+    font-size: 18px;
+    transition: all 0.35s;
+  }
+  .venture-item:hover .venture-arrow { color: #C9935E; transform: translateX(4px); }
+
+  .venture-badges {
+    display: flex; gap: 6px; margin-top: 10px;
+    position: relative; z-index: 1;
+  }
+  .badge {
+    font-size: 9px; padding: 3px 10px; border-radius: 99px;
+    letter-spacing: 0.5px; font-weight: 500;
+  }
+  .badge-sector { background: rgba(201,147,94,0.1); color: #C9935E; }
+  .badge-status-live { background: rgba(100,200,100,0.1); color: #6b9; }
+  .badge-status-building { background: rgba(100,150,255,0.1); color: #79f; }
+  .badge-status-beta { background: rgba(232,200,150,0.1); color: #E8C896; }
+
+  /* Right category alignment */
+  .category-right .category-header { text-align: right; }
+  .category-right .venture-top { flex-direction: row-reverse; }
+  .category-right .venture-info { flex-direction: row-reverse; }
+  .category-right .venture-info > div { text-align: right; }
+  .category-right .venture-badges { justify-content: flex-end; }
+  .category-right .venture-arrow { transform: scaleX(-1); }
+  .category-right .venture-item:hover .venture-arrow { transform: scaleX(-1) translateX(4px); }
+
+  /* === CONCEPT B: Tab Switch === */
+  .concept-b { margin-top: 80px; padding-top: 60px; border-top: 1px solid rgba(100,100,120,0.1); }
+
+  .tab-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .tab-btn {
+    padding: 14px 36px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.4s;
+    position: relative;
+    border: 1px solid rgba(100,100,120,0.15);
+    background: transparent;
+  }
+  .tab-btn:first-child { border-radius: 99px 0 0 99px; border-right: none; }
+  .tab-btn:last-child { border-radius: 0 99px 99px 0; border-left: none; }
+  .tab-btn.active {
+    color: #fff;
+    background: rgba(201,147,94,0.12);
+    border-color: rgba(201,147,94,0.3);
+  }
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #C9935E, transparent);
+  }
+  .tab-btn:hover:not(.active) { color: #999; }
+
+  .tab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .tab-card {
+    background: rgba(20, 20, 32, 0.5);
+    border: 1px solid rgba(100, 100, 120, 0.1);
+    border-radius: 14px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tab-card:hover {
+    border-color: rgba(201,147,94,0.25);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .tab-card .venture-logo { width: 44px; height: 44px; border-radius: 10px; margin-bottom: 14px; font-size: 16px; }
+  .tab-card .venture-name { font-size: 16px; margin-bottom: 6px; }
+  .tab-card .venture-tagline { color: #777; font-size: 12px; line-height: 1.5; }
+
+  /* Pick indicator */
+  .pick-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(12,12,12,0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(201,147,94,0.2);
+    padding: 16px 24px;
+    text-align: center;
+    z-index: 100;
+    font-size: 13px;
+    color: #888;
+  }
+  .pick-bar strong { color: #C9935E; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="section-header">
+    <div class="overline">Our Ecosystem</div>
+    <h2>Ventures We Build</h2>
+    <p>Building and investing in cross-border ventures across two core verticals.</p>
+  </div>
+
+  <!-- ====== CONCEPT A: Split Screen ====== -->
+  <div class="concept-label">Concept A — Split Screen with Divider</div>
+
+  <div class="split-portfolio">
+    <!-- LEFT: Digital Assets -->
+    <div class="category">
+      <div class="category-header">
+        <div class="category-icon">◈</div>
+        <div class="category-title">Digital Assets</div>
+        <div class="category-count">3 ventures</div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Vt</div>
+            <div>
+              <div class="venture-name">Venturetoken <span class="venture-flag">🇳🇴</span></div>
+              <div class="venture-tagline">MiCA-registered utility token</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">Web3</span>
+          <span class="badge badge-status-live">Live</span>
+        </div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Np</div>
+            <div>
+              <div class="venture-name">Nayapaisa <span class="venture-flag">🇵🇰</span></div>
+              <div class="venture-tagline">Cross-border digital payments</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">FinTech</span>
+          <span class="badge badge-status-building">Building</span>
+        </div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Sx</div>
+            <div>
+              <div class="venture-name">ShippingX <span class="venture-flag">🇳🇴</span></div>
+              <div class="venture-tagline">Tokenized maritime investment</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">FinTech</span>
+          <span class="badge badge-status-building">Launching Q1 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="divider-line"></div>
+
+    <!-- RIGHT: Health Tech -->
+    <div class="category category-right">
+      <div class="category-header">
+        <div class="category-icon">✦</div>
+        <div class="category-title">Health Tech</div>
+        <div class="category-count">4 ventures</div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Ma</div>
+            <div>
+              <div class="venture-name"><span class="venture-flag">🇵🇰</span> Mashwara AI</div>
+              <div class="venture-tagline">AI healthcare for emerging markets</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">HealthTech</span>
+          <span class="badge badge-status-beta">Live Beta</span>
+        </div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Am</div>
+            <div>
+              <div class="venture-name"><span class="venture-flag">🇳🇴</span> Aprikos Medical</div>
+              <div class="venture-tagline">MDR-certified medical devices</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">MedTech</span>
+          <span class="badge badge-status-live">Live</span>
+        </div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Mk</div>
+            <div>
+              <div class="venture-name"><span class="venture-flag">🇳🇴</span> MKV32 Cultural Care</div>
+              <div class="venture-tagline">Culturally adapted care solutions</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">HealthTech</span>
+          <span class="badge badge-status-building">Building</span>
+        </div>
+      </div>
+
+      <div class="venture-item">
+        <div class="venture-top">
+          <div class="venture-info">
+            <div class="venture-logo">Ph</div>
+            <div>
+              <div class="venture-name"><span class="venture-flag">🇳🇴</span> Pharmesa</div>
+              <div class="venture-tagline">Pharmaceutical innovation</div>
+            </div>
+          </div>
+          <div class="venture-arrow">→</div>
+        </div>
+        <div class="venture-badges">
+          <span class="badge badge-sector">MedTech</span>
+          <span class="badge badge-status-building">Building</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== CONCEPT B: Tab Switch ====== -->
+  <div class="concept-b">
+    <div class="concept-label">Concept B — Pill Tab Switcher with Card Grid</div>
+
+    <div class="tab-switcher">
+      <div class="tab-btn active" onclick="this.classList.add('active'); this.nextElementSibling.classList.remove('active');">◈ Digital Assets</div>
+      <div class="tab-btn" onclick="this.classList.add('active'); this.previousElementSibling.classList.remove('active');">✦ Health Tech</div>
+    </div>
+
+    <div class="tab-grid">
+      <div class="tab-card">
+        <div class="venture-logo">Vt</div>
+        <div class="venture-name">Venturetoken</div>
+        <div class="venture-tagline">MiCA-registered utility token powering the Aprikos ecosystem. Enabling digital engagement between ventures, creators, and communities.</div>
+        <div class="venture-badges" style="margin-top: 12px;">
+          <span class="badge badge-sector">Web3</span>
+          <span class="badge badge-status-live">Live</span>
+        </div>
+      </div>
+      <div class="tab-card">
+        <div class="venture-logo">Np</div>
+        <div class="venture-name">Nayapaisa</div>
+        <div class="venture-tagline">Cross-border digital payment infrastructure bridging Nordic and South Asian markets.</div>
+        <div class="venture-badges" style="margin-top: 12px;">
+          <span class="badge badge-sector">FinTech</span>
+          <span class="badge badge-status-building">Building</span>
+        </div>
+      </div>
+      <div class="tab-card">
+        <div class="venture-logo">Sx</div>
+        <div class="venture-name">ShippingX</div>
+        <div class="venture-tagline">Tokenized maritime asset platform enabling fractional investment in shipping vessels.</div>
+        <div class="venture-badges" style="margin-top: 12px;">
+          <span class="badge badge-sector">FinTech</span>
+          <span class="badge badge-status-building">Launching Q1 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pick-bar">
+  Scroll to compare both concepts. <strong>Tell me in the terminal which one you prefer</strong> — or if you want to mix elements from both.
+</div>
+
+</body>
+</html>

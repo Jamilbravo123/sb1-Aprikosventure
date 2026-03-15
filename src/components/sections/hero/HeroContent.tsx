@@ -22,7 +22,7 @@ export default function HeroContent() {
   return (
     <div ref={containerRef} className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
       <p className="hero-fade text-gold text-[11px] tracking-[5px] uppercase mb-6">
-        Venture Studio · Oslo
+        Venture Studio · Oslo | Berlin | Lahore | Dubai
       </p>
 
       <HeroHeading />

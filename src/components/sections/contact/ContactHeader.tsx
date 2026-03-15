@@ -9,7 +9,7 @@ export default function ContactHeader() {
         <div className="h-1 w-full bg-gradient-to-r from-transparent via-[#C9935E] to-transparent rounded-full mt-3" />
       </div>
       <p className="mt-6 text-lg leading-8 text-slate-400">
-        Whether you're a founder, investor, or potential partner — we'd love to hear from you.
+        Founder, investor, or future partner? We'd love to hear from you.
       </p>
     </div>
   );
