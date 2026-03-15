@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NavLink from './NavLink';
 import LogoLink from '../brand/LogoLink';
 import { MobileMenu, MobileMenuButton } from './mobile';
-import InvestorButton from '../common/InvestorButton';
-import OwnerRegistrationButton from '../common/OwnerRegistrationButton';
 import UserMenu from '../common/UserMenu';
-import NewsTicker from '../common/NewsTicker';
 import { useAuth } from '../../contexts/AuthContext';
 
 const navLinks = [
-  { href: '#portfolio', label: 'Portfolio' },
+  { href: '#ventures', label: 'Ventures' },
   { href: '#about', label: 'About' },
   { href: '#team', label: 'Team' },
-  { href: '#contact', label: 'Contact' }
+  { href: '#news', label: 'News' },
+  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
@@ -29,20 +27,22 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header 
-      className={`fixed inset-x-2 sm:inset-x-4 top-2 sm:top-4 z-50 transition-all duration-300 rounded-2xl lg:inset-x-8 ${
-        isScrolled || isMobileMenuOpen ? 'bg-white shadow-lg' : 'bg-white/90 backdrop-blur-sm'
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        isScrolled || isMobileMenuOpen
+          ? 'bg-[#0c0c0c]/90 backdrop-blur-xl shadow-lg shadow-black/10'
+          : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Global">
         <div className="flex h-16 sm:h-20 items-center justify-between">
           {/* Logo */}
           <div className="flex lg:flex-1">
-            <LogoLink className="py-2" />
+            <LogoLink className="py-2 brightness-0 invert" />
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex lg:gap-x-12">
+          <div className="hidden lg:flex lg:gap-x-10">
             {navLinks.map((link) => (
               <NavLink key={link.href} href={link.href}>
                 {link.label}
@@ -52,20 +52,22 @@ export default function Navbar() {
 
           {/* Action Buttons */}
           <div className="flex items-center">
-            <div className="hidden lg:flex lg:items-center lg:gap-12 pl-16">
+            <div className="hidden lg:flex lg:items-center lg:gap-4 pl-10">
               {user ? (
                 <UserMenu />
               ) : (
-                <>
-                  <InvestorButton />
-                  <OwnerRegistrationButton />
-                </>
+                <a
+                  href="/investor-login"
+                  className="text-sm font-medium text-[#0c0c0c] bg-[#C9935E] hover:bg-[#E8C896] transition-colors px-5 py-2.5 rounded-lg"
+                >
+                  Investor Login
+                </a>
               )}
             </div>
-            
+
             {/* Mobile Menu Button */}
             <div className="lg:hidden">
-              <MobileMenuButton 
+              <MobileMenuButton
                 isOpen={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               />
@@ -74,13 +76,12 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <MobileMenu 
+        <MobileMenu
           isOpen={isMobileMenuOpen}
           links={navLinks}
           onClose={() => setIsMobileMenuOpen(false)}
         />
       </nav>
-      <NewsTicker />
     </header>
   );
 }
