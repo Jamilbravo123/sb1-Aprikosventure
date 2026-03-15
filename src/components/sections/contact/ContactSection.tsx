@@ -1,9 +1,8 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import ContactHeader from './ContactHeader';
 import ContactForm from './ContactForm';
 import ContactInfo from './ContactInfo';
-import { colors } from '../../../constants/colors';
 
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -39,36 +38,34 @@ export default function ContactSection() {
   };
 
   return (
-    <div id="contact" className="bg-white py-24 sm:py-32">
+    <section id="contact" className="py-24 bg-[#0c0c0c]">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <ContactHeader />
-        
+
         <div className="mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-12 sm:mt-20 lg:grid-cols-2">
           <ContactInfo />
-          
-          <div className="rounded-2xl bg-gradient-to-br from-[#0B2545] to-[#051428] p-[1px] shadow-xl">
-            <div className="rounded-2xl bg-white p-6">
-              <ContactForm formRef={formRef} isSubmitting={isSubmitting} handleSubmit={handleSubmit} />
-              
-              {submitStatus === 'success' && (
-                <div className="mt-4 rounded-lg bg-green-50 p-4">
-                  <p className="text-sm text-green-800">
-                    Thank you for your message! We'll get back to you soon.
-                  </p>
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div className="mt-4 rounded-lg bg-red-50 p-4">
-                  <p className="text-sm text-red-800">
-                    Sorry, there was an error sending your message. Please try again later.
-                  </p>
-                </div>
-              )}
-            </div>
+
+          <div className="rounded-2xl bg-[#141420]/50 backdrop-blur-sm border border-white/5 p-6">
+            <ContactForm formRef={formRef} isSubmitting={isSubmitting} handleSubmit={handleSubmit} />
+
+            {submitStatus === 'success' && (
+              <div className="mt-4 rounded-lg bg-emerald-900/30 border border-emerald-700/30 p-4">
+                <p className="text-sm text-emerald-300">
+                  Thank you for your message! We'll get back to you soon.
+                </p>
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div className="mt-4 rounded-lg bg-red-900/30 border border-red-700/30 p-4">
+                <p className="text-sm text-red-300">
+                  Sorry, there was an error sending your message. Please try again later.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
