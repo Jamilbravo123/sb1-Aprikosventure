@@ -249,7 +249,7 @@ export const ventures: Venture[] = [
     tagline: 'Performance energy drink — powered by Venturetoken',
     kind: 'venture' as VentureKind,
     industry: 'industry' as Industry,
-    hqCountry: 'NO' as Country,
+    hqCountry: 'PK' as Country,
     markets: ['NO', 'GLOBAL'] as Market[],
     status: 'building' as VentureStatus,
     statusText: 'Pre-launch',

@@ -26,10 +26,10 @@ export const portfolioCategories: CategoryConfig[] = [
   },
   {
     id: 'nordic-legacy',
-    title: 'Industry',
+    title: 'Brands',
     icon: '▲',
-    description: 'Consumer brands & Property.',
-    ventureIds: ['november-property', 'kinetic-energy'],
+    description: 'From ventures to everyday life.',
+    ventureIds: ['kinetic-energy'],
   },
 ];
 
