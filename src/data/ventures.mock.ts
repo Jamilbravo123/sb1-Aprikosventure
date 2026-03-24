@@ -202,6 +202,29 @@ export const ventures: Venture[] = [
     details: { highlights: ['Cross-border payments', 'Nordic-South Asian corridor'] },
   },
 
+  // VENTURE: Vera EPJ
+  {
+    id: 'vera-epj',
+    name: 'Vera EPJ',
+    tagline: 'AI-assisted electronic patient journal for Norwegian healthcare',
+    kind: 'venture',
+    industry: 'healthtech',
+    hqCountry: 'NO',
+    markets: ['NO'],
+    status: 'building',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder',
+    logo: '/social/veraepj-logo-placeholder.svg',
+    links: [
+      { label: 'App', url: 'https://app.veraepj.no', type: 'website' as const },
+      { label: 'Portal', url: 'https://portal.veraepj.no', type: 'website' as const },
+    ],
+    statusText: 'Soft Launch',
+    details: {
+      highlights: ['Electronic patient journal', 'AI-assisted documentation', 'Norwegian compliance']
+    }
+  },
+
   // VENTURE: Pharmesa
   {
     id: 'pharmesa',
