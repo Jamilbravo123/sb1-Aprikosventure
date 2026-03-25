@@ -5,7 +5,7 @@ import { portfolioCategories, getVenturesForCategory } from '../../../data/portf
 import CodeEntropyStrip from './CodeEntropyStrip';
 import type { Venture } from '../../../types/dashboard';
 import { countryFlags, industryLabels, statusLabels } from '../../../types/dashboard';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, ChevronDown } from 'lucide-react';
 
 function statusBadgeClass(status: string, statusText?: string): string {
   const text = statusText?.toLowerCase() || status;
@@ -153,13 +153,13 @@ function CategoryRow({ config, ventures, index }: { config: typeof portfolioCate
       <div className="lg:hidden">
         <button
           onClick={toggleMobile}
-          className="w-full flex items-center justify-between py-3"
+          className="w-full flex items-center justify-between py-3 px-4 -mx-4 rounded-lg border border-white/[0.06] hover:border-gold/20 hover:bg-white/[0.02] transition-all"
         >
           <div className="flex items-center gap-3">
             <span className="text-lg text-gold">{config.icon}</span>
             <h3 className="font-display text-xl font-bold text-white">{config.title}</h3>
           </div>
-          <span className={`text-gold text-sm transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`}>▾</span>
+          <ChevronDown className={`w-5 h-5 text-gold/80 transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`} />
         </button>
         <p className="text-[12px] text-[#666] leading-relaxed mb-2">{config.description}</p>
 
