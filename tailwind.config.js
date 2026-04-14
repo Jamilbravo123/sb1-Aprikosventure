@@ -21,6 +21,7 @@ export default {
         'shimmer': 'shimmer 1.5s ease-in-out infinite',
         'marquee': 'marquee 40s linear infinite',
         'marquee-reverse': 'marquee-reverse 40s linear infinite',
+        'ticker': 'marquee 60s linear infinite',
         'pulse-ring': 'pulse-ring 3s ease-out infinite',
       },
       keyframes: {
