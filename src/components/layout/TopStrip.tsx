@@ -16,8 +16,8 @@ export default function TopStrip() {
     <div
       role="region"
       aria-label="Aprikos Venture highlights"
-      className={`group fixed inset-x-0 top-0 z-40 h-9 flex items-center overflow-hidden transition-all duration-500 ease-out ${
-        hidden ? 'opacity-0 -translate-y-full pointer-events-none' : 'opacity-100 translate-y-0'
+      className={`group fixed inset-x-0 top-0 z-40 h-9 flex items-center overflow-hidden transition-all duration-500 ease-out hover:opacity-100 ${
+        hidden ? 'opacity-0 -translate-y-full pointer-events-none' : 'opacity-60 translate-y-0'
       }`}
     >
       <div className="flex whitespace-nowrap animate-ticker motion-reduce:animate-none group-hover:[animation-play-state:paused] will-change-transform">
