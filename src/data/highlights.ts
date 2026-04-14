@@ -21,15 +21,25 @@ export const highlights: Highlight[] = [
     href: 'https://app.veraepj.no',
   },
   {
-    mark: 'Thesis',
-    text: 'Conviction over consensus',
+    mark: 'NBX × Aprikos',
+    text: "JV building Pakistan's regulated digital asset exchange",
+  },
+  {
+    mark: 'ShippingX',
+    text: 'First tokenized issuance Q3 2026',
   },
   {
     mark: 'Thesis',
     text: 'Building at the intersection of AI, health and infrastructure',
   },
   {
-    mark: 'Portfolio',
-    text: 'Ventures across the Nordic, MENA and South Asian corridors',
+    mark: 'Kinetic Energy',
+    text: 'Performance drinks powered by Venturetoken',
+    href: 'https://venturetoken.io/kinetic',
+  },
+  {
+    mark: 'Code Entropy',
+    text: 'In-house AI and Web3 production hub',
+    href: 'https://codentropy.io',
   },
 ];
