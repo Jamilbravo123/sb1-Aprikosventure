@@ -25,10 +25,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 z-50 transition-all duration-500 ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-[#0c0c0c]/90 backdrop-blur-xl shadow-lg shadow-black/10'
-          : 'bg-transparent'
+          ? 'top-0 bg-[#0c0c0c]/90 backdrop-blur-xl shadow-lg shadow-black/10'
+          : 'top-9 bg-transparent'
       }`}
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Global">
