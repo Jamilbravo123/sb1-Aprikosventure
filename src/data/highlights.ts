@@ -17,7 +17,7 @@ export const highlights: Highlight[] = [
   },
   {
     mark: 'Vera EPJ',
-    text: 'AI-assisted patient journal for Norwegian healthcare',
+    text: 'AI-assisted patient journal for the Nordic market',
     href: 'https://app.veraepj.no',
   },
   {

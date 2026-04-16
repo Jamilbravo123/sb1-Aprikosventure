@@ -206,7 +206,7 @@ export const ventures: Venture[] = [
   {
     id: 'vera-epj',
     name: 'Vera EPJ',
-    tagline: 'AI-assisted electronic patient journal for Norwegian healthcare',
+    tagline: 'AI-assisted electronic patient journal for the Nordic market',
     kind: 'venture',
     industry: 'healthtech',
     hqCountry: 'NO',
@@ -246,7 +246,7 @@ export const ventures: Venture[] = [
   {
     id: 'kinetic-energy',
     name: 'Kinetic Energy',
-    tagline: 'Performance energy drink — powered by Venturetoken',
+    tagline: 'Performance energy drink powered by Venturetoken',
     kind: 'venture' as VentureKind,
     industry: 'industry' as Industry,
     hqCountry: 'PK' as Country,
