@@ -199,6 +199,7 @@ export const ventures: Venture[] = [
     aprikosRole: 'Venture Builder',
     logo: '/social/Nayapaisa.png',
     links: [],
+    jvPartner: { name: 'NBX', url: 'https://nbx.com', logo: '/social/nbx-logo.svg' },
     details: { highlights: ['Cross-border payments', 'Nordic-South Asian corridor'] },
   },
 
@@ -239,6 +240,7 @@ export const ventures: Venture[] = [
     aprikosRole: 'Venture Builder',
     logo: '',
     links: [],
+    jvPartner: { name: 'Pharma Nordic', url: 'https://pharmanordic.no', logo: '/social/pharma-nordic-logo.png' },
     details: { highlights: ['Pharma innovation', 'European markets'] },
   },
 

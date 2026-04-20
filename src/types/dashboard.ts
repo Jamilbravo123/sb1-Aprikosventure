@@ -64,9 +64,18 @@ export interface Venture {
   // Links
   links?: VentureLink[];
   balderxUrl?: string;
-  
+
+  // Joint venture partner (shown on venture card for credibility)
+  jvPartner?: JvPartner;
+
   // Sensitive details (kun i modal accordion)
   details?: VentureDetails;
+}
+
+export interface JvPartner {
+  name: string;
+  url: string;
+  logo?: string;
 }
 
 export interface VentureDetails {

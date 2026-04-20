@@ -74,6 +74,32 @@ function VentureCard({ venture }: { venture: Venture }) {
 
       {/* Tagline */}
       <p className="text-[13px] text-[#777] leading-relaxed">{venture.tagline}</p>
+
+      {/* JV partner */}
+      {venture.jvPartner && (
+        <a
+          href={venture.jvPartner.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+          className="mt-3 inline-flex items-center gap-1.5 text-[11px] text-[#666] hover:text-gold-light transition-colors group/jv"
+        >
+          <span className="uppercase tracking-[0.08em] text-[#555]">JV with</span>
+          {venture.jvPartner.logo ? (
+            <img
+              src={venture.jvPartner.logo}
+              alt={venture.jvPartner.name}
+              className="h-4 w-auto object-contain opacity-80 group-hover/jv:opacity-100 transition-opacity"
+            />
+          ) : (
+            <span className="font-semibold text-gold/80 group-hover/jv:text-gold-light">
+              {venture.jvPartner.name}
+            </span>
+          )}
+          <ExternalLink className="w-2.5 h-2.5 text-[#444] group-hover/jv:text-gold transition-colors" />
+        </a>
+      )}
     </div>
   );
 }
