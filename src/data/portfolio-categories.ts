@@ -21,8 +21,8 @@ export const portfolioCategories: CategoryConfig[] = [
     id: 'health-tech',
     title: 'Health Tech',
     icon: '✦',
-    description: 'AI diagnostics, medical devices, and pharmaceutical innovation.',
-    ventureIds: ['mashwara-ai', 'aprikos-medical', 'vera-epj', 'pharmesa'],
+    description: 'AI diagnostics, electronic patient records, and pharmaceutical innovation.',
+    ventureIds: ['mashwara-ai', 'vera-epj', 'pharmesa'],
   },
   {
     id: 'nordic-legacy',

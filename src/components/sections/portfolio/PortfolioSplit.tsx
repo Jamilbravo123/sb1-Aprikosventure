@@ -23,7 +23,6 @@ function getInitials(name: string): string {
 }
 
 const ventureFlags: Record<string, string> = {
-  'aprikos-medical': '🇳🇴 🌍',
   'pharmesa': '🇳🇴 🇵🇰',
   'shippingx': '🇳🇴 🇪🇺',
 };
