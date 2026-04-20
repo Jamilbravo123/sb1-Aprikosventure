@@ -46,7 +46,7 @@ function VentureCard({ venture }: { venture: Venture }) {
       className="venture-card group w-full sm:w-[280px] flex-shrink-0 cursor-pointer py-5 px-6 rounded-xl hover:bg-white/[0.03] transition-all"
     >
       {/* Logo */}
-      <div className="h-20 mb-4 flex items-center gap-2">
+      <div className="relative h-20 mb-4 flex items-center gap-2">
         {venture.id === 'mashwara-ai' ? (
           <>
             <img src="/social/mashwara_Artboard2.png" alt="Mashwara" className="h-12 w-auto object-contain" />
@@ -61,6 +61,19 @@ function VentureCard({ venture }: { venture: Venture }) {
         ) : (
           <span className="text-gold text-4xl font-bold tracking-wide">{getInitials(venture.name)}</span>
         )}
+        {venture.scriptTagline && (
+          <span
+            aria-hidden="true"
+            className="font-script pointer-events-none absolute left-14 -bottom-1 text-[22px] leading-none text-gold-light/90 whitespace-nowrap"
+            style={{
+              transform: 'rotate(-6deg)',
+              transformOrigin: 'left center',
+              textShadow: '0 1px 2px rgba(0,0,0,0.6)',
+            }}
+          >
+            {venture.scriptTagline}
+          </span>
+        )}
       </div>
 
       {/* Name */}
@@ -74,6 +87,14 @@ function VentureCard({ venture }: { venture: Venture }) {
 
       {/* Tagline */}
       <p className="text-[13px] text-[#777] leading-relaxed">{venture.tagline}</p>
+
+      {/* Flavor chip */}
+      {venture.flavor && (
+        <span className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-lime-400/[0.08] border border-lime-400/20 text-[10px] uppercase tracking-[0.12em] text-lime-300/90">
+          <span className="w-1.5 h-1.5 rounded-full bg-lime-400 shadow-[0_0_6px_rgba(163,230,53,0.6)]" />
+          {venture.flavor}
+        </span>
+      )}
 
       {/* JV partner */}
       {venture.jvPartner && (

@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
+        script: ['Allura', 'cursive'],
       },
       animation: {
         'shimmer': 'shimmer 1.5s ease-in-out infinite',

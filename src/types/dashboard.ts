@@ -68,6 +68,12 @@ export interface Venture {
   // Joint venture partner (shown on venture card for credibility)
   jvPartner?: JvPartner;
 
+  // Brand tagline rendered in a script font on the venture card (optional flourish)
+  scriptTagline?: string;
+
+  // Product flavor shown as a small chip on the venture card (consumer brands)
+  flavor?: string;
+
   // Sensitive details (kun i modal accordion)
   details?: VentureDetails;
 }

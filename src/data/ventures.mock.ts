@@ -261,6 +261,8 @@ export const ventures: Venture[] = [
     links: [
       { label: 'Website', url: 'https://venturetoken.io/kinetic', type: 'website' as const }
     ],
+    scriptTagline: 'on a lighter note',
+    flavor: 'Kiwi · Lime',
     details: { highlights: ['Energy drink', 'Consumer brand', 'Venturetoken rewards'] },
   },
 
