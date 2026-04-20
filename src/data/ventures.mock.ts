@@ -263,6 +263,7 @@ export const ventures: Venture[] = [
     ],
     scriptTagline: 'on a lighter note',
     flavor: 'Kiwi · Lime',
+    launchDate: 'October 2026',
     details: { highlights: ['Energy drink', 'Consumer brand', 'Venturetoken rewards'] },
   },
 

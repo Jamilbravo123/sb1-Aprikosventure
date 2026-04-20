@@ -88,12 +88,21 @@ function VentureCard({ venture }: { venture: Venture }) {
       {/* Tagline */}
       <p className="text-[13px] text-[#777] leading-relaxed">{venture.tagline}</p>
 
-      {/* Flavor chip */}
-      {venture.flavor && (
-        <span className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-lime-400/[0.08] border border-lime-400/20 text-[10px] uppercase tracking-[0.12em] text-lime-300/90">
-          <span className="w-1.5 h-1.5 rounded-full bg-lime-400 shadow-[0_0_6px_rgba(163,230,53,0.6)]" />
-          {venture.flavor}
-        </span>
+      {/* Flavor chip + launch caption */}
+      {(venture.flavor || venture.launchDate) && (
+        <div className="mt-3 flex flex-col items-start gap-1.5">
+          {venture.flavor && (
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-lime-400/[0.08] border border-lime-400/20 text-[10px] uppercase tracking-[0.12em] text-lime-300/90">
+              <span className="w-1.5 h-1.5 rounded-full bg-lime-400 shadow-[0_0_6px_rgba(163,230,53,0.6)]" />
+              {venture.flavor}
+            </span>
+          )}
+          {venture.launchDate && (
+            <p className="font-display italic text-[11px] text-gold/60 tracking-[0.02em] pl-0.5">
+              launching {venture.launchDate.toLowerCase()}
+            </p>
+          )}
+        </div>
       )}
 
       {/* JV partner */}

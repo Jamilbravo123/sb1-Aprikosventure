@@ -74,6 +74,9 @@ export interface Venture {
   // Product flavor shown as a small chip on the venture card (consumer brands)
   flavor?: string;
 
+  // Launch window rendered as an elegant italic caption on the venture card
+  launchDate?: string;
+
   // Sensitive details (kun i modal accordion)
   details?: VentureDetails;
 }
