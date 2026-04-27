@@ -19,7 +19,7 @@ export default function CommitmentStep({ data, onUpdate, onNext, onBack }: StepP
       onBack={onBack}
       nextDisabled={!data.commitment}
     >
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" style={{ maxWidth: '520px' }}>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" style={{ maxWidth: '640px' }}>
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}

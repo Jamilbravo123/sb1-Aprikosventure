@@ -20,7 +20,7 @@ export default function InvestorTypeStep({ data, onUpdate, onNext, onBack }: Ste
       showBack={false}
       nextDisabled={!data.investorType}
     >
-      <div className="grid grid-cols-2 gap-3" style={{ maxWidth: '520px' }}>
+      <div className="grid grid-cols-2 gap-3" style={{ maxWidth: '640px' }}>
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}

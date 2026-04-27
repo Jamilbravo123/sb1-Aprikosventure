@@ -17,8 +17,9 @@ const COMMITMENT_LABELS: Record<string, string> = {
 
 const INTEREST_LABELS: Record<string, string> = {
   digital_assets: 'Digital Assets',
-  healthcare: 'Healthcare',
-  ai_studio: 'AI & Studio',
+  healthcare: 'Health Tech',
+  brands: 'Brands',
+  ai_studio: 'AI Studio',
   all: 'All Verticals',
 };
 
@@ -44,7 +45,7 @@ export default function ReviewStep({ data, onNext, onBack }: StepProps) {
       onBack={onBack}
       nextLabel="Submit Registration →"
     >
-      <table className="deck-facts" style={{ maxWidth: '520px' }}>
+      <table className="deck-facts" style={{ maxWidth: '780px' }}>
         <tbody>
           {rows.map((r) => (
             <tr key={r.label}>

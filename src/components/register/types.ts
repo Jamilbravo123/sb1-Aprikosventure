@@ -1,6 +1,6 @@
 export type InvestorType = 'private' | 'institutional' | 'family_office' | 'fund';
 export type Commitment = '100k-250k' | '250k-1m' | '1m_plus' | 'undisclosed';
-export type Vertical = 'digital_assets' | 'healthcare' | 'ai_studio' | 'all';
+export type Vertical = 'digital_assets' | 'healthcare' | 'brands' | 'ai_studio' | 'all';
 
 export interface WizardData {
   investorType: InvestorType | null;
@@ -19,7 +19,7 @@ export const INITIAL_WIZARD_DATA: WizardData = {
   email: '',
   phone: '',
   company: '',
-  country: '',
+  country: 'Norway',
   interests: [],
   commitment: null,
 };

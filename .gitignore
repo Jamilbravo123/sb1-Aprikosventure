@@ -44,3 +44,6 @@ dist-ssr
 # Cache
 .cache
 .eslintcache
+.playwright-mcp/
+.superpowers/
+supabase/.temp/

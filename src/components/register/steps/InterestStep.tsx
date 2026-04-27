@@ -3,8 +3,9 @@ import WizardShell from '../WizardShell';
 
 const OPTIONS: { value: Vertical; label: string }[] = [
   { value: 'digital_assets', label: 'Digital Assets' },
-  { value: 'healthcare', label: 'Healthcare' },
-  { value: 'ai_studio', label: 'AI & Studio' },
+  { value: 'healthcare', label: 'Health Tech' },
+  { value: 'brands', label: 'Brands' },
+  { value: 'ai_studio', label: 'AI Studio' },
   { value: 'all', label: 'All Verticals' },
 ];
 
@@ -32,7 +33,7 @@ export default function InterestStep({ data, onUpdate, onNext, onBack }: StepPro
       onBack={onBack}
       nextDisabled={data.interests.length === 0}
     >
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" style={{ maxWidth: '520px' }}>
+      <div className="grid grid-cols-5 gap-3" style={{ maxWidth: '780px' }}>
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}

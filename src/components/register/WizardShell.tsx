@@ -35,13 +35,13 @@ export default function WizardShell({
   return (
     <div className="deck-page" onKeyDown={handleKeyDown}>
       <div
-        className="min-h-screen flex flex-col"
+        className="min-h-screen flex flex-col items-center justify-center text-center"
         style={{
           padding: 'clamp(32px, 5vw, 64px)',
           background: 'var(--deck-bg-2)',
         }}
       >
-        <div className="deck-progress mb-10">
+        <div className="deck-progress mb-12 w-full" style={{ maxWidth: '640px' }}>
           {Array.from({ length: totalSteps }, (_, i) => (
             <div
               key={i}
@@ -51,20 +51,20 @@ export default function WizardShell({
           ))}
         </div>
 
-        <div className="deck-kicker mb-3">
+        <div className="deck-kicker mb-4" style={{ fontSize: '12px' }}>
           Step {step + 1} · {stepLabel}
         </div>
 
         <h2
-          className="deck-display mb-8"
-          style={{ fontSize: 'clamp(24px, 3vw, 32px)' }}
+          className="deck-display mb-10"
+          style={{ fontSize: 'clamp(36px, 5vw, 56px)' }}
         >
           {question}
         </h2>
 
-        <div className="flex-1">{children}</div>
+        <div className="w-full flex justify-center">{children}</div>
 
-        <div className="flex items-center gap-4 pt-8 mt-auto">
+        <div className="flex items-center justify-center gap-4 pt-10">
           {showBack && (
             <button className="deck-btn-ghost" onClick={onBack}>
               ← Back
@@ -77,18 +77,18 @@ export default function WizardShell({
           >
             {nextLabel}
           </button>
-          <span
-            className="ml-auto"
-            style={{
-              fontFamily: 'var(--deck-f-mono)',
-              fontSize: '10px',
-              color: 'var(--deck-ink-faintest)',
-              letterSpacing: '0.1em',
-            }}
-          >
-            ↵ Enter
-          </span>
         </div>
+        <span
+          className="mt-4"
+          style={{
+            fontFamily: 'var(--deck-f-mono)',
+            fontSize: '10px',
+            color: 'var(--deck-ink-faintest)',
+            letterSpacing: '0.1em',
+          }}
+        >
+          ↵ Enter
+        </span>
       </div>
     </div>
   );

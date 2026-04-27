@@ -8,6 +8,13 @@ const COUNTRIES = [
   'Singapore', 'Hong Kong', 'Japan', 'Australia', 'Other',
 ];
 
+const COMPANY_PLACEHOLDERS: Record<string, string> = {
+  private: 'Company (optional)',
+  institutional: 'Organisation name',
+  family_office: 'Family office name',
+  fund: 'Fund name',
+};
+
 export default function OrganisationStep({ data, onUpdate, onNext, onBack }: StepProps) {
   return (
     <WizardShell
@@ -19,10 +26,10 @@ export default function OrganisationStep({ data, onUpdate, onNext, onBack }: Ste
       onBack={onBack}
       nextDisabled={!data.country}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ maxWidth: '520px' }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ maxWidth: '640px' }}>
         <input
           className="deck-field"
-          placeholder="Company / Organisation (optional)"
+          placeholder={COMPANY_PLACEHOLDERS[data.investorType ?? 'private']}
           value={data.company}
           onChange={(e) => onUpdate({ company: e.target.value })}
         />
