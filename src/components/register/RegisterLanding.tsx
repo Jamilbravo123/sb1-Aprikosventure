@@ -120,17 +120,17 @@ export default function RegisterLanding() {
               <strong>{signInEmail}</strong>
             </p>
           ) : (
-            <form onSubmit={handleSignIn} className="flex flex-wrap gap-3 items-center mt-2">
+            <form onSubmit={handleSignIn} className="flex flex-col items-center gap-3 mt-2">
               <input
                 type="email"
                 className="deck-field"
-                style={{ maxWidth: '280px' }}
+                style={{ maxWidth: '360px', textAlign: 'center' }}
                 placeholder="Your email address"
                 value={signInEmail}
                 onChange={(e) => setSignInEmail(e.target.value)}
                 required
               />
-              <button className="deck-btn-primary" style={{ padding: '16px 24px' }} disabled={sending}>
+              <button className="deck-btn-primary" style={{ padding: '16px 48px' }} disabled={sending}>
                 {sending ? 'Sending...' : 'Send Link'}
               </button>
               {signInError && (
@@ -139,6 +139,21 @@ export default function RegisterLanding() {
             </form>
           )}
         </div>
+
+        {/* Disclaimer */}
+        <p
+          className="mt-12"
+          style={{
+            fontSize: '13px',
+            lineHeight: 1.7,
+            color: 'var(--deck-ink-faint)',
+            maxWidth: '560px',
+          }}
+        >
+          This opportunity is directed at professional and qualified investors only.
+          Minimum commitment €100,000. This is not a public offering and does not
+          constitute investment advice or a solicitation to invest.
+        </p>
       </div>
     </div>
   );

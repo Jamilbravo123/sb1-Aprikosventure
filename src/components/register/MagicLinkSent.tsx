@@ -54,6 +54,18 @@ export default function MagicLinkSent({ email, onResend }: MagicLinkSentProps) {
         >
           {cooldown > 0 ? `Resend in ${cooldown}s` : resending ? 'Sending...' : 'Resend link'}
         </button>
+
+        <p
+          className="mt-10"
+          style={{
+            fontSize: '12px',
+            lineHeight: 1.6,
+            color: 'var(--deck-ink-faint)',
+            maxWidth: '480px',
+          }}
+        >
+          For professional and qualified investors only. Minimum commitment €100,000.
+        </p>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavLink from './NavLink';
 import LogoLink from '../brand/LogoLink';
 import { MobileMenu, MobileMenuButton } from './mobile';
@@ -12,6 +13,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -45,6 +47,23 @@ export default function Navbar() {
                 {link.label}
               </NavLink>
             ))}
+          </div>
+
+          {/* Investor CTA */}
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <button
+              onClick={() => navigate('/register')}
+              className="text-xs font-medium tracking-widest uppercase transition-all duration-300 hover:text-gold"
+              style={{
+                background: 'none',
+                color: '#C9935E',
+                border: 'none',
+                cursor: 'pointer',
+                letterSpacing: '0.15em',
+              }}
+            >
+              Investor Pre-Registration →
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
