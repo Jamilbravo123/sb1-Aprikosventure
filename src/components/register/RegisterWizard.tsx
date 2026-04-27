@@ -35,22 +35,7 @@ export default function RegisterWizard() {
   const submit = async () => {
     setError(null);
 
-    const { data: existing } = await supabase
-      .from('investors')
-      .select('id')
-      .eq('email', data.email)
-      .maybeSingle();
-
-    if (existing) {
-      const { error: signInError } = await signIn(data.email);
-      if (signInError) {
-        setError('Could not send sign-in link. Please try again.');
-        return;
-      }
-      setSubmitted(true);
-      return;
-    }
-
+    // Try to insert — if duplicate email, just send magic link
     const { error: insertError } = await supabase.from('investors').insert({
       investor_type: data.investorType,
       full_name: data.fullName,
@@ -63,7 +48,18 @@ export default function RegisterWizard() {
     });
 
     if (insertError) {
-      setError('Registration failed. Please try again.');
+      // Duplicate email (already registered) — just send magic link
+      if (insertError.code === '23505') {
+        const { error: signInError } = await signIn(data.email);
+        if (signInError) {
+          setError('Could not send sign-in link. Please try again.');
+          return;
+        }
+        setSubmitted(true);
+        return;
+      }
+      console.error('Insert error:', insertError);
+      setError(`Registration failed: ${insertError.message}`);
       return;
     }
 
