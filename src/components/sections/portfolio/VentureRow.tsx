@@ -40,7 +40,7 @@ export default function VentureRow({ venture, mirrored = false }: VentureRowProp
           <img
             src={venture.logo}
             alt={venture.name}
-            className="h-12 w-auto max-w-[200px] object-contain"
+            className={`w-auto object-contain ${venture.id === 'shippingx' ? 'h-9 max-w-[170px]' : 'h-12 max-w-[200px]'}`}
           />
         ) : (
           <span className="text-gold text-xl font-bold tracking-wide">{getInitials(venture.name)}</span>
