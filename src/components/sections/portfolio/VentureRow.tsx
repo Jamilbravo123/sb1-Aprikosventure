@@ -35,12 +35,12 @@ export default function VentureRow({ venture, mirrored = false }: VentureRowProp
       `}
     >
       {/* Logo — fixed height zone */}
-      <div className={`h-8 mb-3 flex items-center ${mirrored ? 'justify-end' : ''}`}>
+      <div className={`h-12 mb-3 flex items-center ${mirrored ? 'justify-end' : ''}`}>
         {venture.logo ? (
           <img
             src={venture.logo}
             alt={venture.name}
-            className="h-8 w-auto max-w-[160px] object-contain"
+            className="h-12 w-auto max-w-[200px] object-contain"
           />
         ) : (
           <span className="text-gold text-xl font-bold tracking-wide">{getInitials(venture.name)}</span>
