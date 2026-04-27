@@ -69,7 +69,7 @@ export default function HeroHeading() {
 
   return (
     <div ref={containerRef} className="text-center">
-      <div className="font-display text-[clamp(2.5rem,6vw,3.5rem)] font-bold leading-[1.12] tracking-tight text-white">
+      <div className="font-display text-[clamp(3rem,7vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-white">
         {line1Words.map((word, i) => (
           <span key={i} className="hero-word inline-block mr-[0.3em]">{word}</span>
         ))}
