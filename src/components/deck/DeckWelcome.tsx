@@ -32,16 +32,16 @@ export default function DeckWelcome() {
       >
         <div
           style={{
-            width: '64px',
-            height: '64px',
+            width: '88px',
+            height: '88px',
             borderRadius: '50%',
             border: '2px solid var(--deck-gold)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '32px',
+            marginBottom: '40px',
             color: 'var(--deck-gold)',
-            fontSize: '28px',
+            fontSize: '36px',
           }}
         >
           ✓
@@ -49,12 +49,12 @@ export default function DeckWelcome() {
 
         <h2
           className="deck-display"
-          style={{ fontSize: '36px', marginBottom: '16px' }}
+          style={{ fontSize: 'clamp(40px, 5vw, 56px)', marginBottom: '24px' }}
         >
           Welcome, <em className="deck-italic-gold">{name || 'Investor'}</em>
         </h2>
 
-        <p className="deck-lede" style={{ maxWidth: '480px', marginBottom: '36px' }}>
+        <p className="deck-lede" style={{ maxWidth: '540px', marginBottom: '48px', fontSize: '20px' }}>
           Your registration is confirmed. You now have exclusive access to the
           Aprikos Venture investor deck.
         </p>
@@ -62,16 +62,17 @@ export default function DeckWelcome() {
         <button
           className="deck-btn-primary"
           onClick={() => navigate('/deck/view')}
+          style={{ padding: '20px 64px', fontSize: '15px' }}
         >
           View Investor Deck →
         </button>
 
         <p
           style={{
-            marginTop: '24px',
-            maxWidth: '400px',
-            lineHeight: 1.6,
-            fontSize: '12px',
+            marginTop: '32px',
+            maxWidth: '460px',
+            lineHeight: 1.7,
+            fontSize: '14px',
             color: 'var(--deck-ink-faint)',
           }}
         >
@@ -84,9 +85,9 @@ export default function DeckWelcome() {
         </p>
 
         <button
-          className="deck-btn-ghost mt-8"
+          className="deck-btn-ghost mt-10"
           onClick={signOut}
-          style={{ fontSize: '10px', padding: '10px 20px' }}
+          style={{ fontSize: '11px', padding: '12px 24px' }}
         >
           Sign Out
         </button>
