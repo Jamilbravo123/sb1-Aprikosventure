@@ -1,5 +1,8 @@
+-- Drop old investors table (different schema, no useful data)
+DROP TABLE IF EXISTS investors CASCADE;
+
 -- Investor pre-registration table
-CREATE TABLE IF NOT EXISTS investors (
+CREATE TABLE investors (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id UUID REFERENCES auth.users(id),
   investor_type TEXT NOT NULL CHECK (investor_type IN ('private', 'institutional', 'family_office', 'fund')),
