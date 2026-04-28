@@ -32,28 +32,28 @@ export default function RegisterLanding() {
         style={{ padding: 'clamp(32px, 5vw, 64px)' }}
       >
         {/* Logo */}
-        <div className="mb-14">
+        <div className="mb-8 sm:mb-14">
           <img
             src={logo}
             alt="Aprikos Venture"
-            style={{ height: '140px', filter: 'brightness(0) invert(1)' }}
+            style={{ height: 'clamp(80px, 15vw, 140px)', filter: 'brightness(0) invert(1)' }}
           />
         </div>
 
         {/* Eyebrow */}
-        <div className="deck-eyebrow mb-6">Investor Pre-Registration</div>
+        <div className="deck-eyebrow mb-4 sm:mb-6">Investor Pre-Registration</div>
 
         {/* Headline */}
         <h1
-          className="deck-display mb-8"
-          style={{ fontSize: 'clamp(42px, 6vw, 72px)', maxWidth: '800px' }}
+          className="deck-display mb-5 sm:mb-8"
+          style={{ fontSize: 'clamp(28px, 6vw, 72px)', maxWidth: '800px' }}
         >
           Early access to a{' '}
           <em className="deck-italic-gold">cross-border</em> venture platform
         </h1>
 
         {/* Lede */}
-        <p className="deck-lede mb-10" style={{ maxWidth: '580px', fontSize: '19px' }}>
+        <p className="deck-lede mb-6 sm:mb-10" style={{ maxWidth: '580px', fontSize: 'clamp(15px, 2.5vw, 19px)' }}>
           A Norway-based venture builder developing technology-driven companies
           across digital assets, healthcare, and AI. Pre-register for access to
           our investor deck and updates.
@@ -61,7 +61,7 @@ export default function RegisterLanding() {
 
         {/* Stats row */}
         <div
-          className="flex flex-wrap justify-center gap-10 sm:gap-16 mb-12 pb-8 w-full"
+          className="flex flex-wrap justify-center gap-6 sm:gap-16 mb-8 sm:mb-12 pb-6 sm:pb-8 w-full"
           style={{ borderBottom: '1px solid var(--deck-rule)', maxWidth: '700px' }}
         >
           {[
@@ -73,7 +73,7 @@ export default function RegisterLanding() {
             <div key={s.l}>
               <div
                 className="deck-display"
-                style={{ fontSize: '36px', color: 'var(--deck-gold)' }}
+                style={{ fontSize: 'clamp(24px, 4vw, 36px)', color: 'var(--deck-gold)' }}
               >
                 {s.n}
               </div>
@@ -142,9 +142,9 @@ export default function RegisterLanding() {
 
         {/* Disclaimer */}
         <p
-          className="mt-12"
+          className="mt-8 sm:mt-12"
           style={{
-            fontSize: '13px',
+            fontSize: '12px',
             lineHeight: 1.7,
             color: 'var(--deck-ink-faint)',
             maxWidth: '560px',

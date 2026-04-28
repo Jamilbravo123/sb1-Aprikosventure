@@ -167,6 +167,10 @@
 .deck-field:focus {
   border-color: var(--deck-gold);
 }
+select.deck-field option {
+  background: #1a1a2e;
+  color: #f0ebe3;
+}
 
 .deck-progress {
   display: flex;

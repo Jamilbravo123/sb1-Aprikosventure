@@ -36,7 +36,7 @@ export const teamMembers: TeamMember[] = [
     bio: 'Experienced venture builder driving innovation and growth across the Aprikos ecosystem.',
     shortBio: 'Operational leader with expertise in scaling Nordic ventures.',
     social: {
-      linkedin: '#',
+      linkedin: 'https://www.linkedin.com/in/lyngmoe/',
       email: 'info@aprikosventure.com'
     }
   },
@@ -58,7 +58,7 @@ export const teamMembers: TeamMember[] = [
     bio: 'As a property expert, Vishal knows how to build something up from the start. He brings deep industry knowledge and strategic insight to our team.',
     shortBio: 'Property and investment specialist across European markets.',
     social: {
-      linkedin: '#',
+      linkedin: 'https://www.linkedin.com/in/vishal-sarna-60a794338/',
       email: 'info@aprikosventure.com'
     }
   }

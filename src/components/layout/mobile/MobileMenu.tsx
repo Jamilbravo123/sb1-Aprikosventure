@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
 
 interface NavLink {
@@ -13,6 +15,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) {
+  const navigate = useNavigate();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -26,7 +29,7 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div className="lg:hidden fixed inset-0 z-[100] flex flex-col" style={{ backgroundColor: '#0c0c0c' }}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
@@ -62,6 +65,17 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
             {label}
           </button>
         ))}
+        {/* Investor CTA */}
+        <button
+          className="mt-4 py-4 text-center text-sm font-medium tracking-widest uppercase transition-colors"
+          style={{ color: '#C9935E', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+          onClick={() => {
+            onClose();
+            navigate('/register');
+          }}
+        >
+          Investor Pre-Registration →
+        </button>
       </nav>
 
       {/* Footer */}
@@ -70,6 +84,7 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
           Venture Studio · Oslo | Berlin | Lahore | Dubai
         </p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
