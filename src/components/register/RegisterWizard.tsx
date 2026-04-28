@@ -52,8 +52,8 @@ export default function RegisterWizard() {
       if (insertError.code === '23505') {
         const { error: signInError } = await signIn(data.email);
         if (signInError) {
-          setError('Could not send sign-in link. Please try again.');
-          return;
+          console.error('Magic link error (existing user):', signInError);
+          // Still show magic link screen — user can retry with resend button
         }
         setSubmitted(true);
         return;
@@ -65,8 +65,9 @@ export default function RegisterWizard() {
 
     const { error: signInError } = await signIn(data.email);
     if (signInError) {
-      setError('Registered, but could not send sign-in link. Please use "Sign in" on the landing page.');
-      return;
+      console.error('Magic link error:', signInError);
+      // Registration succeeded — show the magic link screen anyway
+      // so the user can retry sending the link
     }
 
     setSubmitted(true);
