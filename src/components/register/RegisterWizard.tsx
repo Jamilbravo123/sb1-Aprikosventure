@@ -53,7 +53,8 @@ export default function RegisterWizard() {
         const { error: signInError } = await signIn(data.email);
         if (signInError) {
           console.error('Magic link error (existing user):', signInError);
-          // Still show magic link screen — user can retry with resend button
+          setError('Could not send the sign-in link. Please try again in a moment.');
+          return;
         }
         setSubmitted(true);
         return;
@@ -66,8 +67,8 @@ export default function RegisterWizard() {
     const { error: signInError } = await signIn(data.email);
     if (signInError) {
       console.error('Magic link error:', signInError);
-      // Registration succeeded — show the magic link screen anyway
-      // so the user can retry sending the link
+      setError('Registration saved, but we could not send the sign-in link. Please try again in a moment.');
+      return;
     }
 
     setSubmitted(true);

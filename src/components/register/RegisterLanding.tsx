@@ -19,7 +19,8 @@ export default function RegisterLanding() {
     const { error } = await signIn(signInEmail);
     setSending(false);
     if (error) {
-      setSignInError('Could not send sign-in link. Please try again.');
+      console.error('Supabase OTP error:', error.message, error);
+      setSignInError(`Could not send sign-in link: ${error.message}`);
     } else {
       setSignInSent(true);
     }
