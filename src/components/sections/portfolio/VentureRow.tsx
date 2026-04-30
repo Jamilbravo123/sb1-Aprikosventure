@@ -18,7 +18,7 @@ export default function VentureRow({ venture, mirrored = false }: VentureRowProp
 
   const handleClick = () => {
     const websiteLink = venture.links?.find((l) => l.type === 'website');
-    if (websiteLink) window.open(websiteLink.url, '_blank', 'noopener');
+    if (websiteLink) window.open(websiteLink.url, '_blank', 'noopener,noreferrer');
   };
 
   return (
