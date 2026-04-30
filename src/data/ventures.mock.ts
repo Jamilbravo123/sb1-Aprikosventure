@@ -1,11 +1,8 @@
-import type { Venture, TeamMember } from '../types/dashboard';
-import mashwaraLogo from '../assets/images/mashwara-ai-logo.png';
-const mashwara3dLogo = '/social/mashwara-ai-logo-Cp2Bf_rL.webp';
+import type { Venture, TeamMember, VentureKind, Industry, Country, Market, VentureStatus, OwnershipType } from '../types/dashboard';
 const shippingxLogo = '/social/shippingx-logo3-trimmed.png';
 import aprikosVentureLogo from '../assets/images/aprikos-venture-logo.svg';
 import aprikosMedicalLogo from '../assets/images/aprikosmedical-logo.png';
 import codeEntropyLogo from '../assets/images/code-entropy-logo.webp';
-import venturetokenLogo from '../assets/images/venturetoken-logo.svg';
 const venturetoken3dIcon = '/social/venturetoken-3dicon.png';
 import balderxLogo from '../assets/images/balderx-logo.png';
 

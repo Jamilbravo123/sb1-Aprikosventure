@@ -25,12 +25,12 @@ CREATE POLICY "Users can read own data"
   ON investors FOR SELECT
   USING (auth.uid() = user_id);
 
--- Anyone can insert during registration (before auth)
+-- Anyone can insert during registration (before auth) but cannot set user_id
 CREATE POLICY "Anon can insert during registration"
   ON investors FOR INSERT
-  WITH CHECK (true);
+  WITH CHECK (user_id IS NULL);
 
--- Authenticated users can update their own row (for last_login, user_id binding)
+-- Authenticated users can update their own row, or bind unbound rows matching their email
 CREATE POLICY "Users can update own data"
   ON investors FOR UPDATE
-  USING (auth.uid() = user_id OR user_id IS NULL);
+  USING (auth.uid() = user_id OR (user_id IS NULL AND email = (SELECT email FROM auth.users WHERE id = auth.uid())));

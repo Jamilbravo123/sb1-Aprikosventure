@@ -73,7 +73,7 @@ export default function DeckViewer() {
       </div>
 
       <iframe
-        src="/deck/index.html"
+        src="/_iv_e9ffaba54fb6ed1b/index.html"
         style={{
           flex: 1,
           width: '100%',

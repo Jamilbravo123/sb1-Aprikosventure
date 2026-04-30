@@ -60,7 +60,8 @@ export default function RegisterWizard() {
         return;
       }
       console.error('Insert error:', insertError);
-      setError(`Registration failed: ${insertError.message}`);
+      console.error('Insert error:', insertError);
+      setError('Registration failed. Please check your details and try again.');
       return;
     }
 

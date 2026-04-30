@@ -13,7 +13,7 @@ export default function DeckWelcome() {
     supabase
       .from('investors')
       .select('full_name')
-      .eq('email', user.email)
+      .eq('user_id', user.id)
       .maybeSingle()
       .then(({ data }) => {
         if (data?.full_name) setName(data.full_name.split(' ')[0]);
