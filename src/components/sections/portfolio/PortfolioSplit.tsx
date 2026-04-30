@@ -56,7 +56,11 @@ function VentureCard({ venture }: { venture: Venture }) {
           <img
             src={venture.logo}
             alt={venture.name}
-            className="max-h-20 w-auto max-w-full object-contain"
+            className={`w-auto max-w-full object-contain ${
+              venture.id === 'shippingx' ? 'max-h-14' :
+              venture.id === 'nayapaisa' ? 'max-h-[88px]' :
+              'max-h-20'
+            }`}
           />
         ) : (
           <span className="text-gold text-4xl font-bold tracking-wide">{getInitials(venture.name)}</span>
