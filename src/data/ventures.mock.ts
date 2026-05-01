@@ -204,7 +204,7 @@ export const ventures: Venture[] = [
   {
     id: 'vera-flow',
     name: 'Vera Flow',
-    tagline: 'Digital skjema-app for norske helseklinikker — pasienten fyller ut, behandleren sparer tid',
+    tagline: 'Digital patient forms for clinics — patients submit, clinicians save time',
     kind: 'venture',
     industry: 'healthtech',
     hqCountry: 'NO',
@@ -219,7 +219,7 @@ export const ventures: Venture[] = [
     ],
     statusText: 'Soft Launch',
     details: {
-      highlights: ['Digitale pasientskjemaer', 'Automatisk oppsummering', 'Trendgrafer for behandlere']
+      highlights: ['Digital patient forms', 'Auto-summarised notes', 'Trend graphs for clinicians']
     }
   },
 

@@ -17,7 +17,7 @@ export const highlights: Highlight[] = [
   },
   {
     mark: 'Vera Flow',
-    text: 'Digitale skjemaer som sparer behandlere 10-20 min pr. pasient',
+    text: 'Digital patient forms saving clinicians 10-20 min per session',
     href: 'https://app.veraflow.no',
   },
   {
