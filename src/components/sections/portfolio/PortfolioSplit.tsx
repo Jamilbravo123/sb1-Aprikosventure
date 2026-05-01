@@ -58,8 +58,8 @@ function VentureCard({ venture }: { venture: Venture }) {
             src={venture.logo}
             alt={venture.name}
             className={`w-auto max-w-full object-contain ${
-              venture.id === 'shippingx' ? 'max-h-14' :
-              venture.id === 'nayapaisa' ? 'max-h-16' :
+              venture.id === 'shippingx' ? 'max-h-[88px]' :
+              venture.id === 'nayapaisa' ? 'max-h-[88px]' :
               'max-h-20'
             }`}
           />
