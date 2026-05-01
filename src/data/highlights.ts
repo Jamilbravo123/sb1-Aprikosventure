@@ -16,9 +16,9 @@ export const highlights: Highlight[] = [
     href: 'https://venturetoken.io',
   },
   {
-    mark: 'Vera EPJ',
-    text: 'AI-assisted patient journal for the Nordic market',
-    href: 'https://app.veraepj.no',
+    mark: 'Vera Flow',
+    text: 'Digitale skjemaer som sparer behandlere 10-20 min pr. pasient',
+    href: 'https://app.veraflow.no',
   },
   {
     mark: 'NBX × Aprikos',

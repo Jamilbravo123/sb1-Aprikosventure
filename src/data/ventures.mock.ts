@@ -200,11 +200,11 @@ export const ventures: Venture[] = [
     details: { highlights: ['Cross-border payments', 'Nordic-South Asian corridor'] },
   },
 
-  // VENTURE: Vera EPJ
+  // VENTURE: Vera Flow
   {
-    id: 'vera-epj',
-    name: 'Vera EPJ',
-    tagline: 'AI-assisted electronic patient journal for the Nordic market',
+    id: 'vera-flow',
+    name: 'Vera Flow',
+    tagline: 'Digital skjema-app for norske helseklinikker — pasienten fyller ut, behandleren sparer tid',
     kind: 'venture',
     industry: 'healthtech',
     hqCountry: 'NO',
@@ -214,12 +214,12 @@ export const ventures: Venture[] = [
     aprikosRole: 'Venture Builder',
     logo: '/social/veraepj-logo-placeholder.svg',
     links: [
-      { label: 'App', url: 'https://app.veraepj.no', type: 'website' as const },
-      { label: 'Portal', url: 'https://portal.veraepj.no', type: 'website' as const },
+      { label: 'App', url: 'https://app.veraflow.no', type: 'website' as const },
+      { label: 'Portal', url: 'https://portal.veraflow.no', type: 'website' as const },
     ],
     statusText: 'Soft Launch',
     details: {
-      highlights: ['Electronic patient journal', 'AI-assisted documentation', 'Norwegian compliance']
+      highlights: ['Digitale pasientskjemaer', 'Automatisk oppsummering', 'Trendgrafer for behandlere']
     }
   },
 

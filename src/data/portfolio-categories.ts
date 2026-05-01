@@ -22,7 +22,7 @@ export const portfolioCategories: CategoryConfig[] = [
     title: 'Health Tech',
     icon: '✦',
     description: 'AI diagnostics, electronic patient records, and pharmaceutical innovation.',
-    ventureIds: ['mashwara-ai', 'vera-epj', 'pharmesa'],
+    ventureIds: ['mashwara-ai', 'vera-flow', 'pharmesa'],
   },
   {
     id: 'nordic-legacy',
