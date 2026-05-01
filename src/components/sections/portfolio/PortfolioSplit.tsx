@@ -23,12 +23,13 @@ function getInitials(name: string): string {
 }
 
 const ventureFlags: Record<string, string> = {
+  'nayapaisa': '',
   'pharmesa': '🇳🇴 🇵🇰',
   'shippingx': '🇳🇴 🇪🇺',
 };
 
 function VentureCard({ venture }: { venture: Venture }) {
-  const flag = ventureFlags[venture.id] || countryFlags[venture.hqCountry] || '';
+  const flag = venture.id in ventureFlags ? ventureFlags[venture.id] : (countryFlags[venture.hqCountry] || '');
   const statusText = venture.statusText || statusLabels[venture.status];
   const industryText = industryLabels[venture.industry];
 
