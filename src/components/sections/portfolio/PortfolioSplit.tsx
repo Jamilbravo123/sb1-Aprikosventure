@@ -59,7 +59,7 @@ function VentureCard({ venture }: { venture: Venture }) {
             alt={venture.name}
             className={`w-auto max-w-full object-contain ${
               venture.id === 'shippingx' ? 'max-h-14' :
-              venture.id === 'nayapaisa' ? 'max-h-[88px]' :
+              venture.id === 'nayapaisa' ? 'max-h-16' :
               'max-h-20'
             }`}
           />
