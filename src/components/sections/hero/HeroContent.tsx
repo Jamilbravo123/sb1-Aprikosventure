@@ -22,8 +22,8 @@ export default function HeroContent() {
   return (
     <div ref={containerRef} className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 text-center">
       <div className="hero-fade flex flex-col items-center gap-1.5 mb-6">
-        <span className="text-gold text-[10px] sm:text-[11px] tracking-[4px] sm:tracking-[5px] uppercase">
-          Venture Studio
+        <span className="text-gold text-[10px] sm:text-[11px] tracking-[2.5px] sm:tracking-[5px] uppercase">
+          Regulated Ventures, Hard Markets
         </span>
         <span className="text-[#555] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase">
           Oslo | Berlin | Lahore | Dubai

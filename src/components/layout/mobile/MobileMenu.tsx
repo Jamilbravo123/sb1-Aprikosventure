@@ -81,7 +81,7 @@ export default function MobileMenu({ isOpen, links, onClose }: MobileMenuProps) 
       {/* Footer */}
       <div className="p-6 text-center">
         <p className="text-[#444] text-xs tracking-wider uppercase">
-          Venture Studio · Oslo | Berlin | Lahore | Dubai
+          Regulated Ventures · Oslo | Berlin | Lahore | Dubai
         </p>
       </div>
     </div>,

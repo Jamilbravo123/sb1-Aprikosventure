@@ -59,7 +59,7 @@ export default function About() {
             <div className="h-1 w-full bg-gradient-to-r from-transparent via-gold to-transparent rounded-full mt-3" />
           </div>
           <p className="mt-6 text-lg leading-8 text-slate-400">
-            We are a Norwegian venture studio transforming innovative ideas into successful companies. Through strategic investment and hands-on operational support, we help founders build market-leading businesses across borders.
+            We are a Norwegian operator building companies in markets others find hard to enter. Through strategic investment and hands-on operational support, we help founders build market-leading businesses across borders.
           </p>
         </div>
 
