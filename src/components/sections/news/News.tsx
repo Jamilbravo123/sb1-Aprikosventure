@@ -13,8 +13,9 @@ const ventureFromTitle: Record<string, string> = {
   ShippingX: 'ShippingX',
   Mashwara: 'Mashwara AI',
   NBX: 'Nayapaisa',
-  Kinetic: 'Kinetic Energy',
-  'Aprikos Medical': 'Aprikos Medical',
+  Kinetic: 'Kinetic',
+  Venturetoken: 'Venturetoken',
+  Pharmesa: 'Pharmesa',
 };
 
 function getVentureName(title: string): string | null {

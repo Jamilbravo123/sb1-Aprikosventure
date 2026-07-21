@@ -6,7 +6,7 @@ const stats = [
   { value: 9, label: 'Ventures', suffix: '' },
   { value: 6, label: 'Countries', suffix: '' },
   { value: 5, label: 'Industries', suffix: '' },
-  { value: 4, label: 'Years Building', suffix: '+' },
+  { value: 5, label: 'Years Building', suffix: '+' },
 ];
 
 export default function Stats() {

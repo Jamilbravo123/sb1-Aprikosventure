@@ -4,10 +4,10 @@ import { gsap, ScrollTrigger } from '../../../lib/gsap';
 import brochureImg from '../../../assets/images/hero/brochure-picture.webp';
 
 const stats = [
-  { value: 8, label: 'Ventures' },
+  { value: 9, label: 'Ventures' },
   { value: 6, label: 'Markets' },
   { value: 3, label: 'Verticals' },
-  { value: 4, label: 'Years Building', suffix: '+' },
+  { value: 5, label: 'Years Building', suffix: '+' },
 ];
 
 export default function Thesis() {

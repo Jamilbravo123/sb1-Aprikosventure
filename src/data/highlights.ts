@@ -12,33 +12,33 @@ export const highlights: Highlight[] = [
   },
   {
     mark: 'Venturetoken',
-    text: "Norway's first MiCA-registered utility token",
+    text: "Norway's first MiCA-notified utility token",
     href: 'https://venturetoken.io',
   },
   {
-    mark: 'Vera Flow',
-    text: 'Digital patient forms saving clinicians 10-20 min per session',
-    href: 'https://app.veraflow.no',
+    mark: 'Pharmesa',
+    text: 'Proponent nasal spray, available in Norwegian pharmacies',
   },
   {
     mark: 'NBX × Aprikos',
-    text: "JV building Pakistan's regulated digital asset exchange",
+    text: 'Letter of intent signed for a regulated digital asset exchange',
   },
   {
     mark: 'ShippingX',
     text: 'First tokenized issuance Q3 2026',
+    href: 'https://shippingx.io',
   },
   {
     mark: 'Thesis',
     text: 'Building at the intersection of AI, health and infrastructure',
   },
   {
-    mark: 'Kinetic Energy',
+    mark: 'Kinetic',
     text: 'Performance drinks powered by Venturetoken',
     href: 'https://venturetoken.io/kinetic',
   },
   {
-    mark: 'Code Entropy',
+    mark: 'Codentropy',
     text: 'In-house AI and Web3 production hub',
     href: 'https://codentropy.io',
   },

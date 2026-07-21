@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /deck
+Disallow: /deck/
+Disallow: /auth/
+Disallow: /register/wizard
+
+Sitemap: https://aprikosventure.com/sitemap.xml

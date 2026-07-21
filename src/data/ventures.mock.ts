@@ -1,7 +1,5 @@
 import type { Venture, TeamMember, VentureKind, Industry, Country, Market, VentureStatus, OwnershipType } from '../types/dashboard';
 const shippingxLogo = '/social/shippingx-logo3-trimmed.png';
-import aprikosVentureLogo from '../assets/images/aprikos-venture-logo.svg';
-import aprikosMedicalLogo from '../assets/images/aprikosmedical-logo.png';
 import codeEntropyLogo from '../assets/images/code-entropy-logo.webp';
 const venturetoken3dIcon = '/social/venturetoken-3dicon.png';
 import balderxLogo from '../assets/images/balderx-logo.png';
@@ -11,91 +9,6 @@ import balderxLogo from '../assets/images/balderx-logo.png';
 // =============================================================================
 
 export const ventures: Venture[] = [
-  // PLATFORM: Nordic Legacy
-  {
-    id: 'nordic-legacy',
-    name: 'Nordic Legacy',
-    tagline: 'Strategic holding platform for non-tech ventures',
-    kind: 'platform',
-    industry: 'industry',
-    hqCountry: 'NO',
-    markets: ['NORDICS'],
-    status: 'live',
-    ownershipType: 'core',
-    aprikosRole: 'Platform Owner',
-    logo: aprikosVentureLogo,
-    childIds: ['soe-construction', 'november-property', 'aprikos-medical'],
-    links: [
-      { label: 'Website', url: 'https://nordiclegacy.no', type: 'website' }
-    ],
-    details: {
-      highlights: ['Real estate portfolio', 'Healthcare services', 'Nordic focus']
-    }
-  },
-  
-  // Sub-venture: SOE Construction Group (under Nordic Legacy)
-  {
-    id: 'soe-construction',
-    name: 'SOE Construction Group',
-    tagline: 'Engineering and construction excellence',
-    kind: 'venture',
-    industry: 'proptech',
-    hqCountry: 'NO',
-    markets: ['NO', 'NORDICS'],
-    status: 'live',
-    ownershipType: 'majority',
-    aprikosRole: 'Venture Builder · Operating Partner',
-    logo: aprikosVentureLogo,
-    parentId: 'nordic-legacy',
-    details: {
-      highlights: ['Construction', 'Engineering', 'Nordic projects']
-    }
-  },
-  
-  // Sub-venture: November Property (under Nordic Legacy)
-  {
-    id: 'november-property',
-    name: 'November Property',
-    tagline: 'Property development and real estate',
-    kind: 'venture',
-    industry: 'proptech',
-    hqCountry: 'NO',
-    markets: ['NO', 'NORDICS'],
-    status: 'live',
-    ownershipType: 'majority',
-    aprikosRole: 'Venture Builder · Operating Partner',
-    logo: '/social/November-Property-Logo-white.png',
-    parentId: 'nordic-legacy',
-    links: [
-      { label: 'Website', url: 'https://novemberproperty.com/', type: 'website' as const }
-    ],
-    details: {
-      highlights: ['Property development', 'Real estate', 'Nordic focus']
-    }
-  },
-  
-  // Sub-venture: Aprikos Medical (under Nordic Legacy)
-  {
-    id: 'aprikos-medical',
-    name: 'Aprikos Medical',
-    tagline: 'MDR-certified Norwegian medical device manufacturer',
-    kind: 'venture',
-    industry: 'medtech',
-    hqCountry: 'NO',
-    markets: ['NO', 'EU', 'GLOBAL'],
-    status: 'live',
-    ownershipType: 'strategic',
-    aprikosRole: 'Venture Builder · Strategic Stake',
-    logo: aprikosMedicalLogo,
-    parentId: 'nordic-legacy',
-    links: [
-      { label: 'Website', url: 'https://aprikosmedical.com', type: 'website' }
-    ],
-    details: {
-      highlights: ['Medical devices', 'MDR certified', 'Global distribution']
-    }
-  },
-  
   // VENTURE: Mashwara AI
   {
     id: 'mashwara-ai',
@@ -123,19 +36,19 @@ export const ventures: Venture[] = [
   {
     id: 'shippingx',
     name: 'ShippingX',
-    tagline: 'Tokenized maritime assets and compliance trading',
+    tagline: 'Tokenized maritime debt for professional investors',
     kind: 'venture',
     industry: 'fintech',
-    hqCountry: 'NO',
-    markets: ['GLOBAL'],
+    hqCountry: 'DE',
+    markets: ['EU', 'GLOBAL'],
     status: 'building',
     ownershipType: 'strategic',
     aprikosRole: 'Venture Builder',
     logo: shippingxLogo,
     balderxUrl: 'https://balderx.com/projects/shippingx',
-    statusText: 'Launching Q1 2026',
+    statusText: 'First issuance Q3 2026',
     details: {
-      highlights: ['Maritime innovation', 'Tokenized assets', 'Sustainable compliance']
+      highlights: ['Maritime finance', 'Tokenized notes', 'BaFin tied agent via BMCP']
     }
   },
   
@@ -143,7 +56,7 @@ export const ventures: Venture[] = [
   {
     id: 'venturetoken',
     name: 'Venturetoken',
-    tagline: "Norway's first MiCA registered utility token",
+    tagline: "Norway's first MiCA-notified utility token",
     kind: 'venture',
     industry: 'web3',
     hqCountry: 'NO',
@@ -157,7 +70,7 @@ export const ventures: Venture[] = [
     ],
     balderxUrl: 'https://balderx.com/projects/venturetoken',
     details: {
-      highlights: ['MiCA registered', 'Utility token', 'Venture ecosystem']
+      highlights: ['MiCA-notified white paper', 'Listed on NBX', 'Proof-of-Engagement rewards']
     }
   },
   
@@ -186,41 +99,19 @@ export const ventures: Venture[] = [
   {
     id: 'nayapaisa',
     name: 'Nayapaisa',
-    tagline: 'Centralized exchange (under dev.)',
+    tagline: 'Regulated digital asset exchange',
     kind: 'venture',
     industry: 'fintech',
-    hqCountry: 'PK',
-    markets: ['PK', 'NO'],
+    hqCountry: 'NO',
+    markets: ['NO'],
     status: 'building',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder',
     logo: '/social/Nayapaisa.png',
     links: [],
     jvPartner: { name: 'NBX', url: 'https://nbx.com', logo: '/social/nbx-logo.svg' },
-    details: { highlights: ['Cross-border payments', 'Nordic-South Asian corridor'] },
-  },
-
-  // VENTURE: Vera Flow
-  {
-    id: 'vera-flow',
-    name: 'Vera Flow',
-    tagline: 'Digital patient forms for clinics — patients submit, clinicians save time',
-    kind: 'venture',
-    industry: 'healthtech',
-    hqCountry: 'NO',
-    markets: ['NO'],
-    status: 'building',
-    ownershipType: 'core',
-    aprikosRole: 'Venture Builder',
-    logo: '/social/veraepj-logo-placeholder.svg',
-    links: [
-      { label: 'App', url: 'https://app.veraflow.no', type: 'website' as const },
-      { label: 'Portal', url: 'https://portal.veraflow.no', type: 'website' as const },
-    ],
-    statusText: 'Soft Launch',
-    details: {
-      highlights: ['Digital patient forms', 'Auto-summarised notes', 'Trend graphs for clinicians']
-    }
+    statusText: 'LOI signed',
+    details: { highlights: ['50/50 joint venture with NBX', 'Letter of intent signed', 'Subject to definitive agreements and regulatory approval'] },
   },
 
   // VENTURE: Pharmesa
@@ -231,14 +122,14 @@ export const ventures: Venture[] = [
     kind: 'venture',
     industry: 'medtech',
     hqCountry: 'NO',
-    markets: ['NO', 'EU'],
+    markets: ['NO', 'EU', 'MENA'],
     status: 'building',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder',
-    logo: '',
+    logo: '/social/pharmesa-logo.jpeg',
     links: [],
     jvPartner: { name: 'Pharma Nordic', url: 'https://pharmanordic.no', logo: '/social/pharma-nordic-logo.png' },
-    details: { highlights: ['Pharma innovation', 'European markets'] },
+    details: { highlights: ['Proponent nasal spray', 'JV with Pharma Nordic', 'Nordic launch, MENA-SA expansion'] },
   },
 
   // VENTURE: Kinetic Energy

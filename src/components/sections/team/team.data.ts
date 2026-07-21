@@ -26,7 +26,7 @@ export const teamMembers: TeamMember[] = [
     shortBio: 'Technology-driven brand and growth strategist.',
     social: {
       linkedin: 'https://no.linkedin.com/in/sara-rana-35640a2a2',
-      email: 'sara@novemberproperty.com'
+      email: 'sara@aprikosventure.com'
     }
   },
   {

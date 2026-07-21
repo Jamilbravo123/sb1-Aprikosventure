@@ -15,7 +15,7 @@ export type OwnershipType = 'core' | 'majority' | 'strategic' | 'in-house';
 // Status (konsistent, 4 valg)
 export type VentureStatus = 'live' | 'building' | 'scaling' | 'stealth';
 
-export type PortfolioCategory = 'digital-assets' | 'health-tech' | 'nordic-legacy';
+export type PortfolioCategory = 'digital-assets' | 'health-tech' | 'brands';
 
 // Aprikos rolle - 4 intuitive kategorier (kan kombineres med ·)
 export type AprikosRole = 
@@ -54,7 +54,7 @@ export interface Venture {
   logo?: string;
   
   // Hierarchy
-  parentId?: string;            // For sub-ventures (November, Aprikos Medical)
+  parentId?: string;            // For sub-ventures under a platform
   childIds?: string[];          // For platforms (Nordic Legacy)
   
   // Portfolio
