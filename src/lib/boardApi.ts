@@ -27,21 +27,31 @@ export async function sendBoardOtp(email: string): Promise<{ error: Error | null
 export async function getCurrentMember(): Promise<BoardMember | null> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user?.email) return null;
-  const { data, error } = await supabase
+  const byUserId = await supabase
     .from('board_members')
     .select('*')
-    .or(`user_id.eq.${user.id},email.eq.${user.email.toLowerCase()}`)
+    .eq('user_id', user.id)
     .maybeSingle();
-  throwIf(error);
-  return data;
+  throwIf(byUserId.error);
+  if (byUserId.data) return byUserId.data;
+  const byEmail = await supabase
+    .from('board_members')
+    .select('*')
+    .eq('email', user.email.toLowerCase())
+    .maybeSingle();
+  throwIf(byEmail.error);
+  return byEmail.data;
 }
 
+// Best-effort: binder user_id ved første innlogging. 0 oppdaterte rader er OK —
+// raden kan allerede være bundet, og getCurrentMember matcher også på e-post.
 export async function bindAndTouchMember(userId: string, email: string): Promise<void> {
   const { error } = await supabase
     .from('board_members')
     .update({ user_id: userId })
     .eq('email', email.toLowerCase())
-    .is('user_id', null);
+    .is('user_id', null)
+    .select('id');
   throwIf(error);
 }
 
