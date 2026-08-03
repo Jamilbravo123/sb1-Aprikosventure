@@ -20,6 +20,12 @@ export default function Footer() {
             Privacy
           </a>
           <a
+            href="/styret"
+            className="text-sm text-slate-500 hover:text-[#C9935E] transition-colors"
+          >
+            Styreportal
+          </a>
+          <a
             href="https://www.linkedin.com/company/aprikos-venture/"
             target="_blank"
             rel="noopener noreferrer"
