@@ -210,6 +210,26 @@ create trigger board_members_guard_self_update
   before update on board_members
   for each row execute function board_members_guard_self_update();
 
+-- Siste admin kan aldri fjernes eller nedgraderes — ellers låses alle ute.
+create or replace function board_members_guard_last_admin() returns trigger
+language plpgsql security definer set search_path = public, pg_temp as $$
+begin
+  if old.role = 'admin' and (tg_op = 'DELETE' or new.role is distinct from old.role) then
+    if (select count(*) from board_members where role = 'admin') <= 1 then
+      raise exception 'Kan ikke fjerne eller nedgradere siste admin';
+    end if;
+  end if;
+  if tg_op = 'DELETE' then
+    return old;
+  end if;
+  return new;
+end;
+$$;
+
+create trigger board_members_guard_last_admin
+  before update or delete on board_members
+  for each row execute function board_members_guard_last_admin();
+
 create policy "medlemmer leser prosjekter" on board_projects
   for select using (is_board_member());
 create policy "admin skriver prosjekter" on board_projects
@@ -1967,9 +1987,13 @@ export default function AdminMembers() {
     try {
       await addMember(email, fullName, role);
       setEmail(''); setFullName(''); setRole('medlem');
+      setStatus('Lagt til.');
       setRefreshKey((k) => k + 1);
     } catch (err) {
-      setStatus(`Feil: ${(err as Error).message}`);
+      const msg = (err as Error).message;
+      setStatus(msg.includes('duplicate key')
+        ? 'Feil: denne e-posten er allerede registrert.'
+        : `Feil: ${msg}`);
     }
   };
 

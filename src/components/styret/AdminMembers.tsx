@@ -23,7 +23,10 @@ export default function AdminMembers() {
       setStatus('Lagt til.');
       setRefreshKey((k) => k + 1);
     } catch (err) {
-      setStatus(`Feil: ${(err as Error).message}`);
+      const msg = (err as Error).message;
+      setStatus(msg.includes('duplicate key')
+        ? 'Feil: denne e-posten er allerede registrert.'
+        : `Feil: ${msg}`);
     }
   };
 
