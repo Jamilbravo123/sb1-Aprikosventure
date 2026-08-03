@@ -6,6 +6,8 @@ import AuthCallback from './components/auth/AuthCallback';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import DeckWelcome from './components/deck/DeckWelcome';
 import DeckViewer from './components/deck/DeckViewer';
+import BoardLanding from './pages/styret/BoardLanding';
+import BoardCallback from './pages/styret/BoardCallback';
 
 export default function App() {
   return (
@@ -30,6 +32,8 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/styret" element={<BoardLanding />} />
+      <Route path="/styret/callback" element={<BoardCallback />} />
     </Routes>
   );
 }
