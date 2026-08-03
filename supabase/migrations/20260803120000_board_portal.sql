@@ -15,6 +15,9 @@ create table board_members (
   created_at timestamptz not null default now()
 );
 
+create unique index board_members_user_id_key on board_members (user_id)
+  where user_id is not null;
+
 create table board_projects (
   id uuid primary key default gen_random_uuid(),
   name text not null,
@@ -156,6 +159,7 @@ create or replace function board_members_guard_last_admin() returns trigger
 language plpgsql security definer set search_path = public, pg_temp as $$
 begin
   if old.role = 'admin' and (tg_op = 'DELETE' or new.role is distinct from old.role) then
+    perform pg_advisory_xact_lock(hashtext('board_members_last_admin'));
     if (select count(*) from board_members where role = 'admin') <= 1 then
       raise exception 'Kan ikke fjerne eller nedgradere siste admin';
     end if;
@@ -188,8 +192,8 @@ create policy "admin skriver dokumenter" on board_documents
 
 -- ── Storage: privat bøtte ─────────────────────────────────
 
-insert into storage.buckets (id, name, public)
-values ('board-docs', 'board-docs', false)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('board-docs', 'board-docs', false, 26214400, array['application/pdf'])
 on conflict (id) do nothing;
 
 create policy "styret leser board-docs" on storage.objects

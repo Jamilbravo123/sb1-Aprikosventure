@@ -95,9 +95,13 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   };
 
   const handleDeleteMilestone = async (i: number) => {
-    if (project) await deleteMilestoneAt(project.id, i + 1);
-    setSlot(i, null);
-    onSaved();
+    try {
+      if (project) await deleteMilestoneAt(project.id, i + 1);
+      setSlot(i, null);
+      onSaved();
+    } catch (e) {
+      setStatus(`Feil: ${(e as Error).message}`);
+    }
   };
 
   const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
@@ -162,22 +166,28 @@ export default function AdminProjects() {
   const [projects, setProjects] = useState<BoardProject[]>([]);
   const [openId, setOpenId] = useState<string | 'new' | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [listError, setListError] = useState<string | null>(null);
 
   useEffect(() => {
-    listProjects(true).then(setProjects).catch(() => setProjects([]));
+    listProjects(true).then(setProjects).catch(() => setListError('Kunne ikke laste prosjektene.'));
   }, [refreshKey]);
 
   const refresh = () => setRefreshKey((k) => k + 1);
 
   const handleDelete = async (p: BoardProject) => {
     if (!window.confirm(`Slette «${p.name}» og alle tilhørende milepæler?`)) return;
-    await deleteProject(p.id);
-    refresh();
+    try {
+      await deleteProject(p.id);
+      refresh();
+    } catch (e) {
+      setListError(`Feil: ${(e as Error).message}`);
+    }
   };
 
   return (
     <div className="space-y-4">
       <button className="deck-btn-primary" onClick={() => setOpenId('new')}>Nytt prosjekt</button>
+      {listError && <p className="deck-kicker" style={{ color: '#c94a4a' }}>{listError}</p>}
       {openId === 'new' && <ProjectEditor project={null} onSaved={refresh} />}
       {projects.map((p) => (
         <div key={p.id}>

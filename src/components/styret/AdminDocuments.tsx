@@ -18,7 +18,7 @@ export default function AdminDocuments() {
     Promise.all([listDocuments(), listProjects(true)]).then(([docs, projs]) => {
       setDocuments(docs);
       setProjects(projs);
-    });
+    }).catch(() => setStatus('Kunne ikke laste dokumentene.'));
   }, [refreshKey]);
 
   const handleUpload = async (e: FormEvent) => {

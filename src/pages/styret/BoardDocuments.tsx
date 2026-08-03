@@ -80,7 +80,7 @@ export default function BoardDocuments() {
         {state === 'loading' && <p className="deck-kicker">Laster …</p>}
         {state === 'error' && <p className="deck-lede" style={{ color: '#c94a4a' }}>Kunne ikke laste dokumentene.</p>}
         {state === 'ready' && (filtered.length === 0 ? (
-          <p className="deck-leve">Ingen dokumenter ennå.</p>
+          <p className="deck-lede">Ingen dokumenter ennå.</p>
         ) : (
           <ul className="space-y-3">
             {filtered.map((d) => (

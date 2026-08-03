@@ -74,6 +74,9 @@ create table board_members (
   created_at timestamptz not null default now()
 );
 
+create unique index board_members_user_id_key on board_members (user_id)
+  where user_id is not null;
+
 create table board_projects (
   id uuid primary key default gen_random_uuid(),
   name text not null,
@@ -215,6 +218,7 @@ create or replace function board_members_guard_last_admin() returns trigger
 language plpgsql security definer set search_path = public, pg_temp as $$
 begin
   if old.role = 'admin' and (tg_op = 'DELETE' or new.role is distinct from old.role) then
+    perform pg_advisory_xact_lock(hashtext('board_members_last_admin'));
     if (select count(*) from board_members where role = 'admin') <= 1 then
       raise exception 'Kan ikke fjerne eller nedgradere siste admin';
     end if;
@@ -247,8 +251,8 @@ create policy "admin skriver dokumenter" on board_documents
 
 -- ── Storage: privat bøtte ─────────────────────────────────
 
-insert into storage.buckets (id, name, public)
-values ('board-docs', 'board-docs', false)
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('board-docs', 'board-docs', false, 26214400, array['application/pdf'])
 on conflict (id) do nothing;
 
 create policy "styret leser board-docs" on storage.objects
@@ -1693,9 +1697,13 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   };
 
   const handleDeleteMilestone = async (i: number) => {
-    if (project) await deleteMilestoneAt(project.id, i + 1);
-    setSlot(i, null);
-    onSaved();
+    try {
+      if (project) await deleteMilestoneAt(project.id, i + 1);
+      setSlot(i, null);
+      onSaved();
+    } catch (e) {
+      setStatus(`Feil: ${(e as Error).message}`);
+    }
   };
 
   const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
@@ -1760,22 +1768,28 @@ export default function AdminProjects() {
   const [projects, setProjects] = useState<BoardProject[]>([]);
   const [openId, setOpenId] = useState<string | 'new' | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [listError, setListError] = useState<string | null>(null);
 
   useEffect(() => {
-    listProjects(true).then(setProjects).catch(() => setProjects([]));
+    listProjects(true).then(setProjects).catch(() => setListError('Kunne ikke laste prosjektene.'));
   }, [refreshKey]);
 
   const refresh = () => setRefreshKey((k) => k + 1);
 
   const handleDelete = async (p: BoardProject) => {
     if (!window.confirm(`Slette «${p.name}» og alle tilhørende milepæler?`)) return;
-    await deleteProject(p.id);
-    refresh();
+    try {
+      await deleteProject(p.id);
+      refresh();
+    } catch (e) {
+      setListError(`Feil: ${(e as Error).message}`);
+    }
   };
 
   return (
     <div className="space-y-4">
       <button className="deck-btn-primary" onClick={() => setOpenId('new')}>Nytt prosjekt</button>
+      {listError && <p className="deck-kicker" style={{ color: '#c94a4a' }}>{listError}</p>}
       {openId === 'new' && <ProjectEditor project={null} onSaved={refresh} />}
       {projects.map((p) => (
         <div key={p.id}>
@@ -1859,7 +1873,7 @@ export default function AdminDocuments() {
     Promise.all([listDocuments(), listProjects(true)]).then(([docs, projs]) => {
       setDocuments(docs);
       setProjects(projs);
-    });
+    }).catch(() => setStatus('Kunne ikke laste dokumentene.'));
   }, [refreshKey]);
 
   const handleUpload = async (e: FormEvent) => {
