@@ -265,7 +265,7 @@ Merk: selve kjøringen i Supabase-prosjektet `uvmthunaitnojimjkhmc` skjer i Task
 - Consumes: tabell-/kolonnenavn fra Task 1, `supabase` fra `src/lib/supabase.ts`.
 - Produces (brukes av alle senere tasks):
   - Typer: `BoardMember`, `BoardProject`, `BoardMilestone`, `MilestoneWithProject`, `BoardDocument`, `SinceLast`.
-  - Funksjoner i `boardApi.ts`: `checkBoardEmail(email): Promise<boolean>`, `sendBoardOtp(email): Promise<{ error: Error | null }>`, `getCurrentMember(): Promise<BoardMember | null>`, `bindAndTouchMember(userId: string, email: string): Promise<void>`, `touchLastSeen(memberId: string): Promise<void>`, `listProjects(includeArchived?: boolean): Promise<BoardProject[]>`, `getProjectBySlug(slug: string): Promise<BoardProject | null>`, `listProjectMilestones(projectId: string): Promise<BoardMilestone[]>`, `listUpcomingMilestones(): Promise<MilestoneWithProject[]>`, `listDocuments(projectId?: string): Promise<BoardDocument[]>`, `getDocumentUrl(filePath: string): Promise<string>`, `getSinceLast(since: string | null): Promise<SinceLast>`, `saveProject(p: Partial<BoardProject> & { name: string; slug: string }): Promise<void>`, `deleteProject(id: string): Promise<void>`, `saveMilestone(m: { id?: string; project_id: string; title: string; target_date: string; status: BoardMilestone['status']; position: number }): Promise<void>`, `deleteMilestone(id: string): Promise<void>`, `uploadDocument(file: File, meta: { title: string; doc_type: BoardDocument['doc_type']; meeting_date: string | null; project_id: string | null }): Promise<void>`, `deleteDocument(doc: BoardDocument): Promise<void>`, `listMembers(): Promise<BoardMember[]>`, `addMember(email: string, fullName: string, role: BoardMember['role']): Promise<void>`, `removeMember(id: string): Promise<void>`.
+  - Funksjoner i `boardApi.ts`: `checkBoardEmail(email): Promise<boolean>`, `sendBoardOtp(email): Promise<{ error: Error | null }>`, `getCurrentMember(): Promise<BoardMember | null>`, `bindAndTouchMember(userId: string, email: string): Promise<void>`, `touchLastSeen(memberId: string): Promise<void>`, `listProjects(includeArchived?: boolean): Promise<BoardProject[]>`, `getProjectBySlug(slug: string): Promise<BoardProject | null>`, `listProjectMilestones(projectId: string): Promise<BoardMilestone[]>`, `listUpcomingMilestones(): Promise<MilestoneWithProject[]>`, `listDocuments(projectId?: string): Promise<BoardDocument[]>`, `getDocumentUrl(filePath: string): Promise<string>`, `getSinceLast(since: string | null): Promise<SinceLast>`, `saveProject(p: Partial<BoardProject> & { name: string; slug: string }): Promise<void>`, `deleteProject(id: string): Promise<void>`, `saveMilestone(m: { project_id: string; title: string; target_date: string; status: BoardMilestone['status']; position: number }): Promise<void>`, `deleteMilestoneAt(projectId: string, position: number): Promise<void>`, `uploadDocument(file: File, meta: { title: string; doc_type: BoardDocument['doc_type']; meeting_date: string | null; project_id: string | null }): Promise<void>`, `deleteDocument(doc: BoardDocument): Promise<void>`, `listMembers(): Promise<BoardMember[]>`, `addMember(email: string, fullName: string, role: BoardMember['role']): Promise<void>`, `removeMember(id: string): Promise<void>`.
 
 - [ ] **Step 1: Skriv `src/types/board.ts`**
 
@@ -479,16 +479,17 @@ export async function deleteProject(id: string): Promise<void> {
 }
 
 export async function saveMilestone(m: {
-  id?: string; project_id: string; title: string;
+  project_id: string; title: string;
   target_date: string; status: BoardMilestone['status']; position: number;
 }): Promise<void> {
   const { error } = await supabase.from('board_milestones')
-    .upsert(m, { onConflict: 'id' });
+    .upsert(m, { onConflict: 'project_id,position' });
   throwIf(error);
 }
 
-export async function deleteMilestone(id: string): Promise<void> {
-  const { error } = await supabase.from('board_milestones').delete().eq('id', id);
+export async function deleteMilestoneAt(projectId: string, position: number): Promise<void> {
+  const { error } = await supabase.from('board_milestones')
+    .delete().eq('project_id', projectId).eq('position', position);
   throwIf(error);
 }
 
@@ -1522,7 +1523,7 @@ git commit -m "feat(styret): dokumentside med filter"
 - Modify: `src/App.tsx`
 
 **Interfaces:**
-- Consumes: `useBoardMember`; `listProjects`, `saveProject`, `deleteProject`, `listProjectMilestones`, `saveMilestone`, `deleteMilestone` fra Task 2.
+- Consumes: `useBoardMember`; `listProjects`, `saveProject`, `deleteProject`, `listProjectMilestones`, `saveMilestone`, `deleteMilestoneAt` fra Task 2.
 - Produces: rute `/styret/admin` (admin-gate i komponenten: `member.role !== 'admin'` → `Navigate to='/styret'`); `<BoardAdmin />` med faner som Task 9/10 utvider (fanestruktur: `const [tab, setTab] = useState<'prosjekter' | 'dokumenter' | 'medlemmer'>('prosjekter')`).
 
 - [ ] **Step 1: Skriv `src/pages/styret/BoardAdmin.tsx`**
@@ -1577,7 +1578,7 @@ Ett skjema per prosjekt (utvid/kollaps), tre faste milepælsplasser per prosjekt
 ```typescript
 import { useEffect, useState } from 'react';
 import {
-  deleteMilestone, deleteProject, listProjectMilestones, listProjects,
+  deleteMilestoneAt, deleteProject, listProjectMilestones, listProjects,
   saveMilestone, saveProject,
 } from '../../lib/boardApi';
 import type { BoardMilestone, BoardProject, MilestoneStatus } from '../../types/board';
@@ -1591,7 +1592,6 @@ function slugify(name: string): string {
 }
 
 interface MilestoneDraft {
-  id?: string;
   title: string;
   target_date: string;
   status: MilestoneStatus;
@@ -1609,19 +1609,18 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   const [isArchived, setIsArchived] = useState(project?.is_archived ?? false);
   const [slots, setSlots] = useState<(MilestoneDraft | null)[]>([null, null, null]);
   const [status, setStatus] = useState<string | null>(null);
+  const projectId = project?.id ?? null;
 
   useEffect(() => {
-    if (!project) return;
-    listProjectMilestones(project.id).then((ms) => {
+    if (!projectId) return;
+    listProjectMilestones(projectId).then((ms) => {
       const next: (MilestoneDraft | null)[] = [null, null, null];
       ms.forEach((m: BoardMilestone) => {
-        next[m.position - 1] = {
-          id: m.id, title: m.title, target_date: m.target_date, status: m.status,
-        };
+        next[m.position - 1] = { title: m.title, target_date: m.target_date, status: m.status };
       });
       setSlots(next);
     });
-  }, [project]);
+  }, [projectId]);
 
   const setSlot = (i: number, draft: MilestoneDraft | null) => {
     setSlots((prev) => prev.map((s, j) => (j === i ? draft : s)));
@@ -1647,17 +1646,23 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
       setStatus('Lagret.');
       onSaved();
     } catch (e) {
-      setStatus(`Feil: ${(e as Error).message}`);
+      const msg = (e as Error).message;
+      setStatus(msg.includes('duplicate key')
+        ? 'Feil: et prosjekt med samme slug finnes allerede.'
+        : `Feil: ${msg}`);
     }
   };
 
   const handleSaveMilestone = async (i: number) => {
     if (!project) { setStatus('Lagre prosjektet først.'); return; }
     const draft = slots[i];
-    if (!draft || !draft.title || !draft.target_date) return;
+    if (!draft || !draft.title || !draft.target_date) {
+      setStatus(`Milepæl ${i + 1}: fyll ut tittel og dato.`);
+      return;
+    }
     try {
       await saveMilestone({
-        id: draft.id, project_id: project.id, title: draft.title,
+        project_id: project.id, title: draft.title,
         target_date: draft.target_date, status: draft.status, position: i + 1,
       });
       setStatus(`Milepæl ${i + 1} lagret.`);
@@ -1668,8 +1673,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   };
 
   const handleDeleteMilestone = async (i: number) => {
-    const draft = slots[i];
-    if (draft?.id) await deleteMilestone(draft.id);
+    if (project) await deleteMilestoneAt(project.id, i + 1);
     setSlot(i, null);
     onSaved();
   };
@@ -1717,7 +1721,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
                 </select>
                 <div className="flex gap-3">
                   <button className="deck-kicker underline" onClick={() => handleSaveMilestone(i)}>Lagre</button>
-                  {draft?.id && (
+                  {draft && (
                     <button className="deck-kicker underline" style={{ color: '#c94a4a' }}
                       onClick={() => handleDeleteMilestone(i)}>Slett</button>
                   )}

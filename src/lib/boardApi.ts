@@ -154,16 +154,17 @@ export async function deleteProject(id: string): Promise<void> {
 }
 
 export async function saveMilestone(m: {
-  id?: string; project_id: string; title: string;
+  project_id: string; title: string;
   target_date: string; status: BoardMilestone['status']; position: number;
 }): Promise<void> {
   const { error } = await supabase.from('board_milestones')
-    .upsert(m, { onConflict: 'id' });
+    .upsert(m, { onConflict: 'project_id,position' });
   throwIf(error);
 }
 
-export async function deleteMilestone(id: string): Promise<void> {
-  const { error } = await supabase.from('board_milestones').delete().eq('id', id);
+export async function deleteMilestoneAt(projectId: string, position: number): Promise<void> {
+  const { error } = await supabase.from('board_milestones')
+    .delete().eq('project_id', projectId).eq('position', position);
   throwIf(error);
 }
 

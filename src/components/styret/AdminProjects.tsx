@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
-  deleteMilestone, deleteProject, listProjectMilestones, listProjects,
+  deleteMilestoneAt, deleteProject, listProjectMilestones, listProjects,
   saveMilestone, saveProject,
 } from '../../lib/boardApi';
 import type { BoardMilestone, BoardProject, MilestoneStatus } from '../../types/board';
@@ -14,7 +14,6 @@ function slugify(name: string): string {
 }
 
 interface MilestoneDraft {
-  id?: string;
   title: string;
   target_date: string;
   status: MilestoneStatus;
@@ -32,19 +31,18 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   const [isArchived, setIsArchived] = useState(project?.is_archived ?? false);
   const [slots, setSlots] = useState<(MilestoneDraft | null)[]>([null, null, null]);
   const [status, setStatus] = useState<string | null>(null);
+  const projectId = project?.id ?? null;
 
   useEffect(() => {
-    if (!project) return;
-    listProjectMilestones(project.id).then((ms) => {
+    if (!projectId) return;
+    listProjectMilestones(projectId).then((ms) => {
       const next: (MilestoneDraft | null)[] = [null, null, null];
       ms.forEach((m: BoardMilestone) => {
-        next[m.position - 1] = {
-          id: m.id, title: m.title, target_date: m.target_date, status: m.status,
-        };
+        next[m.position - 1] = { title: m.title, target_date: m.target_date, status: m.status };
       });
       setSlots(next);
     });
-  }, [project]);
+  }, [projectId]);
 
   const setSlot = (i: number, draft: MilestoneDraft | null) => {
     setSlots((prev) => prev.map((s, j) => (j === i ? draft : s)));
@@ -70,17 +68,23 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
       setStatus('Lagret.');
       onSaved();
     } catch (e) {
-      setStatus(`Feil: ${(e as Error).message}`);
+      const msg = (e as Error).message;
+      setStatus(msg.includes('duplicate key')
+        ? 'Feil: et prosjekt med samme slug finnes allerede.'
+        : `Feil: ${msg}`);
     }
   };
 
   const handleSaveMilestone = async (i: number) => {
     if (!project) { setStatus('Lagre prosjektet først.'); return; }
     const draft = slots[i];
-    if (!draft || !draft.title || !draft.target_date) return;
+    if (!draft || !draft.title || !draft.target_date) {
+      setStatus(`Milepæl ${i + 1}: fyll ut tittel og dato.`);
+      return;
+    }
     try {
       await saveMilestone({
-        id: draft.id, project_id: project.id, title: draft.title,
+        project_id: project.id, title: draft.title,
         target_date: draft.target_date, status: draft.status, position: i + 1,
       });
       setStatus(`Milepæl ${i + 1} lagret.`);
@@ -91,8 +95,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   };
 
   const handleDeleteMilestone = async (i: number) => {
-    const draft = slots[i];
-    if (draft?.id) await deleteMilestone(draft.id);
+    if (project) await deleteMilestoneAt(project.id, i + 1);
     setSlot(i, null);
     onSaved();
   };
@@ -140,7 +143,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
                 </select>
                 <div className="flex gap-3">
                   <button className="deck-kicker underline" onClick={() => handleSaveMilestone(i)}>Lagre</button>
-                  {draft?.id && (
+                  {draft && (
                     <button className="deck-kicker underline" style={{ color: '#c94a4a' }}
                       onClick={() => handleDeleteMilestone(i)}>Slett</button>
                   )}
