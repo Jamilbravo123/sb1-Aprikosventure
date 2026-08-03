@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useBoardMember } from '../../hooks/useBoardMember';
 import AdminProjects from '../../components/styret/AdminProjects';
 import AdminDocuments from '../../components/styret/AdminDocuments';
+import AdminMembers from '../../components/styret/AdminMembers';
 
 const TABS = ['prosjekter', 'dokumenter', 'medlemmer'] as const;
 type Tab = (typeof TABS)[number];
@@ -32,7 +33,7 @@ export default function BoardAdmin() {
         </nav>
         {tab === 'prosjekter' && <AdminProjects />}
         {tab === 'dokumenter' && <AdminDocuments />}
-        {tab === 'medlemmer' && <p className="deck-lede">Kommer i neste task.</p>}
+        {tab === 'medlemmer' && <AdminMembers />}
       </div>
     </div>
   );

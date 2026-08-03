@@ -1975,8 +1975,14 @@ export default function AdminMembers() {
 
   const handleRemove = async (m: BoardMember) => {
     if (!window.confirm(`Fjerne ${m.full_name} fra styret? De mister tilgang umiddelbart.`)) return;
-    await removeMember(m.id);
-    setRefreshKey((k) => k + 1);
+    setStatus(null);
+    try {
+      await removeMember(m.id);
+      setStatus('Fjernet.');
+      setRefreshKey((k) => k + 1);
+    } catch (err) {
+      setStatus(`Feil: ${(err as Error).message}`);
+    }
   };
 
   const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
