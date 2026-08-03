@@ -9,6 +9,7 @@ import DeckViewer from './components/deck/DeckViewer';
 import BoardLanding from './pages/styret/BoardLanding';
 import BoardCallback from './pages/styret/BoardCallback';
 import BoardProject from './pages/styret/BoardProject';
+import BoardDocuments from './pages/styret/BoardDocuments';
 import BoardProtectedRoute from './components/styret/BoardProtectedRoute';
 
 export default function App() {
@@ -41,6 +42,14 @@ export default function App() {
         element={
           <BoardProtectedRoute>
             <BoardProject />
+          </BoardProtectedRoute>
+        }
+      />
+      <Route
+        path="/styret/dokumenter"
+        element={
+          <BoardProtectedRoute>
+            <BoardDocuments />
           </BoardProtectedRoute>
         }
       />
