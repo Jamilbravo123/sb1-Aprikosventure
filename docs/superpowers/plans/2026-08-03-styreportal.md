@@ -81,6 +81,7 @@ create table board_projects (
   description text,
   ownership_pct numeric(5,2) check (ownership_pct >= 0 and ownership_pct <= 100),
   ownership_note text,
+  partners text,
   company_name text,
   company_orgnr text,
   sort_order int not null default 0,
@@ -286,6 +287,7 @@ export interface BoardProject {
   description: string | null;
   ownership_pct: number | null;
   ownership_note: string | null;
+  partners: string | null;
   company_name: string | null;
   company_orgnr: string | null;
   sort_order: number;
@@ -1004,6 +1006,7 @@ export default function ProjectCard({ project, nextMilestone }: {
       <p className="deck-kicker mt-2" style={{ color: 'var(--deck-gold)' }}>
         {ownershipLabel(project)}
       </p>
+      {project.partners && <p className="deck-kicker mt-1">med {project.partners}</p>}
       {project.is_archived && <p className="deck-kicker mt-1">Arkivert</p>}
       {nextMilestone && (
         <p className="deck-lede mt-4 text-sm">
@@ -1268,6 +1271,7 @@ export default function BoardProject() {
             {project.ownership_pct !== null ? `${project.ownership_pct} % eierandel` : 'Eierandel ikke avklart'}
             {project.ownership_note && ` · ${project.ownership_note}`}
           </p>
+          {project.partners && (<p className="deck-kicker mt-1">Partnerskap med {project.partners}</p>)}
           {project.company_name && (
             <p className="deck-kicker mt-1">
               {project.company_name}{project.company_orgnr && ` · org.nr ${project.company_orgnr}`}
@@ -1564,6 +1568,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   const [description, setDescription] = useState(project?.description ?? '');
   const [ownershipPct, setOwnershipPct] = useState(project?.ownership_pct?.toString() ?? '');
   const [ownershipNote, setOwnershipNote] = useState(project?.ownership_note ?? '');
+  const [partners, setPartners] = useState(project?.partners ?? '');
   const [companyName, setCompanyName] = useState(project?.company_name ?? '');
   const [companyOrgnr, setCompanyOrgnr] = useState(project?.company_orgnr ?? '');
   const [sortOrder, setSortOrder] = useState(project?.sort_order ?? 0);
@@ -1597,6 +1602,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
         description: description || null,
         ownership_pct: ownershipPct === '' ? null : Number(ownershipPct),
         ownership_note: ownershipNote || null,
+        partners: partners || null,
         company_name: companyName || null,
         company_orgnr: companyOrgnr || null,
         sort_order: sortOrder,
@@ -1645,6 +1651,7 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
           value={ownershipPct} onChange={(e) => setOwnershipPct(e.target.value)} />
         <input className={field} placeholder="Eierandelsnotat (f.eks. 50/50 JV med NBX)"
           value={ownershipNote} onChange={(e) => setOwnershipNote(e.target.value)} />
+        <input className={field} placeholder="Partner(e) (f.eks. NBX, Pharma Nordic)" value={partners} onChange={(e) => setPartners(e.target.value)} />
         <input className={field} placeholder="Selskapsnavn (hvis stiftet)" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
         <input className={field} placeholder="Org.nr" value={companyOrgnr} onChange={(e) => setCompanyOrgnr(e.target.value)} />
         <input className={field} placeholder="Sortering" type="number" value={sortOrder} onChange={(e) => setSortOrder(Number(e.target.value))} />

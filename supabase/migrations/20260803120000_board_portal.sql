@@ -22,6 +22,7 @@ create table board_projects (
   description text,
   ownership_pct numeric(5,2) check (ownership_pct >= 0 and ownership_pct <= 100),
   ownership_note text,
+  partners text,
   company_name text,
   company_orgnr text,
   sort_order int not null default 0,

@@ -59,6 +59,7 @@ privat Storage-bøtte, magisk lenke-innlogging mot lukket allowlist, og admin-gr
 | `description` | text | |
 | `ownership_pct` | numeric(5,2) NULL | tom når ikke avklart/stiftet |
 | `ownership_note` | text NULL | f.eks. «50/50 JV med NBX», «ikke stiftet ennå» |
+| `partners` | text NULL | hvem partnerskapet er med, f.eks. «NBX», «Pharma Nordic» |
 | `company_name` | text NULL | kun når selskap finnes |
 | `company_orgnr` | text NULL | |
 | `sort_order` | int default 0 | |
