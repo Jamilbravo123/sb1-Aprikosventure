@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { BoardMilestone, BoardProject } from '../../types/board';
-import { formatDate } from '../../lib/dateFormatter';
+import { formatDate } from './UpcomingMilestones';
 
 function ownershipLabel(p: BoardProject): string {
   if (p.ownership_pct !== null) return `${p.ownership_pct} % eierandel`;

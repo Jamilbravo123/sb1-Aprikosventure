@@ -1,13 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { MilestoneWithProject } from '../../types/board';
-import { formatDate } from '../../lib/dateFormatter';
 
 const STATUS_COLOR: Record<string, string> = {
   planlagt: 'var(--deck-ink-dim)',
   'pågår': 'var(--deck-gold)',
   forsinket: '#c94a4a',
 };
+
+export function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('nb-NO', {
+    day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
 
 export default function UpcomingMilestones({ items }: { items: MilestoneWithProject[] }) {
   const [showAll, setShowAll] = useState(false);
