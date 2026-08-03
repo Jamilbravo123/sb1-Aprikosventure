@@ -8,6 +8,8 @@ import DeckWelcome from './components/deck/DeckWelcome';
 import DeckViewer from './components/deck/DeckViewer';
 import BoardLanding from './pages/styret/BoardLanding';
 import BoardCallback from './pages/styret/BoardCallback';
+import BoardProject from './pages/styret/BoardProject';
+import BoardProtectedRoute from './components/styret/BoardProtectedRoute';
 
 export default function App() {
   return (
@@ -34,6 +36,14 @@ export default function App() {
       />
       <Route path="/styret" element={<BoardLanding />} />
       <Route path="/styret/callback" element={<BoardCallback />} />
+      <Route
+        path="/styret/prosjekt/:slug"
+        element={
+          <BoardProtectedRoute>
+            <BoardProject />
+          </BoardProtectedRoute>
+        }
+      />
     </Routes>
   );
 }
