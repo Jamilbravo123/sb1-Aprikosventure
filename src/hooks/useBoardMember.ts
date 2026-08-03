@@ -7,10 +7,11 @@ export function useBoardMember(): { member: BoardMember | null; loading: boolean
   const { user, loading: authLoading } = useAuth();
   const [member, setMember] = useState<BoardMember | null>(null);
   const [loading, setLoading] = useState(true);
+  const userId = user?.id ?? null;
 
   useEffect(() => {
     if (authLoading) return;
-    if (!user) {
+    if (!userId) {
       setMember(null);
       setLoading(false);
       return;
@@ -18,10 +19,13 @@ export function useBoardMember(): { member: BoardMember | null; loading: boolean
     let cancelled = false;
     getCurrentMember()
       .then((m) => { if (!cancelled) setMember(m); })
-      .catch(() => { if (!cancelled) setMember(null); })
+      .catch(() => {
+        // Forbigående feil skal ikke kaste ut et allerede verifisert medlem —
+        // behold forrige verdi; en ny bruker uten verdi forblir null.
+      })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [user, authLoading]);
+  }, [userId, authLoading]);
 
   return { member, loading };
 }
