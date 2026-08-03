@@ -10,6 +10,7 @@ import BoardLanding from './pages/styret/BoardLanding';
 import BoardCallback from './pages/styret/BoardCallback';
 import BoardProject from './pages/styret/BoardProject';
 import BoardDocuments from './pages/styret/BoardDocuments';
+import BoardAdmin from './pages/styret/BoardAdmin';
 import BoardProtectedRoute from './components/styret/BoardProtectedRoute';
 
 export default function App() {
@@ -50,6 +51,14 @@ export default function App() {
         element={
           <BoardProtectedRoute>
             <BoardDocuments />
+          </BoardProtectedRoute>
+        }
+      />
+      <Route
+        path="/styret/admin"
+        element={
+          <BoardProtectedRoute>
+            <BoardAdmin />
           </BoardProtectedRoute>
         }
       />
