@@ -131,7 +131,7 @@ create trigger board_milestones_touch before update on board_milestones
 -- ── Hjelpefunksjoner (én kilde for alle policies) ─────────
 
 create or replace function is_board_member() returns boolean
-language sql stable security definer set search_path = public as $$
+language sql stable security definer set search_path = public, pg_temp as $$
   select exists (
     select 1 from board_members m
     where m.user_id = auth.uid()
@@ -140,7 +140,7 @@ language sql stable security definer set search_path = public as $$
 $$;
 
 create or replace function is_board_admin() returns boolean
-language sql stable security definer set search_path = public as $$
+language sql stable security definer set search_path = public, pg_temp as $$
   select exists (
     select 1 from board_members m
     where m.role = 'admin'
@@ -151,7 +151,7 @@ $$;
 
 -- Returnerer KUN ja/nei — lekker aldri listen. Kalles før OTP sendes.
 create or replace function check_board_email(p_email text) returns boolean
-language sql stable security definer set search_path = public as $$
+language sql stable security definer set search_path = public, pg_temp as $$
   select exists (
     select 1 from board_members where email = lower(trim(p_email))
   );
@@ -172,15 +172,42 @@ create policy "medlemmer leser medlemmer" on board_members
   for select using (is_board_member());
 create policy "admin skriver medlemmer" on board_members
   for all using (is_board_admin()) with check (is_board_admin());
--- Medlem kan binde egen rad (user_id) og oppdatere eget last_seen_at.
+-- Medlem kan kun binde egen user_id og oppdatere eget last_seen_at.
+-- RLS kan ikke begrense kolonner — kolonnevakten håndheves i trigger under.
 create policy "medlem oppdaterer egen rad" on board_members
   for update using (
     user_id = auth.uid()
-    or lower(email) = lower(coalesce(auth.jwt() ->> 'email', ''))
+    or (user_id is null
+        and lower(email) = lower(coalesce(auth.jwt() ->> 'email', '')))
   ) with check (
     user_id = auth.uid()
     or lower(email) = lower(coalesce(auth.jwt() ->> 'email', ''))
   );
+
+create or replace function board_members_guard_self_update() returns trigger
+language plpgsql security definer set search_path = public, pg_temp as $$
+begin
+  if is_board_admin() then
+    return new;
+  end if;
+  if new.email is distinct from old.email
+     or new.full_name is distinct from old.full_name
+     or new.role is distinct from old.role
+     or new.id is distinct from old.id
+     or new.created_at is distinct from old.created_at then
+    raise exception 'Kun user_id og last_seen_at kan endres av medlemmet selv';
+  end if;
+  if new.user_id is distinct from old.user_id
+     and (old.user_id is not null or new.user_id is distinct from auth.uid()) then
+    raise exception 'user_id kan kun bindes til egen bruker';
+  end if;
+  return new;
+end;
+$$;
+
+create trigger board_members_guard_self_update
+  before update on board_members
+  for each row execute function board_members_guard_self_update();
 
 create policy "medlemmer leser prosjekter" on board_projects
   for select using (is_board_member());
