@@ -13,28 +13,46 @@ export default function BoardProject() {
   const [milestones, setMilestones] = useState<BoardMilestone[]>([]);
   const [documents, setDocuments] = useState<BoardDocument[]>([]);
   const [state, setState] = useState<'loading' | 'ready' | 'notfound' | 'error'>('loading');
+  const [docError, setDocError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!slug) return;
+    let cancelled = false;
+    setState('loading');
     getProjectBySlug(slug)
       .then(async (p) => {
+        if (cancelled) return;
         if (!p) { setState('notfound'); return; }
         setProject(p);
         const [ms, docs] = await Promise.all([
           listProjectMilestones(p.id),
           listDocuments(p.id),
         ]);
+        if (cancelled) return;
         setMilestones(ms);
         setDocuments(docs);
         setState('ready');
       })
-      .catch(() => setState('error'));
+      .catch(() => { if (!cancelled) setState('error'); });
+    return () => { cancelled = true; };
   }, [slug]);
 
   const openDocument = async (doc: BoardDocument) => {
-    // Signert lenke hentes ferskt ved hvert klikk — utløp er dermed uproblematisk.
-    const url = await getDocumentUrl(doc.file_path);
-    window.open(url, '_blank', 'noopener');
+    setDocError(null);
+    // Vinduet må åpnes synkront FØR await — ellers blokkerer Safari/Chrome popupen.
+    const win = window.open('about:blank', '_blank');
+    if (win) win.opener = null;
+    try {
+      const url = await getDocumentUrl(doc.file_path);
+      if (win) {
+        win.location.href = url;
+      } else {
+        window.location.assign(url);
+      }
+    } catch {
+      win?.close();
+      setDocError('Kunne ikke åpne dokumentet. Prøv igjen.');
+    }
   };
 
   if (state === 'loading') {
@@ -95,6 +113,7 @@ export default function BoardProject() {
               ))}
             </ul>
           )}
+          {docError && <p className="deck-kicker mt-2" style={{ color: '#c94a4a' }}>{docError}</p>}
         </section>
       </div>
     </div>

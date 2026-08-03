@@ -1373,6 +1373,7 @@ export default function BoardDocuments() {
   const [typeFilter, setTypeFilter] = useState<(typeof TYPES)[number]>('alle');
   const [projectFilter, setProjectFilter] = useState<string>('alle');
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [docError, setDocError] = useState<string | null>(null);
 
   useEffect(() => {
     Promise.all([listDocuments(), listProjects(true)])
@@ -1395,8 +1396,21 @@ export default function BoardDocuments() {
     id === null ? 'Selskapsnivå' : projects.find((p) => p.id === id)?.name ?? '';
 
   const openDocument = async (doc: BoardDocument) => {
-    const url = await getDocumentUrl(doc.file_path);
-    window.open(url, '_blank', 'noopener');
+    setDocError(null);
+    // Vinduet må åpnes synkront FØR await — ellers blokkerer Safari/Chrome popupen.
+    const win = window.open('about:blank', '_blank');
+    if (win) win.opener = null;
+    try {
+      const url = await getDocumentUrl(doc.file_path);
+      if (win) {
+        win.location.href = url;
+      } else {
+        window.location.assign(url);
+      }
+    } catch {
+      win?.close();
+      setDocError('Kunne ikke åpne dokumentet. Prøv igjen.');
+    }
   };
 
   return (
@@ -1443,6 +1457,7 @@ export default function BoardDocuments() {
             ))}
           </ul>
         ))}
+        {docError && <p className="deck-kicker mt-2" style={{ color: '#c94a4a' }}>{docError}</p>}
       </div>
     </div>
   );
