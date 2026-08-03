@@ -1863,8 +1863,13 @@ export default function AdminDocuments() {
 
   const handleDelete = async (doc: BoardDocument) => {
     if (!window.confirm(`Slette «${doc.title}»?`)) return;
-    await deleteDocument(doc);
-    setRefreshKey((k) => k + 1);
+    try {
+      await deleteDocument(doc);
+      setStatus('Slettet.');
+      setRefreshKey((k) => k + 1);
+    } catch (err) {
+      setStatus(`Feil: ${(err as Error).message}`);
+    }
   };
 
   const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
