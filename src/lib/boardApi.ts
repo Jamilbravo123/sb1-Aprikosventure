@@ -191,6 +191,21 @@ export async function uploadDocument(file: File, meta: {
   }
 }
 
+const LOGO_TYPES = ['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'];
+
+export async function uploadProjectLogo(file: File): Promise<string> {
+  if (!LOGO_TYPES.includes(file.type)) {
+    throw new Error('Logo må være PNG, JPEG, SVG eller WebP.');
+  }
+  const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+  const filePath = `${crypto.randomUUID()}/${safeName}`;
+  const { error } = await supabase.storage
+    .from('board-logos')
+    .upload(filePath, file, { contentType: file.type });
+  throwIf(error);
+  return supabase.storage.from('board-logos').getPublicUrl(filePath).data.publicUrl;
+}
+
 export async function deleteDocument(doc: BoardDocument): Promise<void> {
   const { error } = await supabase.from('board_documents').delete().eq('id', doc.id);
   throwIf(error);
