@@ -59,6 +59,7 @@ function ProjectEditor({ project, onSaved, onCreated }: {
   const [partners, setPartners] = useState(project?.partners ?? '');
   const [companyName, setCompanyName] = useState(project?.company_name ?? '');
   const [companyOrgnr, setCompanyOrgnr] = useState(project?.company_orgnr ?? '');
+  const [websiteUrl, setWebsiteUrl] = useState(project?.website_url ?? '');
   const [sortOrder, setSortOrder] = useState(project?.sort_order ?? 0);
   const [isArchived, setIsArchived] = useState(project?.is_archived ?? false);
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -119,6 +120,9 @@ function ProjectEditor({ project, onSaved, onCreated }: {
         partners: partners || null,
         company_name: companyName || null,
         company_orgnr: companyOrgnr || null,
+        website_url: websiteUrl.trim()
+          ? (websiteUrl.trim().startsWith('http') ? websiteUrl.trim() : 'https://' + websiteUrl.trim())
+          : null,
         sort_order: sortOrder,
         is_archived: isArchived,
         logo_url: logoUrl,
@@ -252,6 +256,10 @@ function ProjectEditor({ project, onSaved, onCreated }: {
         </Field>
         <Field label="Org.nr">
           <input className={field} value={companyOrgnr} onChange={(e) => setCompanyOrgnr(e.target.value)} />
+        </Field>
+        <Field label="Nettside (URL, valgfritt)">
+          <input className={field} placeholder="https://…"
+            value={websiteUrl} onChange={(e) => setWebsiteUrl(e.target.value)} />
         </Field>
         <Field label="Sortering">
           <input className={field} type="number" value={sortOrder} onChange={(e) => setSortOrder(Number(e.target.value))} />

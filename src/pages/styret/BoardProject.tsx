@@ -89,6 +89,12 @@ export default function BoardProject() {
           {!project.company_name && (
             <p className="deck-kicker mt-1">Prosjekt — ikke etablert som eget selskap</p>
           )}
+          {project.website_url && (
+            <a href={project.website_url} target="_blank" rel="noopener noreferrer"
+               className="deck-kicker underline mt-1 inline-block" style={{ color: 'var(--deck-gold)' }}>
+              {project.website_url.replace(/^https?:\/\//, '').replace(/\/$/, '')} ↗
+            </a>
+          )}
         </header>
 
         {project.description && <p className="deck-lede">{project.description}</p>}

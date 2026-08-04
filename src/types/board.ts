@@ -17,6 +17,7 @@ export interface BoardProject {
   ownership_note: string | null;
   partners: string | null;
   logo_url: string | null;
+  website_url: string | null;
   company_name: string | null;
   company_orgnr: string | null;
   sort_order: number;
