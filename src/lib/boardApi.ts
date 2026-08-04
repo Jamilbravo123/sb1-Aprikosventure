@@ -24,6 +24,25 @@ export async function sendBoardOtp(email: string): Promise<{ error: Error | null
   return { error: error as Error | null };
 }
 
+// Alternativ innlogging med 6-sifret kode fra samme e-post som magisk lenke
+// (bedrifts-e-postskannere konsumerer ofte lenken før brukeren rekker å klikke).
+export async function verifyBoardOtp(email: string, token: string): Promise<void> {
+  const { data, error } = await supabase.auth.verifyOtp({
+    email: email.trim().toLowerCase(),
+    token: token.trim(),
+    type: 'email',
+  });
+  throwIf(error);
+  const user = data.user;
+  if (user?.email) {
+    try {
+      await bindAndTouchMember(user.id, user.email);
+    } catch {
+      // best-effort — se kommentar ved bindAndTouchMember
+    }
+  }
+}
+
 export async function getCurrentMember(): Promise<BoardMember | null> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user?.email) return null;
