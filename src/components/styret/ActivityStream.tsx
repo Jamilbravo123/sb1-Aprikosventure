@@ -1,16 +1,21 @@
 import { Link } from 'react-router-dom';
 import type { ActivityItem } from '../../types/board';
-import { formatShortDate } from './UpcomingMilestones';
 
 function startOfDay(d: Date): number {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+}
+
+// Kompakt dato UTEN år — «3. aug.» — for å holde seg innenfor w-20-kolonnen.
+// Året er implisitt for nylig aktivitet; resten av forsiden bruker år (formatShortDate).
+function formatActivityDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('nb-NO', { day: 'numeric', month: 'short' });
 }
 
 function whenLabel(iso: string): string {
   const diffDays = Math.round((startOfDay(new Date()) - startOfDay(new Date(iso))) / 86_400_000);
   if (diffDays === 0) return 'I dag';
   if (diffDays === 1) return 'I går';
-  return formatShortDate(iso);
+  return formatActivityDate(iso);
 }
 
 function ProjectLink({ name, slug }: { name: string; slug: string | null }) {

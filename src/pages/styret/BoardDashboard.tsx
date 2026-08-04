@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import {
-  getRecentActivity, getSinceLast, listProjects, listProjectMilestones,
+  getRecentActivity, getSinceLast, listAllMilestones, listProjects,
   listUpcomingMilestones, touchLastSeen,
 } from '../../lib/boardApi';
 import type {
@@ -35,18 +35,19 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
           touched.current = true;
           touchLastSeen(member.id).catch(() => {});
         }
-        const [activityData, upcomingData, projectData] = await Promise.all([
+        const [activityData, upcomingData, projectData, allMilestones] = await Promise.all([
           getRecentActivity(),
           listUpcomingMilestones(),
           listProjects(true),
+          listAllMilestones(),
         ]);
         setActivity(activityData);
         setUpcoming(upcomingData);
         setProjects(projectData);
-        const byProject: Record<string, BoardMilestone[]> = {};
-        await Promise.all(projectData.map(async (p) => {
-          byProject[p.id] = await listProjectMilestones(p.id);
-        }));
+        const byProject = allMilestones.reduce<Record<string, BoardMilestone[]>>((acc, m) => {
+          (acc[m.project_id] ??= []).push(m);
+          return acc;
+        }, {});
         setMilestonesByProject(byProject);
       } catch {
         setError('Kunne ikke laste innholdet. Last siden på nytt.');

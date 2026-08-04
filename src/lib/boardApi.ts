@@ -89,6 +89,15 @@ export async function listProjectMilestones(projectId: string): Promise<BoardMil
   return data ?? [];
 }
 
+export async function listAllMilestones(): Promise<BoardMilestone[]> {
+  const { data, error } = await supabase
+    .from('board_milestones')
+    .select('*')
+    .order('position');
+  throwIf(error);
+  return data ?? [];
+}
+
 export async function listUpcomingMilestones(): Promise<MilestoneWithProject[]> {
   const { data, error } = await supabase
     .from('board_milestones')
