@@ -14,8 +14,8 @@ og `docs/superpowers/plans/2026-08-03-styreportal.md` (planen er synket med fakt
 - Ruter: `/styret` (login ELLER dashboard), `/styret/callback` (egen — rører ALDRI `investors`/`/deck`),
   `/styret/prosjekt/:slug`, `/styret/dokumenter`, `/styret/admin`. Kode i `src/pages/styret/` + `src/components/styret/`.
 - Datalag: `src/lib/boardApi.ts`, typer i `src/types/board.ts`. Tabeller: `board_members`, `board_projects`
-  (m/ `partners`, `logo_url`), `board_milestones` (posisjon 1–3, unik per prosjekt — lagres med
-  `onConflict: 'project_id,position'`, IKKE id), `board_documents`.
+  (m/ `partners`, `logo_url`), `board_milestones` (v1.4 2026-08-04: UBEGRENSET antall per prosjekt,
+  `is_archived` for historikk — `position`-kolonnen er DROPPET; lagres id-basert upsert), `board_documents`.
 - Storage: `board-docs` (privat, kun PDF, signert URL 300 s) og `board-logos` (offentlig, bilder, 2 MB).
   Seed-logoene peker på eksisterende `/social/…`-assets, ikke bøtta.
 
@@ -48,3 +48,13 @@ og `docs/superpowers/plans/2026-08-03-styreportal.md` (planen er synket med fakt
 - Datoformat: formatShortDate («30. sep. 2026») på forsiden, formatDate (lang) ellers; aktivitetsstrømmen
   bruker bevisst kortform uten år. Kjent minor: date-strenger tolkes som UTC (én dag feil vest for UTC).
 - Jamils arbeidsflyt for UI-endringer: mock på Artifact-URL godkjennes FØR koden endres.
+
+## v1.3/v1.4 (2026-08-04)
+
+- Kort: mini-milepælliste (inntil 3 nærmeste AKTIVE) på desktop, kompakt «Neste» på mobil, klikk-affordanse.
+- Milepæler: admin har dynamisk liste + Arkiver/Gjenåpne + «Historikk (N)»; prosjektsiden bruker
+  MilestoneList (MilestoneStepper er slettet). Alle lesefunksjoner filtrerer `is_archived=false`.
+- «Siste aktivitet»: segmentknapper I dag/Uke/3 mnd (default Uke), fast høyde ~3 rader m/ scroll,
+  `getActivity(sinceIso)` (getRecentActivity er fjernet).
+- Magic Link-e-postmalen i Supabase har Go-template-betingelser på `.RedirectTo` (styret = norsk tekst,
+  investor = engelsk) — endret via dashboard 2026-08-04; betingelsene dekker prod/www/localhost-callback.
