@@ -82,7 +82,6 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
         {sinceLast !== null && (
           <>
             <SinceLastPanel data={sinceLast} firstVisit={member.last_seen_at === null} />
-            <UpcomingMilestones items={upcoming} />
             <section>
               <div className="flex items-baseline justify-between">
                 <p className="deck-eyebrow">Prosjekter</p>
@@ -93,13 +92,14 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
               {visibleProjects.length === 0 ? (
                 <p className="deck-lede mt-3">Ingen prosjekter ennå.</p>
               ) : (
-                <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                   {visibleProjects.map((p) => (
                     <ProjectCard key={p.id} project={p} nextMilestone={nextByProject[p.id] ?? null} />
                   ))}
                 </div>
               )}
             </section>
+            <UpcomingMilestones items={upcoming} />
           </>
         )}
       </div>

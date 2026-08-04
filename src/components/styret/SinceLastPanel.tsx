@@ -6,13 +6,15 @@ export default function SinceLastPanel({ data, firstVisit }: { data: SinceLast; 
     && data.changedMilestones.length === 0
     && data.newDocuments.length === 0;
 
+  if (!firstVisit && empty) {
+    return <p className="deck-kicker">Siden sist: ingenting nytt.</p>;
+  }
+
   return (
     <section className="border border-[var(--deck-rule)] p-6">
       <p className="deck-eyebrow">Siden sist</p>
       {firstVisit ? (
         <p className="deck-lede mt-3">Velkommen til Styreportalen. Dette er ditt første besøk.</p>
-      ) : empty ? (
-        <p className="deck-lede mt-3">Ingenting nytt siden sist.</p>
       ) : (
         <ul className="mt-4 space-y-2">
           {data.newProjects.map((p) => (
