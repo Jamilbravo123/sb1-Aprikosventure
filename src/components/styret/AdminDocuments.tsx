@@ -57,21 +57,36 @@ export default function AdminDocuments() {
     <div className="space-y-8">
       <form onSubmit={handleUpload} className="border border-[var(--deck-rule)] p-6 space-y-4">
         <p className="deck-eyebrow">Last opp dokument (kun PDF)</p>
-        <input className={field} placeholder="Tittel" required value={title} onChange={(e) => setTitle(e.target.value)} />
-        <div className="grid md:grid-cols-3 gap-4">
-          <select className={field} value={docType} onChange={(e) => setDocType(e.target.value as BoardDocument['doc_type'])}>
-            <option value="protokoll">protokoll</option>
-            <option value="referat">referat</option>
-            <option value="annet">annet</option>
-          </select>
-          <input className={field} type="date" value={meetingDate} onChange={(e) => setMeetingDate(e.target.value)} />
-          <select className={field} value={projectId} onChange={(e) => setProjectId(e.target.value)}>
-            <option value="">Selskapsnivå</option>
-            {projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
-          </select>
+        <div>
+          <label className="deck-kicker block mb-1">Tittel</label>
+          <input className={field} required value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
-        <input type="file" accept="application/pdf" required
-          onChange={(e) => setFile(e.target.files?.[0] ?? null)} className="deck-kicker" />
+        <div className="grid md:grid-cols-3 gap-4">
+          <div>
+            <label className="deck-kicker block mb-1">Type</label>
+            <select className={field} value={docType} onChange={(e) => setDocType(e.target.value as BoardDocument['doc_type'])}>
+              <option value="protokoll">protokoll</option>
+              <option value="referat">referat</option>
+              <option value="annet">annet</option>
+            </select>
+          </div>
+          <div>
+            <label className="deck-kicker block mb-1">Møtedato</label>
+            <input className={field} type="date" value={meetingDate} onChange={(e) => setMeetingDate(e.target.value)} />
+          </div>
+          <div>
+            <label className="deck-kicker block mb-1">Prosjekt</label>
+            <select className={field} value={projectId} onChange={(e) => setProjectId(e.target.value)}>
+              <option value="">Selskapsnivå</option>
+              {projects.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+            </select>
+          </div>
+        </div>
+        <div>
+          <label className="deck-kicker block mb-1">PDF-fil</label>
+          <input type="file" accept="application/pdf" required
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)} className="deck-kicker" />
+        </div>
         <button type="submit" className="deck-btn-primary">Last opp</button>
         {status && <p className="deck-kicker">{status}</p>}
       </form>

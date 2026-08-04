@@ -49,12 +49,21 @@ export default function AdminMembers() {
       <form onSubmit={handleAdd} className="border border-[var(--deck-rule)] p-6 space-y-4">
         <p className="deck-eyebrow">Legg til medlem</p>
         <div className="grid md:grid-cols-3 gap-4">
-          <input className={field} type="email" placeholder="E-post" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <input className={field} placeholder="Fullt navn" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
-          <select className={field} value={role} onChange={(e) => setRole(e.target.value as BoardMember['role'])}>
-            <option value="medlem">medlem</option>
-            <option value="admin">admin</option>
-          </select>
+          <div>
+            <label className="deck-kicker block mb-1">E-post</label>
+            <input className={field} type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <label className="deck-kicker block mb-1">Fullt navn</label>
+            <input className={field} required value={fullName} onChange={(e) => setFullName(e.target.value)} />
+          </div>
+          <div>
+            <label className="deck-kicker block mb-1">Rolle</label>
+            <select className={field} value={role} onChange={(e) => setRole(e.target.value as BoardMember['role'])}>
+              <option value="medlem">medlem</option>
+              <option value="admin">admin</option>
+            </select>
+          </div>
         </div>
         <button type="submit" className="deck-btn-primary">Legg til</button>
         {status && <p className="deck-kicker">{status}</p>}
