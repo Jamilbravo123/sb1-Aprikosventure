@@ -257,3 +257,52 @@ select.deck-field option {
 .styret-page .deck-lede {
   font-size: 19px;
 }
+
+/* ─── Styreportal: prosjektkort — klikk-affordanse og milepælprikker ─── */
+.styret-card {
+  position: relative;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.styret-card:hover {
+  border-color: var(--deck-rule-strong);
+  background: rgba(243, 236, 225, 0.035);
+  transform: translateY(-2px);
+}
+.styret-card-go {
+  color: var(--deck-ink-faint);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.styret-card:hover .styret-card-go {
+  color: var(--deck-gold);
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .styret-card,
+  .styret-card-go {
+    transition: none;
+  }
+  .styret-card:hover {
+    transform: none;
+  }
+}
+
+.styret-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  align-self: center;
+}
+.styret-dot-done {
+  background: var(--deck-gold);
+}
+.styret-dot-progress {
+  background: transparent;
+  border: 1px solid var(--deck-gold);
+}
+.styret-dot-late {
+  background: #c94a4a;
+}
+.styret-dot-planned {
+  background: rgba(243, 236, 225, 0.25);
+}
