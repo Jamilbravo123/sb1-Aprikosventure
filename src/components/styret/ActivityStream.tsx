@@ -109,7 +109,12 @@ export default function ActivityStream() {
   return (
     <section>
       <div className="section-head flex items-baseline justify-between gap-4 flex-wrap mb-2.5">
-        <p className="deck-eyebrow">Siste aktivitet</p>
+        <div className="flex items-baseline gap-2">
+          <p className="deck-eyebrow">Siste aktivitet</p>
+          {!loading && !error && items.length > 0 && (
+            <span className="deck-kicker">({items.length})</span>
+          )}
+        </div>
         <div className="flex items-center gap-1">
           {PERIODS.map((p) => {
             const active = period === p;
@@ -139,7 +144,7 @@ export default function ActivityStream() {
         <p className="deck-kicker">{EMPTY_LABEL[period]}</p>
       )}
       {!error && !loading && items.length > 0 && (
-        <div className="border border-[var(--deck-rule)] px-4 sm:px-5 py-1 max-h-[7rem] overflow-y-auto">
+        <div className="styret-scroll border border-[var(--deck-rule)] px-4 sm:px-5 py-1 max-h-[10rem] overflow-y-auto">
           {items.map((item, i) => (
             <div
               key={`${item.kind}-${item.timestamp}-${i}`}
