@@ -11,6 +11,12 @@ const PERIOD_LABEL: Record<Period, string> = {
   mnd: 'Siste 3 mnd',
 };
 
+const PERIOD_SHORT_LABEL: Record<Period, string> = {
+  dag: 'I dag',
+  uke: 'Uke',
+  mnd: '3 mnd',
+};
+
 const EMPTY_LABEL: Record<Period, string> = {
   dag: 'Ingen aktivitet i dag.',
   uke: 'Ingen aktivitet siste uke.',
@@ -104,15 +110,27 @@ export default function ActivityStream() {
     <section>
       <div className="section-head flex items-baseline justify-between gap-4 flex-wrap mb-2.5">
         <p className="deck-eyebrow">Siste aktivitet</p>
-        <label className="deck-kicker flex items-center gap-2">
-          <select
-            value={period}
-            onChange={(e) => setPeriod(e.target.value as Period)}
-            className="bg-transparent border border-[var(--deck-rule)] p-2"
-          >
-            {PERIODS.map((p) => <option key={p} value={p}>{PERIOD_LABEL[p]}</option>)}
-          </select>
-        </label>
+        <div className="flex items-center gap-1">
+          {PERIODS.map((p) => {
+            const active = period === p;
+            return (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPeriod(p)}
+                aria-pressed={active}
+                aria-label={PERIOD_LABEL[p]}
+                className="deck-kicker border-b px-2 py-1 transition-colors hover:text-[var(--deck-ink-dim)]"
+                style={{
+                  color: active ? 'var(--deck-gold)' : 'var(--deck-ink-faint)',
+                  borderColor: active ? 'var(--deck-gold)' : 'transparent',
+                }}
+              >
+                {PERIOD_SHORT_LABEL[p]}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {error && <p className="deck-kicker" style={{ color: '#c94a4a' }}>{error}</p>}
