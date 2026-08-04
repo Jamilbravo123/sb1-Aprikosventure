@@ -33,7 +33,7 @@ export default function KpiRow({
       <KpiTile num={inProgressCount} label="Milepæler pågår" />
       <KpiTile
         num={newSinceLast}
-        label="Nytt siden sist"
+        label="Oppdateringer"
         sub={lastSeenAt ? `siste besøk ${formatShortDate(lastSeenAt)}` : undefined}
       />
     </div>

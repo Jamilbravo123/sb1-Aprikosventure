@@ -17,7 +17,8 @@ export default function ProjectCard({ project, milestones }: {
   const next = milestones
     .filter((m) => m.status !== 'fullført')
     .sort((a, b) => a.target_date.localeCompare(b.target_date))[0] ?? null;
-  const fillPct = total > 0 ? Math.round((completed / total) * 100) : 0;
+  const completedPct = total > 0 ? Math.round((completed / total) * 100) : 0;
+  const inProgressPct = total > 0 ? Math.round((inProgress / total) * 100) : 0;
 
   return (
     <Link
@@ -41,10 +42,14 @@ export default function ProjectCard({ project, milestones }: {
       <div className="flex items-center gap-3 mt-auto pt-2">
         {total > 0 ? (
           <>
-            <span className="flex-1 h-[3px]" style={{ background: 'rgba(243, 236, 225, 0.16)' }}>
+            <span className="flex-1 h-[3px] flex" style={{ background: 'rgba(243, 236, 225, 0.16)' }}>
               <span
-                className="block h-[3px]"
-                style={{ background: 'var(--deck-gold)', width: `${fillPct}%` }}
+                className="block h-[3px] shrink-0"
+                style={{ background: 'var(--deck-gold)', width: `${completedPct}%` }}
+              />
+              <span
+                className="block h-[3px] shrink-0"
+                style={{ background: 'var(--deck-gold)', opacity: 0.35, width: `${inProgressPct}%` }}
               />
             </span>
             <span className="deck-kicker whitespace-nowrap" style={{ fontSize: '10.5px' }}>
@@ -55,7 +60,7 @@ export default function ProjectCard({ project, milestones }: {
           <span className="deck-kicker">Ingen milepæler</span>
         )}
       </div>
-      <p className="deck-kicker" style={{ fontSize: '10px' }}>
+      <p className="deck-kicker text-[10px]" style={{ color: 'var(--deck-ink-faint)', opacity: 0.7 }}>
         Sist oppdatert {formatShortDate(project.updated_at)}
       </p>
     </Link>

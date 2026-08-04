@@ -27,7 +27,7 @@ export function formatDate(iso: string): string {
 
 export function formatShortDate(iso: string): string {
   return new Date(iso).toLocaleDateString('nb-NO', {
-    day: 'numeric', month: 'short',
+    day: 'numeric', month: 'short', year: 'numeric',
   });
 }
 
@@ -101,7 +101,7 @@ export default function UpcomingMilestones({ items }: { items: MilestoneWithProj
     if (r.type === 'header') {
       return (
         <p key={`h-${r.date}`} className="deck-kicker mt-4 mb-1" style={{ color: 'var(--deck-gold)' }}>
-          {formatDate(r.date)}
+          {formatShortDate(r.date)}
         </p>
       );
     }
