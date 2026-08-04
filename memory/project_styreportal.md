@@ -58,3 +58,14 @@ og `docs/superpowers/plans/2026-08-03-styreportal.md` (planen er synket med fakt
   `getActivity(sinceIso)` (getRecentActivity er fjernet).
 - Magic Link-e-postmalen i Supabase har Go-template-betingelser på `.RedirectTo` (styret = norsk tekst,
   investor = engelsk) — endret via dashboard 2026-08-04; betingelsene dekker prod/www/localhost-callback.
+
+## v1.5 (2026-08-04) — engangskode + «siste besøk»
+
+- **Bedrifts-e-postskannere spiser magiske lenker.** Auth-loggen 2026-08-04 viste at Microsoft SafeLinks
+  (IP 72.145.152.30 / 52.102.18.197) åpnet Haroons lenke 16 sek etter utsendelse → «One-time token not
+  found» da han selv klikket. Løsning: `verifyBoardOtp` + kodefelt i «sent»-fasen på /styret
+  (Supabase `{{ .Token }}` ligger allerede i e-posten). Lenken er fortsatt primærvei.
+- Email OTP expiry satt ned 3600 → **900 s** i Supabase (kompenserer for at 6-sifret kode er et mindre
+  nøkkelrom enn lenke-tokenet). Ikke skru den opp igjen uten å tenke på brute force.
+- `touchLastSeen` kalles KUN når forrige besøk er >30 min gammelt — ellers nullstiller hver sidelast
+  referansepunktet, og KPI-flisen «Oppdateringer» viser alltid 0 for den som selv jobber i portalen.
