@@ -13,12 +13,12 @@ export default function BoardAdmin() {
   const [tab, setTab] = useState<Tab>('prosjekter');
 
   if (loading) {
-    return <div className="deck-page min-h-screen flex items-center justify-center"><p className="deck-kicker">Laster …</p></div>;
+    return <div className="deck-page styret-page min-h-screen flex items-center justify-center"><p className="deck-kicker">Laster …</p></div>;
   }
   if (!member || member.role !== 'admin') return <Navigate to="/styret" replace />;
 
   return (
-    <div className="deck-page min-h-screen px-6 py-12">
+    <div className="deck-page styret-page min-h-screen px-6 py-12">
       <div className="max-w-4xl mx-auto space-y-8">
         <Link to="/styret" className="deck-kicker underline">← Styreportal</Link>
         <h1 className="deck-display text-4xl">Admin</h1>

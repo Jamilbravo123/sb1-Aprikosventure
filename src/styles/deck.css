@@ -241,3 +241,17 @@ select.deck-field option {
     flex-shrink: 0;
   }
 }
+
+/* ─── Styreportal: større tekst for lesbarhet ─── */
+.styret-page {
+  font-size: 17px;
+}
+.styret-page .deck-kicker {
+  font-size: 12.5px;
+}
+.styret-page .deck-eyebrow {
+  font-size: 13px;
+}
+.styret-page .deck-lede {
+  font-size: 19px;
+}

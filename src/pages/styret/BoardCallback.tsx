@@ -69,7 +69,7 @@ export default function BoardCallback() {
   }, [navigate]);
 
   return (
-    <div className="deck-page flex items-center justify-center min-h-screen">
+    <div className="deck-page styret-page flex items-center justify-center min-h-screen">
       {error ? (
         <p className="deck-lede" style={{ color: '#c94a4a' }}>{error}</p>
       ) : (

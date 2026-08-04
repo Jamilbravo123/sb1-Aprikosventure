@@ -53,7 +53,7 @@ export default function BoardDocuments() {
   };
 
   return (
-    <div className="deck-page min-h-screen px-6 py-12">
+    <div className="deck-page styret-page min-h-screen px-6 py-12">
       <div className="max-w-4xl mx-auto space-y-8">
         <Link to="/styret" className="deck-kicker underline">← Styreportal</Link>
         <h1 className="deck-display text-4xl">Protokoller og <span className="deck-italic-gold">referater</span></h1>

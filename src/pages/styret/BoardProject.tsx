@@ -56,11 +56,11 @@ export default function BoardProject() {
   };
 
   if (state === 'loading') {
-    return <div className="deck-page min-h-screen flex items-center justify-center"><p className="deck-kicker">Laster …</p></div>;
+    return <div className="deck-page styret-page min-h-screen flex items-center justify-center"><p className="deck-kicker">Laster …</p></div>;
   }
   if (state === 'notfound' || state === 'error' || !project) {
     return (
-      <div className="deck-page min-h-screen flex flex-col items-center justify-center gap-4">
+      <div className="deck-page styret-page min-h-screen flex flex-col items-center justify-center gap-4">
         <p className="deck-lede">{state === 'notfound' ? 'Fant ikke prosjektet.' : 'Kunne ikke laste prosjektet.'}</p>
         <Link to="/styret" className="deck-kicker underline">Til forsiden</Link>
       </div>
@@ -68,7 +68,7 @@ export default function BoardProject() {
   }
 
   return (
-    <div className="deck-page min-h-screen px-6 py-12">
+    <div className="deck-page styret-page min-h-screen px-6 py-12">
       <div className="max-w-4xl mx-auto space-y-10">
         <Link to="/styret" className="deck-kicker underline">← Styreportal</Link>
         <header>

@@ -6,7 +6,7 @@ export default function BoardProtectedRoute({ children }: { children: React.Reac
 
   if (loading) {
     return (
-      <div className="deck-page flex items-center justify-center min-h-screen">
+      <div className="deck-page styret-page flex items-center justify-center min-h-screen">
         <div className="deck-kicker">Laster …</div>
       </div>
     );

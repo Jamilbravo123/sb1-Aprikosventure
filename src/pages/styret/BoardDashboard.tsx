@@ -57,7 +57,7 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
   const visibleProjects = projects.filter((p) => showArchived || !p.is_archived);
 
   return (
-    <div className="deck-page min-h-screen px-6 py-12">
+    <div className="deck-page styret-page min-h-screen px-6 py-12">
       <div className="max-w-5xl mx-auto space-y-10">
         <header className="flex items-end justify-between flex-wrap gap-4">
           <div>

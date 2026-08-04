@@ -13,7 +13,7 @@ export default function BoardLanding() {
 
   if (loading) {
     return (
-      <div className="deck-page flex items-center justify-center min-h-screen">
+      <div className="deck-page styret-page flex items-center justify-center min-h-screen">
         <div className="deck-kicker">Laster …</div>
       </div>
     );
@@ -46,7 +46,7 @@ export default function BoardLanding() {
   };
 
   return (
-    <div className="deck-page flex items-center justify-center min-h-screen px-6">
+    <div className="deck-page styret-page flex items-center justify-center min-h-screen px-6">
       <div className="w-full max-w-md text-center">
         <p className="deck-eyebrow justify-center">Aprikos Venture</p>
         <h1 className="deck-display text-4xl mt-4">
