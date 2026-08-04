@@ -242,9 +242,11 @@ select.deck-field option {
   }
 }
 
-/* ─── Styreportal: større tekst for lesbarhet ─── */
+/* ─── Styreportal: større tekst og lysere sekundærfarger for lesbarhet ─── */
 .styret-page {
   font-size: 17px;
+  --deck-ink-dim: #c2b9a7;
+  --deck-ink-faint: #a49b89;
 }
 .styret-page .deck-kicker {
   font-size: 12.5px;

@@ -134,14 +134,19 @@ privat Storage-bøtte, magisk lenke-innlogging mot lukket allowlist, og admin-gr
                                     → /styret/admin (kun admin)
 ```
 
-### Forside `/styret`
-Rekkefølge (beslutningsflyt): 
-1. **«Siden sist»-panel** — nye prosjekter, endrede/nye milepæler, nye dokumenter siden
-   `last_seen_at` (basert på `created_at`/`updated_at`). Tom tilstand: «Ingenting nytt siden sist.»
-2. **Kommende milepæler** — samlet tidslinje på tvers av prosjekter, stigende på `target_date`,
-   ekskluderer `fullført`, maks 8 med «se alle»-utvidelse.
-3. **Prosjektgrid** — kort per prosjekt: navn, eierandel (eller notat), neste milepæl.
-   Arkiverte skjult som standard; «Vis arkiverte»-toggle.
+### Forside `/styret` (v1.2, godkjent via layoutmock 2026-08-04)
+Rekkefølge:
+1. **KPI-rad** — 4 fliser: Aktive prosjekter, Kommende milepæler (+ neste frist), Milepæler pågår,
+   Nytt siden sist (samme datagrunnlag som tidligere «siden sist»-mekanikk, nå som nøkkeltall
+   med undertekst «siste besøk …»).
+2. **Siste aktivitet** — de 3 nyeste hendelsene globalt (nye prosjekter, oppdaterte milepæler,
+   nye dokumenter), sortert på tidsstempel. Tom tilstand: «Ingen aktivitet ennå.»
+3. **Prosjektgrid** — kompakte kort: logo/navn, eierandel, partnerlinje, neste milepæl,
+   fremdriftsmåler («X av Y fullført · Z pågår»), sist oppdatert-dato. Arkiverte skjult som
+   standard; enkel «Vis arkiverte»-lenke i seksjonshodet (ingen filterknapper).
+4. **Kommende milepæler** — gruppert på `target_date` (dato som gruppeoverskrift), sortert dato
+   stigende og innen samme dato pågår før planlagt/forsinket, deretter prosjektnavn. Første 5
+   radene synlige, resten bak «Vis alle (N)»/«Vis færre».
 
 ### Prosjektside `/styret/prosjekt/:slug`
 De tre milepælene som visuell horisontal stegviser/tidslinje (posisjon 1–3, status-farger,

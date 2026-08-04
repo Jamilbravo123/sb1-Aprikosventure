@@ -57,3 +57,11 @@ export interface SinceLast {
   changedMilestones: MilestoneWithProject[];
   newDocuments: BoardDocument[];
 }
+
+export interface ActivityItem {
+  kind: 'prosjekt' | 'milepæl' | 'dokument';
+  label: string;
+  projectName: string | null;
+  projectSlug: string | null;
+  timestamp: string;
+}

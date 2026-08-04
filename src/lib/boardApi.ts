@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 import type {
-  BoardDocument, BoardMember, BoardMilestone, BoardProject,
+  ActivityItem, BoardDocument, BoardMember, BoardMilestone, BoardProject,
   MilestoneWithProject, SinceLast,
 } from '../types/board';
 
@@ -136,6 +136,52 @@ export async function getSinceLast(since: string | null): Promise<SinceLast> {
     changedMilestones: (milestones.data ?? []) as MilestoneWithProject[],
     newDocuments: documents.data ?? [],
   };
+}
+
+// Global aktivitetsstrøm for forsiden: de 3 nyeste hendelsene på tvers av
+// prosjekter, milepæler og dokumenter.
+export async function getRecentActivity(): Promise<ActivityItem[]> {
+  const [projects, milestones, documents] = await Promise.all([
+    supabase.from('board_projects').select('*')
+      .order('created_at', { ascending: false }).limit(3),
+    supabase.from('board_milestones')
+      .select('*, board_projects!inner(name, slug, is_archived)')
+      .eq('board_projects.is_archived', false)
+      .order('updated_at', { ascending: false }).limit(3),
+    supabase.from('board_documents').select('*')
+      .order('created_at', { ascending: false }).limit(3),
+  ]);
+  throwIf(projects.error);
+  throwIf(milestones.error);
+  throwIf(documents.error);
+
+  const items: ActivityItem[] = [
+    ...(projects.data ?? []).map((p: BoardProject): ActivityItem => ({
+      kind: 'prosjekt',
+      label: p.name,
+      projectName: p.name,
+      projectSlug: p.slug,
+      timestamp: p.created_at,
+    })),
+    ...(milestones.data ?? []).map((m: BoardMilestone & { board_projects: { name: string; slug: string } }): ActivityItem => ({
+      kind: 'milepæl',
+      label: m.title,
+      projectName: m.board_projects.name,
+      projectSlug: m.board_projects.slug,
+      timestamp: m.updated_at,
+    })),
+    ...(documents.data ?? []).map((d: BoardDocument): ActivityItem => ({
+      kind: 'dokument',
+      label: d.title,
+      projectName: null,
+      projectSlug: null,
+      timestamp: d.created_at,
+    })),
+  ];
+
+  return items
+    .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
+    .slice(0, 3);
 }
 
 // ── Admin-skriving (RLS håndhever is_board_admin) ──────────
