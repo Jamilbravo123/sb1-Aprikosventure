@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
-  deleteMilestoneAt, deleteProject, getProjectBySlug, listProjectMilestones, listProjects,
-  removeProjectLogoFile, saveMilestone, saveProject, uploadProjectLogo,
+  deleteMilestone, deleteProject, getProjectBySlug, listProjectMilestones, listProjects,
+  removeProjectLogoFile, saveMilestone, saveProject, setMilestoneArchived, uploadProjectLogo,
 } from '../../lib/boardApi';
 import type { BoardMilestone, BoardProject, MilestoneStatus } from '../../types/board';
+import { formatDate } from './UpcomingMilestones';
 import ProjectDocumentsSection from './ProjectDocumentsSection';
 
 const STATUSES: MilestoneStatus[] = ['planlagt', 'pågår', 'fullført', 'forsinket'];
@@ -15,10 +16,15 @@ function slugify(name: string): string {
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-interface MilestoneDraft {
+interface MilestoneRow {
+  id?: string;
   title: string;
   target_date: string;
   status: MilestoneStatus;
+}
+
+function toRow(m: BoardMilestone): MilestoneRow {
+  return { id: m.id, title: m.title, target_date: m.target_date, status: m.status };
 }
 
 const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
@@ -49,7 +55,9 @@ function ProjectEditor({ project, onSaved, onCreated }: {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoRemoved, setLogoRemoved] = useState(false);
   const logoInputRef = useRef<HTMLInputElement>(null);
-  const [slots, setSlots] = useState<(MilestoneDraft | null)[]>([null, null, null]);
+  const [activeRows, setActiveRows] = useState<MilestoneRow[]>([]);
+  const [archived, setArchived] = useState<BoardMilestone[]>([]);
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const projectId = project?.id ?? null;
 
@@ -59,19 +67,23 @@ function ProjectEditor({ project, onSaved, onCreated }: {
   );
   useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, [previewUrl]);
 
+  const reloadMilestones = async (id: string) => {
+    const ms = await listProjectMilestones(id, true);
+    setActiveRows(ms.filter((m) => !m.is_archived).map(toRow));
+    setArchived(ms.filter((m) => m.is_archived));
+  };
+
   useEffect(() => {
     if (!projectId) return;
-    listProjectMilestones(projectId).then((ms) => {
-      const next: (MilestoneDraft | null)[] = [null, null, null];
-      ms.forEach((m: BoardMilestone) => {
-        next[m.position - 1] = { title: m.title, target_date: m.target_date, status: m.status };
-      });
-      setSlots(next);
-    });
+    reloadMilestones(projectId);
   }, [projectId]);
 
-  const setSlot = (i: number, draft: MilestoneDraft | null) => {
-    setSlots((prev) => prev.map((s, j) => (j === i ? draft : s)));
+  const updateRow = (i: number, patch: Partial<MilestoneRow>) => {
+    setActiveRows((prev) => prev.map((r, j) => (j === i ? { ...r, ...patch } : r)));
+  };
+
+  const addDraftRow = () => {
+    setActiveRows((prev) => [...prev, { title: '', target_date: '', status: 'planlagt' }]);
   };
 
   const currentLogoUrl = logoRemoved ? null : (project?.logo_url ?? null);
@@ -127,29 +139,54 @@ function ProjectEditor({ project, onSaved, onCreated }: {
     }
   };
 
-  const handleSaveMilestone = async (i: number) => {
+  const handleSaveMilestoneRow = async (i: number) => {
     if (!project) { setStatus('Lagre prosjektet først.'); return; }
-    const draft = slots[i];
-    if (!draft || !draft.title || !draft.target_date) {
-      setStatus(`Milepæl ${i + 1}: fyll ut tittel og dato.`);
+    const row = activeRows[i];
+    if (!row.title || !row.target_date) {
+      setStatus('Fyll ut tittel og dato for milepælen.');
       return;
     }
     try {
       await saveMilestone({
-        project_id: project.id, title: draft.title,
-        target_date: draft.target_date, status: draft.status, position: i + 1,
+        id: row.id, project_id: project.id, title: row.title,
+        target_date: row.target_date, status: row.status,
       });
-      setStatus(`Milepæl ${i + 1} lagret.`);
+      setStatus('Milepæl lagret.');
+      await reloadMilestones(project.id);
       onSaved();
     } catch (e) {
       setStatus(`Feil: ${(e as Error).message}`);
     }
   };
 
-  const handleDeleteMilestone = async (i: number) => {
+  const handleArchiveMilestone = async (id: string) => {
+    if (!project) return;
     try {
-      if (project) await deleteMilestoneAt(project.id, i + 1);
-      setSlot(i, null);
+      await setMilestoneArchived(id, true);
+      await reloadMilestones(project.id);
+      onSaved();
+    } catch (e) {
+      setStatus(`Feil: ${(e as Error).message}`);
+    }
+  };
+
+  const handleReopenMilestone = async (id: string) => {
+    if (!project) return;
+    try {
+      await setMilestoneArchived(id, false);
+      await reloadMilestones(project.id);
+      onSaved();
+    } catch (e) {
+      setStatus(`Feil: ${(e as Error).message}`);
+    }
+  };
+
+  const handleDeleteMilestone = async (id: string) => {
+    if (!project) return;
+    if (!window.confirm('Slette milepælen? Dette er kun ment for feilregistreringer — bruk «Arkiver» for historikk.')) return;
+    try {
+      await deleteMilestone(id);
+      await reloadMilestones(project.id);
       onSaved();
     } catch (e) {
       setStatus(`Feil: ${(e as Error).message}`);
@@ -217,31 +254,61 @@ function ProjectEditor({ project, onSaved, onCreated }: {
 
       {project && (
         <div className="space-y-4 pt-4 border-t border-[var(--deck-rule)]">
-          <p className="deck-eyebrow">Milepæler (maks 3)</p>
-          {[0, 1, 2].map((i) => {
-            const draft = slots[i];
-            return (
-              <div key={i} className="grid md:grid-cols-4 gap-2 items-center">
-                <input className={field} placeholder={`Milepæl ${i + 1}`}
-                  value={draft?.title ?? ''}
-                  onChange={(e) => setSlot(i, { ...(draft ?? { target_date: '', status: 'planlagt' }), title: e.target.value })} />
-                <input className={field} type="date"
-                  value={draft?.target_date ?? ''}
-                  onChange={(e) => setSlot(i, { ...(draft ?? { title: '', status: 'planlagt' }), target_date: e.target.value })} />
-                <select className={field} value={draft?.status ?? 'planlagt'}
-                  onChange={(e) => setSlot(i, { ...(draft ?? { title: '', target_date: '' }), status: e.target.value as MilestoneStatus })}>
-                  {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-                </select>
-                <div className="flex gap-3">
-                  <button className="deck-kicker underline" onClick={() => handleSaveMilestone(i)}>Lagre</button>
-                  {draft && (
+          <p className="deck-eyebrow">Milepæler</p>
+          {activeRows.map((row, i) => (
+            <div key={row.id ?? `draft-${i}`} className="grid md:grid-cols-4 gap-2 items-center">
+              <input className={field} placeholder="Tittel"
+                value={row.title}
+                onChange={(e) => updateRow(i, { title: e.target.value })} />
+              <input className={field} type="date"
+                value={row.target_date}
+                onChange={(e) => updateRow(i, { target_date: e.target.value })} />
+              <select className={field} value={row.status}
+                onChange={(e) => updateRow(i, { status: e.target.value as MilestoneStatus })}>
+                {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+              <div className="flex gap-3">
+                <button className="deck-kicker underline" onClick={() => handleSaveMilestoneRow(i)}>Lagre</button>
+                {row.id && (
+                  <>
+                    <button className="deck-kicker underline" onClick={() => handleArchiveMilestone(row.id!)}>
+                      Arkiver
+                    </button>
                     <button className="deck-kicker underline" style={{ color: '#c94a4a' }}
-                      onClick={() => handleDeleteMilestone(i)}>Slett</button>
-                  )}
-                </div>
+                      onClick={() => handleDeleteMilestone(row.id!)}>
+                      Slett
+                    </button>
+                  </>
+                )}
               </div>
-            );
-          })}
+            </div>
+          ))}
+          <button className="deck-kicker underline" onClick={addDraftRow}>+ Legg til milepæl</button>
+
+          <div className="pt-4 border-t border-[var(--deck-rule)]">
+            <button className="deck-kicker underline" onClick={() => setHistoryOpen((v) => !v)}>
+              {historyOpen ? 'Skjul historikk' : `Historikk (${archived.length})`}
+            </button>
+            {historyOpen && (
+              <div className="space-y-2 mt-3">
+                {archived.length === 0 ? (
+                  <p className="deck-kicker">Ingen arkiverte milepæler.</p>
+                ) : archived.map((m) => (
+                  <div key={m.id} className="flex items-baseline gap-3 flex-wrap" style={{ opacity: 0.6 }}>
+                    <span className="deck-lede">{m.title}</span>
+                    <span className="deck-kicker">{m.status} · {formatDate(m.target_date)}</span>
+                    <button className="deck-kicker underline" onClick={() => handleReopenMilestone(m.id)}>
+                      Gjenåpne
+                    </button>
+                    <button className="deck-kicker underline" style={{ color: '#c94a4a' }}
+                      onClick={() => handleDeleteMilestone(m.id)}>
+                      Slett
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       )}
       {status && <p className="deck-kicker">{status}</p>}

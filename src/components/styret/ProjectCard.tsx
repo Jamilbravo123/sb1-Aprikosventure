@@ -30,9 +30,10 @@ export default function ProjectCard({ project, milestones }: {
     .sort((a, b) => a.target_date.localeCompare(b.target_date))[0] ?? null;
   const completedPct = total > 0 ? Math.round((completed / total) * 100) : 0;
   const inProgressPct = total > 0 ? Math.round((inProgress / total) * 100) : 0;
+  // milestones er ferdigfiltrert til aktive (listAllMilestones()) — her tas kun de 3 nærmeste.
   const miniMilestones = milestones
     .slice()
-    .sort((a, b) => a.position - b.position)
+    .sort((a, b) => a.target_date.localeCompare(b.target_date))
     .slice(0, 3);
 
   return (

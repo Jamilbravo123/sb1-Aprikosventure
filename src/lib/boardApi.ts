@@ -1,7 +1,7 @@
 import { supabase } from './supabase';
 import type {
   ActivityItem, BoardDocument, BoardMember, BoardMilestone, BoardProject,
-  MilestoneWithProject, SinceLast,
+  MilestoneStatus, MilestoneWithProject, SinceLast,
 } from '../types/board';
 
 function throwIf(error: { message: string } | null): void {
@@ -81,10 +81,14 @@ export async function getProjectBySlug(slug: string): Promise<BoardProject | nul
   return data;
 }
 
-export async function listProjectMilestones(projectId: string): Promise<BoardMilestone[]> {
-  const { data, error } = await supabase
+export async function listProjectMilestones(
+  projectId: string, includeArchived = false,
+): Promise<BoardMilestone[]> {
+  let query = supabase
     .from('board_milestones').select('*')
-    .eq('project_id', projectId).order('position');
+    .eq('project_id', projectId).order('target_date');
+  if (!includeArchived) query = query.eq('is_archived', false);
+  const { data, error } = await query;
   throwIf(error);
   return data ?? [];
 }
@@ -93,7 +97,8 @@ export async function listAllMilestones(): Promise<BoardMilestone[]> {
   const { data, error } = await supabase
     .from('board_milestones')
     .select('*')
-    .order('position');
+    .eq('is_archived', false)
+    .order('target_date');
   throwIf(error);
   return data ?? [];
 }
@@ -103,6 +108,7 @@ export async function listUpcomingMilestones(): Promise<MilestoneWithProject[]> 
     .from('board_milestones')
     .select('*, board_projects!inner(name, slug)')
     .neq('status', 'fullført')
+    .eq('is_archived', false)
     .eq('board_projects.is_archived', false)
     .order('target_date');
   throwIf(error);
@@ -134,7 +140,7 @@ export async function getSinceLast(since: string | null): Promise<SinceLast> {
       .gt('created_at', since).eq('is_archived', false),
     supabase.from('board_milestones')
       .select('*, board_projects!inner(name, slug)')
-      .gt('updated_at', since).eq('board_projects.is_archived', false),
+      .gt('updated_at', since).eq('is_archived', false).eq('board_projects.is_archived', false),
     supabase.from('board_documents').select('*').gt('created_at', since),
   ]);
   throwIf(projects.error);
@@ -209,17 +215,23 @@ export async function deleteProject(id: string): Promise<void> {
 }
 
 export async function saveMilestone(m: {
-  project_id: string; title: string;
-  target_date: string; status: BoardMilestone['status']; position: number;
+  id?: string; project_id: string; title: string;
+  target_date: string; status: MilestoneStatus;
 }): Promise<void> {
   const { error } = await supabase.from('board_milestones')
-    .upsert(m, { onConflict: 'project_id,position' });
+    .upsert(m, { onConflict: 'id' });
   throwIf(error);
 }
 
-export async function deleteMilestoneAt(projectId: string, position: number): Promise<void> {
+export async function deleteMilestone(id: string): Promise<void> {
   const { error } = await supabase.from('board_milestones')
-    .delete().eq('project_id', projectId).eq('position', position);
+    .delete().eq('id', id);
+  throwIf(error);
+}
+
+export async function setMilestoneArchived(id: string, archived: boolean): Promise<void> {
+  const { error } = await supabase.from('board_milestones')
+    .update({ is_archived: archived }).eq('id', id);
   throwIf(error);
 }
 

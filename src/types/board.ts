@@ -33,7 +33,7 @@ export interface BoardMilestone {
   title: string;
   target_date: string;
   status: MilestoneStatus;
-  position: number;
+  is_archived: boolean;
   created_at: string;
   updated_at: string;
 }

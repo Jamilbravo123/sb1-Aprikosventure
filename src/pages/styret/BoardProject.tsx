@@ -4,13 +4,14 @@ import {
   getDocumentUrl, getProjectBySlug, listDocuments, listProjectMilestones,
 } from '../../lib/boardApi';
 import type { BoardDocument, BoardMilestone, BoardProject as Project } from '../../types/board';
-import MilestoneStepper from '../../components/styret/MilestoneStepper';
+import MilestoneList from '../../components/styret/MilestoneList';
 import { formatDate } from '../../components/styret/UpcomingMilestones';
 
 export default function BoardProject() {
   const { slug } = useParams<{ slug: string }>();
   const [project, setProject] = useState<Project | null>(null);
   const [milestones, setMilestones] = useState<BoardMilestone[]>([]);
+  const [archivedMilestones, setArchivedMilestones] = useState<BoardMilestone[]>([]);
   const [documents, setDocuments] = useState<BoardDocument[]>([]);
   const [state, setState] = useState<'loading' | 'ready' | 'notfound' | 'error'>('loading');
   const [docError, setDocError] = useState<string | null>(null);
@@ -25,11 +26,12 @@ export default function BoardProject() {
         if (!p) { setState('notfound'); return; }
         setProject(p);
         const [ms, docs] = await Promise.all([
-          listProjectMilestones(p.id),
+          listProjectMilestones(p.id, true),
           listDocuments(p.id),
         ]);
         if (cancelled) return;
-        setMilestones(ms);
+        setMilestones(ms.filter((m) => !m.is_archived));
+        setArchivedMilestones(ms.filter((m) => m.is_archived));
         setDocuments(docs);
         setState('ready');
       })
@@ -92,8 +94,8 @@ export default function BoardProject() {
         {project.description && <p className="deck-lede">{project.description}</p>}
 
         <section>
-          <p className="deck-eyebrow">De tre viktigste milepælene</p>
-          <MilestoneStepper milestones={milestones} />
+          <p className="deck-eyebrow">Milepæler</p>
+          <MilestoneList milestones={milestones} archivedMilestones={archivedMilestones} />
         </section>
 
         <section>
