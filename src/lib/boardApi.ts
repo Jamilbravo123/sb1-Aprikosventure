@@ -221,10 +221,13 @@ export async function deleteProject(id: string): Promise<void> {
 export async function saveMilestone(m: {
   id?: string; project_id: string; title: string;
   target_date: string; status: MilestoneStatus;
-}): Promise<void> {
-  const { error } = await supabase.from('board_milestones')
-    .upsert(m, { onConflict: 'id' });
+}): Promise<BoardMilestone> {
+  const { data, error } = await supabase.from('board_milestones')
+    .upsert(m, { onConflict: 'id' })
+    .select()
+    .single();
   throwIf(error);
+  return data as BoardMilestone;
 }
 
 export async function deleteMilestone(id: string): Promise<void> {

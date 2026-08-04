@@ -21,10 +21,19 @@ interface MilestoneRow {
   title: string;
   target_date: string;
   status: MilestoneStatus;
+  created_at?: string;
+  updated_at?: string;
 }
 
 function toRow(m: BoardMilestone): MilestoneRow {
-  return { id: m.id, title: m.title, target_date: m.target_date, status: m.status };
+  return {
+    id: m.id, title: m.title, target_date: m.target_date, status: m.status,
+    created_at: m.created_at, updated_at: m.updated_at,
+  };
+}
+
+function sortByTargetDate<T extends { target_date: string }>(rows: T[]): T[] {
+  return [...rows].sort((a, b) => a.target_date.localeCompare(b.target_date));
 }
 
 const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
@@ -147,12 +156,12 @@ function ProjectEditor({ project, onSaved, onCreated }: {
       return;
     }
     try {
-      await saveMilestone({
+      const saved = await saveMilestone({
         id: row.id, project_id: project.id, title: row.title,
         target_date: row.target_date, status: row.status,
       });
       setStatus('Milepæl lagret.');
-      await reloadMilestones(project.id);
+      setActiveRows((prev) => prev.map((r, j) => (j === i ? toRow(saved) : r)));
       onSaved();
     } catch (e) {
       setStatus(`Feil: ${(e as Error).message}`);
@@ -161,9 +170,22 @@ function ProjectEditor({ project, onSaved, onCreated }: {
 
   const handleArchiveMilestone = async (id: string) => {
     if (!project) return;
+    const row = activeRows.find((r) => r.id === id);
+    if (!row) return;
     try {
       await setMilestoneArchived(id, true);
-      await reloadMilestones(project.id);
+      setActiveRows((prev) => prev.filter((r) => r.id !== id));
+      const archivedRow: BoardMilestone = {
+        id,
+        project_id: project.id,
+        title: row.title,
+        target_date: row.target_date,
+        status: row.status,
+        is_archived: true,
+        created_at: row.created_at ?? new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+      setArchived((prev) => sortByTargetDate([...prev, archivedRow]));
       onSaved();
     } catch (e) {
       setStatus(`Feil: ${(e as Error).message}`);
@@ -172,21 +194,32 @@ function ProjectEditor({ project, onSaved, onCreated }: {
 
   const handleReopenMilestone = async (id: string) => {
     if (!project) return;
+    const row = archived.find((m) => m.id === id);
+    if (!row) return;
     try {
       await setMilestoneArchived(id, false);
-      await reloadMilestones(project.id);
+      setArchived((prev) => prev.filter((m) => m.id !== id));
+      setActiveRows((prev) => sortByTargetDate([...prev, toRow(row)]));
       onSaved();
     } catch (e) {
       setStatus(`Feil: ${(e as Error).message}`);
     }
   };
 
-  const handleDeleteMilestone = async (id: string) => {
+  const handleDeleteMilestone = async (id: string | undefined, draftIndex?: number) => {
     if (!project) return;
+    if (!id) {
+      // Draft-rad uten id: ingen server-rad å slette, fjern kun lokalt.
+      if (draftIndex !== undefined) {
+        setActiveRows((prev) => prev.filter((_, j) => j !== draftIndex));
+      }
+      return;
+    }
     if (!window.confirm('Slette milepælen? Dette er kun ment for feilregistreringer — bruk «Arkiver» for historikk.')) return;
     try {
       await deleteMilestone(id);
-      await reloadMilestones(project.id);
+      setActiveRows((prev) => prev.filter((r) => r.id !== id));
+      setArchived((prev) => prev.filter((m) => m.id !== id));
       onSaved();
     } catch (e) {
       setStatus(`Feil: ${(e as Error).message}`);
@@ -270,16 +303,14 @@ function ProjectEditor({ project, onSaved, onCreated }: {
               <div className="flex gap-3">
                 <button className="deck-kicker underline" onClick={() => handleSaveMilestoneRow(i)}>Lagre</button>
                 {row.id && (
-                  <>
-                    <button className="deck-kicker underline" onClick={() => handleArchiveMilestone(row.id!)}>
-                      Arkiver
-                    </button>
-                    <button className="deck-kicker underline" style={{ color: '#c94a4a' }}
-                      onClick={() => handleDeleteMilestone(row.id!)}>
-                      Slett
-                    </button>
-                  </>
+                  <button className="deck-kicker underline" onClick={() => handleArchiveMilestone(row.id!)}>
+                    Arkiver
+                  </button>
                 )}
+                <button className="deck-kicker underline" style={{ color: '#c94a4a' }}
+                  onClick={() => handleDeleteMilestone(row.id, i)}>
+                  Slett
+                </button>
               </div>
             </div>
           ))}
