@@ -69,3 +69,19 @@ og `docs/superpowers/plans/2026-08-03-styreportal.md` (planen er synket med fakt
   nøkkelrom enn lenke-tokenet). Ikke skru den opp igjen uten å tenke på brute force.
 - `touchLastSeen` kalles KUN når forrige besøk er >30 min gammelt — ellers nullstiller hver sidelast
   referansepunktet, og KPI-flisen «Oppdateringer» viser alltid 0 for den som selv jobber i portalen.
+
+## Ukentlig e-postrapport (2026-08-04)
+
+- Edge Function `styre-ukesrapport` + cron-jobb `styre-ukesrapport` (mandag 06:00 GMT). Sender ett
+  sammendrag av endringer siden forrige VELLYKKEDE sending til alle i `board_members` via Resend
+  (`updates.aprikosventure.com`, EU). Ingen endringer ⇒ ingen e-post.
+- `board_report_log` er dublettvakten: sender ikke to ganger innen 20 timer. NØDVENDIG fordi pg_net
+  har maks 5 s timeout — funksjonen kan bruke lenger, så cron kan feilaktig markere kjøringen som
+  feilet etter at e-posten faktisk gikk ut.
+- **Autorisasjon:** `verify_jwt` alene er IKKE nok — anon-nøkkelen ligger åpent i frontenden og
+  passerer den. Funksjonen krever service_role-JWT (eller `x-cron-secret`). Verifisert i prod:
+  anon-nøkkel ⇒ 401, cron-jobb ⇒ 200.
+- Hemmelighet: `RESEND_API_KEY` som Edge Function secret (satt av Jamil). pg_net + pg_cron installert.
+- Trygg testoppskrift uten å spamme styret: sett en fersk rad i `board_report_log`, kjør
+  cron-kommandoen dynamisk (`select command from cron.job` + `execute`), les `net._http_response`,
+  slett testraden.
