@@ -13,6 +13,8 @@ import ProjectCard from '../../components/styret/ProjectCard';
 import ActivityStream from '../../components/styret/ActivityStream';
 import KpiRow from '../../components/styret/KpiRow';
 
+const TOUCH_TERSKEL_MS = 30 * 60 * 1000;
+
 export default function BoardDashboard({ member }: { member: BoardMember }) {
   const { signOut } = useAuth();
   const [sinceLast, setSinceLast] = useState<SinceLast | null>(null);
@@ -32,7 +34,12 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
         // 2) … og oppdater tidsstempelet ETTERPÅ (én gang per økt).
         if (!touched.current) {
           touched.current = true;
-          touchLastSeen(member.id).catch(() => {});
+          const forrige = member.last_seen_at ? new Date(member.last_seen_at).getTime() : 0;
+          // Oppdater «siste besøk» kun ved en NY økt (>30 min siden forrige) — ellers
+          // ville hver sidelast nullstille referansepunktet for «Oppdateringer».
+          if (Date.now() - forrige > TOUCH_TERSKEL_MS) {
+            touchLastSeen(member.id).catch(() => {});
+          }
         }
         const [upcomingData, projectData, allMilestones] = await Promise.all([
           listUpcomingMilestones(),
