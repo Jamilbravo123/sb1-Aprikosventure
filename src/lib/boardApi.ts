@@ -153,18 +153,22 @@ export async function getSinceLast(since: string | null): Promise<SinceLast> {
   };
 }
 
-// Global aktivitetsstrøm for forsiden: de 3 nyeste hendelsene på tvers av
-// prosjekter, milepæler og dokumenter.
-export async function getRecentActivity(): Promise<ActivityItem[]> {
+// Global aktivitetsstrøm for forsiden: hendelser på tvers av prosjekter,
+// milepæler og dokumenter siden `sinceIso`, maks 50 totalt.
+export async function getActivity(sinceIso: string): Promise<ActivityItem[]> {
   const [projects, milestones, documents] = await Promise.all([
     supabase.from('board_projects').select('*')
-      .order('created_at', { ascending: false }).limit(3),
+      .gte('created_at', sinceIso)
+      .order('created_at', { ascending: false }).limit(50),
     supabase.from('board_milestones')
       .select('*, board_projects!inner(name, slug, is_archived)')
+      .eq('is_archived', false)
       .eq('board_projects.is_archived', false)
-      .order('updated_at', { ascending: false }).limit(3),
+      .gte('updated_at', sinceIso)
+      .order('updated_at', { ascending: false }).limit(50),
     supabase.from('board_documents').select('*')
-      .order('created_at', { ascending: false }).limit(3),
+      .gte('created_at', sinceIso)
+      .order('created_at', { ascending: false }).limit(50),
   ]);
   throwIf(projects.error);
   throwIf(milestones.error);
@@ -196,7 +200,7 @@ export async function getRecentActivity(): Promise<ActivityItem[]> {
 
   return items
     .sort((a, b) => b.timestamp.localeCompare(a.timestamp))
-    .slice(0, 3);
+    .slice(0, 50);
 }
 
 // ── Admin-skriving (RLS håndhever is_board_admin) ──────────

@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import {
-  getRecentActivity, getSinceLast, listAllMilestones, listProjects,
+  getSinceLast, listAllMilestones, listProjects,
   listUpcomingMilestones, touchLastSeen,
 } from '../../lib/boardApi';
 import type {
-  ActivityItem, BoardMember, BoardMilestone, BoardProject, MilestoneWithProject, SinceLast,
+  BoardMember, BoardMilestone, BoardProject, MilestoneWithProject, SinceLast,
 } from '../../types/board';
 import UpcomingMilestones from '../../components/styret/UpcomingMilestones';
 import ProjectCard from '../../components/styret/ProjectCard';
@@ -16,7 +16,6 @@ import KpiRow from '../../components/styret/KpiRow';
 export default function BoardDashboard({ member }: { member: BoardMember }) {
   const { signOut } = useAuth();
   const [sinceLast, setSinceLast] = useState<SinceLast | null>(null);
-  const [activity, setActivity] = useState<ActivityItem[]>([]);
   const [upcoming, setUpcoming] = useState<MilestoneWithProject[]>([]);
   const [projects, setProjects] = useState<BoardProject[]>([]);
   const [milestonesByProject, setMilestonesByProject] = useState<Record<string, BoardMilestone[]>>({});
@@ -35,13 +34,11 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
           touched.current = true;
           touchLastSeen(member.id).catch(() => {});
         }
-        const [activityData, upcomingData, projectData, allMilestones] = await Promise.all([
-          getRecentActivity(),
+        const [upcomingData, projectData, allMilestones] = await Promise.all([
           listUpcomingMilestones(),
           listProjects(true),
           listAllMilestones(),
         ]);
-        setActivity(activityData);
         setUpcoming(upcomingData);
         setProjects(projectData);
         const byProject = allMilestones.reduce<Record<string, BoardMilestone[]>>((acc, m) => {
@@ -97,10 +94,7 @@ export default function BoardDashboard({ member }: { member: BoardMember }) {
               lastSeenAt={member.last_seen_at}
             />
 
-            <section>
-              <p className="deck-eyebrow mb-2.5">Siste aktivitet</p>
-              <ActivityStream items={activity} />
-            </section>
+            <ActivityStream />
 
             <section>
               <div className="flex items-baseline justify-between flex-wrap gap-2">

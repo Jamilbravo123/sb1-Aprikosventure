@@ -1,7 +1,14 @@
 # Styreportal — designspesifikasjon
 
-Sist oppdatert: 2026-08-03
+Sist oppdatert: 2026-08-04
 Status: Til godkjenning hos Jamil
+
+**Endring 2026-08-04 (v1.4):** `board_milestones` har fri milepælsmodell — ubegrenset antall per
+prosjekt, ikke lenger maks 3/faste posisjoner. `position`-kolonnen (og unique/check-constraint på
+den) er fjernet; ny `is_archived boolean` styrer arkivering/historikk i stedet for sletting.
+Prosjektkortene på forsiden viser fortsatt kun de 3 nærmeste aktive milepælene (sortert på
+`target_date`), og «Siste aktivitet» har fått en periodevelger (i dag / siste uke / siste 3 mnd,
+default siste uke) i stedet for en fast liste på 3 hendelser.
 
 ## Bakgrunn og mål
 
@@ -74,8 +81,8 @@ privat Storage-bøtte, magisk lenke-innlogging mot lukket allowlist, og admin-gr
 | `title` | text NOT NULL | |
 | `target_date` | date NOT NULL | anslått dato |
 | `status` | text CHECK (`'planlagt'`,`'pågår'`,`'fullført'`,`'forsinket'`) | |
-| `position` | int **CHECK (position BETWEEN 1 AND 3)** | |
-| | | **UNIQUE (project_id, position)** — maks tre håndheves i SQL, ikke bare UI |
+| `is_archived` | boolean default false | v1.4: fri modell, ubegrenset antall per prosjekt. Arkivering
+  (ikke sletting) er standardveien til historikk — sletting er kun for feilregistreringer |
 | `created_at` / `updated_at` | timestamptz | |
 
 ### `board_documents`
@@ -139,26 +146,31 @@ Rekkefølge:
 1. **KPI-rad** — 4 fliser: Aktive prosjekter, Kommende milepæler (+ neste frist), Milepæler pågår,
    Nytt siden sist (samme datagrunnlag som tidligere «siden sist»-mekanikk, nå som nøkkeltall
    med undertekst «siste besøk …»).
-2. **Siste aktivitet** — de 3 nyeste hendelsene globalt (nye prosjekter, oppdaterte milepæler,
-   nye dokumenter), sortert på tidsstempel. Tom tilstand: «Ingen aktivitet ennå.»
-3. **Prosjektgrid** — kompakte kort: logo/navn, eierandel, partnerlinje, neste milepæl,
-   fremdriftsmåler («X av Y fullført · Z pågår»), sist oppdatert-dato. Arkiverte skjult som
-   standard; enkel «Vis arkiverte»-lenke i seksjonshodet (ingen filterknapper).
+2. **Siste aktivitet** — hendelser globalt (nye prosjekter, oppdaterte milepæler, nye dokumenter),
+   sortert på tidsstempel, maks 50. v1.4: periodevelger «I dag» / «Siste uke» / «Siste 3 mnd»
+   (default siste uke) i seksjonshodet; listen scroller internt i en boks med fast høyde i stedet
+   for å forlenge siden. Tom tilstand er periode-spesifikk («Ingen aktivitet i dag.» osv.).
+3. **Prosjektgrid** — kompakte kort: logo/navn, eierandel, partnerlinje, de 3 nærmeste aktive
+   milepælene (sortert på `target_date`), fremdriftsmåler («X av Y fullført · Z pågår» — Y teller
+   ALLE aktive milepæler, ikke bare de 3 viste), sist oppdatert-dato. Arkiverte prosjekter skjult
+   som standard; enkel «Vis arkiverte»-lenke i seksjonshodet (ingen filterknapper).
 4. **Kommende milepæler** — gruppert på `target_date` (dato som gruppeoverskrift), sortert dato
    stigende og innen samme dato pågår før planlagt/forsinket, deretter prosjektnavn. Første 5
    radene synlige, resten bak «Vis alle (N)»/«Vis færre».
 
 ### Prosjektside `/styret/prosjekt/:slug`
-De tre milepælene som visuell horisontal stegviser/tidslinje (posisjon 1–3, status-farger,
-datoer merket «anslått» når status ≠ `fullført`), eierandel + eierandelsnotat, ev. selskapsinfo,
-beskrivelse, prosjektets dokumenter.
+v1.4: fri liste av alle AKTIVE milepæler sortert på `target_date` (status-farget prikk, tittel,
+datoer merket «anslått» når status ≠ `fullført`), med en sammenleggbar «Historikk (N)»-seksjon
+under for arkiverte milepæler. Ikke lenger begrenset til tre faste posisjoner. Eierandel +
+eierandelsnotat, ev. selskapsinfo, beskrivelse, prosjektets dokumenter vises som før.
 
 ### Dokumenter `/styret/dokumenter`
 Alle protokoller/referater, filter på type og prosjekt, sortert på møtedato. Åpnes via signert lenke.
 
 ### Admin `/styret/admin` (kun `role = 'admin'`)
 - CRUD prosjekter (inkl. arkivering, sortering).
-- CRUD milepæler (maks 3 per prosjekt — UI viser tre faste plasser).
+- CRUD milepæler — v1.4: ubegrenset antall per prosjekt, dynamisk liste i stedet for tre faste
+  plasser. Arkiver/gjenåpne for historikk; sletting er kun for feilregistreringer.
 - Opplasting av dokumenter (kun PDF) + metadata; sletting.
 - Medlemsliste: legg til/fjern e-post, sett rolle.
 
