@@ -1,6 +1,7 @@
 # Aprikos Venture - Project Memory
 
 ## References
+- [Styreportalen /styret](project_styreportal.md) — arkitektur, RLS/triggere, driftsfakta for styreområdet (lansert 2026-08-04)
 - [Supabase CLI and API access](reference_supabase_access.md) — How to run SQL, manage auth users, and access the Aprikos Venture Club Supabase project
 - [Magic link trigger fix](project_magic_link_trigger_fix.md) — Broken auth trigger on auth.users that blocked new user signups (fixed 2026-04-30)
 - [Code Entropy restructuring](code_entropy_restructuring.md) — ⚠️ 2026-06-27 PIVOT: venture model DROPPED, focus only on Mashwara, downsize 22→~6–7 (validation phase). Insta Doctor = real-time central feature, fill-rate too thin → employ local doctor(s) to guarantee supply. (Earlier parallel-venture/16-people plan superseded.)
@@ -24,7 +25,7 @@
 - News: Supabase `news` table (project: Aprikos Venture Club, id: uvmthunaitnojimjkhmc)
 
 ## Architecture
-- Single page: `HomePage` (public only — investor dashboard removed, to be rebuilt later)
+- Public: `HomePage`. Beskyttede områder: `/deck` (investor) og `/styret` (styreportal — se project_styreportal.md)
 - No state management library - React useState only
 - Venture data: static mock (`src/data/ventures.mock.ts`), categories (`src/data/portfolio-categories.ts`)
 - Smooth scroll: Lenis provider wraps entire app

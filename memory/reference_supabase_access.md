@@ -4,12 +4,15 @@ description: How to access Supabase project database via CLI, service_role key, 
 type: reference
 ---
 
+## Supabase MCP-plugin (foretrukket per 2026-08-04)
+- `plugin:supabase`-MCP etter OAuth-godkjenning fra Jamil gir `execute_sql`, `apply_migration`,
+  `list_tables`, `get_advisors` m.m. mot prosjektet — dekker alt SQL-behov.
+- Auth-KONFIG (redirect URLs, e-postmaler) er IKKE tilgjengelig via MCP — gjøres i dashboardet.
+
 ## Supabase CLI
-- Installed at `/usr/local/bin/supabase` (v2.54.11)
-- Project is linked: Aprikos Venture Club (`uvmthunaitnojimjkhmc`), region: West EU (Ireland)
-- `supabase projects list` works without extra auth
-- `supabase projects api-keys --project-ref uvmthunaitnojimjkhmc` to get keys
-- CLI version lacks `db execute` — use Management API for SQL
+- ⚠️ 2026-08-04: `/usr/local/bin/supabase` finnes IKKE på stasjonær Mac (notatet under var fra laptop).
+- (Laptop: v2.54.11, prosjekt linket: Aprikos Venture Club `uvmthunaitnojimjkhmc`, West EU (Ireland);
+  `supabase projects api-keys --project-ref uvmthunaitnojimjkhmc` for nøkler; CLI mangler `db execute`.)
 
 ## Service Role Key
 - Can be used for Auth Admin API calls (list/create/delete users)
