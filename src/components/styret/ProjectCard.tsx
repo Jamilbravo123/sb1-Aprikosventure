@@ -16,6 +16,7 @@ export default function ProjectCard({ project, nextMilestone }: {
       to={`/styret/prosjekt/${project.slug}`}
       className="block border border-[var(--deck-rule)] p-6 hover:border-[var(--deck-rule-strong)] transition-colors"
     >
+      {project.logo_url && <img src={project.logo_url} alt="" className="h-8 w-auto mb-3" />}
       <h3 className="deck-display text-2xl">{project.name}</h3>
       <p className="deck-kicker mt-2" style={{ color: 'var(--deck-gold)' }}>
         {ownershipLabel(project)}

@@ -72,6 +72,7 @@ export default function BoardProject() {
       <div className="max-w-4xl mx-auto space-y-10">
         <Link to="/styret" className="deck-kicker underline">← Styreportal</Link>
         <header>
+          {project.logo_url && <img src={project.logo_url} alt="" className="h-12 w-auto mb-4" />}
           <h1 className="deck-display text-5xl">{project.name}</h1>
           <p className="deck-kicker mt-3" style={{ color: 'var(--deck-gold)' }}>
             {project.ownership_pct !== null ? `${project.ownership_pct} % eierandel` : 'Eierandel ikke avklart'}

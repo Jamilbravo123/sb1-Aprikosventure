@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
-  deleteMilestoneAt, deleteProject, listProjectMilestones, listProjects,
-  saveMilestone, saveProject,
+  deleteMilestoneAt, deleteProject, getProjectBySlug, listProjectMilestones, listProjects,
+  saveMilestone, saveProject, uploadProjectLogo,
 } from '../../lib/boardApi';
 import type { BoardMilestone, BoardProject, MilestoneStatus } from '../../types/board';
+import ProjectDocumentsSection from './ProjectDocumentsSection';
 
 const STATUSES: MilestoneStatus[] = ['planlagt', 'pågår', 'fullført', 'forsinket'];
+const LOGO_ACCEPT = 'image/png,image/jpeg,image/svg+xml,image/webp';
 
 function slugify(name: string): string {
   return name.toLowerCase()
@@ -19,7 +21,22 @@ interface MilestoneDraft {
   status: MilestoneStatus;
 }
 
-function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onSaved: () => void }) {
+const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
+
+function Field({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div>
+      <label className="deck-kicker block mb-1">{label}</label>
+      {children}
+    </div>
+  );
+}
+
+function ProjectEditor({ project, onSaved, onCreated }: {
+  project: BoardProject | null;
+  onSaved: () => void;
+  onCreated?: (p: BoardProject) => void;
+}) {
   const [name, setName] = useState(project?.name ?? '');
   const [description, setDescription] = useState(project?.description ?? '');
   const [ownershipPct, setOwnershipPct] = useState(project?.ownership_pct?.toString() ?? '');
@@ -29,6 +46,8 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
   const [companyOrgnr, setCompanyOrgnr] = useState(project?.company_orgnr ?? '');
   const [sortOrder, setSortOrder] = useState(project?.sort_order ?? 0);
   const [isArchived, setIsArchived] = useState(project?.is_archived ?? false);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoRemoved, setLogoRemoved] = useState(false);
   const [slots, setSlots] = useState<(MilestoneDraft | null)[]>([null, null, null]);
   const [status, setStatus] = useState<string | null>(null);
   const projectId = project?.id ?? null;
@@ -48,9 +67,20 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
     setSlots((prev) => prev.map((s, j) => (j === i ? draft : s)));
   };
 
+  const currentLogoUrl = logoRemoved ? null : (project?.logo_url ?? null);
+
+  const handleRemoveLogo = () => {
+    setLogoFile(null);
+    setLogoRemoved(true);
+  };
+
   const handleSave = async () => {
     setStatus(null);
     try {
+      let logoUrl: string | null = project?.logo_url ?? null;
+      if (logoRemoved) logoUrl = null;
+      if (logoFile) logoUrl = await uploadProjectLogo(logoFile);
+
       const payload: Partial<BoardProject> & { name: string; slug: string } = {
         name,
         slug: project?.slug ?? slugify(name),
@@ -62,10 +92,19 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
         company_orgnr: companyOrgnr || null,
         sort_order: sortOrder,
         is_archived: isArchived,
+        logo_url: logoUrl,
       };
       if (project) payload.id = project.id;
       await saveProject(payload);
       setStatus('Lagret.');
+
+      if (!project) {
+        const created = await getProjectBySlug(payload.slug);
+        if (created && onCreated) {
+          onCreated(created);
+          return;
+        }
+      }
       onSaved();
     } catch (e) {
       const msg = (e as Error).message;
@@ -104,25 +143,55 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
     }
   };
 
-  const field = 'w-full bg-transparent border border-[var(--deck-rule)] p-2 deck-lede';
-
   return (
     <div className="border border-[var(--deck-rule)] p-6 space-y-4">
-      <input className={field} placeholder="Navn" value={name} onChange={(e) => setName(e.target.value)} />
-      <textarea className={field} placeholder="Beskrivelse" value={description} onChange={(e) => setDescription(e.target.value)} rows={3} />
+      <Field label="Navn">
+        <input className={field} value={name} onChange={(e) => setName(e.target.value)} />
+      </Field>
+      <Field label="Beskrivelse">
+        <textarea className={field} value={description} onChange={(e) => setDescription(e.target.value)} rows={3} />
+      </Field>
       <div className="grid md:grid-cols-2 gap-4">
-        <input className={field} placeholder="Eierandel % (tom hvis uavklart)" type="number" min={0} max={100} step="0.01"
-          value={ownershipPct} onChange={(e) => setOwnershipPct(e.target.value)} />
-        <input className={field} placeholder="Eierandelsnotat (f.eks. 50/50 JV med NBX)"
-          value={ownershipNote} onChange={(e) => setOwnershipNote(e.target.value)} />
-        <input className={field} placeholder="Partner(e) (f.eks. NBX, Pharma Nordic)" value={partners} onChange={(e) => setPartners(e.target.value)} />
-        <input className={field} placeholder="Selskapsnavn (hvis stiftet)" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
-        <input className={field} placeholder="Org.nr" value={companyOrgnr} onChange={(e) => setCompanyOrgnr(e.target.value)} />
-        <input className={field} placeholder="Sortering" type="number" value={sortOrder} onChange={(e) => setSortOrder(Number(e.target.value))} />
-        <label className="deck-kicker flex items-center gap-2">
-          <input type="checkbox" checked={isArchived} onChange={(e) => setIsArchived(e.target.checked)} />
-          Arkivert
-        </label>
+        <Field label="Eierandel (%)">
+          <input className={field} type="number" min={0} max={100} step="0.01"
+            value={ownershipPct} onChange={(e) => setOwnershipPct(e.target.value)} />
+        </Field>
+        <Field label="Partnere">
+          <input className={field} placeholder="f.eks. NBX, Pharma Nordic"
+            value={partners} onChange={(e) => setPartners(e.target.value)} />
+        </Field>
+        <Field label="Eierskapsnotat (valgfritt)">
+          <input className={field} placeholder="f.eks. 50/50 JV"
+            value={ownershipNote} onChange={(e) => setOwnershipNote(e.target.value)} />
+        </Field>
+        <Field label="Selskapsnavn (hvis stiftet)">
+          <input className={field} value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+        </Field>
+        <Field label="Org.nr">
+          <input className={field} value={companyOrgnr} onChange={(e) => setCompanyOrgnr(e.target.value)} />
+        </Field>
+        <Field label="Sortering">
+          <input className={field} type="number" value={sortOrder} onChange={(e) => setSortOrder(Number(e.target.value))} />
+        </Field>
+        <Field label="Logo (valgfritt)">
+          <div className="space-y-2">
+            {currentLogoUrl && <img src={currentLogoUrl} alt="" className="h-10 w-auto" />}
+            <input type="file" accept={LOGO_ACCEPT} className="deck-kicker"
+              onChange={(e) => { setLogoFile(e.target.files?.[0] ?? null); setLogoRemoved(false); }} />
+            {(currentLogoUrl || logoFile) && (
+              <button type="button" className="deck-kicker underline" style={{ color: '#c94a4a' }}
+                onClick={handleRemoveLogo}>
+                Fjern logo
+              </button>
+            )}
+          </div>
+        </Field>
+        <Field label="Arkivert">
+          <label className="deck-kicker flex items-center gap-2">
+            <input type="checkbox" checked={isArchived} onChange={(e) => setIsArchived(e.target.checked)} />
+            Arkivert
+          </label>
+        </Field>
       </div>
       <button className="deck-btn-primary" onClick={handleSave}>
         {project ? 'Lagre prosjekt' : 'Opprett prosjekt'}
@@ -158,6 +227,8 @@ function ProjectEditor({ project, onSaved }: { project: BoardProject | null; onS
         </div>
       )}
       {status && <p className="deck-kicker">{status}</p>}
+
+      {project && <ProjectDocumentsSection projectId={project.id} />}
     </div>
   );
 }
@@ -188,7 +259,13 @@ export default function AdminProjects() {
     <div className="space-y-4">
       <button className="deck-btn-primary" onClick={() => setOpenId('new')}>Nytt prosjekt</button>
       {listError && <p className="deck-kicker" style={{ color: '#c94a4a' }}>{listError}</p>}
-      {openId === 'new' && <ProjectEditor project={null} onSaved={refresh} />}
+      {openId === 'new' && (
+        <ProjectEditor
+          project={null}
+          onSaved={refresh}
+          onCreated={(p) => { setOpenId(p.id); refresh(); }}
+        />
+      )}
       {projects.map((p) => (
         <div key={p.id}>
           <div className="flex items-baseline gap-4">
