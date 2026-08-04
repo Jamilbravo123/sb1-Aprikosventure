@@ -37,3 +37,14 @@ og `docs/superpowers/plans/2026-08-03-styreportal.md` (planen er synket med fakt
 - Medlemmer administreres i `/styret/admin` → Medlemmer (per 2026-08-04: Jamil + Robert Lyngmoe admin;
   Farooq, Abid, Haroon Malik, Vishal medlem). E-postadresser skal ALDRI inn i git — kun i databasen.
 - Prosjektdata seedet fra `aprikos-hq/portefølje/` 2026-08-04; vedlikeholdes nå i admin, ikke via SQL.
+
+## v1.2-forside (2026-08-04, godkjent via Artifact-mock før koding)
+
+- Struktur: KPI-rad (auto-beregnet) → «Siste aktivitet» (getRecentActivity, 3 nyeste globalt) → prosjektgrid
+  m/ fremdriftsmåler (fullført=kobber, pågår=svak tone, beregnes fra milepælstatus) → dato-grupperte
+  milepæler (pågår før planlagt, 5 synlige + «Vis alle»). SinceLastPanel er slettet — «siden sist»-logikken
+  lever videre i KPI-flisen «Oppdateringer».
+- Forsiden gjør konstant antall spørringer (listAllMilestones — IKKE per prosjekt; ikke gjeninnfør N+1).
+- Datoformat: formatShortDate («30. sep. 2026») på forsiden, formatDate (lang) ellers; aktivitetsstrømmen
+  bruker bevisst kortform uten år. Kjent minor: date-strenger tolkes som UTC (én dag feil vest for UTC).
+- Jamils arbeidsflyt for UI-endringer: mock på Artifact-URL godkjennes FØR koden endres.
