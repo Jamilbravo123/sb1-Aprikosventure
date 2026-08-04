@@ -1,7 +1,7 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import {
   deleteMilestoneAt, deleteProject, getProjectBySlug, listProjectMilestones, listProjects,
-  saveMilestone, saveProject, uploadProjectLogo,
+  removeProjectLogoFile, saveMilestone, saveProject, uploadProjectLogo,
 } from '../../lib/boardApi';
 import type { BoardMilestone, BoardProject, MilestoneStatus } from '../../types/board';
 import ProjectDocumentsSection from './ProjectDocumentsSection';
@@ -48,9 +48,16 @@ function ProjectEditor({ project, onSaved, onCreated }: {
   const [isArchived, setIsArchived] = useState(project?.is_archived ?? false);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoRemoved, setLogoRemoved] = useState(false);
+  const logoInputRef = useRef<HTMLInputElement>(null);
   const [slots, setSlots] = useState<(MilestoneDraft | null)[]>([null, null, null]);
   const [status, setStatus] = useState<string | null>(null);
   const projectId = project?.id ?? null;
+
+  const previewUrl = useMemo(
+    () => (logoFile ? URL.createObjectURL(logoFile) : null),
+    [logoFile],
+  );
+  useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, [previewUrl]);
 
   useEffect(() => {
     if (!projectId) return;
@@ -72,6 +79,7 @@ function ProjectEditor({ project, onSaved, onCreated }: {
   const handleRemoveLogo = () => {
     setLogoFile(null);
     setLogoRemoved(true);
+    if (logoInputRef.current) logoInputRef.current.value = '';
   };
 
   const handleSave = async () => {
@@ -97,6 +105,11 @@ function ProjectEditor({ project, onSaved, onCreated }: {
       if (project) payload.id = project.id;
       await saveProject(payload);
       setStatus('Lagret.');
+
+      const oldLogoUrl = project?.logo_url ?? null;
+      if (oldLogoUrl && oldLogoUrl !== logoUrl && oldLogoUrl.includes('/board-logos/')) {
+        removeProjectLogoFile(oldLogoUrl).catch(() => {});
+      }
 
       if (!project) {
         const created = await getProjectBySlug(payload.slug);
@@ -175,8 +188,13 @@ function ProjectEditor({ project, onSaved, onCreated }: {
         </Field>
         <Field label="Logo (valgfritt)">
           <div className="space-y-2">
-            {currentLogoUrl && <img src={currentLogoUrl} alt="" className="h-10 w-auto" />}
-            <input type="file" accept={LOGO_ACCEPT} className="deck-kicker"
+            {(previewUrl ?? currentLogoUrl) && (
+              <div className="space-y-1">
+                <img src={previewUrl ?? currentLogoUrl ?? undefined} alt="" className="h-10 w-auto" />
+                {previewUrl && <p className="deck-kicker">(ikke lagret ennå)</p>}
+              </div>
+            )}
+            <input ref={logoInputRef} type="file" accept={LOGO_ACCEPT} className="deck-kicker"
               onChange={(e) => { setLogoFile(e.target.files?.[0] ?? null); setLogoRemoved(false); }} />
             {(currentLogoUrl || logoFile) && (
               <button type="button" className="deck-kicker underline" style={{ color: '#c94a4a' }}
@@ -263,7 +281,11 @@ export default function AdminProjects() {
         <ProjectEditor
           project={null}
           onSaved={refresh}
-          onCreated={(p) => { setOpenId(p.id); refresh(); }}
+          onCreated={(p) => {
+            setProjects((prev) => [...prev, p]);
+            setOpenId(p.id);
+            refresh();
+          }}
         />
       )}
       {projects.map((p) => (

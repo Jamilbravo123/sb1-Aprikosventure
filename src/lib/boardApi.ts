@@ -206,6 +206,14 @@ export async function uploadProjectLogo(file: File): Promise<string> {
   return supabase.storage.from('board-logos').getPublicUrl(filePath).data.publicUrl;
 }
 
+export async function removeProjectLogoFile(logoUrl: string): Promise<void> {
+  const marker = '/board-logos/';
+  const idx = logoUrl.indexOf(marker);
+  if (idx === -1) return;
+  const path = decodeURIComponent(logoUrl.slice(idx + marker.length));
+  await supabase.storage.from('board-logos').remove([path]);
+}
+
 export async function deleteDocument(doc: BoardDocument): Promise<void> {
   const { error } = await supabase.from('board_documents').delete().eq('id', doc.id);
   throwIf(error);
