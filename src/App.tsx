@@ -6,6 +6,8 @@ import AuthCallback from './components/auth/AuthCallback';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import DeckWelcome from './components/deck/DeckWelcome';
 import DeckViewer from './components/deck/DeckViewer';
+import DeckPaused from './components/deck/DeckPaused';
+import { DECK_ACCESS_OPEN } from './constants/deck';
 import BoardLanding from './pages/styret/BoardLanding';
 import BoardCallback from './pages/styret/BoardCallback';
 import BoardProject from './pages/styret/BoardProject';
@@ -23,17 +25,25 @@ export default function App() {
       <Route
         path="/deck"
         element={
-          <ProtectedRoute>
-            <DeckWelcome />
-          </ProtectedRoute>
+          DECK_ACCESS_OPEN ? (
+            <ProtectedRoute>
+              <DeckWelcome />
+            </ProtectedRoute>
+          ) : (
+            <DeckPaused />
+          )
         }
       />
       <Route
         path="/deck/view"
         element={
-          <ProtectedRoute>
-            <DeckViewer />
-          </ProtectedRoute>
+          DECK_ACCESS_OPEN ? (
+            <ProtectedRoute>
+              <DeckViewer />
+            </ProtectedRoute>
+          ) : (
+            <DeckPaused />
+          )
         }
       />
       <Route path="/styret" element={<BoardLanding />} />

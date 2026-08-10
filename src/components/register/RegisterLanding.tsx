@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import logo from '../../assets/images/aprikos-venture-logo.svg';
+import { DECK_ACCESS_OPEN } from '../../constants/deck';
 
 export default function RegisterLanding() {
   const navigate = useNavigate();
@@ -56,8 +57,10 @@ export default function RegisterLanding() {
         {/* Lede */}
         <p className="deck-lede mb-6 sm:mb-10" style={{ maxWidth: '580px', fontSize: 'clamp(15px, 2.5vw, 19px)' }}>
           A Norway-based venture builder developing technology-driven companies
-          across digital assets, healthcare, and AI. Pre-register for access to
-          our investor deck and updates.
+          across digital assets, healthcare, and AI.{' '}
+          {DECK_ACCESS_OPEN
+            ? 'Pre-register for access to our investor deck and updates.'
+            : 'Register your interest and we will reach out personally with our investor materials.'}
         </p>
 
         {/* Stats row */}
@@ -66,10 +69,10 @@ export default function RegisterLanding() {
           style={{ borderBottom: '1px solid var(--deck-rule)', maxWidth: '700px' }}
         >
           {[
-            { n: '€5M', l: 'Raise Target' },
-            { n: '5', l: 'Active Ventures' },
+            { n: '9', l: 'Ventures' },
+            { n: '6', l: 'Markets' },
             { n: '3', l: 'Verticals' },
-            { n: '4+', l: 'Years Building' },
+            { n: '5+', l: 'Years Building' },
           ].map((s) => (
             <div key={s.l}>
               <div
@@ -92,7 +95,8 @@ export default function RegisterLanding() {
           Pre-Register Now <span className="text-lg">→</span>
         </button>
 
-        {/* Sign in link */}
+        {/* Sign in link — skjult mens decken er stengt */}
+        {DECK_ACCESS_OPEN && (
         <div className="mt-5">
           {!showSignIn ? (
             <button
@@ -140,6 +144,7 @@ export default function RegisterLanding() {
             </form>
           )}
         </div>
+        )}
 
         {/* Disclaimer */}
         <p

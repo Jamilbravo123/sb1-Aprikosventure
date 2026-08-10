@@ -10,6 +10,8 @@ import InterestStep from './steps/InterestStep';
 import CommitmentStep from './steps/CommitmentStep';
 import ReviewStep from './steps/ReviewStep';
 import MagicLinkSent from './MagicLinkSent';
+import RegistrationReceived from './RegistrationReceived';
+import { DECK_ACCESS_OPEN } from '../../constants/deck';
 
 export default function RegisterWizard() {
   const navigate = useNavigate();
@@ -48,8 +50,12 @@ export default function RegisterWizard() {
     });
 
     if (insertError) {
-      // Duplicate email (already registered) — just send magic link
+      // Duplicate email (already registered)
       if (insertError.code === '23505') {
+        if (!DECK_ACCESS_OPEN) {
+          setSubmitted(true);
+          return;
+        }
         const { error: signInError } = await signIn(data.email);
         if (signInError) {
           console.error('Magic link error (existing user):', signInError);
@@ -60,8 +66,13 @@ export default function RegisterWizard() {
         return;
       }
       console.error('Insert error:', insertError);
-      console.error('Insert error:', insertError);
       setError('Registration failed. Please check your details and try again.');
+      return;
+    }
+
+    // Deck stengt: lagre kun kontaktinfo, ingen magisk lenke
+    if (!DECK_ACCESS_OPEN) {
+      setSubmitted(true);
       return;
     }
 
@@ -80,7 +91,9 @@ export default function RegisterWizard() {
   };
 
   if (submitted) {
-    return <MagicLinkSent email={data.email} onResend={handleResend} />;
+    return DECK_ACCESS_OPEN
+      ? <MagicLinkSent email={data.email} onResend={handleResend} />
+      : <RegistrationReceived />;
   }
 
   const stepProps = { data, onUpdate: update, onNext: step === 5 ? submit : next, onBack: back };
