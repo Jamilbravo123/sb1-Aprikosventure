@@ -23,7 +23,7 @@ export default function HeroContent() {
     <div ref={containerRef} className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 text-center">
       <div className="hero-fade flex flex-col items-center gap-1.5 mb-6">
         <span className="text-gold text-[10px] sm:text-[11px] tracking-[2.5px] sm:tracking-[5px] uppercase">
-          Regulated Ventures, Hard Markets
+          Regulated Industries, Frontier Markets
         </span>
         <span className="text-[#555] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase">
           Oslo | Berlin | Lahore | Dubai
@@ -33,7 +33,7 @@ export default function HeroContent() {
       <HeroHeading />
 
       <p className="hero-fade text-[#777] text-base leading-relaxed max-w-[520px] mt-5">
-        We build and scale ventures across AI, digital assets, and emerging markets.
+        We build and scale ventures across AI, digital assets, and healthcare.
       </p>
 
       <div className="hero-fade flex flex-col sm:flex-row gap-3.5 mt-10 w-full sm:w-auto">
