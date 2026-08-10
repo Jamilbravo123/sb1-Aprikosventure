@@ -1,6 +1,7 @@
 # Aprikos Venture - Project Memory
 
 ## References
+- [Hero-tagline copy-beslutning](copy_hero_tagline.md) — «Regulated Industries, Frontier Markets» (2026-08-10); ikke gjeninnfør «hard markets»
 - [Styreportalen /styret](project_styreportal.md) — arkitektur, RLS/triggere, driftsfakta for styreområdet (lansert 2026-08-04)
 - [Supabase CLI and API access](reference_supabase_access.md) — How to run SQL, manage auth users, and access the Aprikos Venture Club Supabase project
 - [Magic link trigger fix](project_magic_link_trigger_fix.md) — Broken auth trigger on auth.users that blocked new user signups (fixed 2026-04-30)
