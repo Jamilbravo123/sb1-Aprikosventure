@@ -1,8 +1,19 @@
 ---
 name: Investor pre-registration flow
-description: Full investor registration wizard + magic link auth + interactive pitch deck viewer — built 2026-04-27/28
+description: Full investor registration wizard + magic link auth + interactive pitch deck viewer — built 2026-04-27/28. ⚠️ Deck STENGT 2026-08-10 (DECK_ACCESS_OPEN=false)
 type: project
 ---
+
+## ⚠️ STATUS 2026-08-10: Deck stengt for revisjon
+
+Decken er utdatert etter juni-pivoten og skal oppdateres. Sperre lagt inn via
+`DECK_ACCESS_OPEN = false` i `src/constants/deck.ts` (commit `ebcb7ef`):
+- `/deck` og `/deck/view` viser `DeckPaused` («materials being updated») — også for innloggede
+- Wizard lagrer kun kontaktinfo i `investors`, sender ingen magisk lenke; viser `RegistrationReceived`
+- «Sign in with magic link» skjult på `/register`; stats oppdatert til 9/6/3/5+ (€5M-mål fjernet)
+- Gjenåpning: sett flagget til `true` — hele flyten under er intakt
+
+Beskrivelsen nedenfor gjelder flyten slik den er NÅR decken er åpen.
 
 ## What was built (2026-04-27/28)
 
