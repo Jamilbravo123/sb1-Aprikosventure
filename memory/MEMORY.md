@@ -3,6 +3,7 @@
 ## References
 - [Investor pre-registration + deck](project_investor_registration.md) — ⚠️ deck STENGT 2026-08-10 (`DECK_ACCESS_OPEN=false` i `src/constants/deck.ts`); wizard lagrer kun kontaktinfo, gjenåpning = sett flagget til true
 - [aprikos-hq = kilde til sannhet](reference_aprikos_hq.md) — selskapsfakta/porteføljestatus/nettside-avvik; kanoniske tall 9/6/3/5+
+- [Kontaktskjema / EmailJS](reference_contact_form_emailjs.md) — nøkler i Netlify-env (ikke repo); 412 «Invalid grant» = koble Outlook til på nytt i EmailJS
 - [Company profile](company-profile.md) — org.nr, nøkkelpersoner, portefølje, milepæler
 - [Hero-tagline copy-beslutning](copy_hero_tagline.md) — «Regulated Industries, Frontier Markets» (2026-08-10); ikke gjeninnfør «hard markets»
 - [Styreportalen /styret](project_styreportal.md) — arkitektur, RLS/triggere, driftsfakta for styreområdet (lansert 2026-08-04)
