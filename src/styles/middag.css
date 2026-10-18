@@ -238,3 +238,11 @@
 .middag .partners .lbl { font-size: 12px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
 .middag .partners img { height: 32px; width: auto; display: block; }
 .middag .partners img.framed { border-radius: 4px; }
+
+/* Official store badges (unmodified, linked to the listing, per Apple and Google guidelines).
+   The Google PNG carries its own clear space, so it is drawn taller to match Apple's visual height. */
+.middag .stores { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 12px; }
+.middag .stores a { display: block; line-height: 0; border-radius: 8px; }
+.middag .stores a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.middag .stores .ios { height: 40px; width: auto; }
+.middag .stores .gp { height: 59px; width: auto; margin: -9px -6px; }

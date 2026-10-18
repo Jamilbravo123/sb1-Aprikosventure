@@ -213,7 +213,11 @@ export default function Middag() {
               <span className="status">Ny versjon 1. november</span>
               <h3>Fra helseapp til personlig helseplattform</h3>
               <p>En ny måte å forstå, organisere og følge opp egen helse på.</p>
-              <ul className="badges" aria-label="Sertifisering og tilgjengelighet"><li>ISO/IEC 27001-sertifisert</li><li>På App Store og Google Play</li></ul>
+              <ul className="badges" aria-label="Sertifisering"><li>ISO/IEC 27001-sertifisert</li></ul>
+              <div className="stores">
+                <a href="https://apps.apple.com/pk/app/mashwara-ai/id6757075379" target="_blank" rel="noopener noreferrer"><img className="ios" src="/middag/stores/app-store.svg" alt="Last ned fra App Store" /></a>
+                <a href="https://play.google.com/store/apps/details?id=com.codentropy.mashwara" target="_blank" rel="noopener noreferrer"><img className="gp" src="/middag/stores/google-play.png" alt="Last ned på Google Play" /></a>
+              </div>
               <div className="partners">
                 <span className="lbl">Partnere</span>
                 <img src="/middag/partners/efu.png" alt="EFU Life" />
