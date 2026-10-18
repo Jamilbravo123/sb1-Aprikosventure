@@ -21,6 +21,7 @@ export interface DinnerGuest {
   token: string;
   note: string | null;
   opened_at: string | null;
+  link_copied_at: string | null;
   created_at: string;
   dinner_rsvps: {
     attending: boolean;

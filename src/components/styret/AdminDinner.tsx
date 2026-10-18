@@ -1,6 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { addGuest, inviteUrl, listGuests, removeGuest } from '../../lib/dinnerApi';
+import { addGuest, inviteUrl, listGuests, markLinkCopied, removeGuest } from '../../lib/dinnerApi';
 import type { DinnerGuest } from '../../types/dinner';
+
+const copiedFmt = new Intl.DateTimeFormat('nb-NO', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
 function guestStatus(g: DinnerGuest): string {
   const r = g.dinner_rsvps;
@@ -42,6 +44,13 @@ export default function AdminDinner() {
       window.setTimeout(() => setCopied(null), 2000);
     } catch {
       window.prompt('Kopier lenken:', url);
+    }
+    // Lagres, så «Kopiert» står igjen neste gang portalen åpnes og du ser hvem som har fått lenken.
+    try {
+      const copiedAt = await markLinkCopied(g.id);
+      setGuests((gs) => gs.map((x) => (x.id === g.id ? { ...x, link_copied_at: copiedAt } : x)));
+    } catch (err) {
+      setStatus(`Lenken er kopiert, men ble ikke markert: ${(err as Error).message}`);
     }
   };
 
@@ -114,8 +123,13 @@ export default function AdminDinner() {
                 <td className="py-3 pr-4">{g.dinner_rsvps?.dietary ?? '–'}</td>
                 <td className="py-3 pr-4">
                   <button type="button" className="deck-kicker underline" onClick={() => handleCopy(g)}>
-                    {copied === g.id ? 'Kopiert' : 'Kopier lenke'}
+                    {copied === g.id ? 'Kopiert ✓' : g.link_copied_at ? 'Kopier igjen' : 'Kopier lenke'}
                   </button>
+                  {g.link_copied_at && (
+                    <span className="block deck-kicker mt-1" style={{ color: 'var(--deck-gold)' }}>
+                      ✓ Kopiert {copiedFmt.format(new Date(g.link_copied_at))}
+                    </span>
+                  )}
                 </td>
                 <td className="py-3">
                   <button type="button" className="deck-kicker underline" onClick={() => handleRemove(g)}>Fjern</button>
