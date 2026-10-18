@@ -219,9 +219,9 @@ export default function Middag() {
       <section className="evening wrap" aria-labelledby="middag-ev">
         <h2 className="section-title" id="middag-ev">Kvelden</h2>
         <ol className="timeline">
-          <li><time>18.00</time><b>Velkommen</b><span>Mingling</span></li>
-          <li><time>18.30</time><b>Presentasjon</b><span>Mashwara AI og Mashwara MED</span></li>
-          <li><time>19.15</time><b>Middag</b><span>Buffet og den gode samtalen</span></li>
+          <li><time>18.00</time><b>Velkommen og middag</b><span>Buffet og mingling</span></li>
+          <li><time>19.00</time><b>Presentasjon</b><span>Mashwara AI og Mashwara MED</span></li>
+          <li><time>19.40</time><b>Kaffe og dessert</b><span>Spørsmål og den gode samtalen</span></li>
         </ol>
       </section>
 
