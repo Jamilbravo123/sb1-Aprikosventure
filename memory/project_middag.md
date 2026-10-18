@@ -17,3 +17,6 @@ type: project
   `MIDDAG_VARSEL_TIL`. Dedupe: `notified_at` lagrer svarets `updated_at`; uendret svar gir ingen ny versjon.
 - Admin: fanen «middag» i `/styret/admin` — legg til gjest, kopier lenke, status, allergier til cateringen.
 - Sikkerhetsgjennomgang (Fable, 2026-10-18): ingen datalekkasje; varselfiksene er lagt inn. Ende-til-ende-test mot prod OK.
+- 2026-10-18 kveld: `link_copied_at` lagt til `dinner_guests` (`20261018190000_middag_copied.sql`, kjørt med
+  `db query --linked` + `migration repair`). Portalen viser «✓ Kopiert <tid>» permanent. Scroll-knapp på mobil bruker
+  `window.scrollTo` med absolutt posisjon (scrollIntoView skjøt forbi på iOS). Kontaktblokk med ikoner på kortet.
