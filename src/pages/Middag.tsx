@@ -63,9 +63,9 @@ export default function Middag() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollToCompanies = () => {
+  const scrollToEvening = () => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.getElementById('middag-co')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    document.getElementById('middag-ev')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   };
 
   const scrollToCard = () => {
@@ -196,13 +196,22 @@ export default function Middag() {
 
             <p className="deadline">Svar innen fredag 30. oktober. Begrenset antall plasser.</p>
           </article>
-          <button className={`cue${scrolled ? ' gone' : ''}`} type="button" onClick={scrollToCompanies} aria-label="Se selskapene og programmet">
-            <span className="cue-label">Se selskapene og programmet</span>
+          <button className={`cue${scrolled ? ' gone' : ''}`} type="button" onClick={scrollToEvening} aria-label="Se programmet og selskapene">
+            <span className="cue-label">Se programmet og selskapene</span>
             <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
             <span className="cue-line" aria-hidden="true"><i /></span>
           </button>
         </div>
       </header>
+
+      <section className="evening wrap" aria-labelledby="middag-ev">
+        <h2 className="section-title" id="middag-ev">Kvelden</h2>
+        <ol className="timeline">
+          <li><time>18.00</time><b>Velkommen</b><span>Mingling</span></li>
+          <li><time>18.30</time><b>Presentasjon</b><span>Mashwara AI og Mashwara MED</span></li>
+          <li><time>19.15</time><b>Middag</b><span>Buffet og den gode samtalen</span></li>
+        </ol>
+      </section>
 
       <section className="companies wrap" aria-labelledby="middag-co">
         <h2 className="section-title" id="middag-co">To integrerte selskaper, ett marked på over 250 millioner</h2>
@@ -247,15 +256,6 @@ export default function Middag() {
             </div>
           </article>
         </div>
-      </section>
-
-      <section className="evening wrap" aria-labelledby="middag-ev">
-        <h2 className="section-title" id="middag-ev">Kvelden</h2>
-        <ol className="timeline">
-          <li><time>18.00</time><b>Velkommen</b><span>Mingling</span></li>
-          <li><time>18.30</time><b>Presentasjon</b><span>Mashwara AI og Mashwara MED</span></li>
-          <li><time>19.15</time><b>Middag</b><span>Buffet og den gode samtalen</span></li>
-        </ol>
       </section>
 
       {(phase === 'choose' || phase === 'form') && (
