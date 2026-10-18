@@ -233,9 +233,9 @@ export default function Middag() {
           <article className="co med">
             <div className="co-mark"><img src="/middag/mashwara-med.png" alt="Mashwara MED" /></div>
             <div className="co-body">
-              <span className="status">Ny satsing</span>
+              <span className="status">I drift</span>
               <h3>Fra produsent til pasient</h3>
-              <p>B2B-distribusjon av legemidler i Pakistan, med internasjonale partnere og egne merkevarer. Import og nettapotek kommer som neste steg.</p>
+              <p>B2B-distribusjon av legemidler i Pakistan, med internasjonale partnere og egne merkevarer. Importlisens er under behandling, og nettapoteket åpner sammen med vårt eget apotek i Bahria Town.</p>
               <ul className="badges" aria-label="Lisens"><li>Lisensiert legemiddeldistributør · Punjab, gyldig til 2031</li></ul>
               <div className="partners">
                 <span className="lbl">Partnere</span>
