@@ -35,7 +35,7 @@ const setMeta = (src, attr, key, value) => {
 
 let out = html.replace(/<title>[^<]*<\/title>/, `<title>${TITLE}</title>`);
 out = setMeta(out, 'name', 'description', DESC);
-out = setMeta(out, 'property', 'og:url', `${SITE}/middag`);
+out = setMeta(out, 'property', 'og:url', `${SITE}/middag/`);
 out = setMeta(out, 'property', 'og:title', TITLE);
 out = setMeta(out, 'property', 'og:description', DESC);
 out = setMeta(out, 'property', 'og:image', IMAGE);
@@ -44,12 +44,12 @@ out = setMeta(out, 'property', 'og:image:height', '630');
 out = setMeta(out, 'property', 'og:image:alt', 'Mashwara: invitasjon til investormiddag');
 out = setMeta(out, 'property', 'og:site_name', 'Mashwara');
 out = setMeta(out, 'property', 'og:locale', 'nb_NO');
-out = setMeta(out, 'name', 'twitter:url', `${SITE}/middag`);
+out = setMeta(out, 'name', 'twitter:url', `${SITE}/middag/`);
 out = setMeta(out, 'name', 'twitter:title', TITLE);
 out = setMeta(out, 'name', 'twitter:description', DESC);
 out = setMeta(out, 'name', 'twitter:image', IMAGE);
 out = setMeta(out, 'name', 'twitter:image:alt', 'Mashwara: invitasjon til investormiddag');
-out = out.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${SITE}/middag" />`);
+out = out.replace(/<link rel="canonical"[^>]*>/, `<link rel="canonical" href="${SITE}/middag/" />`);
 out = setMeta(out, 'name', 'robots', 'noindex, nofollow');
 out = out.replace('</head>', '  <style>html,body{background:#003333}</style>\n</head>');
 out = emptyRoot(out);

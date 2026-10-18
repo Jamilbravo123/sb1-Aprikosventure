@@ -55,5 +55,5 @@ export async function removeGuest(id: string): Promise<void> {
 }
 
 export function inviteUrl(token: string): string {
-  return `${window.location.origin}/middag?g=${token}`;
+  return `${window.location.origin}/middag/?g=${token}`;
 }
