@@ -1,0 +1,234 @@
+/* Investormiddag (/middag). Mashwara-merket side, uavhengig av nettstedets kobber-tema.
+   Konsept: et trykt invitasjonskort på Mashwaras dype teal, med logoens tre prikker som et stille
+   bakteppe. Alt er scopet under .middag så resten av nettstedet ikke påvirkes. */
+.middag {
+  --night: #003333;
+  --paper: #F7FBFA;
+  --ink: #0F2E2E;
+  --muted: #557272;
+  --rule: #D5E6E3;
+  --teal: #008080;
+  --cyan: #71CDDD;
+  --leaf: #2CB04C;
+  --soft: #B9D6D4;
+  --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --sans: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--night);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  color-scheme: dark;
+}
+.middag *, .middag *::before, .middag *::after { box-sizing: border-box; }
+.middag h1, .middag .details dd, .middag .timeline time, .middag .done, .middag .sig {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.middag .wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+}
+
+.middag .hero { position: relative; padding-block: 72px 88px; }
+.middag .constellation { position: absolute; inset: 0; pointer-events: none; overflow: hidden; --s: min(19vw, 250px); }
+.middag .constellation i { position: absolute; border-radius: 50%; display: block; width: var(--s); aspect-ratio: 1; }
+.middag .constellation .d1 { background: var(--leaf); right: calc(8% + var(--s) * .6); top: 14%; }
+.middag .constellation .d2 { background: var(--cyan); right: calc(8% + var(--s) * 1.15); top: calc(14% + var(--s) * 1.02); opacity: .85; }
+.middag .constellation .d3 { background: var(--teal); right: calc(8% + var(--s) * .05); top: calc(14% + var(--s) * 1.02); }
+.middag .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 620px); justify-items: start; }
+.middag .card {
+  background: var(--paper); color: var(--ink); border-radius: 6px;
+  padding: clamp(32px, 6vw, 64px);
+  box-shadow: 0 30px 80px rgba(0, 20, 20, .45);
+  display: grid; gap: 28px;
+  outline: 1px solid var(--rule); outline-offset: -14px;
+}
+.middag .logo img { width: 132px; height: auto; display: block; }
+.middag .lead-in { margin: 0; font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--teal); }
+.middag h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(40px, 5.2vw, 64px); line-height: .98; letter-spacing: -0.01em; margin: 0; text-wrap: balance; }
+.middag .sub { margin: 0; font-size: 17px; color: var(--muted); max-width: 30em; }
+.middag .details { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 20px; margin: 0; padding-block: 22px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.middag .details dt { font-size: 14px; color: var(--muted); }
+.middag .details dd { margin: 0; font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.3; }
+.middag .details dd span { font-family: var(--sans); font-weight: 300; font-size: 14px; color: var(--muted); display: block; }
+
+.middag .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.middag .btn { font: inherit; font-weight: 500; font-size: 15px; border-radius: 999px; padding: 15px 30px; cursor: pointer; border: 1px solid var(--night); transition: background .15s, color .15s; }
+.middag .btn.primary { background: var(--night); color: var(--paper); }
+.middag .btn.primary:hover { background: var(--teal); border-color: var(--teal); }
+.middag .btn.primary:disabled { opacity: .6; cursor: wait; }
+.middag .btn.ghost { background: transparent; color: var(--night); border-color: var(--rule); }
+.middag .btn.ghost:hover { border-color: var(--night); }
+.middag .btn:focus-visible, .middag input:focus-visible, .middag select:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+.middag .link { background: none; border: 0; padding: 0; font: inherit; font-size: 14px; color: var(--teal); text-decoration: underline; cursor: pointer; justify-self: start; }
+.middag .deadline { margin: 0; font-size: 14px; color: var(--muted); }
+.middag .note { margin: 0; font-size: 15px; color: var(--muted); }
+
+.middag form { display: grid; gap: 12px; }
+.middag label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); min-width: 0; }
+.middag input, .middag select { font: inherit; font-weight: 400; font-size: 16px; color: var(--ink); background: #FFFFFF; border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; width: 100%; }
+.middag .pair { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; }
+.middag form .btn { justify-self: start; margin-top: 4px; }
+.middag .err { margin: 0; color: #B3261E; font-size: 14px; }
+.middag .done { margin: 0; font-family: var(--serif); font-size: 28px; line-height: 1.25; color: var(--night); }
+
+.middag .companies { padding-block: 24px 72px; }
+.middag .section-title { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); margin: 0 0 28px; color: var(--paper); }
+.middag .pair-co { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.middag .co { background: var(--paper); color: var(--ink); border-radius: 6px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.middag .co-mark { height: 168px; display: flex; align-items: center; justify-content: center; padding: 28px; border-bottom: 1px solid var(--rule); background: #FFFFFF; }
+.middag .co-mark img { max-height: 100%; max-width: 78%; width: auto; display: block; }
+.middag .co-body { padding: 28px 32px 32px; display: grid; gap: 10px; align-content: start; }
+.middag .status { font-size: 14px; font-weight: 500; color: var(--teal); display: flex; align-items: center; gap: 8px; }
+.middag .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.middag .co.med .status { color: var(--leaf); }
+.middag .co h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; margin: 0; }
+.middag .co p { margin: 0; color: var(--muted); }
+
+.middag .evening { padding-block: 16px 80px; }
+.middag .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative; }
+.middag .timeline::before { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 1px; background: rgba(255,255,255,.22); }
+.middag .timeline li { position: relative; padding-top: 30px; padding-right: 16px; min-width: 0; }
+.middag .timeline li::before { content: ""; position: absolute; left: 0; top: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--night); border: 2px solid var(--cyan); }
+.middag .timeline li:nth-child(3)::before { background: var(--leaf); border-color: var(--leaf); }
+.middag .timeline time { display: block; font-family: var(--serif); font-size: 30px; font-weight: 500; line-height: 1; margin-bottom: 8px; }
+.middag .timeline b { display: block; font-weight: 500; }
+.middag .timeline span { color: var(--soft); font-size: 14px; }
+
+.middag .signoff { border-top: 1px solid rgba(255,255,255,.16); padding-block: 36px 48px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; }
+.middag .sig { font-family: var(--serif); font-style: italic; font-size: 30px; line-height: 1; }
+.middag .sig small { display: block; font-family: var(--sans); font-style: normal; font-size: 14px; color: var(--soft); margin-top: 8px; }
+.middag .signoff p { margin: 0; color: var(--soft); font-size: 14px; }
+
+/* The integration, shown rather than told: a hairline between the two companies with two points of
+   light travelling opposite ways (recommendations AI -> MED, health help MED -> AI). One slow loop. */
+.middag .pair-co { grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr); gap: 0; align-items: stretch; }
+.middag .link-co { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding-inline: 0; min-width: 0; }
+.middag .link-co .lbl { font-size: 12px; color: var(--soft); text-align: center; line-height: 1.3; }
+.middag .link-co .line { position: relative; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,.08), rgba(255,255,255,.35), rgba(255,255,255,.08)); }
+.middag .link-co .line i { position: absolute; top: -3px; width: 7px; height: 7px; border-radius: 50%; left: 0; }
+.middag .link-co .fwd { background: var(--cyan); box-shadow: 0 0 10px 2px rgba(113,205,221,.55); animation: middag-co-fwd 6s cubic-bezier(.45,0,.55,1) infinite; }
+.middag .link-co .back { background: var(--leaf); box-shadow: 0 0 10px 2px rgba(44,176,76,.5); animation: middag-co-back 6s cubic-bezier(.45,0,.55,1) 3s infinite both; }
+@keyframes middag-co-fwd { 0% { left: 0; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: calc(100% - 7px); opacity: 0; } }
+@keyframes middag-co-back { 0% { left: calc(100% - 7px); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { left: 0; opacity: 0; } }
+@media (max-width: 900px) {
+  .middag .pair-co { grid-template-columns: minmax(0, 1fr); }
+  .middag .link-co { height: 110px; flex-direction: row; justify-content: center; align-items: stretch; gap: 14px; }
+  .middag .link-co .lbl { align-self: center; width: 9em; }
+  .middag .link-co .lbl:first-child { text-align: right; }
+  .middag .link-co .lbl:last-child { text-align: left; }
+  .middag .link-co .line { width: 1px; height: auto; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.35), rgba(255,255,255,.08)); }
+  .middag .link-co .line i { left: -3px; top: 0; }
+  .middag .link-co .fwd { animation-name: middag-co-fwd-v; }
+  .middag .link-co .back { animation-name: middag-co-back-v; }
+  @keyframes middag-co-fwd-v { 0% { top: 0; opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: calc(100% - 7px); opacity: 0; } }
+  @keyframes middag-co-back-v { 0% { top: calc(100% - 7px); opacity: 0; } 12% { opacity: 1; } 88% { opacity: 1; } 100% { top: 0; opacity: 0; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .middag .link-co .line i { animation: none; opacity: 1; }
+  .middag .link-co .back { left: calc(100% - 7px); }
+}
+
+@media (max-width: 900px) {
+  .middag .constellation { --s: 22vw; }
+  .middag .constellation .d1 { right: calc(4% + var(--s) * .6); top: 16px; }
+  .middag .constellation .d2 { right: calc(4% + var(--s) * 1.15); top: calc(16px + var(--s) * 1.02); }
+  .middag .constellation .d3 { right: calc(4% + var(--s) * .05); top: calc(16px + var(--s) * 1.02); }
+  .middag .hero { padding-block: 120px 56px; }
+  .middag .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
+  .middag .timeline::before { display: none; }
+}
+@media (max-width: 520px) {
+  .middag .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .middag .card { outline-offset: -8px; }
+  .middag .pair { grid-template-columns: minmax(0, 1fr); }
+  .middag .actions .btn { width: 100%; }
+  .middag .co-mark { height: 132px; }
+  .middag .co-body { padding: 22px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .middag .constellation i { animation: middag-settle 1.4s cubic-bezier(.2,.7,.2,1) both; }
+  .middag .constellation .d2 { animation-delay: .12s; }
+  .middag .constellation .d3 { animation-delay: .24s; }
+  @keyframes middag-settle { from { transform: scale(.92); } to { transform: none; } }
+}
+
+/* Phone first: most guests open the link from WhatsApp or mail on a phone. */
+.middag .rsvp-bar { display: none; }
+@media (max-width: 600px) {
+  .middag .hero { padding-block: 84px 40px; }
+  .middag .constellation { --s: 26vw; }
+  .middag .constellation .d1 { right: calc(6% + var(--s) * .6); top: 10px; }
+  .middag .constellation .d2 { right: calc(6% + var(--s) * 1.15); top: calc(10px + var(--s) * 1.02); }
+  .middag .constellation .d3 { right: calc(6% + var(--s) * .05); top: calc(10px + var(--s) * 1.02); }
+  .middag .card { padding: 32px 24px 28px; gap: 22px; }
+  .middag .logo svg, .middag .logo img { width: 112px; }
+  .middag .lead-in { font-size: 20px; }
+  .middag h1 { font-size: 42px; line-height: 1; }
+  .middag .sub { font-size: 16px; }
+  .middag .details { grid-template-columns: minmax(0, 1fr); gap: 2px; padding-block: 18px; }
+  .middag .details dt { margin-top: 10px; font-size: 13px; }
+  .middag .details dt:first-child { margin-top: 0; }
+  .middag .details dd { font-size: 21px; }
+  .middag .actions { flex-direction: column; gap: 10px; }
+  .middag .actions .btn { width: 100%; padding-block: 16px; }
+  .middag form .btn { width: 100%; }
+  .middag .companies { padding-block: 16px 48px; }
+  .middag .section-title { font-size: 30px; line-height: 1.15; margin-bottom: 20px; }
+  .middag .co-mark { height: 116px; padding: 20px; }
+  .middag .co-body { padding: 22px 22px 26px; }
+  .middag .co h3 { font-size: 25px; }
+  .middag .link-co { height: 92px; }
+  .middag .evening { padding-block: 8px 48px; }
+  .middag .timeline { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .middag .timeline::before { display: block; left: 6px; right: auto; top: 10px; bottom: 10px; width: 1px; height: auto; }
+  .middag .timeline li { padding: 0 0 22px 34px; display: grid; grid-template-columns: 64px minmax(0, 1fr); column-gap: 12px; align-items: baseline; }
+  .middag .timeline li::before { top: 6px; }
+  .middag .timeline time { font-size: 24px; margin: 0; grid-row: span 2; }
+  .middag .signoff { flex-direction: column; align-items: start; padding-block: 28px calc(96px + env(safe-area-inset-bottom, 0px)); }
+  .middag .rsvp-bar {
+    display: block; position: fixed; z-index: 20; left: 0; right: 0; bottom: 0;
+    padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    background: linear-gradient(180deg, rgba(0,51,51,0), rgba(0,51,51,.92) 35%);
+    transform: translateY(110%); transition: transform .3s ease;
+  }
+  .middag .rsvp-bar.show { transform: none; }
+  .middag .rsvp-bar .btn { width: 100%; background: var(--paper); color: var(--night); border-color: var(--paper); box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+}
+@media (prefers-reduced-motion: reduce) { .rsvp-bar { transition: none; } }
+
+/* Scroll cue under the card: a hairline with a point of light sliding down, same language as the connector. */
+.middag .cue { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; margin: 40px auto 0; width: max-content; background: none; border: 0; padding: 8px 16px; cursor: pointer; color: var(--soft); font: inherit; font-size: 13px; letter-spacing: .04em; }
+.middag .cue:hover { color: var(--paper); }
+.middag .cue:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; border-radius: 8px; }
+.middag .cue .cue-line { position: relative; width: 1px; height: 44px; background: linear-gradient(180deg, rgba(255,255,255,.35), rgba(255,255,255,0)); }
+.middag .cue .cue-line i { position: absolute; left: -3px; top: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 10px 2px rgba(113,205,221,.55); animation: middag-cue-drop 2.4s cubic-bezier(.45,0,.55,1) infinite; }
+@keyframes middag-cue-drop { 0% { top: 0; opacity: 0; } 20% { opacity: 1; } 100% { top: 37px; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cue .cue-line i { animation: none; top: 18px; } }
+@media (max-width: 600px) { .cue { margin-top: 28px; } }
+
+/* Scroll cue v2: beside the card on desktop (bottom-aligned), a floating pill at the bottom of the
+   screen on phones until the guest starts scrolling. Click scrolls the page for them. */
+.middag .hero-grid { grid-template-columns: minmax(0, 620px) auto; align-items: end; column-gap: 36px; }
+.middag .cue { margin: 0 0 8px; align-self: end; flex-direction: column; }
+.middag .cue .chev { width: 18px; height: 18px; display: block; animation: middag-cue-bob 2.4s ease-in-out infinite; }
+@keyframes middag-cue-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+@media (max-width: 900px) {
+  .middag .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .middag .cue {
+    position: fixed; z-index: 15; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%); flex-direction: row; gap: 8px; margin: 0;
+    padding: 11px 18px; border-radius: 999px; color: var(--paper);
+    background: rgba(0, 51, 51, .78); border: 1px solid rgba(255, 255, 255, .22);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    transition: opacity .3s ease, transform .3s ease;
+  }
+  .middag .cue .cue-line { display: none; }
+  .middag .cue.gone { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) { .cue .chev { animation: none; } .cue { transition: none; } }

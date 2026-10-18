@@ -4,8 +4,9 @@ import { useBoardMember } from '../../hooks/useBoardMember';
 import AdminProjects from '../../components/styret/AdminProjects';
 import AdminDocuments from '../../components/styret/AdminDocuments';
 import AdminMembers from '../../components/styret/AdminMembers';
+import AdminDinner from '../../components/styret/AdminDinner';
 
-const TABS = ['prosjekter', 'dokumenter', 'medlemmer'] as const;
+const TABS = ['prosjekter', 'dokumenter', 'medlemmer', 'middag'] as const;
 type Tab = (typeof TABS)[number];
 
 export default function BoardAdmin() {
@@ -34,6 +35,7 @@ export default function BoardAdmin() {
         {tab === 'prosjekter' && <AdminProjects />}
         {tab === 'dokumenter' && <AdminDocuments />}
         {tab === 'medlemmer' && <AdminMembers />}
+        {tab === 'middag' && <AdminDinner />}
       </div>
     </div>
   );

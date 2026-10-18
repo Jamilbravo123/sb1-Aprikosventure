@@ -80,3 +80,4 @@ Hero → Portfolio (horizontal rows with accordion on mobile) → Venture Model 
 - 2-space indent, single quotes, modern ES modules
 - npm (not pnpm)
 - User often gets ChatGPT feedback — evaluate critically, only implement what adds value
+- [Investormiddag /middag](project_middag.md) — personlige lenker, RLS/RPC, e-postvarsel; kjør SQL direkte, ikke `db push`
