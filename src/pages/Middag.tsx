@@ -136,7 +136,7 @@ export default function Middag() {
             <p className="sub">En privat kveld med ledelsen i Mashwara. Vi presenterer neste vekstfase og en emisjon for en lukket krets av investorer.</p>
             <dl className="details">
               <dt>Når</dt><dd>Torsdag 5. november, kl. 18.00</dd>
-              <dt>Hvor</dt><dd>Lysaker torg 5<span>Spesialistklinikkenes lokaler</span></dd>
+              <dt>Hvor</dt><dd>Lysaker torg 5</dd>
             </dl>
 
             {phase === 'loading' && <p className="note">Henter invitasjonen …</p>}
