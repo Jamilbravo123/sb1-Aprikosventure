@@ -196,8 +196,8 @@ export default function Middag() {
 
             <p className="deadline">Svar innen fredag 30. oktober. Begrenset antall plasser.</p>
           </article>
-          <button className={`cue${scrolled ? ' gone' : ''}`} type="button" onClick={scrollToCompanies} aria-label="Les mer om kvelden">
-            <span>Om kvelden</span>
+          <button className={`cue${scrolled ? ' gone' : ''}`} type="button" onClick={scrollToCompanies} aria-label="Se selskapene og programmet">
+            <span className="cue-label">Se selskapene og programmet</span>
             <svg className="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
             <span className="cue-line" aria-hidden="true"><i /></span>
           </button>
