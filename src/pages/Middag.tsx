@@ -210,9 +210,15 @@ export default function Middag() {
           <article className="co ai">
             <div className="co-mark"><img src="/middag/mashwara-ai.png" alt="Mashwara AI" /></div>
             <div className="co-body">
-              <span className="status">Lanseres 1. november</span>
+              <span className="status">Ny versjon 1. november</span>
               <h3>Fra helseapp til personlig helseplattform</h3>
               <p>En ny måte å forstå, organisere og følge opp egen helse på.</p>
+              <ul className="badges" aria-label="Sertifisering og tilgjengelighet"><li>ISO/IEC 27001-sertifisert</li><li>På App Store og Google Play</li></ul>
+              <div className="partners">
+                <span className="lbl">Partnere</span>
+                <img src="/middag/partners/efu.png" alt="EFU Life" />
+                <img src="/middag/partners/chughtai.png" alt="Chughtai Lab" />
+              </div>
             </div>
           </article>
           <div className="link-co" aria-hidden="true">
@@ -225,7 +231,15 @@ export default function Middag() {
             <div className="co-body">
               <span className="status">Ny satsing</span>
               <h3>Fra produsent til pasient</h3>
-              <p>Import, B2B-distribusjon og nettapotek i Pakistan, med internasjonale partnere og egne merkevarer.</p>
+              <p>B2B-distribusjon av legemidler i Pakistan, med internasjonale partnere og egne merkevarer. Import og nettapotek kommer som neste steg.</p>
+              <ul className="badges" aria-label="Lisens"><li>Lisensiert legemiddeldistributør · Punjab, gyldig til 2031</li></ul>
+              <div className="partners">
+                <span className="lbl">Partnere</span>
+                <img className="framed" src="/middag/partners/proponent.png" alt="Proponent Biotech, avtale signert" />
+                <img src="/middag/partners/dr-harleys.png" alt="Dr. Harley's" />
+                <img src="/middag/partners/herbwiser.png" alt="Herbwiser" />
+                <img src="/middag/partners/noorani.webp" alt="Noorani Surgical" />
+              </div>
             </div>
           </article>
         </div>
@@ -236,8 +250,7 @@ export default function Middag() {
         <ol className="timeline">
           <li><time>18.00</time><b>Velkommen</b><span>Mingling</span></li>
           <li><time>18.30</time><b>Presentasjon</b><span>Mashwara AI og Mashwara MED</span></li>
-          <li><time>19.00</time><b>Middag</b><span>Buffet</span></li>
-          <li><time>19.45</time><b>Samtale</b><span>Spørsmål og veien videre</span></li>
+          <li><time>19.15</time><b>Middag</b><span>Buffet og den gode samtalen</span></li>
         </ol>
       </section>
 

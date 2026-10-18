@@ -91,7 +91,7 @@
 .middag .co p { margin: 0; color: var(--muted); }
 
 .middag .evening { padding-block: 16px 80px; }
-.middag .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); position: relative; }
+.middag .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); position: relative; }
 .middag .timeline::before { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 1px; background: rgba(255,255,255,.22); }
 .middag .timeline li { position: relative; padding-top: 30px; padding-right: 16px; min-width: 0; }
 .middag .timeline li::before { content: ""; position: absolute; left: 0; top: 0; width: 13px; height: 13px; border-radius: 50%; background: var(--night); border: 2px solid var(--cyan); }
@@ -140,8 +140,6 @@
   .middag .constellation .d2 { right: calc(4% + var(--s) * 1.15); top: calc(16px + var(--s) * 1.02); }
   .middag .constellation .d3 { right: calc(4% + var(--s) * .05); top: calc(16px + var(--s) * 1.02); }
   .middag .hero { padding-block: 120px 56px; }
-  .middag .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; }
-  .middag .timeline::before { display: none; }
 }
 @media (max-width: 520px) {
   .middag .wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
@@ -232,3 +230,11 @@
   .middag .cue.gone { opacity: 0; transform: translate(-50%, 12px); pointer-events: none; }
 }
 @media (prefers-reduced-motion: reduce) { .cue .chev { animation: none; } .cue { transition: none; } }
+
+/* Credentials and partners on the company cards: quiet text chips and a small logo row. */
+.middag .badges { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.middag .badges li { font-size: 12.5px; font-weight: 400; line-height: 1.4; color: var(--ink); background: #FFFFFF; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; }
+.middag .partners { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 14px; padding-top: 16px; border-top: 1px solid var(--rule); }
+.middag .partners .lbl { font-size: 12px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+.middag .partners img { height: 32px; width: auto; display: block; }
+.middag .partners img.framed { border-radius: 4px; }
