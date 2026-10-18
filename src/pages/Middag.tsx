@@ -65,7 +65,12 @@ export default function Middag() {
 
   const scrollToEvening = () => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.getElementById('middag-ev')?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    const el = document.getElementById('middag-ev');
+    if (!el) return;
+    // Absolute document position, not scrollIntoView: on iOS the toolbar collapses during a smooth
+    // scrollIntoView, the viewport grows and the page overshoots past the programme.
+    const top = el.getBoundingClientRect().top + window.scrollY - 24;
+    window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
   };
 
   const scrollToCard = () => {
@@ -137,7 +142,7 @@ export default function Middag() {
             {phase === 'loading' && <p className="note">Henter invitasjonen …</p>}
 
             {phase === 'no-invite' && (
-              <p className="note">Denne invitasjonen er personlig. Bruk lenken du fikk tilsendt for å svare.</p>
+              <p className="note">Denne invitasjonen er personlig. Ønsker du å delta, ta kontakt med Jamil.</p>
             )}
 
             {phase === 'choose' && (
@@ -195,6 +200,7 @@ export default function Middag() {
             )}
 
             <p className="deadline">Svar innen fredag 30. oktober. Begrenset antall plasser.</p>
+            <p className="contact">Spørsmål? Jamil Rehman, <a href="tel:+4798691760">986 91 760</a>, <a href="mailto:jamil@aprikosventure.com">jamil@aprikosventure.com</a></p>
           </article>
           <button className={`cue${scrolled ? ' gone' : ''}`} type="button" onClick={scrollToEvening} aria-label="Se programmet og selskapene">
             <span className="cue-label">Se programmet og selskapene</span>
@@ -245,7 +251,7 @@ export default function Middag() {
               <span className="status">I drift</span>
               <ul className="badges" aria-label="Lisens"><li>Lisensiert legemiddeldistributør · Punjab, gyldig til 2031</li></ul>
               <h3>Fra produsent til pasient</h3>
-              <p>B2B-distribusjon av legemidler og egen nettbutikk, med internasjonale partnere og egne merkevarer. Importlisensen er søkt, og vi åpner eget apotek med nettapotek i Bahria Town.</p>
+              <p>B2B-distribusjon av legemidler, egen nettbutikk, internasjonale partnerskap og egne merkevarer. Vi har søkt om importlisens, og gjennom medeierskap i et etablert apotek i Bahria Town bygger vi nettapotek med hjemlevering.</p>
               <div className="partners">
                 <span className="lbl">Partnere</span>
                 <img className="framed" src="/middag/partners/proponent.png" alt="Proponent Biotech, avtale signert" />
