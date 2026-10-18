@@ -142,7 +142,7 @@ export default function Middag() {
             {phase === 'loading' && <p className="note">Henter invitasjonen …</p>}
 
             {phase === 'no-invite' && (
-              <p className="note">Denne invitasjonen er personlig. Ønsker du å delta, ta kontakt med Jamil.</p>
+              <p className="note">Denne invitasjonen er personlig.</p>
             )}
 
             {phase === 'choose' && (
@@ -200,7 +200,13 @@ export default function Middag() {
             )}
 
             <p className="deadline">Svar innen fredag 30. oktober. Begrenset antall plasser.</p>
-            <p className="contact">Spørsmål? Jamil Rehman, <a href="tel:+4798691760">986 91 760</a>, <a href="mailto:jamil@aprikosventure.com">jamil@aprikosventure.com</a></p>
+            <div className="contact">
+              <p>Spørsmål? Ta kontakt med Jamil Rehman.</p>
+              <ul>
+                <li><a href="tel:+4798691760"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>986 91 760</span></a></li>
+                <li><a href="mailto:jamil@aprikosventure.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg><span>jamil@aprikosventure.com</span></a></li>
+              </ul>
+            </div>
           </article>
           <button className={`cue${scrolled ? ' gone' : ''}`} type="button" onClick={scrollToEvening} aria-label="Se programmet og selskapene">
             <span className="cue-label">Se programmet og selskapene</span>
