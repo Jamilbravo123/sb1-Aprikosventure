@@ -257,7 +257,7 @@ export default function Middag() {
               <span className="status">I drift</span>
               <ul className="badges" aria-label="Lisens"><li>Lisensiert legemiddeldistributør · Punjab, gyldig til 2031</li></ul>
               <h3>Fra produsent til pasient</h3>
-              <p>B2B-distribusjon av legemidler, egen nettbutikk, internasjonale partnerskap og egne merkevarer. Vi har søkt om importlisens, og gjennom medeierskap i et etablert apotek i Bahria Town bygger vi nettapotek med hjemlevering.</p>
+              <p>B2B-distribusjon av legemidler, egen nettbutikk, internasjonale partnerskap og egne merkevarer. Vi har søkt om importlisens og bygger nettapotek med hjemlevering.</p>
               <div className="partners">
                 <span className="lbl">Partnere</span>
                 <img className="framed" src="/middag/partners/proponent.png" alt="Proponent Biotech, avtale signert" />
