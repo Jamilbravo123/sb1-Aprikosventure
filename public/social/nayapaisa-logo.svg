@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 218 40" role="img" aria-label="Nayapaisa">
+  <g transform="translate(2.93 2.93) scale(0.2439)">
+    <path d="M29.43 80.87 A42 42 0 1 1 55.64 109.47" fill="none" stroke="#C3DC63" stroke-width="30" stroke-linecap="round"/>
+    <circle cx="70" cy="70" r="17" fill="#9CB44E"/>
+    <circle cx="14" cy="122" r="15" fill="#C3DC63"/>
+  </g>
+  <text x="52" y="28.5" fill="#C3DC63" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="1.56"><tspan font-weight="700">NAYA</tspan><tspan font-weight="400">PAISA</tspan></text>
+</svg>

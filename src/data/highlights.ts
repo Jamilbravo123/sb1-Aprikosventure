@@ -34,8 +34,8 @@ export const highlights: Highlight[] = [
   },
   {
     mark: 'Kinetic',
-    text: 'Performance drinks powered by Venturetoken',
-    href: 'https://venturetoken.io/kinetic',
+    text: 'Performance energy drinks',
+    href: 'https://kineticfoods.pk',
   },
   {
     mark: 'Codentropy',

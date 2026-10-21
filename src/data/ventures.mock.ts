@@ -3,6 +3,7 @@ const shippingxLogo = '/social/shippingx-logo3-trimmed.png';
 import codeEntropyLogo from '../assets/images/code-entropy-logo.webp';
 const venturetoken3dIcon = '/social/venturetoken-3dicon.png';
 import balderxLogo from '../assets/images/balderx-logo.png';
+import aprikosMedicalLogo from '../assets/images/aprikosmedical-logo.png';
 
 // =============================================================================
 // VENTURES - Our Venture Structure
@@ -45,6 +46,9 @@ export const ventures: Venture[] = [
     ownershipType: 'strategic',
     aprikosRole: 'Venture Builder',
     logo: shippingxLogo,
+    links: [
+      { label: 'Website', url: 'https://shippingx.io', type: 'website' }
+    ],
     balderxUrl: 'https://balderx.com/projects/shippingx',
     statusText: 'First issuance Q3 2026',
     details: {
@@ -107,11 +111,34 @@ export const ventures: Venture[] = [
     status: 'building',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder',
-    logo: '/social/Nayapaisa.png',
-    links: [],
+    logo: '/social/nayapaisa-logo.svg',
+    links: [
+      { label: 'Website', url: 'https://nayapaisa.pk', type: 'website' }
+    ],
     jvPartner: { name: 'NBX', url: 'https://nbx.com', logo: '/social/nbx-logo.svg' },
     statusText: 'LOI signed',
     details: { highlights: ['50/50 joint venture with NBX', 'Letter of intent signed', 'Subject to definitive agreements and regulatory approval'] },
+  },
+
+  // VENTURE: Aprikos Medical
+  {
+    id: 'aprikos-medical',
+    name: 'Aprikos Medical',
+    tagline: 'MDR-certified Norwegian medical device manufacturer',
+    kind: 'venture',
+    industry: 'medtech',
+    hqCountry: 'NO',
+    markets: ['NO', 'EU', 'GLOBAL'],
+    status: 'live',
+    ownershipType: 'strategic',
+    aprikosRole: 'Venture Builder · Strategic Stake',
+    logo: aprikosMedicalLogo,
+    links: [
+      { label: 'Website', url: 'https://aprikosmedical.com', type: 'website' }
+    ],
+    details: {
+      highlights: ['Medical devices', 'MDR certified', 'Global distribution']
+    }
   },
 
   // VENTURE: Pharmesa
@@ -136,7 +163,7 @@ export const ventures: Venture[] = [
   {
     id: 'kinetic-energy',
     name: 'Kinetic Energy',
-    tagline: 'Performance energy drink powered by Venturetoken',
+    tagline: 'Performance energy drink',
     kind: 'venture' as VentureKind,
     industry: 'industry' as Industry,
     hqCountry: 'PK' as Country,
@@ -147,12 +174,12 @@ export const ventures: Venture[] = [
     aprikosRole: 'Venture Builder',
     logo: '/social/ke-logo.png',
     links: [
-      { label: 'Website', url: 'https://venturetoken.io/kinetic', type: 'website' as const }
+      { label: 'Website', url: 'https://kineticfoods.pk', type: 'website' as const }
     ],
     scriptTagline: 'on a lighter note',
     flavor: 'Kiwi · Lime',
-    launchDate: 'October 2026',
-    details: { highlights: ['Energy drink', 'Consumer brand', 'Venturetoken rewards'] },
+    launchDate: 'H1 2027',
+    details: { highlights: ['Energy drink', 'Consumer brand'] },
   },
 
   // HUB: Code Entropy

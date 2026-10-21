@@ -24,6 +24,7 @@ function getInitials(name: string): string {
 
 const ventureFlags: Record<string, string> = {
   'nayapaisa': '',
+  'aprikos-medical': '🇳🇴 🌍',
   'pharmesa': '🇳🇴 🇵🇰',
   'shippingx': '🇳🇴 🇪🇺',
 };
@@ -58,8 +59,8 @@ function VentureCard({ venture }: { venture: Venture }) {
             src={venture.logo}
             alt={venture.name}
             className={`w-auto max-w-full object-contain ${
-              venture.id === 'shippingx' ? 'max-h-[88px]' :
-              venture.id === 'nayapaisa' ? 'max-h-[88px]' :
+              venture.id === 'shippingx' ? 'max-h-10' :
+              venture.id === 'nayapaisa' ? 'max-h-9' :
               'max-h-20'
             }`}
           />
@@ -104,7 +105,7 @@ function VentureCard({ venture }: { venture: Venture }) {
           )}
           {venture.launchDate && (
             <p className="font-display italic text-[11px] text-gold/60 tracking-[0.02em] pl-0.5">
-              launching {venture.launchDate.toLowerCase()}
+              launching {venture.launchDate}
             </p>
           )}
         </div>
@@ -118,21 +119,21 @@ function VentureCard({ venture }: { venture: Venture }) {
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => e.stopPropagation()}
-          className="mt-3 inline-flex items-center gap-1.5 text-[11px] text-[#666] hover:text-gold-light transition-colors group/jv"
+          className="mt-3 inline-flex items-center gap-1.5 text-[10px] text-[#555] hover:text-gold-light transition-colors group/jv"
         >
-          <span className="uppercase tracking-[0.08em] text-[#555]">JV with</span>
+          <span className="uppercase tracking-[0.08em] text-[#4a4a4a]">JV with</span>
           {venture.jvPartner.logo ? (
             <img
               src={venture.jvPartner.logo}
               alt={venture.jvPartner.name}
-              className="h-4 w-auto object-contain opacity-80 group-hover/jv:opacity-100 transition-opacity"
+              className="h-2.5 w-auto object-contain opacity-50 group-hover/jv:opacity-90 transition-opacity"
             />
           ) : (
-            <span className="font-semibold text-gold/80 group-hover/jv:text-gold-light">
+            <span className="font-semibold text-gold/60 group-hover/jv:text-gold-light">
               {venture.jvPartner.name}
             </span>
           )}
-          <ExternalLink className="w-2.5 h-2.5 text-[#444] group-hover/jv:text-gold transition-colors" />
+          <ExternalLink className="w-2 h-2 text-[#3a3a3a] group-hover/jv:text-gold transition-colors" />
         </a>
       )}
     </div>
