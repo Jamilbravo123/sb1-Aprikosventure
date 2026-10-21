@@ -22,3 +22,11 @@ markets» er et etablert, positivt ladet begrep som dekker PK/MENA-posisjonering
   «markets» og matcher porteføljen).
 - SEO-titler i `index.html` (`<title>`, og:title, twitter:title) skal alltid
   matche hero-taglinen ved fremtidige endringer.
+
+## Hero-overskrift og Thesis (2026-10-21)
+- H1: **«Nordic Standards. *Frontier* Scale.»** (kursivt kobberord: Frontier). Erstattet «Turning Ideas Into Impactful Ventures».
+- Undertittel: «A cross-border venture builder co-founding regulated companies in digital assets, health and proptech.»
+- Skrivemaskinen beholdt (Jamil: «ga litt liv til siden»), nye ord: **WE → CO-FOUND · LICENSE · OPERATE · SCALE** (veien til et regulert selskap i drift).
+- Thesis-overskrift: «Two Markets, One Operating Model» (lik på desktop og mobil).
+- **Why «Standards», ikke «Rigour»:** «Nordic rigour» er en slitt konsulentfrase, britisk stavet og abstrakt. «Standards» peker konkret på regulering/compliance. Jamil fikk valget; bytt bare om han ber om det.
+

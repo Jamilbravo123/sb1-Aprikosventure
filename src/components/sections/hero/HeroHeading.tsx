@@ -1,9 +1,8 @@
 import { useRef, useEffect, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap } from '../../../lib/gsap';
-import { splitWords } from '../../../utils/splitWords';
 
-const ROTATION_WORDS = ['BUILD', 'INVEST', 'SCALE'];
+const ROTATION_WORDS = ['CO-FOUND', 'LICENSE', 'OPERATE', 'SCALE'];
 const TYPE_SPEED = 80;   // ms per character
 const DELETE_SPEED = 50;  // ms per character delete
 const HOLD_DELAY = 1400;  // ms to hold completed word
@@ -65,22 +64,19 @@ export default function HeroHeading() {
     return () => clearTimeout(timer);
   }, [displayText, isDeleting, wordIndex]);
 
-  const line1Words = splitWords('Turning Ideas Into');
-
   return (
     <div ref={containerRef} className="text-center">
       <h1 className="font-display text-[clamp(3rem,7vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-white">
-        {line1Words.map((word, i) => (
-          <span key={i}><span className="hero-word inline-block">{word}</span>{' '}</span>
-        ))}
+        <span className="hero-word inline-block">Nordic</span>{' '}
+        <span className="hero-word inline-block">Standards.</span>{' '}
         <br />
-        <span className="hero-word inline-block text-gold italic">Impactful</span>{' '}
-        <span className="hero-word inline-block">Ventures</span>
+        <span className="hero-word inline-block text-gold italic">Frontier</span>{' '}
+        <span className="hero-word inline-block">Scale.</span>
       </h1>
 
       <div className="flex items-center justify-center gap-3 mt-8" aria-hidden="true">
-        <span className="text-[#444] text-xs tracking-[3px] uppercase">WE</span>
-        <div className="bg-gold/[0.06] border border-gold/[0.12] rounded-lg px-5 py-2 min-w-[120px]">
+        <span className="text-[#808080] text-xs tracking-[3px] uppercase">WE</span>
+        <div className="bg-gold/[0.06] border border-gold/[0.12] rounded-lg px-5 py-2 min-w-[140px]">
           <span className="text-gold-light text-sm font-semibold tracking-wider">
             {displayText}
           </span>

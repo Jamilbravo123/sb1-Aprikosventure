@@ -74,7 +74,7 @@ export default function Thesis() {
           Why Aprikos Venture
         </p>
         <h2 className="thesis-animate font-display text-3xl sm:text-4xl font-bold mb-5 text-white">
-          Where Innovation Meets<br className="hidden sm:inline" /> Emerging Opportunity
+          Two Markets, One Operating Model
         </h2>
         <p className="thesis-animate text-[#999] text-base leading-[1.8] max-w-[600px] mx-auto mb-10">
           We focus on building companies where technology, capital, and emerging markets

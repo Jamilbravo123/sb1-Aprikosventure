@@ -32,8 +32,8 @@ export default function HeroContent() {
 
       <HeroHeading />
 
-      <p className="hero-fade text-[#999] text-base leading-relaxed max-w-[520px] mt-5">
-        We build and scale ventures across AI, digital assets, and healthcare.
+      <p className="hero-fade text-[#999] text-base leading-relaxed max-w-[560px] mt-6">
+        A cross-border venture builder co-founding regulated companies in digital assets, health and proptech.
       </p>
 
       <div className="hero-fade flex flex-col sm:flex-row gap-3.5 mt-10 w-full sm:w-auto">
