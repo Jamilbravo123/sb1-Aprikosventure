@@ -71,7 +71,7 @@ export default function RegisterLanding() {
           {[
             { n: '9', l: 'Ventures' },
             { n: '6', l: 'Markets' },
-            { n: '3', l: 'Verticals' },
+            { n: '4', l: 'Verticals' },
             { n: '5+', l: 'Years Building' },
           ].map((s) => (
             <div key={s.l}>

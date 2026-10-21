@@ -22,7 +22,14 @@ export const portfolioCategories: CategoryConfig[] = [
     title: 'Health Tech',
     icon: '✦',
     description: 'AI diagnostics, medical devices, and pharmaceutical innovation.',
-    ventureIds: ['mashwara-ai', 'aprikos-medical', 'pharmesa'],
+    ventureIds: ['mashwara-ai', 'mashwara-med', 'aprikos-medical', 'pharmesa'],
+  },
+  {
+    id: 'proptech',
+    title: 'PropTech',
+    icon: '⌂',
+    description: 'AI property advice, building compliance, and public real estate data.',
+    ventureIds: ['tomerik'],
   },
   {
     id: 'brands',

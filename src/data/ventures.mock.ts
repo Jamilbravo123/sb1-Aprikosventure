@@ -103,7 +103,7 @@ export const ventures: Venture[] = [
   {
     id: 'nayapaisa',
     name: 'Nayapaisa',
-    tagline: 'Regulated digital asset exchange',
+    tagline: 'Digital asset exchange',
     kind: 'venture',
     industry: 'fintech',
     hqCountry: 'NO',
@@ -118,6 +118,27 @@ export const ventures: Venture[] = [
     jvPartner: { name: 'NBX', url: 'https://nbx.com', logo: '/social/nbx-logo.svg' },
     statusText: 'LOI signed',
     details: { highlights: ['50/50 joint venture with NBX', 'Letter of intent signed', 'Subject to definitive agreements and regulatory approval'] },
+  },
+
+  // VENTURE: Mashwara MED
+  {
+    id: 'mashwara-med',
+    name: 'Mashwara MED',
+    tagline: 'Licensed health product distributor and online marketplace',
+    kind: 'venture',
+    industry: 'healthtech',
+    hqCountry: 'PK',
+    markets: ['PK'],
+    status: 'live',
+    ownershipType: 'core',
+    aprikosRole: 'Venture Builder',
+    logo: '/social/mashwaramed-logo.png',
+    links: [
+      { label: 'Website', url: 'https://mashwaramed.com', type: 'website' }
+    ],
+    details: {
+      highlights: ['Licensed distributor', 'Online marketplace', 'Supplements and medical devices']
+    }
   },
 
   // VENTURE: Aprikos Medical
@@ -153,10 +174,31 @@ export const ventures: Venture[] = [
     status: 'building',
     ownershipType: 'core',
     aprikosRole: 'Venture Builder',
-    logo: '/social/pharmesa-logo.jpeg',
+    logo: '/social/pharmesa-logo-transparent.png',
     links: [],
     jvPartner: { name: 'Pharma Nordic', url: 'https://pharmanordic.no', logo: '/social/pharma-nordic-logo.png' },
     details: { highlights: ['Proponent nasal spray', 'JV with Pharma Nordic', 'Nordic launch, MENA-SA expansion'] },
+  },
+
+  // VENTURE: TomErik
+  {
+    id: 'tomerik',
+    name: 'TomErik',
+    tagline: 'AI property adviser for buying, building and selling in Norway',
+    kind: 'venture',
+    industry: 'proptech',
+    hqCountry: 'NO',
+    markets: ['NO'],
+    status: 'live',
+    ownershipType: 'majority',
+    aprikosRole: 'Venture Builder',
+    logo: '/social/tomerik-logo-light.svg',
+    links: [
+      { label: 'Website', url: 'https://tomerik.com', type: 'website' }
+    ],
+    details: {
+      highlights: ['Agentic property adviser', 'IFC model checks against TEK17', 'Public data from Kartverket, SSB and PBE']
+    }
   },
 
   // VENTURE: Kinetic Energy

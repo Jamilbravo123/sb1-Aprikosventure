@@ -4,7 +4,7 @@ import PortfolioSplit from './PortfolioSplit';
 export default function Portfolio() {
   return (
     <section id="ventures" className="py-16 sm:py-24 bg-[#0c0c0c]">
-      <div className="max-w-[1100px] mx-auto px-6">
+      <div className="max-w-[1280px] mx-auto px-6">
         <PortfolioHeader />
         <PortfolioSplit />
       </div>

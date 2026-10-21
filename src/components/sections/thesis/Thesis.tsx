@@ -6,7 +6,7 @@ import brochureImg from '../../../assets/images/hero/brochure-picture.webp';
 const stats = [
   { value: 9, label: 'Ventures' },
   { value: 6, label: 'Markets' },
-  { value: 3, label: 'Verticals' },
+  { value: 4, label: 'Verticals' },
   { value: 5, label: 'Years Building', suffix: '+' },
 ];
 

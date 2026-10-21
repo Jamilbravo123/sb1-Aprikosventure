@@ -45,7 +45,7 @@ function VentureCard({ venture }: { venture: Venture }) {
       tabIndex={0}
       onClick={handleClick}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleClick(); }}
-      className="venture-card group w-full sm:w-[280px] flex-shrink-0 cursor-pointer py-5 px-6 rounded-xl hover:bg-white/[0.03] transition-all"
+      className="venture-card group w-full sm:w-[280px] lg:w-[calc((100%-2rem)/3)] xl:w-[calc((100%-3rem)/4)] flex-shrink-0 cursor-pointer py-5 px-6 xl:px-5 rounded-xl hover:bg-white/[0.03] transition-all"
     >
       {/* Logo */}
       <div className="relative h-20 mb-4 flex items-center gap-2">
@@ -61,6 +61,9 @@ function VentureCard({ venture }: { venture: Venture }) {
             className={`w-auto max-w-full object-contain ${
               venture.id === 'shippingx' ? 'max-h-10' :
               venture.id === 'nayapaisa' ? 'max-h-9' :
+              venture.id === 'mashwara-med' ? 'max-h-14' :
+              venture.id === 'tomerik' ? 'max-h-16' :
+              venture.id === 'pharmesa' ? 'max-h-11' :
               'max-h-20'
             }`}
           />
@@ -196,14 +199,13 @@ function CategoryRow({ config, ventures, index }: { config: typeof portfolioCate
     <div ref={rowRef} className="py-6 lg:py-10 relative">
       {/* Desktop layout */}
       <div className="hidden lg:flex lg:flex-row lg:gap-0">
-        <div className="cat-label lg:w-[220px] flex-shrink-0 lg:pr-8 lg:self-center">
-          <div className="flex items-center gap-3 mb-2">
+        <div className="cat-label lg:w-[170px] flex-shrink-0 lg:pr-4 lg:self-center">
+          <div className="flex items-center gap-3">
             <span className="text-lg text-gold">{config.icon}</span>
             <h3 className="font-display text-xl font-bold text-white">{config.title}</h3>
           </div>
-          <p className="text-[12px] text-[#666] leading-relaxed">{config.description}</p>
         </div>
-        <div className="flex-1 flex flex-nowrap items-start gap-4 lg:ml-6 lg:pl-6 lg:border-l-2 lg:border-gold/30 lg:shadow-[inset_2px_0_12px_rgba(201,147,94,0.08)]">
+        <div className="flex-1 flex flex-wrap items-start gap-x-4 gap-y-2 lg:ml-6 lg:pl-6 lg:border-l-2 lg:border-gold/30 lg:shadow-[inset_2px_0_12px_rgba(201,147,94,0.08)]">
           {ventures.map((v) => (
             <VentureCard key={v.id} venture={v} />
           ))}
@@ -222,7 +224,6 @@ function CategoryRow({ config, ventures, index }: { config: typeof portfolioCate
           </div>
           <ChevronDown className={`w-5 h-5 text-gold/80 transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`} />
         </button>
-        <p className="text-[12px] text-[#666] leading-relaxed mb-2">{config.description}</p>
 
         <div ref={mobileContentRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
           <div className="space-y-1 pt-3">

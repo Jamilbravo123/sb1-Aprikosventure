@@ -5,7 +5,7 @@
 - [aprikos-hq = kilde til sannhet](reference_aprikos_hq.md) — selskapsfakta/porteføljestatus/nettside-avvik; kanoniske tall 9/6/3/5+
 - [Kontaktskjema / EmailJS](reference_contact_form_emailjs.md) — nøkler i Netlify-env (ikke repo); 412 «Invalid grant» = koble Outlook til på nytt i EmailJS
 - [Company profile](company-profile.md) — org.nr, nøkkelpersoner, portefølje, milepæler
-- [Porteføljeendringer okt 2026](project_portefolje_oktober_2026.md) — Aprikos Medical tilbake, nayapaisa.pk beholdes bevisst (tross NOC-regel), Kinetic uten Venturetoken
+- [Porteføljeendringer okt 2026](project_portefolje_oktober_2026.md) — 4 vertikaler (ny PropTech: TomErik), Mashwara MED + Aprikos Medical i Health Tech, nayapaisa.pk beholdes bevisst (tross NOC-regel), Kinetic uten Venturetoken
 - [Hero-tagline copy-beslutning](copy_hero_tagline.md) — «Regulated Industries, Frontier Markets» (2026-08-10); ikke gjeninnfør «hard markets»
 - [Styreportalen /styret](project_styreportal.md) — arkitektur, RLS/triggere, driftsfakta for styreområdet (lansert 2026-08-04)
 - [Supabase CLI and API access](reference_supabase_access.md) — How to run SQL, manage auth users, and access the Aprikos Venture Club Supabase project
@@ -53,6 +53,7 @@
 - Tailwind custom colors: `dark-primary`, `dark-secondary`, `dark-elevated`, `gold`, `gold-light`, `gold-dark`
 
 ## HomePage Section Order
+(Portfolio har nå 4 vertikaler — se project_portefolje_oktober_2026.md)
 Hero → Portfolio (horizontal rows with accordion on mobile) → Venture Model (BUILD/INVEST/SCALE timeline) → Thesis (Why Aprikos + stats) → Team → News (editorial feed) → Contact
 
 ## Portfolio Structure (3 verticals)
