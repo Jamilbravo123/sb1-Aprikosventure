@@ -41,3 +41,11 @@ Relatert: [[reference-aprikos-hq]], [[project-investor-registration]]
 - Footer har juridisk disclaimer (ikke investeringsråd/tilbud, kryptorisiko, kun profesjonelle).
 - Nyheter ligger i Supabase-tabellen `news` (prod), ikke i koden — endringer der går live umiddelbart.
 
+## Pause-sjekkpunkt 2026-10-21 (alt pushet og live, siste commit `58599b3`)
+Åpne punkter:
+- **«6 Markets»** står urørt — Jamil sjekker selv hvilke seks markeder (Dubai er ute).
+- **NBX-JV:** når NBX har børsmeldt den signerte JV-en → bytt «LOI signed» til JV (kort, stripe, partnerrad, index.html) og legg inn JV-nyhet i `news`-tabellen.
+- **Sikkerhet (utenfor nettsiden):** en Django `SECRET_KEY` for marketplaceBE ligger i klartekst i en Slack-DM (Umair, 2026-07-23) — bør roteres.
+- aprikos-hq `ops/nettside-avvik.md` er utdatert (sier Aprikos Medical fjernet, 3 vertikaler, Dubai) — ikke oppdatert herfra.
+Gjort i økta: se commits `b7223cf`, `53c4d6c`, `4285e03`, `d6b787c`, `58599b3`.
+

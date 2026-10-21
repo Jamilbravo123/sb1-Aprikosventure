@@ -18,8 +18,8 @@ Nøkkelfiler:
 - `ops/nettside-avvik.md` — avviksanalyse nettsiden vs. virkelighet; kanoniske tall **9 ventures / 6 markets / 3 verticals / 5+ år** (opprydning 2026-07-21, commit `203ac62`)
 - `finans/_runway.md`, `team/bemanning.md` — kostnads-/bemanningsfakta
 
-Kjente åpne avvik (per 2026-08-10):
-- Hero sier «Oslo | Berlin | Lahore | Dubai» — Dubai mangler dokumentert forankring
+Kjente åpne avvik (per 2026-08-10, oppdatert 2026-10-21):
+- ~~Dubai i hero~~ — fjernet 2026-10-21 (Jamil: «vi er ikke lenger der»)
 - `balderxUrl`-lenker peker fortsatt til balderx.com mens BalderX er i bero
 
 Relatert: [[project-investor-registration]] — stats på /register skal alltid matche de kanoniske tallene.
