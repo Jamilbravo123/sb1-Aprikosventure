@@ -41,6 +41,10 @@ export default function ContactForm({ formRef, isSubmitting, handleSubmit }: Con
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
+        <p className="mt-3 text-center text-xs text-slate-500">
+          We use your details only to reply to you. See our{' '}
+          <a href="/privacy" className="underline underline-offset-2 hover:text-[#C9935E]">Privacy Notice</a>.
+        </p>
       </div>
     </form>
   );

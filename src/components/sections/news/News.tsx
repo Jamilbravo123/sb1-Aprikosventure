@@ -11,7 +11,9 @@ import { categoryLabels, categoryColors } from '../../../types/news';
 // Map news titles to venture names for the feed
 const ventureFromTitle: Record<string, string> = {
   ShippingX: 'ShippingX',
+  'Mashwara MED': 'Mashwara MED',
   Mashwara: 'Mashwara AI',
+  TomErik: 'TomErik',
   NBX: 'Nayapaisa',
   Kinetic: 'Kinetic',
   Venturetoken: 'Venturetoken',
@@ -59,7 +61,7 @@ function FeaturedCard({ item }: { item: NewsItem }) {
         <div className="flex items-center gap-2 mb-6">
           {venture && <span className="text-gold text-[11px] font-semibold tracking-wider uppercase">{venture}</span>}
           {venture && <span className="text-[#333]">·</span>}
-          <time className="text-xs text-[#555]">{formatDate(item.published_at)}</time>
+          <time className="text-xs text-[#808080]">{formatDate(item.published_at)}</time>
         </div>
         <h3 className="font-display text-2xl lg:text-[32px] font-bold text-white mb-5 group-hover:text-gold-light transition-colors leading-tight shimmer-text">
           {item.title}
@@ -80,12 +82,12 @@ function SecondaryCard({ item }: { item: NewsItem }) {
       <div className="flex items-center gap-2 mb-3 sm:mb-4">
         {venture && <span className="text-gold text-[10px] font-semibold tracking-wider uppercase">{venture}</span>}
         {venture && <span className="text-[#333]">·</span>}
-        <time className="text-[11px] text-[#555]">{formatDate(item.published_at)}</time>
+        <time className="text-[11px] text-[#808080]">{formatDate(item.published_at)}</time>
       </div>
       <h3 className="text-[16px] sm:text-[18px] font-semibold text-white mb-2 sm:mb-3 group-hover:text-gold-light transition-colors leading-snug">
         {item.title}
       </h3>
-      <p className="hidden sm:block text-[14px] text-[#777] leading-[1.7]">
+      <p className="hidden sm:block text-[14px] text-[#999] leading-[1.7]">
         {item.summary}
       </p>
       <div className="mt-3 sm:mt-4">
@@ -101,7 +103,7 @@ function CompactItem({ item }: { item: NewsItem }) {
     <article className="news-card group flex items-start gap-3 sm:gap-5 py-4 sm:py-5 border-b border-white/[0.04] last:border-b-0 transition-all duration-300 hover:bg-white/[0.01] hover:px-3 hover:-mx-3 rounded-lg">
       {/* Timeline dot + date */}
       <div className="flex flex-col items-center flex-shrink-0 w-[70px] sm:w-[85px] pt-1">
-        <time className="text-[10px] sm:text-[11px] text-[#555] whitespace-nowrap">
+        <time className="text-[10px] sm:text-[11px] text-[#808080] whitespace-nowrap">
           {formatDate(item.published_at)}
         </time>
       </div>
@@ -119,7 +121,7 @@ function CompactItem({ item }: { item: NewsItem }) {
         <h4 className="text-[14px] sm:text-[15px] font-semibold text-white group-hover:text-gold-light transition-colors leading-snug">
           {item.title}
         </h4>
-        <p className="hidden sm:block text-[12px] text-[#666] leading-relaxed mt-1.5">
+        <p className="hidden sm:block text-[12px] text-[#999] leading-relaxed mt-1.5">
           {item.summary}
         </p>
       </div>

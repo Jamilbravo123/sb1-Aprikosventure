@@ -25,7 +25,7 @@ export const highlights: Highlight[] = [
   },
   {
     mark: 'ShippingX',
-    text: 'First tokenized issuance Q3 2026',
+    text: 'First tokenized issuance Q4 2026',
     href: 'https://shippingx.io',
   },
   {
@@ -34,7 +34,7 @@ export const highlights: Highlight[] = [
   },
   {
     mark: 'Kinetic',
-    text: 'Performance energy drinks',
+    text: 'Performance drinks',
     href: 'https://kineticfoods.pk',
   },
   {

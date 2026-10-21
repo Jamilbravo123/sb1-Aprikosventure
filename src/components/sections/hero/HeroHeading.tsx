@@ -69,16 +69,16 @@ export default function HeroHeading() {
 
   return (
     <div ref={containerRef} className="text-center">
-      <div className="font-display text-[clamp(3rem,7vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-white">
+      <h1 className="font-display text-[clamp(3rem,7vw,4.5rem)] font-bold leading-[1.1] tracking-tight text-white">
         {line1Words.map((word, i) => (
-          <span key={i} className="hero-word inline-block mr-[0.3em]">{word}</span>
+          <span key={i}><span className="hero-word inline-block">{word}</span>{' '}</span>
         ))}
         <br />
-        <span className="hero-word inline-block mr-[0.3em] text-gold italic">Impactful</span>
+        <span className="hero-word inline-block text-gold italic">Impactful</span>{' '}
         <span className="hero-word inline-block">Ventures</span>
-      </div>
+      </h1>
 
-      <div className="flex items-center justify-center gap-3 mt-8">
+      <div className="flex items-center justify-center gap-3 mt-8" aria-hidden="true">
         <span className="text-[#444] text-xs tracking-[3px] uppercase">WE</span>
         <div className="bg-gold/[0.06] border border-gold/[0.12] rounded-lg px-5 py-2 min-w-[120px]">
           <span className="text-gold-light text-sm font-semibold tracking-wider">

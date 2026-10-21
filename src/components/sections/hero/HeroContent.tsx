@@ -25,14 +25,14 @@ export default function HeroContent() {
         <span className="text-gold text-[10px] sm:text-[11px] tracking-[2.5px] sm:tracking-[5px] uppercase">
           Regulated Industries, Frontier Markets
         </span>
-        <span className="text-[#555] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase">
-          Oslo | Berlin | Lahore | Dubai
+        <span className="text-[#808080] text-[9px] sm:text-[10px] tracking-[3px] sm:tracking-[4px] uppercase">
+          Oslo | Berlin | Lahore
         </span>
       </div>
 
       <HeroHeading />
 
-      <p className="hero-fade text-[#777] text-base leading-relaxed max-w-[520px] mt-5">
+      <p className="hero-fade text-[#999] text-base leading-relaxed max-w-[520px] mt-5">
         We build and scale ventures across AI, digital assets, and healthcare.
       </p>
 

@@ -64,6 +64,7 @@ function VentureCard({ venture }: { venture: Venture }) {
               venture.id === 'mashwara-med' ? 'max-h-14' :
               venture.id === 'tomerik' ? 'max-h-16' :
               venture.id === 'pharmesa' ? 'max-h-11' :
+              venture.id === 'kinetic-energy' ? 'max-h-9 -mt-4' :
               'max-h-20'
             }`}
           />
@@ -73,7 +74,7 @@ function VentureCard({ venture }: { venture: Venture }) {
         {venture.scriptTagline && (
           <span
             aria-hidden="true"
-            className="font-script pointer-events-none absolute left-14 -bottom-1 text-[22px] leading-none text-gold-light/90 whitespace-nowrap"
+            className="font-script pointer-events-none absolute left-16 bottom-0 text-[22px] leading-none text-gold-light/90 whitespace-nowrap"
             style={{
               transform: 'rotate(-6deg)',
               transformOrigin: 'left center',
@@ -95,7 +96,7 @@ function VentureCard({ venture }: { venture: Venture }) {
       </div>
 
       {/* Tagline */}
-      <p className="text-[13px] text-[#777] leading-relaxed">{venture.tagline}</p>
+      <p className="text-[13px] text-[#999] leading-relaxed">{venture.tagline}</p>
 
       {/* Flavor chip + launch caption */}
       {(venture.flavor || venture.launchDate) && (

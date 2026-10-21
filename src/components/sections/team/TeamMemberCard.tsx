@@ -17,12 +17,10 @@ export default function TeamMemberCard({ name, role, image, bio, shortBio, socia
         <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c] via-[#0c0c0c]/60 to-[#C9935E]/10 opacity-0 transition-opacity duration-300 group-hover:opacity-90" />
 
         <div className="absolute bottom-0 left-0 right-0 flex flex-col items-start p-4 sm:p-6 bg-gradient-to-t from-[#0c0c0c]/90 via-[#0c0c0c]/40 to-transparent">
-          <div className="flex items-center justify-between w-full">
-            <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-white">{name}</h3>
-              <p className="mt-0.5 text-xs sm:text-sm text-slate-300">{role}</p>
-            </div>
-            <div className="flex gap-2">
+          <div className="w-full">
+            <h3 className="text-lg sm:text-xl font-semibold text-white">{name}</h3>
+            <p className="mt-0.5 text-xs sm:text-sm text-slate-300">{role}</p>
+            <div className="mt-3 flex gap-2">
               {social.linkedin && (
                 <a
                   href={social.linkedin}
@@ -56,16 +54,16 @@ export default function TeamMemberCard({ name, role, image, bio, shortBio, socia
               )}
             </div>
           </div>
-          {shortBio && (
-            <p className="mt-3 text-sm text-[#E8C896] opacity-0 max-h-0 transition-all duration-300 group-hover:opacity-100 group-hover:max-h-20 overflow-hidden">
-              {shortBio}
-            </p>
-          )}
           <p className="mt-2 text-sm text-slate-200 opacity-0 max-h-0 transition-all duration-300 group-hover:opacity-100 group-hover:max-h-40 overflow-hidden">
             {bio}
           </p>
         </div>
       </div>
+      {shortBio && (
+        <p className="mt-3 w-64 mx-auto text-[13px] leading-relaxed text-slate-400">
+          {shortBio}
+        </p>
+      )}
     </div>
   );
 }

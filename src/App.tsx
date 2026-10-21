@@ -14,6 +14,7 @@ import BoardProject from './pages/styret/BoardProject';
 import BoardDocuments from './pages/styret/BoardDocuments';
 import BoardAdmin from './pages/styret/BoardAdmin';
 import Middag from './pages/Middag';
+import Privacy from './pages/Privacy';
 import BoardProtectedRoute from './components/styret/BoardProtectedRoute';
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
         }
       />
       <Route path="/middag" element={<Middag />} />
+      <Route path="/privacy" element={<Privacy />} />
       <Route path="/styret" element={<BoardLanding />} />
       <Route path="/styret/callback" element={<BoardCallback />} />
       <Route

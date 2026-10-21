@@ -2,7 +2,7 @@
 
 ## Core Info
 - **Org:** 926 056 743 | Registered Nov 2020 (founded 2019)
-- **Address:** Lørenveien 73a, 0585 Oslo
+- **Address:** Nordalveien 8B, 0580 Oslo (Brreg forretningsadresse; brukes på nettsiden fra 2026-10-21 — Lørenveien 73a er utgått)
 - **Type:** Cross-border venture studio (Norway <-> Pakistan/MESA)
 - **Parent:** Nordic Legacy AS (holding ~10 companies)
 

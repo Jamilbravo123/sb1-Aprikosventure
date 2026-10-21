@@ -50,7 +50,7 @@ export const ventures: Venture[] = [
       { label: 'Website', url: 'https://shippingx.io', type: 'website' }
     ],
     balderxUrl: 'https://balderx.com/projects/shippingx',
-    statusText: 'First issuance Q3 2026',
+    statusText: 'First issuance Q4 2026',
     details: {
       highlights: ['Maritime finance', 'Tokenized notes', 'BaFin tied agent via BMCP']
     }
@@ -201,11 +201,11 @@ export const ventures: Venture[] = [
     }
   },
 
-  // VENTURE: Kinetic Energy
+  // VENTURE: Kinetic
   {
     id: 'kinetic-energy',
-    name: 'Kinetic Energy',
-    tagline: 'Performance energy drink',
+    name: 'Kinetic',
+    tagline: 'Performance drink',
     kind: 'venture' as VentureKind,
     industry: 'industry' as Industry,
     hqCountry: 'PK' as Country,
@@ -214,14 +214,14 @@ export const ventures: Venture[] = [
     statusText: 'Pre-launch',
     ownershipType: 'core' as OwnershipType,
     aprikosRole: 'Venture Builder',
-    logo: '/social/ke-logo.png',
+    logo: '/social/kinetic-logo-white.png',
     links: [
       { label: 'Website', url: 'https://kineticfoods.pk', type: 'website' as const }
     ],
     scriptTagline: 'on a lighter note',
     flavor: 'Kiwi · Lime',
     launchDate: 'H1 2027',
-    details: { highlights: ['Energy drink', 'Consumer brand'] },
+    details: { highlights: ['Performance drink', 'Consumer brand'] },
   },
 
   // HUB: Code Entropy

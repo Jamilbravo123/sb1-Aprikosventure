@@ -28,3 +28,16 @@ metadata:
 - JV-partnerlinjen («JV with NBX/Pharma Nordic») er bevisst diskret (logo h-2.5, 50 % opasitet).
 
 Relatert: [[reference-aprikos-hq]], [[project-investor-registration]]
+
+## Tillitsgjennomgang 2026-10-21
+- Adresse overalt = **Brreg: Nordalveien 8B, 0580 Oslo** (Jamils valg). Footer: org.nr. 926 056 743 MVA.
+- `/privacy` laget (`src/pages/Privacy.tsx`) — var tom side i prod. Lagringstider (24 mnd) er forslag Jamil bør bekrefte.
+- Dubai fjernet fra hero og mobilmeny («vi er ikke lenger der»).
+- Partnerrad i Thesis: NBX (Nayapaisa · LOI signed), Pharma Nordic (JV · Pharmesa), BMCP GmbH (BaFin · ShippingX, uten lenke — URL ukjent).
+- Jamil 2026-10-21: **BaFin-registreringen via BMCP er OK**. JV med NBX er signert internt (Horizon Markets AS registrert 15.10), men **siden sier fortsatt «LOI signed» til NBX har børsmeldt JV-en** (NBX er notert — de må offentliggjøre først). Bytt til JV-tekst + JV-nyhet etter børsmeldingen.
+- Nyhetene ble oppdatert i prod 2026-10-21 (4 nye saker, 3 skjult, NBX-tittel rettet til LOI).
+- ShippingX første utstedelse: **Q4 2026** (side + deck).
+- Kinetic: **ordet «energy» fjernet overalt** (PFA forbyr det). Navn «Kinetic», ny logo `kinetic-logo-white.png` (ikon + «kinetic», laget fra deck-logoen).
+- Footer har juridisk disclaimer (ikke investeringsråd/tilbud, kryptorisiko, kun profesjonelle).
+- Nyheter ligger i Supabase-tabellen `news` (prod), ikke i koden — endringer der går live umiddelbart.
+

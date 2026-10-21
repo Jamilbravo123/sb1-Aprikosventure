@@ -21,7 +21,7 @@ const floatingImages = [
   {
     src: saraTable,
     alt: 'Aprikos Venture dinner',
-    className: 'left-[8%] bottom-[5%] w-[170px] h-[210px] rotate-1',
+    className: 'left-[3%] bottom-[5%] w-[150px] h-[190px] rotate-1',
   },
 ];
 
@@ -122,7 +122,7 @@ export default function VentureModel() {
         <div className="text-center mb-16">
           <p className="text-gold text-[11px] tracking-[4px] uppercase mb-3.5">How We Work</p>
           <h2 className="font-display text-4xl font-bold mb-3.5 text-white">From Idea to Impact</h2>
-          <p className="text-[#666] text-[15px] max-w-[460px] mx-auto leading-relaxed">
+          <p className="text-[#999] text-[15px] max-w-[460px] mx-auto leading-relaxed">
             A repeatable model for building ventures across markets and sectors.
           </p>
         </div>

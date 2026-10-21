@@ -8,8 +8,8 @@ const contactDetails = [
     link: 'mailto:contact@aprikosventure.com',
   },
   {
-    title: 'Office',
-    details: 'Lorenveien 73a, Oslo',
+    title: 'Address',
+    details: 'Nordalveien 8B, 0580 Oslo, Norway',
     icon: MapPin,
   },
 ];

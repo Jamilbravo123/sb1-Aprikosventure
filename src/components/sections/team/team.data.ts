@@ -9,7 +9,7 @@ import robertPortrait from '../../../assets/images/hero/robert.jpeg';
 export const teamMembers: TeamMember[] = [
   {
     name: 'Jamil Rehman',
-    role: 'CEO & Founder',
+    role: 'Founder & CEO',
     image: joniPortrait,
     bio: 'Serial entrepreneur with 15+ years of experience in technology and venture building.',
     shortBio: 'Entrepreneur focused on AI, digital assets and cross-border ventures.',
@@ -20,7 +20,7 @@ export const teamMembers: TeamMember[] = [
   },
   {
     name: 'Sara Rana',
-    role: 'Co-founder / Venture Builder',
+    role: 'Co-founder & Venture Builder',
     image: saraPortrait,
     bio: 'Masters in Data Science with a passion for innovation and entrepreneurship.',
     shortBio: 'Technology-driven brand and growth strategist.',
@@ -36,19 +36,17 @@ export const teamMembers: TeamMember[] = [
     bio: 'Experienced venture builder driving innovation and growth across the Aprikos ecosystem.',
     shortBio: 'Operational leader with expertise in scaling Nordic ventures.',
     social: {
-      linkedin: 'https://www.linkedin.com/in/lyngmoe/',
-      email: 'info@aprikosventure.com'
+      linkedin: 'https://www.linkedin.com/in/lyngmoe/'
     }
   },
   {
     name: 'Dr. Farooq Maqsood',
-    role: 'Co-founder and Venture Builder',
+    role: 'Co-founder & Venture Builder',
     image: farooqPortrait,
     bio: 'Farooq brings extensive clinical experience and domain expertise to spearhead our health innovation ventures.',
     shortBio: 'Clinical expert bridging healthcare and technology.',
     social: {
-      linkedin: 'https://www.linkedin.com/in/farooq-maqsood-437b3361/',
-      email: 'contact@aprikosventure.com'
+      linkedin: 'https://www.linkedin.com/in/farooq-maqsood-437b3361/'
     }
   },
   {
@@ -58,8 +56,7 @@ export const teamMembers: TeamMember[] = [
     bio: 'As a property expert, Vishal knows how to build something up from the start. He brings deep industry knowledge and strategic insight to our team.',
     shortBio: 'Property and investment specialist across European markets.',
     social: {
-      linkedin: 'https://www.linkedin.com/in/vishal-sarna-60a794338/',
-      email: 'info@aprikosventure.com'
+      linkedin: 'https://www.linkedin.com/in/vishal-sarna-60a794338/'
     }
   }
 ] as const;
