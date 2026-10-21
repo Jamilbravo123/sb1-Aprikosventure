@@ -108,7 +108,7 @@ function VentureCard({ venture }: { venture: Venture }) {
             </span>
           )}
           {venture.launchDate && (
-            <p className="font-display italic text-[11px] text-gold/60 tracking-[0.02em] pl-0.5">
+            <p className="font-display italic text-[12px] text-gold/80 tracking-[0.02em] pl-0.5">
               launching {venture.launchDate}
             </p>
           )}
@@ -146,7 +146,7 @@ function VentureCard({ venture }: { venture: Venture }) {
 
 function CategoryRow({ config, ventures, index }: { config: typeof portfolioCategories[0]; ventures: Venture[]; index: number }) {
   const rowRef = useRef<HTMLDivElement>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(index === 0);
   const mobileContentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -226,7 +226,7 @@ function CategoryRow({ config, ventures, index }: { config: typeof portfolioCate
           <ChevronDown className={`w-5 h-5 text-gold/80 transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`} />
         </button>
 
-        <div ref={mobileContentRef} className="overflow-hidden" style={{ height: 0, opacity: 0 }}>
+        <div ref={mobileContentRef} className="overflow-hidden" style={index === 0 ? undefined : { height: 0, opacity: 0 }}>
           <div className="space-y-1 pt-3">
             {ventures.map((v) => (
               <VentureCard key={v.id} venture={v} />

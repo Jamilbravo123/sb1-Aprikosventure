@@ -29,10 +29,6 @@ export const highlights: Highlight[] = [
     href: 'https://shippingx.io',
   },
   {
-    mark: 'Thesis',
-    text: 'Building at the intersection of AI, health and infrastructure',
-  },
-  {
     mark: 'Kinetic',
     text: 'Performance drinks',
     href: 'https://kineticfoods.pk',
